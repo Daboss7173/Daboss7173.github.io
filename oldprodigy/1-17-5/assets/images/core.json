@@ -981,15 +981,6 @@
 	"sourceSize": {"w":200,"h":200},
 	"pivot": {"x":0.5,"y":0.5}
 },
-"blockbutton":
-{
-	"frame": {"x":121,"y":643,"w":125,"h":70},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":125,"h":70},
-	"sourceSize": {"w":125,"h":70},
-	"pivot": {"x":0.5,"y":0.5}
-},
 "yes-btn":
 {
 	"frame": {"x":434,"y":404,"w":200,"h":80},
@@ -998,14 +989,4 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":80},
 	"sourceSize": {"w":200,"h":80},
 	"pivot": {"x":0.5,"y":0.5}
-}},
-"meta": {
-	"app": "https://web.archive.org/web/20151231022419/http://www.codeandweb.com/texturepacker",
-	"version": "1.0",
-	"image": "core.png",
-	"format": "RGBA8888",
-	"size": {"w":2042,"h":602},
-	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:980372903423ea7a43147afe01d9560f:d4ac3883d928d46738e08c42b96e1c64:55de436f7a9fe3598f9e950639dea687$"
-}
-}
+}}}

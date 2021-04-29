@@ -26,23 +26,4 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
 	"sourceSize": {"w":50,"h":50},
 	"pivot": {"x":0.5,"y":0.5}
-}
-"cloud":
-{
-	"frame": {"x":1284,"y":245,"w":50,"h":85},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":85},
-	"sourceSize": {"w":50,"h":85},
-	"pivot": {"x":0.5,"y":0.5}
-}},
-"meta": {
-	"app": "https://web.archive.org/web/20200330133929/http://www.codeandweb.com/texturepacker",
-	"version": "1.0",
-	"image": "zone-forest.png",
-	"format": "RGBA8888",
-	"size": {"w":1336,"h":724},
-	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:ff46db652fb73fe2f9390444b58ffd94:3536882eb32b34b144b446287173a705:ed97f6a873a4aac1b24e0f3094cdde75$"
-}
-}
+}}}

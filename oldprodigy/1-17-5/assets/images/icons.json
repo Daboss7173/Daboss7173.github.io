@@ -9,15 +9,6 @@
 	"sourceSize": {"w":80,"h":80},
 	"pivot": {"x":0.5,"y":0.5}
 },
-"boy":
-{
-	"frame": {"x":2,"y":422,"w":65,"h":65},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":5,"y":4,"w":65,"h":65},
-	"sourceSize": {"w":65,"h":65},
-	"pivot": {"x":0.5,"y":0.5}
-},
 "attack":
 {
 	"frame": {"x":2,"y":187,"w":90,"h":93},
@@ -5147,14 +5138,4 @@
 	"spriteSourceSize": {"x":4,"y":0,"w":72,"h":80},
 	"sourceSize": {"w":80,"h":80},
 	"pivot": {"x":0.5,"y":0.5}
-}},
-"meta": {
-	"app": "https://web.archive.org/web/20151231022430/http://www.codeandweb.com/texturepacker",
-	"version": "1.0",
-	"image": "icons.png",
-	"format": "RGBA8888",
-	"size": {"w":2048,"h":1385},
-	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:6b045a10db93799ab5f399bdd17dd9db:39d3cd8045a0e458a5b5e04d23ce5100:b5c5bd7252d2048fecbb1bda1760f9ef$"
-}
-}
+}}}
