@@ -1,0 +1,20 @@
+{"frames": {
+
+"bg":
+{
+	"frame": {"x":2,"y":2,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"sparkle":
+{
+	"frame": {"x":1284,"y":2,"w":37,"h":46},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":46},
+	"sourceSize": {"w":37,"h":46},
+	"pivot": {"x":0.5,"y":0.5}
+}}}
