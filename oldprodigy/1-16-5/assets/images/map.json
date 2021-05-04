@@ -1,0 +1,20 @@
+{"frames": {
+
+"cloud":
+{
+	"frame": {"x":2,"y":724,"w":236,"h":92},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":236,"h":92},
+	"sourceSize": {"w":236,"h":92},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"map":
+{
+	"frame": {"x":2,"y":2,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720},
+	"pivot": {"x":0.5,"y":0.5}
+}}}
