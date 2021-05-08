@@ -1,0 +1,30 @@
+{"frames": {
+
+"cloud":
+{
+	"frame": {"x":2,"y":724,"w":236,"h":92},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":236,"h":92},
+	"sourceSize": {"w":236,"h":92},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"map":
+{
+	"frame": {"x":2,"y":2,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "https://web.archive.org/web/20150715200229/http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "map.png",
+	"format": "RGBA8888",
+	"size": {"w":1284,"h":818},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:be8c6e4b7f8c64ae991308f58efb6e39:f94446693a2be728c7fa8b0cbcacf67c:68463c66230aaeb26021edb8ea8cd9b6$"
+}
+}
