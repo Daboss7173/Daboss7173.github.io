@@ -152,7 +152,8 @@
          "tilecount":192,
          "tileheight":40,
          "tilewidth":40
-        }        {
+        },
+        {
          "firstgid":1033,
          "image":"..\/..\/..\/..\/..\/assets_dev\/tilesets\/tileset-collisions.png",
          "imageheight":40,
