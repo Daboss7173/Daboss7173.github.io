@@ -1,0 +1,20 @@
+{
+	"assets":
+	{
+		"clothing":
+		{
+			image: "https://daboss7173.github.io/wrm/assets/clothing.png"
+			json: "https://daboss7173.github.io/wrm/assets/clothing.json"
+		}
+		"skins":
+		{
+			image: "https://daboss7173.github.io/wrm/assets/skins.png"
+			json: "https://daboss7173.github.io/wrm/assets/skins.json"
+		}
+		"portions":
+		{
+			image: "https://daboss7173.github.io/wrm/assets/portions.png"
+			json: "https://daboss7173.github.io/wrm/assets/portions.json"
+		}
+	}
+}
