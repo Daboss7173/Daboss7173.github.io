@@ -1,0 +1,72 @@
+{
+	"atlas":
+	{
+		"skins":
+		{
+			"color-blood":
+			{
+				"x": 1700,
+				"y": 1700,
+				"width": 64,
+				"height": 64
+			}
+		},
+		"glow":
+		{
+			"glow-blood":
+			{
+				"x": 489,
+				"y": 545,
+				"width": 64,
+				"height": 64
+			}
+		}
+	},
+	"colordata"
+	{
+		"c_blood": "fc714a",
+		"c_choco": "6c4b42",
+		"c_olive": "d4de61",
+		"c_pink": "f6bdd0",
+		"c_red": "eb4243",
+		"c_blue": "0049c0",
+		"c_green": "009b3a",
+		"c_gold": "ffce03",
+		"c_black": "606060",
+		"c_white": "ffffff",
+		"c_azure": "3196f0",
+		"c_cyan": "58c4f5",
+		"c_emer": "31a79b",
+		"c_grass": "83c13b",
+		"c_ivory": "fedeb5",
+		"c_ocean": "26c6da",
+		"c_orng": "fca637",
+		"c_blood": "fc714a",
+		"c_yllw": "feec64",
+		"c_ruby": "f44336",
+		"c_card": "ec4243",
+		"c_prpl": "7042ba",
+		"c_dsky": "22a8f5",
+		"c_vio": "8760c7",
+		"c_pmp_1": "f6ab07",
+		"c_pmp_2": "f69809",
+		"c_pmp_3": "f68009",
+		"c_pmp_4": "d85806",
+	    "c_a_tm2_A": "ff6944",
+		"c_a_tm2_B": "18d2f2"
+	}
+	"skindata":
+	[
+		{
+			"id": 1
+			"guest": true,
+			"prime": "c_blood",
+			"segments": [
+				"color-blood"
+			],
+			"glow": [
+				"glow-blood"
+			],
+		}
+	]
+}

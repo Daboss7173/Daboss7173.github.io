@@ -1,1 +1,24 @@
-{"version":1,"assets":{"clothing":{"image":"https://daboss7173.github.io/wrm/assets/10000/clothing.png","json":"https://daboss7173.github.io/wrm/assets/10000/clothing.json"},"skins":{"image":"https://daboss7173.github.io/wrm/assets/10000/skins.png","json":"https://daboss7173.github.io/wrm/assets/10000/skins.json"},"portions":{"image":"https://daboss7173.github.io/wrm/assets/10000/portions.png","json":"https://daboss7173.github.io/wrm/assets/10000/portions.json"}}}
+{
+	"version": 1,
+	"assets_version": 10000,
+	"latest_version": 1
+	"latest_compatable": 1,
+	"assets": {
+		"clothing": {
+			"image": "https://daboss7173.github.io/wrm/assets/10000/clothing.png",
+			"json": "https://daboss7173.github.io/wrm/assets/10000/clothing.json"
+		},
+		"skins": {
+			"image": "https://daboss7173.github.io/wrm/assets/10000/skins.png",
+			"json": "https://daboss7173.github.io/wrm/assets/10000/skins.json"
+		},
+		"portions": {
+			"image": "https://daboss7173.github.io/wrm/assets/10000/portions.png",
+			"json": "https://daboss7173.github.io/wrm/assets/10000/portions.json"
+		},
+		"abilities": {
+			"image": "https://daboss7173.github.io/wrm/assets/10000/abilities.png",
+			"json": "https://daboss7173.github.io/wrm/assets/10000/abilites.json"
+		}
+	}
+}
