@@ -1,24 +1,6 @@
 {
-	"version": 1,
-	"assets_version": 10000,
-	"latest_version": 1
+	"latest_version": 1,
+	"latest_version_notes": "Version CLOSED BETA 1.0##Welcome, this is an early build of Old Wormate. This is a future changelog, basically update sneak peak. The closed beta will not have the version changed frequently."
 	"latest_compatable": 1,
-	"assets": {
-		"clothing": {
-			"image": "https://daboss7173.github.io/wrm/assets/10000/clothing.png",
-			"json": "https://daboss7173.github.io/wrm/assets/10000/clothing.json"
-		},
-		"skins": {
-			"image": "https://daboss7173.github.io/wrm/assets/10000/skins.png",
-			"json": "https://daboss7173.github.io/wrm/assets/10000/skins.json"
-		},
-		"portions": {
-			"image": "https://daboss7173.github.io/wrm/assets/10000/portions.png",
-			"json": "https://daboss7173.github.io/wrm/assets/10000/portions.json"
-		},
-		"abilities": {
-			"image": "https://daboss7173.github.io/wrm/assets/10000/abilities.png",
-			"json": "https://daboss7173.github.io/wrm/assets/10000/abilites.json"
-		}
-	}
+	"latest_build_link": null
 }
