@@ -673,7 +673,7 @@ var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator 
 							var o = RESOURCES_HOST + e.relativePath;
 						}
 						else {
-							var o = "https:/" + e.url;
+							var o = e.url;
 						}
 						i[t] = new FSTexture(o, POGL.$b.from(o))
 					}), this.Fc(t, i)
