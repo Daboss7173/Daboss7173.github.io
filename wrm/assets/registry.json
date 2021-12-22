@@ -26,8 +26,8 @@
          "sha256": "9394e11ae642c624d9ff4f56fa1afe7aa14cdf58a3dfcefaaf04acd964c107d9"
       },
       "t_skins_prehal2017": {
-         "url": "https://daboss7173.github.io/wrm/assets/pre_hal2017_skins.png",
-         "relativePath": "https://daboss7173.github.io/wrm/assets/pre_hal2017_skins.png",
+         "url": "/daboss7173.github.io/wrm/assets/pre_hal2017_skins.png",
+         "relativePath": "/wrm/assets/pre_hal2017_skins.png",
          "fileSize": 169177,
          "sha256": "9a75c1d6fc7cc37b450e63940fb5f4d9f56a21122ca0a006d7a9f4e395b65562"
       },
