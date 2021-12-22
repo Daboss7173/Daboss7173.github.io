@@ -550,6 +550,7 @@ var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator 
 			isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
 			GATEWAY_HOST = atob("aHR0cHM6Ly9nYXRld2F5Lndvcm1hdGUuaW8="),
 			RESOURCES_HOST = atob("aHR0cHM6Ly9yZXNvdXJjZXMud29ybWF0ZS5pbw=="),
+			LOCAL_HOST = atob("aHR0cHM6Ly9kYWJvc3M3MTczLmdpdGh1Yi5pbw==")
 			LANG = window.I18N_LANG;
 		LANG || (LANG = "en");
 		var LOCALE = void 0;
@@ -673,7 +674,7 @@ var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator 
 							var o = RESOURCES_HOST + e.relativePath;
 						}
 						else {
-							var o = e.url;
+							var o = LOCAL_HOST + e.relativePath;
 						}
 						i[t] = new FSTexture(o, POGL.$b.from(o))
 					}), this.Fc(t, i)
