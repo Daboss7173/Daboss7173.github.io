@@ -1852,10 +1852,10 @@ var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator 
 					this.Fe = new POGL._b(POGL.$b.from("/images/bg-obstacle.png"));
 					var t = POGL.$b.from("/images/confetti-xmas2022.png");
 					this.Ge = [new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128)), new POGL._b(t, new POGL.dc(0, 0, 128, 128))], this.Cf = new POGL._b(function() {
-						var t = POGL.$b.from("/images/bg-pattern-pow2-ARENA.png");
+						var t = POGL.$b.from("https://daboss7173.github.io/wrm/assets/bg-pattern.png");
 						return t.wrapMode = POGL.kc.lc, t
 					}()), this.Df = new POGL._b(function() {
-						var t = POGL.$b.from("/images/bg-pattern-pow2-TEAM2.png");
+						var t = POGL.$b.from("https://daboss7173.github.io/wrm/assets/bg-pattern-TEAM2.png");
 						return t.wrapMode = POGL.kc.lc, t
 					}()), this.Af = new POGL._b(POGL.$b.from("/images/lens.png"));
 					var e = POGL.$b.from("/images/wear-ability.png");
