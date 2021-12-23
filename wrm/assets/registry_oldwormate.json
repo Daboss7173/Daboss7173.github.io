@@ -8982,370 +8982,6 @@
          "w": 64,
          "h": 64
       },
-      "sk_xmas2016_01_001": {
-         "texture": "t_skins_prehal2017",
-         "x": 0,
-         "y": 0,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_01_002": {
-         "texture": "t_skins_prehal2017",
-         "x": 68,
-         "y": 0,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_01_003": {
-         "texture": "t_skins_prehal2017",
-         "x": 136,
-         "y": 0,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_01_004": {
-         "texture": "t_skins_prehal2017",
-         "x": 204,
-         "y": 0,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_01_005": {
-         "texture": "t_skins_prehal2017",
-         "x": 272,
-         "y": 0,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_01_006": {
-         "texture": "t_skins_prehal2017",
-         "x": 340,
-         "y": 0,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_01_007": {
-         "texture": "t_skins_prehal2017",
-         "x": 408,
-         "y": 0,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_01_008": {
-         "texture": "t_skins_prehal2017",
-         "x": 476,
-         "y": 0,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_02_001": {
-         "texture": "t_skins_prehal2017",
-         "x": 0,
-         "y": 68,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_02_002": {
-         "texture": "t_skins_prehal2017",
-         "x": 68,
-         "y": 68,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_02_003": {
-         "texture": "t_skins_prehal2017",
-         "x": 136,
-         "y": 68,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_02_004": {
-         "texture": "t_skins_prehal2017",
-         "x": 204,
-         "y": 68,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_02_005": {
-         "texture": "t_skins_prehal2017",
-         "x": 272,
-         "y": 68,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_02_006": {
-         "texture": "t_skins_prehal2017",
-         "x": 340,
-         "y": 68,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_03_001": {
-         "texture": "t_skins_prehal2017",
-         "x": 0,
-         "y": 136,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_03_002": {
-         "texture": "t_skins_prehal2017",
-         "x": 68,
-         "y": 136,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_03_003": {
-         "texture": "t_skins_prehal2017",
-         "x": 136,
-         "y": 136,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_03_004": {
-         "texture": "t_skins_prehal2017",
-         "x": 204,
-         "y": 136,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_03_005": {
-         "texture": "t_skins_prehal2017",
-         "x": 272,
-         "y": 136,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_03_006": {
-         "texture": "t_skins_prehal2017",
-         "x": 340,
-         "y": 136,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_03_007": {
-         "texture": "t_skins_prehal2017",
-         "x": 408,
-         "y": 136,
-         "w": 64,
-         "h": 64
-      },
-      "sk_xmas2016_03_008": {
-         "texture": "t_skins_prehal2017",
-         "x": 476,
-         "y": 136,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_01_001": {
-         "texture": "t_skins_prehal2017",
-         "x": 0,
-         "y": 204,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_01_002": {
-         "texture": "t_skins_prehal2017",
-         "x": 68,
-         "y": 204,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_01_003": {
-         "texture": "t_skins_prehal2017",
-         "x": 136,
-         "y": 204,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_01_004": {
-         "texture": "t_skins_prehal2017",
-         "x": 204,
-         "y": 204,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_01_005": {
-         "texture": "t_skins_prehal2017",
-         "x": 272,
-         "y": 204,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_01_006": {
-         "texture": "t_skins_prehal2017",
-         "x": 340,
-         "y": 204,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_01_007": {
-         "texture": "t_skins_prehal2017",
-         "x": 408,
-         "y": 204,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_02_001": {
-         "texture": "t_skins_prehal2017",
-         "x": 0,
-         "y": 272,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_02_002": {
-         "texture": "t_skins_prehal2017",
-         "x": 68,
-         "y": 272,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_02_003": {
-         "texture": "t_skins_prehal2017",
-         "x": 136,
-         "y": 272,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_02_004": {
-         "texture": "t_skins_prehal2017",
-         "x": 204,
-         "y": 272,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_02_005": {
-         "texture": "t_skins_prehal2017",
-         "x": 272,
-         "y": 272,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_02_006": {
-         "texture": "t_skins_prehal2017",
-         "x": 340,
-         "y": 272,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_02_007": {
-         "texture": "t_skins_prehal2017",
-         "x": 408,
-         "y": 272,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_03_001": {
-         "texture": "t_skins_prehal2017",
-         "x": 0,
-         "y": 340,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_03_002": {
-         "texture": "t_skins_prehal2017",
-         "x": 68,
-         "y": 340,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_03_003": {
-         "texture": "t_skins_prehal2017",
-         "x": 136,
-         "y": 340,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_03_004": {
-         "texture": "t_skins_prehal2017",
-         "x": 204,
-         "y": 340,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_03_005": {
-         "texture": "t_skins_prehal2017",
-         "x": 272,
-         "y": 340,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_03_006": {
-         "texture": "t_skins_prehal2017",
-         "x": 340,
-         "y": 340,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_03_007": {
-         "texture": "t_skins_prehal2017",
-         "x": 408,
-         "y": 340,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_03_008": {
-         "texture": "t_skins_prehal2017",
-         "x": 476,
-         "y": 340,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_04_001": {
-         "texture": "t_skins_prehal2017",
-         "x": 0,
-         "y": 408,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_04_002": {
-         "texture": "t_skins_prehal2017",
-         "x": 68,
-         "y": 408,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_04_003": {
-         "texture": "t_skins_prehal2017",
-         "x": 136,
-         "y": 408,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_04_004": {
-         "texture": "t_skins_prehal2017",
-         "x": 204,
-         "y": 408,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_04_005": {
-         "texture": "t_skins_prehal2017",
-         "x": 272,
-         "y": 408,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_04_006": {
-         "texture": "t_skins_prehal2017",
-         "x": 340,
-         "y": 408,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_04_007": {
-         "texture": "t_skins_prehal2017",
-         "x": 408,
-         "y": 408,
-         "w": 64,
-         "h": 64
-      },
-      "sk_val2017_04_008": {
-         "texture": "t_skins_prehal2017",
-         "x": 476,
-         "y": 408,
-         "w": 64,
-         "h": 64
-      },
       "P000": {
          "texture": "t_portions",
          "x": 390,
@@ -9821,100 +9457,100 @@
       },
       "P_ENERGY": {
          "texture": "t_portions",
-         "x": 448,
-         "y": 402,
-         "w": 64,
-         "h": 64,
-         "px": 16,
-         "py": 16,
+         "x": 2,
+         "y": 129,
+         "w": 46,
+         "h": 58,
+         "px": 32,
+         "py": 32,
          "pw": 64,
          "ph": 64
       },
       "P_FLEXIBLE": {
          "texture": "t_portions",
-         "x": 128,
-         "y": 402,
-         "w": 64,
-         "h": 64,
-         "px": 16,
-         "py": 16,
+         "x": 120,
+         "y": 144,
+         "w": 46,
+         "h": 58,
+         "px": 32,
+         "py": 32,
          "pw": 64,
          "ph": 64
       },
       "P_MAGNETIC": {
          "texture": "t_portions",
-         "x": 192,
-         "y": 402,
-         "w": 64,
-         "h": 64,
-         "px": 16,
-         "py": 16,
+         "x": 170,
+         "y": 144,
+         "w": 46,
+         "h": 58,
+         "px": 32,
+         "py": 32,
          "pw": 64,
          "ph": 64
       },
       "P_UNKNOWN": {
          "texture": "t_portions",
-         "x": 0,
-         "y": 402,
-         "w": 64,
-         "h": 64,
-         "px": 16,
-         "py": 16,
+         "x": 19,
+         "y": 406,
+         "w": 26,
+         "h": 58,
+         "px": 18,
+         "py": 3,
          "pw": 64,
          "ph": 64
       },
       "P_VELOCITY": {
          "texture": "t_portions",
-         "x": 64,
-         "y": 402,
-         "w": 64,
-         "h": 64,
-         "px": 16,
-         "py": 16,
+         "x": 270,
+         "y": 145,
+         "w": 46,
+         "h": 58,
+         "px": 32,
+         "py": 32,
          "pw": 64,
          "ph": 64
       },
       "P_X10": {
          "texture": "t_portions",
-         "x": 384,
-         "y": 402,
+         "x": 320,
+         "y": 147,
          "w": 46,
          "h": 58,
-         "px": 16,
-         "py": 16,
+         "px": 32,
+         "py": 32,
          "pw": 64,
          "ph": 64
       },
       "P_X2": {
          "texture": "t_portions",
-         "x": 256,
-         "y": 402,
-         "w": 64,
-         "h": 64,
-         "px": 16,
-         "py": 16,
+         "x": 370,
+         "y": 150,
+         "w": 46,
+         "h": 58,
+         "px": 32,
+         "py": 32,
          "pw": 64,
          "ph": 64
       },
       "P_X5": {
          "texture": "t_portions",
-         "x": 320,
-         "y": 402,
-         "w": 64,
-         "h": 64,
-         "px": 16,
-         "py": 16,
+         "x": 420,
+         "y": 184,
+         "w": 46,
+         "h": 58,
+         "px": 32,
+         "py": 32,
          "pw": 64,
          "ph": 64
       },
       "P_ZOOM": {
          "texture": "t_portions",
-         "x": 0,
-         "y": 467,
-         "w": 64,
-         "h": 64,
-         "px": 16,
-         "py": 16,
+         "x": 2,
+         "y": 191,
+         "w": 46,
+         "h": 58,
+         "px": 32,
+         "py": 32,
          "pw": 64,
          "ph": 64
       },
@@ -13908,39 +13544,6 @@
             9303,
             9304
          ]
-      },
-      {
-         "id": "xmas2016",
-         "name": {
-            "de": "Weihnachten 2016",
-            "en": "Christmas 2016",
-            "es": "Navidad 2016",
-            "fr": "Noël 2016",
-            "ru": "Рождественские 2016",
-            "uk": "Різдвяні 2016"
-         },
-         "list": [
-            2001,
-            2002,
-            2003
-         ]
-      },
-      {
-         "id": "val2017",
-         "name": {
-            "de": "Valentinstag 2017",
-            "en": "Valentine's Day 2017",
-            "es": "San Valentin 2017",
-            "fr": "La Saint-Valentin 2017",
-            "ru": "Валентинки 2017",
-            "uk": "ВалентінесV 2017"
-         },
-         "list": [
-            2004,
-            2005,
-            2006,
-            2007
-         ]
       }
    ],
    "skinUnknown": {
@@ -17865,165 +17468,6 @@
             "a__card",
             "a__card",
             "a__card"
-         ]
-      },
-      {
-         "id": 2001,
-         "guest": false,
-         "nonbuyable": false,
-         "price": 0,
-         "priceBefore": 0,
-         "prime": "c_blood",
-         "base": [
-            "sk_xmas2016_01_001",
-            "sk_xmas2016_01_002",
-            "sk_xmas2016_01_003",
-            "sk_xmas2016_01_004",
-            "sk_xmas2016_01_005",
-            "sk_xmas2016_01_006",
-            "sk_xmas2016_01_007",
-            "sk_xmas2016_01_008"
-         ],
-         "glow": [
-            "a__ruby"
-         ]
-      },
-      {
-         "id": 2002,
-         "guest": false,
-         "nonbuyable": false,
-         "price": 0,
-         "priceBefore": 0,
-         "prime": "c__cyan",
-         "base": [
-            "sk_xmas2016_02_001",
-            "sk_xmas2016_02_002",
-            "sk_xmas2016_02_003",
-            "sk_xmas2016_02_004",
-            "sk_xmas2016_02_005",
-            "sk_xmas2016_02_006"
-         ],
-         "glow": [
-            "a__cyan"
-         ]
-      },
-      {
-         "id": 2003,
-         "guest": false,
-         "nonbuyable": false,
-         "price": 0,
-         "priceBefore": 0,
-         "prime": "c_green",
-         "base": [
-            "sk_xmas2016_03_001",
-            "sk_xmas2016_03_002",
-            "sk_xmas2016_03_003",
-            "sk_xmas2016_03_004",
-            "sk_xmas2016_03_005",
-            "sk_xmas2016_03_006",
-            "sk_xmas2016_03_007",
-            "sk_xmas2016_03_008"
-         ],
-         "glow": [
-            "a_grass"
-         ]
-      },
-      {
-         "id": 2004,
-         "guest": false,
-         "nonbuyable": false,
-         "price": 0,
-         "priceBefore": 0,
-         "prime": "c_white",
-         "base": [
-            "sk_val2017_01_007",
-            "sk_val2017_01_006",
-            "sk_val2017_01_005",
-            "sk_val2017_01_004",
-            "sk_val2017_01_003",
-            "sk_val2017_01_002",
-            "sk_val2017_01_001"
-         ],
-         "glow": [
-            "a_white",
-            "a_white",
-            "a_white",
-            "a__ruby",
-            "a__ruby"
-         ]
-      },
-      {
-         "id": 2005,
-         "guest": false,
-         "nonbuyable": false,
-         "price": 0,
-         "priceBefore": 0,
-         "prime": "c__ruby",
-         "base": [
-            "sk_val2017_02_007",
-            "sk_val2017_02_006",
-            "sk_val2017_02_005",
-            "sk_val2017_02_004",
-            "sk_val2017_02_003",
-            "sk_val2017_02_002",
-            "sk_val2017_02_001"
-         ],
-         "glow": [
-            "a__ruby",
-            "a__ruby",
-            "a__ruby",
-            "a_white",
-            "a_white"
-         ]
-      },
-      {
-         "id": 2006,
-         "guest": false,
-         "nonbuyable": false,
-         "price": 0,
-         "priceBefore": 0,
-         "prime": "c_white",
-         "base": [
-            "sk_val2017_03_008",
-            "sk_val2017_03_007",
-            "sk_val2017_03_006",
-            "sk_val2017_03_005",
-            "sk_val2017_03_004",
-            "sk_val2017_03_003",
-            "sk_val2017_03_002",
-            "sk_val2017_03_001"
-         ],
-         "glow": [
-            "a_white",
-            "a_white",
-            "a_white",
-            "a__ruby",
-            "a__ruby"
-         ]
-      },
-      {
-         "id": 2007,
-         "guest": false,
-         "nonbuyable": false,
-         "price": 0,
-         "priceBefore": 0,
-         "prime": "c__ruby",
-         "base": [
-            "sk_val2017_04_008",
-            "sk_val2017_04_007",
-            "sk_val2017_04_006",
-            "sk_val2017_04_005",
-            "sk_val2017_04_004",
-            "sk_val2017_04_003",
-            "sk_val2017_04_002",
-            "sk_val2017_04_001"
-         ],
-         "glow": [
-            "a__ruby",
-            "a__ruby",
-            "a__ruby",
-            "a_white",
-            "a_white"
          ]
       }
    ],
