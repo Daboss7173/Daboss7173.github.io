@@ -14,23 +14,17 @@
          "sha256": "f89632395d17f33d11044644e2df6638a233e76a946ba6ece53269f4447e6651"
       },
       "t_portions": {
-         "url": "/resources.wormate.io/static/assets/images/79700_portions.png",
+         "url": "/daboss7173.github.io/wrm/assets/79700_portions.png",
          "relativePath": "/static/assets/images/79700_portions.png",
-         "fileSize": 233617,
-         "sha256": "3b2c7a4d91e6ca085733d40022facb5549d6dd1ce8edc28a7020a31a9de4e7d4"
+         "fileSize": 277023,
+         "sha256": "cac9b255b4b7a7984b72c1e470063469defc2ab49ecb1df0d21e08654877c5b5"
       },
       "t_abilities": {
-         "url": "/resources.wormate.io/static/assets/images/61000_abilities.png",
-         "relativePath": "/static/assets/images/61000_abilities.png",
-         "fileSize": 37965,
-         "sha256": "9394e11ae642c624d9ff4f56fa1afe7aa14cdf58a3dfcefaaf04acd964c107d9"
+         "url": "/daboss7173.github.io/wrm/assets/61000_abilities.png",
+         "relativePath": "/wrm/assets/61000_abilities.png",
+         "fileSize": 30735,
+         "sha256": "a6eb6c4e6b8a25cd7931a4c6ae07c50490b8c0f75a273fa580cc0bd491326376"
       },
-      "t_skins_prehal2017": {
-         "url": "/daboss7173.github.io/wrm/assets/pre_hal2017_skins.png",
-         "relativePath": "/wrm/assets/pre_hal2017_skins.png",
-         "fileSize": 169177,
-         "sha256": "9a75c1d6fc7cc37b450e63940fb5f4d9f56a21122ca0a006d7a9f4e395b65562"
-      }
    },
    "colorDict": {
       "c_choco": "6c4b42",
