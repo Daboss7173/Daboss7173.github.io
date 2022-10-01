@@ -1,1 +1,0 @@
-lime.embed ("Funkin", "openfl-content", 1280, 720, { parameters: {} });
