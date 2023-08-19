@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+    <title>Old Prodigy (Version Selection)</title>
+    </head>
+    
+    <style>
+	body {
+		background-image: url("/oldprodigy/images/Background.png");
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center center;
+		margin: auto;
+		height: 100%;
+		background-color: #55B9A7;
+	}
+	
+	.select-panel {
+        display: block;
+        position: fixed;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	
+	.button {
+		display: block;
+		position: fixed;
+	}
+	
+	.button:hover {
+		transform: translate(0px, -3px)
+	}
+	
+	.select-panel .banner {
+		position: fixed;
+		display: block;
+		top: 20px;
+		left: 55px;
+	}
+	
+	.select-panel .overlay {
+		position: fixed;
+		display: block;
+		top: 170px;
+		left: 11px;
+	}
+    </style>
+    
+<body>
+    
+	<div class="select-panel">
+        <img src="/oldprodigy/images/MenuPanel-3.png">
+        
+        <div class="banner">
+       	  <img alt="Version Select" src="/oldprodigy/images/MenuPanel-Banner.png">
+        </div>
+        
+        <div class="overlay">
+        	<img src="/oldprodigy/images/MenuPanel-Overlay.png">
+            
+            <a onclick="EnterGame('1-11-0')" class="button" style="top: 12px; left: 12px; position: absolute">
+            	<img alt="1-11-0" src="/oldprodigy/images/1-11-0.png">
+            </a>
+            
+            <a onclick="EnterGame('1-16-5')" class="button" style="top: 68px; left: 12px; position: absolute">
+            	<img alt="1-16-5" src="/oldprodigy/images/1-16-5.png">
+            </a>
+            
+            <a onclick="EnterGame('1-17-0')" class="button" style="top: 124px; left: 12px; position: absolute">
+            	<img alt="1-17-0" src="/oldprodigy/images/1-17-0.png">
+            </a>
+            
+            <a onclick="EnterGame('1-24-0')" class="button" style="top: 180px; left: 12px; position: absolute">
+            	<img alt="1-24-0" src="/oldprodigy/images/1-24-0.png">
+            </a>
+            
+            <a onclick="EnterGame('1-30-0')" class="button" style="top: 236px; left: 12px; position: absolute">
+            	<img alt="1-30-0" src="/oldprodigy/images/1-30-0.png">
+            </a>
+            
+            <a onclick="EnterGame('1-37-0')" class="button" style="top: 292px; left: 12px; position: absolute">
+            	<img alt="1-37-0" src="/oldprodigy/images/1-37-0.png">
+            </a>
+            
+            <a onclick="EnterGame('1-39-0')" class="button" style="top: 12px; right: 12px; position: absolute">
+            	<img alt="1-39-0" src="/oldprodigy/images/1-39-0.png">
+            </a>
+            
+            <a onclick="EnterGame('1-50-0')" class="button" style="top: 68px; right: 12px; position: absolute">
+            	<img alt="1-50-0" src="/oldprodigy/images/1-50-0.png">
+            </a>
+            
+            <a onclick="EnterGame('1-51-0')" class="button" style="top: 124px; right: 12px; position: absolute">
+            	<img alt="1-51-0" src="/oldprodigy/images/1-51-0.png">
+            </a>
+            
+            <a onclick="EnterGame('1-60-0')" class="button" style="top: 180px; right: 12px; position: absolute">
+            	<img alt="1-60-0" src="/oldprodigy/images/1-60-0.png">
+            </a>
+            
+            <a onclick="EnterGame('1-70-0')" class="button" style="top: 236px; right: 12px; position: absolute">
+            	<img alt="1-70-0" src="/oldprodigy/images/1-70-0.png">
+            </a>
+        </div>
+        
+        <div class="button" style="bottom: 24px; left: 24px;">
+            <a onclick="ExitSelection()">
+            	<img alt="Back" src="/oldprodigy/images/Back.png">
+            </a>
+        </div>
+        
+	</div>
+        
+</body>
+
+<script>
+var ClickSound = new Audio("/oldprodigy/audio/click.mp3"),
+Menu = {
+	Select: 0,
+	BetaPopup: 1,
+	ModSelect: 2,
+},
+currentMenu = Menu.Select,
+PlayClick = function() {
+	ClickSound.play()
+},
+ExitSelection = function() {
+	if (currentMenu != Menu.Select) {
+		return
+	};
+	PlayClick();
+	setTimeout(()=> {
+		window.location.href = "/";
+	}, 200);
+},
+EnterGame = function(version) {
+	if (currentMenu != Menu.Select) {
+		return
+	};
+	PlayClick();
+	setTimeout(()=> {
+		window.location.href = "/oldprodigy/" + version + "/";
+	}, 200);
+}
+</script>
+
+</html>
