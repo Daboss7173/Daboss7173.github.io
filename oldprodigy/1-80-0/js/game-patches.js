@@ -385,18 +385,15 @@ function initGamePatches(e) {
 	QI.getUpdatedData = function() {
 		return 0
 	};
+	Util.MOD = 3,
 	Util.PLUGIN = 5,
 	Util.PATCH = 6,
-	Util.MOD = 7,
 	Util.log = function(e, t) {
 		if (t = Util.isDefined(t) ? t : 1, t & GameConstants.get("GameConstants.Build.LOG_LEVEL")) {
 			var i = "string" == typeof e;
 			switch (t) {
 				case 8:
 					console.log(i ? "%c[PRODIGY][ERROR] " + e : e, "background: #900; color: #FFF");
-					break;
-				case 7:
-					console.log(i ? "%c[PRODIGY][MOD] " + e : e, "background: #5aa; color: #FFF");
 					break;
 				case 6:
 					console.log(i ? "%c[PRODIGY][PATCH] " + e : e, "background: #b82; color: #FFF");
@@ -408,7 +405,7 @@ function initGamePatches(e) {
 					console.log(i ? "%c[PRODIGY][INFO] " + e : e, "background: #009; color: #FFF");
 					break;
 				case 3:
-					console.log(i ? "%c[PRODIGY][INFO] " + e : e, "background: #009; color: #FFF");
+					console.log(i ? "%c[PRODIGY][MOD] " + e : e, "background: #5aa; color: #FFF");
 					break;
 				case 2:
 					console.log(i ? "[PRODIGY][DEBUG] " + e : e);
