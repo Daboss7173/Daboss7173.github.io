@@ -83,7 +83,12 @@ class ModObj {
 			key: "general-login",
 			v: "1"
 		},
+		this.game.state.states.CharCreate.chooseServer = function(e, t) {
+			return t ? (this.showDialogue(), void 0) : (this._dialogue.close(), e ? this.game.prodigy.network.sendAnalytics("Socket-Success", "", "Login-Events") : this.game.prodigy.network.sendAnalytics("Socket-Fail", "", "Login-Events"), delete this.game.prodigy.player.data.reset, this.game.prodigy.player.data.school = "none", this.game.prodigy.player.data.startDate = (new Date).getTime(), this.game.prodigy.player.registerDate = new Date(this.game.prodigy.player.data.startDate) this.game.prodigy.world.enter(), void 0)
+		}
 		this.game.state.states.Login.screenSetup = function() {
+			this.game.prodigy.player.data.startDate = (new Date).getTime,
+			this.game.prodigy.player.registerDate = new Date(this.game.prodigy.player.data.startDate),
 			this.background.add(this.game.prodigy.create.sprite(0, 0, "login-bg-5")),
 			this.loginBox = this.game.prodigy.create.element(this.background),
 			this.usernameField = Prodigy.Control.InputField.createInputField(this.game, this.loginBox, "username", "", 100, 230, 300, 40),
