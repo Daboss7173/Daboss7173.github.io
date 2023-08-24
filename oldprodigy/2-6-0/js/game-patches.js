@@ -279,6 +279,7 @@ class ModObj {
 					i.prodigy.open.messageBox("Your character is from a different Prodigy version! This may cause multiple problems while playing!\n\nDo you want to continue?", i.prodigy.game.state.states.Login.loadCharacter.bind(this, e, !1, i), i.prodigy.game.state.states.Login.showLogin.bind(i.prodigy.game.state.states.Login, !0), null, "Character Loader")
 					i.prodigy.game.state.states.Login.showLogin(!1);
 				} else {
+					i.prodigy.player.appearance = (new (importer(11)).Player(i, !0)).appearance,
 					i.prodigy.player.appearance.data = e.appearancedata,
 					i.prodigy.player.equipment.data = e.equipmentdata,
 					i.prodigy.player.kennel.data = e.kenneldata,
@@ -322,17 +323,32 @@ class ModObj {
 							i.prodigy.player.type = e.metadata.type
 						};
 						if (!Util.isDefined(e.metadata.hasbam)) {
-							i.prodigy.player.data.stars = importer(62).Creature.starsToLevel(i.prodigy.player.data.level);
+							i.prodigy.player.data.stars = (importer(305)).StarConverter.convertLegacyStarsToModern(i.prodigy.player.data.stars);
 							for(var it = i.prodigy.player.kennel.getPets(), iu = 0; iu < it.length; iu++) {
-								it[iu].stars = importer(62).Creature.starsToLevel(it[iu].level)
+								it[iu].stars = (importer(305)).StarConverter.convertLegacyStarsToModern(it[iu].stars)
 							}
+						};
+						if (!Util.isDefined(e.metadata.hasNewName)) {
+							delete i.prodigy.player.getPlayerData().spinDate,
+							delete i.prodigy.player.getPlayerData().numSpins;
+							i.prodigy.player.appearance.data.name = null,
+							i.prodigy.player.state.data.tutorial = {},
+							i.prodigy.player.state.data.zone = {},
+							i.prodigy.player.state.data.world = {},
+							i.prodigy.player.state.data.breadcrumbs = {},
+							i.prodigy.player.state.updated = !0,
+							i.prodigy.player.backpack.data.key = [],
+							i.prodigy.player.backpack.updated = !0
+							i.prodigy.world.teleport("house-suburbs");
+							return
 						}
 					} else {
 						i.prodigy.player.isMember = !1, // No membership by default
 						i.prodigy.player.data.startDate = (new Date).getTime(), // Fix mail crash
-						i.prodigy.player.registerDate = new Date(i.prodigy.player.data.startDate)
+						i.prodigy.player.registerDate = new Date(i.prodigy.player.data.startDate),
+						i.prodigy.player.checkVersion()
 					};
-					i.prodigy.game.state.states.Login.offlineMode()
+					i.prodigy.game.state.states.Login.enterGame()
 				}
 			} catch (error) {
 				i.prodigy.open.messageBoxOkay("A critical error occurred during your character load! This is most-likely from a corrupted/modified save.\n\n\nCheck the console for more details.", "OKAY", null, null, "Character Loader")
@@ -342,6 +358,154 @@ class ModObj {
 				Util.log("Load error detected, data loaded returned below.", Util.INFO),
 				console.log(e);
 			}
+		},
+		(importer(708)).SystemMenu.prototype.setMode = function(e) {
+			switch (importer(13).RenderMenu.prototype.setMode.call(this, e), this.clearContents(), e) {
+				case 1:
+					this.openGraphics();
+					break;
+				case 2:
+					this.openNetwork();
+					break;
+				case 3:
+					this.openOther();
+					break;
+				default:
+					this.openSound()
+			}
+		},
+		(importer(708)).SystemMenu.prototype.create = function() {
+			this.addTransparent();
+			var e = this.game.prodigy.gameContainer.Localizer,
+				i = [{
+					icon: "settings",
+					bot: e.getText("SETTINGS_SOUND")
+				}, {
+					icon: "settings",
+					bot: e.getText("SETTINGS_GRAPHICS")
+				}, {
+					icon: "settings",
+					bot: e.getText("SETTINGS_NETWORK")
+				}, {
+					icon: "settings",
+					bot: "Other"
+				}],
+				n = this.game.prodigy.player;
+			!n.hasValidatedParentEmail() && n.hasCompletedTutorial() && i.push({
+				atlas: "atlas-24",
+				icon: "parent-link-hud-badge",
+				top: e.getText("SETTINGS_PARENT"),
+				bot: e.getText("SETTINGS_ACCOUNT")
+			}), this.content = this.game.prodigy.create.element(this, 280, 260), this.createBaseSetup(20, 13, "shine", e.getText("SETTINGS_TITLE"), i), importer(13).RenderMenu.prototype.create.call(this), this.setMode(0);
+			for (var a = 0; a < i.length; a++) {
+				if ("atlas-24" === i[a].atlas) {
+					var r = this.game.prodigy.create.indicator(0, 0),
+						o = this.buttons[a].sprite;
+					o.addChild(r), r.visible = !1;
+					var l = s.Util.getCenteredXY(r.width, 0, o.x, 0, o.width, 0);
+					r.x = l.x, r.y = o.y - r.height, r.addTween(), r.visible = !0
+				}
+			}
+			this.game.prodigy.create.advButton(this, 900, 480, {
+				icon: "settings",
+				bot: e.getText("SETTINGS_LOGOUT")
+			}, this.exitGame.bind(this))
+		},
+		(importer(708)).SystemMenu.prototype.openNetwork = function() {
+			var t = this.game.prodigy.gameContainer.Localizer,
+				e = Util.isValid(this.game.prodigy.player.world) ? t.getText("SETTINGS_YOUR_WORLD", this.game.prodigy.player.world.name) : t.getText("SETTINGS_OFFLINE");
+			this.game.prodigy.create.font(this.content, 0, 50, e, {
+				width: 600,
+				align: "center"
+			}), this.game.prodigy.create.textButton(this.content, 150, 200, {
+				text: "Save Character",
+				size: (importer(21)).TextButton.MED
+			}, this.saveCharacter.bind(this))
+		},
+		(importer(708)).SystemMenu.prototype.openOther = function() {
+			this.game.prodigy.create.textButton(this.content, 150, 50, {
+				text: "Get All Epics",
+				size: (importer(21)).TextButton.MED
+			}, this.unlockEpics.bind(this)), this.game.prodigy.create.textButton(this.content, 150, 125, {
+				text: "Toggle Member",
+				size: (importer(21)).TextButton.MED
+			}, this.toggleMember.bind(this))
+		},
+		(importer(708)).SystemMenu.prototype.toggleMember = function() {
+			if (this.game.prodigy.player.isMember == true) {
+				this.game.prodigy.player.isMember = false;
+				this.game.prodigy.open.messageBoxOkay("You have deactivated Membership.", "OKAY", null, null, "Membership")
+			}
+			else {
+				this.game.prodigy.player.isMember = true;
+				this.game.prodigy.open.messageBoxOkay("You have activated Membership!", "OKAY", null, null, "Membership")
+			}
+		},
+		(importer(708)).SystemMenu.prototype.unlockEpics = function() {
+			this.addEpic(125);
+			this.addEpic(126);
+			this.addEpic(127);
+			this.addEpic(128);
+			this.addEpic(129);
+			this.addEpic(130);
+			this.addEpic(131);
+			this.addEpic(132);
+			this.addEpic(133);
+			this.game.prodigy.open.messageBoxOkay("Any epics you didn't have before have been added to your team!","OKAY",null,null,"Epics Unlocked!");
+		},
+		(importer(708)).SystemMenu.prototype.addEpic = function(e) {
+			if (!this.game.prodigy.player.kennel.hasPet(e)) {
+				this.game.prodigy.player.kennel.add(e, null, Prodigy.Creature.starsToLevel(19), 20),
+				this.game.prodigy.player.backpack.add("follow", e)
+			}
+		},
+		(importer(708)).SystemMenu.prototype.downloadForCharacter = function(content, fileName, contentType) {
+			var a = document.createElement("a");
+			var file = new Blob([content], {
+				type: contentType
+			});
+			a.href = URL.createObjectURL(file);
+			a.download = fileName;
+			a.click();
+			return !0
+		},
+		(importer(708)).SystemMenu.prototype.saveCharacter = function() {
+			var character = {
+				appearancedata: this.game.prodigy.player.appearance.data,
+				equipmentdata: this.game.prodigy.player.equipment.data,
+				kenneldata: this.game.prodigy.player.kennel.data,
+				data: this.game.prodigy.player.data,
+				questdata: this.game.prodigy.player.quests.data,
+				statedata: this.game.prodigy.player.state.data,
+				tutorialdata: this.game.prodigy.player.tutorial.data,
+				backpackdata: this.game.prodigy.player.backpack.data,
+				housedata: this.game.prodigy.player.house.data,
+				achievementsdata: this.game.prodigy.player.achievements.data,
+				metadata: {
+					isMember: this.game.prodigy.player.isMember,
+					appearanceChanged: this.game.prodigy.player.appearanceChanged,
+					broadcastId: this.game.prodigy.player.broadcastId,
+					inPVP: this.game.prodigy.player.inPVP,
+					updated: this.game.prodigy.player.updated,
+					parentalLink: this.game.prodigy.player.parentalLink,
+					hasBam: true,
+					modifiers: this.game.prodigy.player.modifiers.data,
+					mountdata: this.game.prodigy.player.mount,
+					hasNewName: true
+				},
+				gameVersion: this.game.prodigy.version
+			};
+			if (Util.isDefined(this.game.prodigy.player.registerDate)) {
+				character.metadata.registerDate = this.game.prodigy.player.registerDate
+			};
+			this.downloadForCharacter(JSON.stringify(character), 'character.json', 'text/plain');
+        	},
+		//(importer(708)).SystemMenu.prototype
+		(importer(746)).Card.prototype.toHouse = function() {
+			this.game.prodigy.world.teleport("house")
+		},
+		this.game.prodigy.friendsListNetworkHandler.getTotalFriendRequests = function(e) {
+			return 0
 		}
 	}
 	
