@@ -140,7 +140,6 @@
 </body>
 
 <script>
-var ClickSound = new Audio("/oldprodigy/audio/click.mp3"),
 Menu = {
 	Select: 0,
 	BetaPopup: 1,
@@ -157,7 +156,7 @@ Pages = [
 currentPage = 0,
 currentMenu = Menu.Select,
 PlayClick = function() {
-	ClickSound.play()
+	(new Audio("/oldprodigy/audio/click.mp3")).play()
 },
 ExitSelection = function() {
 	if (currentMenu != Menu.Select) {
