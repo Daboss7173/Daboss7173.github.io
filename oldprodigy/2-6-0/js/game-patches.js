@@ -501,7 +501,7 @@ class ModObj {
 					hasBam: true,
 					type: this.game.prodigy.player.type,
 					modifiers: this.game.prodigy.player.modifiers.data,
-					mountdata: this.game.prodigy.player.mount,
+					mountdata: this.game.prodigy.player.mount.data,
 					hasNewName: true
 				},
 				gameVersion: this.game.prodigy.version
