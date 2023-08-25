@@ -53,7 +53,12 @@ class ModObj {
 			
 		},
 		importer(548).MenuModel.prototype.addFeedIcon = function(t, e) {
-			
+			// This removes wizard watch, it's in the game but the API support is nonexistant and it's identical to modern Prodigy, so yeah. Removed.
+		},
+		importer(548).MenuModel.prototype.addMemberIcon = function(t, e) {
+			!this.game.prodigy.player.data.isMember && this.pages[t][e].push({
+				type: (importer(540)).MemberIconButton
+			})
 		},
 		importer(198).WalkableScreen.prototype.processPopups = function(t) {
 			var o = importer(4),
@@ -62,22 +67,23 @@ class ModObj {
 			l = importer(60),
 			_ = importer(0),
 			y = importer(12);
-			if (o.GameConstants.get("GameConstants.Debug.POPUPS_ENABLED")) {
-				var e = this.game.prodigy.achievements.process();
-				if (g.ParentalLink.isSuccessRequired(this.game.prodigy.player)) return void this.game.prodigy.open.parentalLinkSuccessPrompt(t);
-				if (g.ParentalLink.isInfoRequired(this.game.prodigy.player)) return void this.game.prodigy.open.parentalLinkInfoPrompt(f.ParentLinkBenefitsConfig.ANALYTICS_SOURCE_LOGIN, t);
-				if (e.length > 0)
-					for (var a = 0; a < e.length; a++) this.game.prodigy.player.achievements.complete(e[a].ID), this.game.prodigy.player.achievements.complete(e[a].ID), this.game.prodigy.notifications.initNotificationTemplate(l.NotificationType.ACHIEVEMENTS, [{
-						ID: e[a].ID,
-						type: "achievement",
-						value: e[a].data.name
-					}], e[a].metadata), this.game.prodigy.notifications.playNextNotification(), this.game.prodigy.notifications.getSocialNotifications(3);
-				else {
-					if (this.game.prodigy.player.justLeveled && this.game.prodigy.player.getLevel() >= 10) return this.game.prodigy.player.justLeveled = !1, void this.game.prodigy.open.rating(t);
-					this.game.prodigy.player.hasCompletedTutorial() && (this.game.prodigy.notifications.playNextNotification(), this.game.prodigy.notifications.getSocialNotifications(3))
+				if (o.GameConstants.get("GameConstants.Debug.POPUPS_ENABLED")) {
+					var e = this.game.prodigy.achievements.process();
+					if (g.ParentalLink.isSuccessRequired(this.game.prodigy.player)) return void this.game.prodigy.open.parentalLinkSuccessPrompt(t);
+					if (this.game.prodigy.player.hasCompletedTutorial() && !(this.game.prodigy.player.memberPrompt || !this.game.prodigy.player.hasMembership() && _.Util.isSchoolHours() || this.game.prodigy.player.hasMembership() && this.game.prodigy.player.backpack.hasItem("mount", 1) > 0) && (this.game.prodigy.player.locationSelectionType !== o.GameConstants.get("GameConstants.LocationSelection.SCHOOL") || this.game.prodigy.player.hasMembership() && 0 === this.game.prodigy.player.backpack.hasItem("mount", 1))) return void(this.game.prodigy.player.rewardMembershipPrizes(t) || this.game.prodigy.open.membershipInfo(t));
+					if (g.ParentalLink.isInfoRequired(this.game.prodigy.player)) return void this.game.prodigy.open.parentalLinkInfoPrompt(f.ParentLinkBenefitsConfig.ANALYTICS_SOURCE_LOGIN, t);
+					if (e.length > 0)
+						for (var a = 0; a < e.length; a++) this.game.prodigy.player.achievements.complete(e[a].ID), this.game.prodigy.player.achievements.complete(e[a].ID), this.game.prodigy.notifications.initNotificationTemplate(l.NotificationType.ACHIEVEMENTS, [{
+							ID: e[a].ID,
+							type: "achievement",
+							value: e[a].data.name
+						}], e[a].metadata), this.game.prodigy.notifications.playNextNotification(), this.game.prodigy.notifications.getSocialNotifications(3);
+					else {
+						if (this.game.prodigy.player.justLeveled && this.game.prodigy.player.getLevel() >= 10) return this.game.prodigy.player.justLeveled = !1, void this.game.prodigy.open.rating(t);
+						this.game.prodigy.player.hasCompletedTutorial() && (this.game.prodigy.notifications.playNextNotification(), this.game.prodigy.notifications.getSocialNotifications(3))
+					}
 				}
-			}
-			_.Util.isValid(t) && t()
+				_.Util.isValid(t) && t()
 		},
 		GameConstants.enableGameConstant("GameConstants.Debug.EDUCATION_ENABLED", !1),
 		GameConstants.enableGameConstant("GameConstants.Debug.AUTO_ANSWER_CORRECTLY", !0),
@@ -322,7 +328,10 @@ class ModObj {
 						if (Util.isDefined(e.metadata.type)) {
 							i.prodigy.player.type = e.metadata.type
 						};
-						if (!Util.isDefined(e.metadata.hasbam)) {
+						if (Util.isDefined(e.metadata.memberPrompt)) {
+							i.prodigy.player.memberPrompt = e.metadata.memberPrompt
+						};
+						if (!Util.isDefined(e.metadata.hasBam)) {
 							i.prodigy.player.data.stars = (importer(305)).StarConverter.convertLegacyStarsToModern(i.prodigy.player.data.stars);
 							for(var it = i.prodigy.player.kennel.getPets(), iu = 0; iu < it.length; iu++) {
 								it[iu].stars = (importer(305)).StarConverter.convertLegacyStarsToModern(it[iu].stars)
@@ -455,7 +464,7 @@ class ModObj {
 		},
 		(importer(708)).SystemMenu.prototype.addEpic = function(e) {
 			if (!this.game.prodigy.player.kennel.hasPet(e)) {
-				this.game.prodigy.player.kennel.add(e, null, Prodigy.Creature.starsToLevel(19), 20),
+				this.game.prodigy.player.kennel.add(e, null, (importer(62)).Creature.starsToLevel(20), 20),
 				this.game.prodigy.player.backpack.add("follow", e)
 			}
 		},
@@ -488,7 +497,9 @@ class ModObj {
 					inPVP: this.game.prodigy.player.inPVP,
 					updated: this.game.prodigy.player.updated,
 					parentalLink: this.game.prodigy.player.parentalLink,
+					memberPrompt: this.game.prodigy.player.memberPrompt,
 					hasBam: true,
+					type: this.game.prodigy.player.type,
 					modifiers: this.game.prodigy.player.modifiers.data,
 					mountdata: this.game.prodigy.player.mount,
 					hasNewName: true
@@ -498,14 +509,37 @@ class ModObj {
 			if (Util.isDefined(this.game.prodigy.player.registerDate)) {
 				character.metadata.registerDate = this.game.prodigy.player.registerDate
 			};
-			this.downloadForCharacter(JSON.stringify(character), 'character.json', 'text/plain');
-        	},
-		//(importer(708)).SystemMenu.prototype
+			this.downloadForCharacter(JSON.stringify(character), this.game.prodigy.player.appearance.getFullName() + ".json", 'text/plain');
+        },
 		(importer(746)).Card.prototype.toHouse = function() {
 			this.game.prodigy.world.teleport("house")
 		},
 		this.game.prodigy.friendsListNetworkHandler.getTotalFriendRequests = function(e) {
 			return 0
+		},
+		importer(213).HttpDataProvider.ENVIRONMENT_URLS.local = "https://www.prodigygame.com/",
+		importer(220).Store.prototype.create = function() {
+			var i = importer,
+				a = i(7),
+				r = i(24),
+				o = i(4),
+				s = i(2),
+				l = i(14),
+				c = i(31),
+				h = i(0),
+				u = i(30),
+				p = i(67),
+				d = i(219),
+				g = i(218),
+				t = d.StoreBase;
+			this.addTransparent(),
+			h.Util.isValid(this.analyticEvents.onCreateEvent) && this.game.prodigy.network.sendAnalytics(h.Util.isValid(this.analyticEvents.onCreateEvent.action) ? this.analyticEvents.onCreateEvent.action : "", h.Util.isValid(this.analyticEvents.onCreateEvent.label) ? this.analyticEvents.onCreateEvent.label : "", this.analyticEvents.onCreateEvent.category), this.createBaseSetup(30, 16, "shine", null, null, !0, null);
+				var e = this.game.prodigy.create.element(this, 0, 0);
+				e.setRenderState(!0), e.add(new Phaser.TileSprite(this.game, 51, 240, 1178, 40, "atlas-161", "blue-top")), e.add(new Phaser.TileSprite(this.game, 51, 280, 1178, 300, "atlas-161", "blue-mid")), e.add(new Phaser.TileSprite(this.game, 51, 580, 1178, 40, "atlas-161", "blue-top2")), this.spinner = this.add(this.game.prodigy.create.sprite(640, 360, "atlas-18", "loading")), this.spinner.anchor.setTo(.5, .5), this.game.add.tween(this.spinner).to({
+					angle: 360
+				}, 2e3, Phaser.Easing.Linear.None, !0, 0, o.GameConstants.MAX_SAFE_INTEGER, !1), t.prototype.create.call(this);
+			var e = this.game.prodigy.gameContainer.Localizer;
+			this.game.prodigy.open.message(e.getText("STORE_OPEN_FAILED_MESSAGE"), this.close.bind(this), null, e.getText("STORE_OPEN_FAILED_TITLE"))
 		}
 	}
 	
