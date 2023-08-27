@@ -206,6 +206,7 @@ class ModObj {
 					i.prodigy.open.confirm("Your character is from a different Prodigy version! This may cause multiple problems while playing!\n\nDo you want to continue?", i.prodigy.game.state.states.Login.loadCharacter.bind(this, e, !1, i), i.prodigy.game.state.states.Login.showLogin.bind(i.prodigy.game.state.states.Login, !0), null, "Character Loader")
 					i.prodigy.game.state.states.Login.showLogin(!1);
 				} else {
+					i.prodigy.player.appearance
 					i.prodigy.player.appearance.data = e.appearancedata,
 					i.prodigy.player.equipment.data = e.equipmentdata,
 					i.prodigy.player.kennel.data = e.kenneldata,
@@ -238,7 +239,7 @@ class ModObj {
 						};
 						if (Util.isDefined(e.metadata.parentalLink)) {
 							i.prodigy.player.parentalLink = e.metadata.parentalLink
-						}
+						};
 					} else {
 						i.prodigy.player.isMember = !1, // No membership by default
 						i.prodigy.player.data.startDate = (new Date).getTime(), // Fix mail crash
@@ -412,7 +413,7 @@ class ModObj {
 		this.game.prodigy.pvpNetworkHandler.getSeasonLeaderboard = function(e) {},
 		this.game.prodigy.pvpNetworkHandler.getClassLeaderboard = function(e) {},
 		this.game.prodigy.network.player = this.game.prodigy.player,
-		this.game.prodigy.player.data.startDate = (new Date).getTime,
+		this.game.prodigy.player.data.startDate = (new Date).getTime(),
 		this.game.prodigy.player.registerDate = new Date(this.game.prodigy.player.data.startDate),
 		GameConstants.enableGameConstant("GameConstants.Debug.EDUCATION_ENABLED", !1),
 		GameConstants.enableGameConstant("GameConstants.Debug.AUTO_ANSWER_CORRECTLY", !0);
@@ -422,12 +423,12 @@ class ModObj {
 		this.game.prodigy.assets._assets["game-data"] = {
 			type: "json",
 			base: "",
-			fullURL: "https://cdn.prodigygame.com/game/data/production/20/data.json"
+			fullURL: "https://cdn.prodigygame.com/game/data/production/23/data.json"
 		},
 		this.game.prodigy.assets._assets["store-data"] = {
 			type: "json",
 			base: "",
-			fullURL: "https://cdn.prodigygame.com/game/data/production/20/stores.json"
+			fullURL: "https://cdn.prodigygame.com/game/data/production/23/stores.json"
 		};
 		this.game.prodigy.assets._assets["login-buttons"] = {
 			type: "local",
