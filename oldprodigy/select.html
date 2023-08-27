@@ -50,8 +50,11 @@
     </style>
     
 <body>
+
+	<div class="beta-popup" id="beta-popup">
+	</div>
     
-	<div class="select-panel">
+	<div class="select-panel" id="version-select">
         <img src="/oldprodigy/images/MenuPanel-3.png">
         
         <div class="banner">
@@ -141,9 +144,12 @@
 
 <script>
 Menu = {
-	Select: 0,
-	BetaPopup: 1,
-	ModSelect: 2,
+	Select: {
+		id: "version-select"
+	},
+	BetaPopup: {
+		id: "beta-popup"
+	}
 },
 Pages = [
 	{
@@ -155,6 +161,7 @@ Pages = [
 ],
 currentPage = 0,
 currentMenu = Menu.Select,
+new Audio("/oldprodigy/audio/click.mp3")
 PlayClick = function() {
 	(new Audio("/oldprodigy/audio/click.mp3")).play()
 },
@@ -185,6 +192,16 @@ NextPage = function() {
 		currentPage += 1
 	};
 	document.getElementById(Pages[currentPage].id).style.display = "block"
+},
+openBetaPopup = function() {
+	document.getElementById(currentMenu.id).style.display = "none",
+	currentMenu = Menu.BetaPopup,
+	document.getElementById(currentMenu.id).style.display = "block";
+},
+closeBetaPopup = function() {
+	document.getElementById(currentMenu.id).style.display = "none",
+	currentMenu = Menu.Select,
+	document.getElementById(currentMenu.id).style.display = "block";
 }
 </script>
 
