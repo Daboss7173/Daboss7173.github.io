@@ -365,7 +365,7 @@ class ModObj {
 			if (Util.isDefined(this.game.prodigy.player.registerDate)) {
 				character.metadata.registerDate = this.game.prodigy.player.registerDate
 			};
-			this.downloadForCharacter(JSON.stringify(character), 'character.json', 'text/plain');
+			this.downloadForCharacter(JSON.stringify(character), this.game.prodigy.player.appearance.data.name + '.json', 'text/plain');
         },
 		Prodigy.Menu.Card.prototype.toHouse = function() {
 			this.game.prodigy.world.teleport("house")
