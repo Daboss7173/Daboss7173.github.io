@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+<link rel="icon" type="image/png" href="/Includes/Images/favicon.gif">
+<link rel="stylesheet" href="/Includes/Styles/Fonts/Font-Awesome/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="https://prodigy.blob.core.windows.net/edu-controls-1-0-0/style/MonospaceTypewriter.css">
+<link rel="stylesheet" type="text/css" href="https://prodigy.blob.core.windows.net/edu-controls-1-0-0/style/ControlStyle.css">
+<link rel="stylesheet" type="text/css" href="https://prodigy.blob.core.windows.net/edu-question-interface-1-0-0/style/QuestionInterfaceStyle.css">
+<script type="text/javascript" src="https://prodigygame.com/assets/scripts/libraries/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://prodigygame.com/assets/scripts/libraries/lodash.min.js"></script>
+<script type="text/javascript" src="https://prodigygame.com/assets/scripts/libraries/backbone.min.js"></script>
+<script type="text/javascript" src="https://prodigy.blob.core.windows.net/edu-controls-1-0-0/controls.min.js"></script>
+<script type="text/javascript" src="https://prodigy.blob.core.windows.net/edu-question-interface-1-0-0/question.min.js"></script>
+<title>Prodigy</title>
+<link rel="stylesheet" type="text/css" href="/Includes/Styles/web.min.css?v=prodigy-1-10-0">
+<script src="https://prodigy.blob.core.windows.net/prodigy-1-7-0/phaser.min.js?v=prodigy-1-10-0"></script>
+<style>
+            body{
+                margin:0;
+                height:100%;
+            }
+
+            #game-container {
+             height:100%;
+            }
+
+            .game-input{
+                margin:0;
+                position:absolute;
+                top:0;
+                left:0;
+                padding:0px 10px;
+                border-radius:10px;
+                border: 1px solid #363636;
+                background-color:#fff5eb;
+                color:#363636;
+                text-align:left;
+                
+            }
+            .head-bar{
+                height:45px;
+                width:100%;
+                position:fixed;
+            }
+
+            .head-content{
+                width:100%;
+                position:relative;
+                height:100%;
+            }
+
+           
+
+            .full-nav-button{
+                border:1px solid #596ED9;
+                border-top:none;
+
+                font-weight:bold;
+                color:#f89825;
+                margin-top:0;
+                font-size:1.3em;
+                padding:10px 10px;
+                height:100%;
+                width:100%;
+                background-color: #6579DC;
+                color:white;
+
+            }
+
+
+            .full-nav-button:hover {
+                background:none;
+                background-color:#596ED9;
+                border:none;
+                color:#f2f2f2;
+                box-shadow: none;
+            }
+
+            .announcement {
+                margin-bottom: 0;
+                position: absolute;
+                width: 100%;
+            }
+
+            .announcement-close {
+                position:absolute;
+                right:20px;
+                top:10px;
+                color:#a94442;
+            }
+            .announcement-close:hover {
+                color:#c94442;
+                cursor:pointer;
+            }
+
+            .announcement .alert {
+                padding-right:50px;
+            }
+
+            iframe {
+             display:none;
+            }
+</style>
+<div id='game-container'></div>
+<div id='external-content'></div>
+<div id='external-ui'></div>
+<div id='notices'></div>
+<div id='popups'>
+<div id='dynamic-popups'></div></div>
+<script src="https://prodigy.blob.core.windows.net/prodigy-1-7-0/game.min.js?v=prodigy-1-7-0"></script> 
+<script src="http://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/jquery.min.js"></script> 
+<script src="http://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/play.js?v=prodigy-1-10-0"></script> 
+<script src="http://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/popup.js?v=prodigy-1-10-0"></script> 
+<script src="http://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/Controllers/LargeNotice.js?v=prodigy-1-10-0"></script> 
+<script src="http://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/Controllers/Register.js?v=prodigy-1-10-0"></script> 
+<script src="http://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/Controllers/Notice.js?v=prodigy-1-10-0"></script> 
+<script type="text/javascript">
+
+    var prodigyWeb = {};
+    prodigyWeb.country = 2;
+    window.onerror = function(error, file, line){
+        
+        // var error = "Error: "+error+" File: "+file+" Line: "+line;
+
+        // WebService.logBug(error, 'Beta 2', "Exception");
+    };
+    window.onload = function() {
+
+        document.addEventListener("contextmenu", function(e){
+            e.preventDefault();
+        }, false);
+        
+        var sso = {};
+                Boot.init(sso);
+
+    };
+    
+    
+    window.onresize = function() {
+        scroll(0,0);
+    };
+    
+
+    
+</script> 
+<script>
+
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-40390561-1']);
+     _gaq.push(['_trackPageview']);
+
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+    //
+</script> 
+<script type="text/javascript">
+
+ /* <![CDATA[ */
+ var google_conversion_id = 1008327338;
+ var google_conversion_label = "rgONCLa1jgQQqrXn4AM";
+ var google_custom_params = window.google_tag_params;
+ var google_remarketing_only = true;
+ /* ]]> */
+</script> 
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script> 
+<script>
+
+        $('.announcement-close').click(function(){
+            $('#service-announcement').remove();
+        });
+</script>
