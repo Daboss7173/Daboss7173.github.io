@@ -123,6 +123,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
   leveled players/pets are way more powerful, and relics and wands have spells associated with them rather than choosing them in a spellbook. The older spells also were
   completely phased out in favor of newer spells with smoother animation, but that's the gist.
 
+Well- okay, maybe it's still a bit overwhelming. At least you know what you're getting in each version though!
 
 ## The other version
 
