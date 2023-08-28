@@ -25,15 +25,6 @@
 		transform: translate(-50%, -50%);
 	}
 	
-	.button {
-		display: block;
-		position: fixed;
-	}
-	
-	.button:hover {
-		transform: translate(0px, -3px)
-	}
-	
 	.select-panel .banner {
 		position: fixed;
 		display: block;
@@ -47,22 +38,64 @@
 		top: 185px;
 		left: 11px;
 	}
+	
+	.button {
+		display: block;
+		position: fixed;
+	}
+	
+	.button:hover {
+		transform: translate(0px, -3px)
+	}
+	
+	.warning-panel {
+        display: none;
+        position: fixed;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	
+	.warning-panel .warning-body {
+		position: fixed;
+		display: block;
+		top: 128px;
+		left: 24px;
+		width: 420px;
+		font: 16px "Arial", sans-serif;
+		font-weight: bold;
+		color: rgb(0, 0, 0);
     </style>
     
 <body>
 
-	<div class="beta-popup" id="beta-popup">
+	<div class="warning-panel" id="beta-popup">
+		<img alt="Warning!" src="/oldprodigy/images/WarningPanel.png">
+		
+		<div class="warning-body" id="beta-body">
+			<div>This version is known for being buggy, and is still under development.</div>
+			<br>
+			<div>Do you want to continue?</div>
+		</div>
+		
+		<a onclick="EnterGame(betaConfirmCallback)" class="button" style="bottom: 24px; left: 24px;">
+			<img alt="Yes" src="/oldprodigy/images/Yes.png">
+		</a>
+		
+		<a onclick="betaConfirmCallback = null; closeBetaPopup()" class="button" style="bottom: 24px; right: 24px;">
+			<img alt="No" src="/oldprodigy/images/No.png">
+		</a>
 	</div>
     
 	<div class="select-panel" id="version-select">
         <img src="/oldprodigy/images/MenuPanel-3.png">
         
         <div class="banner">
-       	  <img alt="Version Select" src="/oldprodigy/images/MenuPanel-Banner.png">
+			<img alt="Version Select" src="/oldprodigy/images/MenuPanel-Banner.png">
         </div>
         
         <div class="overlay">
-        	<img src="/oldprodigy/images/MenuPanel-Overlay.png">
+			<img src="/oldprodigy/images/MenuPanel-Overlay.png">
             
 			<div id="page-1" style="display: block">
 			
@@ -122,7 +155,7 @@
 					<img alt="1-90-0" src="/oldprodigy/images/1-90-0.png">
 				</a>
 			
-				<a onclick="EnterGame('2-6-0')" class="button" style="top: 68px; left: 12px; position: absolute">
+				<a onclick="openBetaPopup('2-6-0')" class="button" style="top: 68px; left: 12px; position: absolute">
 					<img alt="2-6-0" src="/oldprodigy/images/2-6-0.png">
 				</a>
 				
@@ -170,19 +203,17 @@ PlayClick = function() {
 	(new Audio("/oldprodigy/audio/click.mp3")).play()
 },
 ExitSelection = function() {
-	if (currentMenu != Menu.Select) {
-		return
-	};
 	PlayClick();
 	setTimeout(()=> {
 		window.location.href = "/";
 	}, 200);
 },
 EnterGame = function(version) {
-	if (currentMenu != Menu.Select) {
+	PlayClick();
+	if (version == null) {
+		closeBetaPopup();
 		return
 	};
-	PlayClick();
 	setTimeout(()=> {
 		window.location.href = "/oldprodigy/" + version + "/";
 	}, 200);
@@ -197,12 +228,16 @@ NextPage = function() {
 	};
 	document.getElementById(Pages[currentPage].id).style.display = "block"
 },
-openBetaPopup = function() {
+betaConfirmCallback = null,
+openBetaPopup = function(version) {
+	PlayClick();
+	betaConfirmCallback = version,
 	document.getElementById(currentMenu.id).style.display = "none",
 	currentMenu = Menu.BetaPopup,
 	document.getElementById(currentMenu.id).style.display = "block";
 },
 closeBetaPopup = function() {
+	PlayClick();
 	document.getElementById(currentMenu.id).style.display = "none",
 	currentMenu = Menu.Select,
 	document.getElementById(currentMenu.id).style.display = "block";
