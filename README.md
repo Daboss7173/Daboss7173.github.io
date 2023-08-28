@@ -37,7 +37,7 @@ If you want to start a new game and configure your character however you want, y
 If you want to load a character that you've already saved, you click load character and select your save file.
 
 To save your character, you can just go into the settings menu, go under 'network' and click the button called "save character". It'll automatically download
-to your computer, For this I recommend manually choosing a folder to save it in so things can be more organized. If there is no network tab in the version
+to your computer, For this I recommend manually choosing a folder to save it in so you can organize it as you need. If there is no network tab in the version
 you're playing in, click the 'other' tab instead.
 
 ## Version choice breakdown!
