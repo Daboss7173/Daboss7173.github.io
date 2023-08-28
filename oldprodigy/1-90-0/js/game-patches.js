@@ -423,12 +423,12 @@ class ModObj {
 		this.game.prodigy.assets._assets["game-data"] = {
 			type: "json",
 			base: "",
-			fullURL: "https://cdn.prodigygame.com/game/data/production/23/data.json"
+			fullURL: "https://cdn.prodigygame.com/game/data/production/30/data.json"
 		},
 		this.game.prodigy.assets._assets["store-data"] = {
 			type: "json",
 			base: "",
-			fullURL: "https://cdn.prodigygame.com/game/data/production/23/stores.json"
+			fullURL: "https://cdn.prodigygame.com/game/data/production/30/stores.json"
 		};
 		this.game.prodigy.assets._assets["login-buttons"] = {
 			type: "local",
