@@ -3,6 +3,8 @@
 Here are some coding projects I work on.
 Right now I only have one public one. Old Prodigy.
 
+## Old Prodigy
+
 This is some pretty simple modding of older versions of Prodigy, to get them to work right now, in the present day!
 If you want a little dose of nostalgia from older prodigy versions, no matter what the purpose - 
 seeing the older battle systems, the older quests, or anything of the sort - 
