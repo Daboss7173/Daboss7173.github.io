@@ -132,6 +132,7 @@ There's one version I haven't mentioned yet, it is the least buggy out of all of
 
   Huh? The current version? This isn't Old Prodigy! Well - maybe not, but it is THE Prodigy, it is more Prodigy than any of these versions. The full-game experience is
   to be experienced there. There is no other version of Prodigy with fully-fledged multiplayer. There is no other version with fully functional leaderboards. There is no other
-  version with the intricately designed education system. For that, you need to play Prodigy, as it is now.
+  version with the intricately designed education system, and there is no other version that consistently gets updated by a dedicated team of truly wonderful people. For that,
+  you need to play Prodigy, as it is now.
 
 In case you don't know how to get there somehow, here's the link: https://sso.prodigygame.com/game/login/
