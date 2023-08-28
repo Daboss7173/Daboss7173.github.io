@@ -113,7 +113,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.90.0 | Bunnies Vs. Foxes!
 
   The leaderboards got overhauled a bit and overall look way brighter than before. Also, the Dyno Dig Oasis quests are phased out now, Professor Scoog is now a shopkeeper.
-  This version also includes some general stability improvements, and the first Springfest in Prodigy was also here.
+  This version also includes some general stability improvements, and the first Springfest in Prodigy was also here. Also a lot of new music was added in!
 
 - 2.6.0 | Another battle overhaul!
 
