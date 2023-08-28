@@ -108,3 +108,14 @@ where a lot of previously bitmap-based fonts start to get replaced by vector fon
 battle revision is the focus here. Anyway to go into more detail about the battle revision, basically everything has a LOT of health now, attacks do more damage, higher
 leveled players/pets are way more powerful, and relics and wands have spells associated with them rather than choosing them in a spellbook. The older spells also were
 completely phased out in favor of newer spells with smoother animation, but that's the gist.
+
+
+### The other version
+
+There's one version I haven't mentioned yet, it is the least buggy out of all of these versions.
+
+- The current version | The most functional build!
+Huh? The current version? This isn't Old Prodigy! Well - maybe not, but it is THE Prodigy, it is more Prodigy than any of these versions. The full-game experience is
+to be experienced there. There is no other version of Prodigy with fully-fledged multiplayer. There is no other version with fully functional leaderboards. There is no other version with the intricately designed education system. For that, you need to play Prodigy, as it is now.
+
+In case you don't know how to get there somehow, here's the link: https://sso.prodigygame.com/game/login/
