@@ -67,7 +67,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.30.0 | Just as many radical changes!
 
   This version had the updated Skywatch, the updated Bonfire Spire, AND an updated map screen! This version also introduced achievements and all kinds of
-  other, more subtle changes.
+  other, more subtle changes. This version is another one that I really recommend trying out, another definitive update.
 
 - 1.37.0 | New Lamplight Town and tutorial!
 
