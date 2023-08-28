@@ -1,1 +1,1 @@
-1.11.0 prodigy has bunch of modded stuff
+1.11.0 prodigy has modded stuff, I'll make the new voice audio soon
