@@ -2,10 +2,10 @@
 
 <html>
 	<head>
-    <title>Old Prodigy (Version Selection)</title>
-    </head>
-    
-    <style>
+	<title>Old Prodigy (Version Selection)</title>
+	</head>
+	
+	<style>
 	body {
 		background-image: url("/oldprodigy/images/Background.png");
 		background-attachment: fixed;
@@ -18,8 +18,8 @@
 	}
 	
 	.select-panel {
-        display: block;
-        position: fixed;
+		display: block;
+		position: fixed;
 		left: 50%;
 		top: 50%;
 		transform: translate(-50%, -50%);
@@ -39,6 +39,28 @@
 		left: 11px;
 	}
 	
+	.select-panel .textbox {
+		position: fixed;
+		display: block;
+		top: 140px;
+		width: 540px;
+		font: 14pt "Arial";
+		text-align: center;
+		color: rgb(0, 0, 0);
+	}
+	
+	.intext {
+		position: absolute;
+		top: 10px;
+		width: 238px;
+		font: 14pt "Arial";
+		text-align: center;
+		font-weight: bold;
+		-webkit-text-stroke: #000;
+		-webkit-text-stroke-width: medium;
+		color: rgb(255, 255, 255);
+	}
+	
 	.button {
 		display: block;
 		position: fixed;
@@ -49,8 +71,8 @@
 	}
 	
 	.warning-panel {
-        display: none;
-        position: fixed;
+		display: none;
+		position: fixed;
 		left: 50%;
 		top: 50%;
 		transform: translate(-50%, -50%);
@@ -65,14 +87,14 @@
 		font: 16px "Arial", sans-serif;
 		font-weight: bold;
 		color: rgb(0, 0, 0);
-    </style>
-    
+	</style>
+	
 <body>
 
 	<div class="warning-panel" id="beta-popup">
 		<img alt="Warning!" src="/oldprodigy/images/WarningPanel.png">
 		
-		<div class="warning-body" id="beta-body">
+		<div class="warning-body">
 			<div>This version is still in beta, and may not function as intended. Expect the unexpected every now and again, and be sure to save frequently.</div>
 			<br>
 			<div>Do you want to continue?</div>
@@ -86,17 +108,67 @@
 			<img alt="No" src="/oldprodigy/images/No.png">
 		</a>
 	</div>
-    
-	<div class="select-panel" id="version-select">
-        <img src="/oldprodigy/images/MenuPanel-3.png">
-        
-        <div class="banner">
-			<img alt="Version Select" src="/oldprodigy/images/MenuPanel-Banner.png">
-        </div>
-        
-        <div class="overlay">
+	
+	<div class="select-panel" id="mod-select" style="display: none;">
+		<img src="/oldprodigy/images/MenuPanel-3.png">
+		
+		<div class="banner">
+			<img alt="Mod Select" src="/oldprodigy/images/ModSelect-Banner.png">
+		</div>
+		
+		<div class="textbox" id="select-mod-version">
+			<img src="/oldprodigy/images/ModVersionText.png" alt="Choose a version to select mods for.">
+		</div>
+		
+		<div class="textbox" id="select-mod-play" style="display: none;">
+			<img src="/oldprodigy/images/ModSelectText.png" alt="Select the mods you want to play with.">
+		</div>
+		
+		<div class="overlay">
 			<img src="/oldprodigy/images/MenuPanel-Overlay.png">
-            
+			
+				<div id="versions-1">
+				
+					<a onclick="ModSelector('1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute">
+						<img alt="1-30-0" src="/oldprodigy/images/1-30-0.png">
+					</a>
+					
+				</div>
+				
+				<div id="mods-1-30-0" style="display: none">
+				
+					<a onclick="AddMod('WalkSpeed', '1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute">
+						<img id="mod-WalkSpeed-1-30-0" src="/oldprodigy/images/ModSelectButton.png">
+						
+						<div class="intext" id="select-mod-version">
+							<img alt="Walk Speed" src="/oldprodigy/images/WalkSpeed.png"></img>
+						</div>
+					</a>
+					
+					<a onclick="StartGameMod('1-30-0')" class="button" style="top: 371px; right: 12px; position: absolute">
+						<img alt="Start" src="/oldprodigy/images/Start.png">
+					</a>
+				
+				</div>
+		</div>
+		
+		<div class="button" style="bottom: 24px; left: 24px;">
+			<a id="mod-back" onclick="closeBetaPopup()">
+				<img alt="Go back" src="/oldprodigy/images/Back.png">
+			</a>
+		</div>
+	</div>
+	
+	<div class="select-panel" id="version-select">
+		<img src="/oldprodigy/images/MenuPanel-3.png">
+		
+		<div class="banner">
+			<img alt="Version Select" src="/oldprodigy/images/MenuPanel-Banner.png">
+		</div>
+		
+		<div class="overlay">
+			<img src="/oldprodigy/images/MenuPanel-Overlay.png">
+			
 			<div id="page-1" style="display: block">
 			
 				<a onclick="EnterGame('1-11-0')" class="button" style="top: 12px; left: 12px; position: absolute">
@@ -161,22 +233,34 @@
 				
 			</div>
 			
-        </div>
-        
-        <div class="button" style="bottom: 24px; left: 24px;">
-            <a onclick="ExitSelection()">
-            	<img alt="Back" src="/oldprodigy/images/Back.png">
-            </a>
-        </div>
-        
-        <div class="button" style="top: 112px; left: 165px;">
-            <a onclick="NextPage()">
-            	<img alt="Next" src="/oldprodigy/images/Next.png">
-            </a>
-        </div>
-        
+		</div>
+		
+		<div class="button" style="top: 112px; left: 24px;">
+			<a onclick="ExitSelection()">
+				<img alt="Go back" src="/oldprodigy/images/Close.png">
+			</a>
+		</div>
+		
+		<div class="button" style="top: 112px; right: 24px;">
+			<a onclick="openMods()">
+				<img alt="Mods" src="/oldprodigy/images/Mods.png">
+			</a>
+		</div>
+		
+		<div class="button" style="bottom: 24px; left: 24px;">
+			<a onclick="BackPage()">
+				<img alt="Go back" src="/oldprodigy/images/Back.png">
+			</a>
+		</div>
+		
+		<div class="button" style="bottom: 24px; right: 24px;">
+			<a onclick="NextPage()">
+				<img alt="Next page" src="/oldprodigy/images/Next.png">
+			</a>
+		</div>
+		
 	</div>
-        
+		
 </body>
 
 <script>
@@ -186,6 +270,9 @@ Menu = {
 	},
 	BetaPopup: {
 		id: "beta-popup"
+	},
+	ModSelect: {
+		id: "mod-select"
 	}
 },
 Pages = [
@@ -196,9 +283,19 @@ Pages = [
 		id: "page-2"
 	}
 ],
+ModPages = {
+	"1-30-0": {
+		id: "mods-1-30-0"
+	},
+	selection: {
+		id: "versions-1"
+	}
+},
+selectedMods = [],
 currentPage = 0,
 currentMenu = Menu.Select,
-new Audio("/oldprodigy/audio/click.mp3")
+currentModPage = ModPages.selection,
+(new Audio("/oldprodigy/audio/click.mp3")).load(),
 PlayClick = function() {
 	(new Audio("/oldprodigy/audio/click.mp3")).play()
 },
@@ -217,6 +314,16 @@ EnterGame = function(version) {
 	setTimeout(()=> {
 		window.location.href = "/oldprodigy/" + version + "/";
 	}, 200);
+},
+BackPage = function() {
+	PlayClick();
+	document.getElementById(Pages[currentPage].id).style.display = "none";
+	if (currentPage == 0) {
+		currentPage = Pages.length - 1
+	} else {
+		currentPage -= 1
+	};
+	document.getElementById(Pages[currentPage].id).style.display = "block"
 },
 NextPage = function() {
 	PlayClick();
@@ -241,6 +348,58 @@ closeBetaPopup = function() {
 	document.getElementById(currentMenu.id).style.display = "none",
 	currentMenu = Menu.Select,
 	document.getElementById(currentMenu.id).style.display = "block";
+},
+openMods = function() {
+	PlayClick(),
+	document.getElementById(currentMenu.id).style.display = "none",
+	currentMenu = Menu.ModSelect,
+	document.getElementById(currentMenu.id).style.display = "block",
+	currentModPage = ModPages.selection
+},
+ModSelector = function(version) {
+	PlayClick();
+	if (currentModPage == ModPages.selection) {
+		DeselectAllMods(version),
+		document.getElementById(currentModPage.id).style.display = "none",
+		currentModPage = ModPages[version],
+		document.getElementById(currentModPage.id).style.display = "block",
+		document.getElementById("mod-back").onclick = ModSelector,
+		document.getElementById("select-mod-version").style.display = "none",
+		document.getElementById("select-mod-play").style.display = "block"
+	} else {
+		document.getElementById(currentModPage.id).style.display = "none",
+		currentModPage = ModPages.selection,
+		document.getElementById(currentModPage.id).style.display = "block",
+		document.getElementById("mod-back").onclick = closeBetaPopup,
+		document.getElementById("select-mod-version").style.display = "block",
+		document.getElementById("select-mod-play").style.display = "none"
+	}
+},
+AddMod = function(modid, version) {
+	PlayClick();
+	if (selectedMods.indexOf(modid) == -1) {
+		document.getElementById("mod-" + modid + "-" + version).setAttribute('src', '/oldprodigy/images/ModSelectButton-HIGHLIGHT.png'),
+		selectedMods.push(modid)
+	} else {
+		document.getElementById("mod-" + modid + "-" + version).setAttribute('src', '/oldprodigy/images/ModSelectButton.png'),
+		selectedMods.splice(selectedMods.indexOf(modid), 1)
+	}
+},
+DeselectAllMods = function(version) {
+	for(var i = 0; i < selectedMods.length; i += 1) {
+		document.getElementById("mod-" + selectedMods[i] + "-" + version).setAttribute('src', '/oldprodigy/images/ModSelectButton.png')
+	};
+	selectedMods.pop()
+}
+StartGameMod = function(version) {
+	PlayClick();
+	var ModString = '?mods=' + selectedMods.toString();
+	if (selectedMods.length < 1) {
+		ModString = ""
+	};
+	setTimeout(()=> {
+		window.location.href = "/oldprodigy/" + version + "/" + ModString;
+	}, 200);
 }
 </script>
 
