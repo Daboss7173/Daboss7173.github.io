@@ -195,13 +195,13 @@ class ModObj {
 					t.loadCharacter.call(t, JSON.parse(reader.target.result), !0);
 				};
 				reader.onerror = function(reader) {
-					PIXI.game.prodigy.open.messageBoxOkay("Failed to open save file, please retry.","OKAY",null,null,"Character Loader");
+					t.game.prodigy.open.messageBoxOkay("Failed to open save file, please retry.","OKAY",null,null,"Character Loader");
 				}
 			}
 		}, this.game.state.states.Login.loadCharacter = function(e, t) {
 			try {
 				if (e.gameVersion != this.game.prodigy.version && t == !0) {
-					this.game.prodigy.open.confirm("Your character is from a different Prodigy version! This may cause multiple problems while playing!\n\nDo you want to continue?", this.loadCharacter.bind(this, e, !1, i), this.showLogin.bind(this, !0), null, "Character Loader")
+					this.game.prodigy.open.confirm("Your character is from a different Prodigy version! This may cause multiple problems while playing!\n\nDo you want to continue?", this.loadCharacter.bind(this, e, !1), this.showLogin.bind(this, !0), null, "Character Loader")
 					this.game.prodigy.game.state.states.Login.showLogin(!1);
 				} else {
 					this.game.prodigy.player.appearance.data = e.appearancedata,
