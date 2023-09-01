@@ -237,8 +237,9 @@ class ModObj {
 						if (Util.isDefined(e.metadata.parentalLink)) {
 							this.game.prodigy.player.parentalLink = e.metadata.parentalLink
 						};
-						Util.isDefined(e.metadata.mountdata) ?
+						if (Util.isDefined(e.metadata.mountdata)) {
 							this.game.prodigy.player.mount.data = e.metadata.mountdata
+						}
 					} else {
 						this.game.prodigy.player.isMember = !1, // No membership by default
 						this.game.prodigy.player.data.startDate = (new Date).getTime(), // Fix mail crash
