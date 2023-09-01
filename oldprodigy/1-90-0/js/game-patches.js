@@ -180,9 +180,9 @@ class ModObj {
 		}, this.game.state.states.Login.offlineMode = function() {
 			this.game.prodigy.start("CharSelect")
 		}, this.game.state.states.Login.openFileForCharacter = function() {
-			var LoadCharacterData = this.loadCharacter;
 			var fileInput = document.createElement('input');
 			var e = this.game
+			var t = this
 			fileInput.type = 'file',
 			fileInput.id = 'myfile' + Math.floor(Math.random() * 999999),
 			fileInput.name = 'files',
@@ -192,65 +192,64 @@ class ModObj {
 				var reader = new FileReader();
 				reader.readAsText(file.target.files[0]);
 				reader.onload = function(reader) {
-					var finisheddata = JSON.parse(reader.target.result);
-					console.log(finisheddata);
-					LoadCharacterData(finisheddata, !0, e);
+					t.loadCharacter.call(t, JSON.parse(reader.target.result), !0);
 				};
 				reader.onerror = function(reader) {
 					PIXI.game.prodigy.open.messageBoxOkay("Failed to open save file, please retry.","OKAY",null,null,"Character Loader");
 				}
 			}
-		}, this.game.state.states.Login.loadCharacter = function(e, t, i) {
+		}, this.game.state.states.Login.loadCharacter = function(e, t) {
 			try {
-				if (e.gameVersion != i.prodigy.version && t == !0) {
-					i.prodigy.open.confirm("Your character is from a different Prodigy version! This may cause multiple problems while playing!\n\nDo you want to continue?", i.prodigy.game.state.states.Login.loadCharacter.bind(this, e, !1, i), i.prodigy.game.state.states.Login.showLogin.bind(i.prodigy.game.state.states.Login, !0), null, "Character Loader")
-					i.prodigy.game.state.states.Login.showLogin(!1);
+				if (e.gameVersion != this.game.prodigy.version && t == !0) {
+					this.game.prodigy.open.confirm("Your character is from a different Prodigy version! This may cause multiple problems while playing!\n\nDo you want to continue?", this.loadCharacter.bind(this, e, !1, i), this.showLogin.bind(this, !0), null, "Character Loader")
+					this.game.prodigy.game.state.states.Login.showLogin(!1);
 				} else {
-					i.prodigy.player.appearance
-					i.prodigy.player.appearance.data = e.appearancedata,
-					i.prodigy.player.equipment.data = e.equipmentdata,
-					i.prodigy.player.kennel.data = e.kenneldata,
-					i.prodigy.player.data = e.data,
-					i.prodigy.player.quests.data = e.questdata,
-					i.prodigy.player.backpack.data = e.backpackdata;
+					this.game.prodigy.player.appearance.data = e.appearancedata,
+					this.game.prodigy.player.equipment.data = e.equipmentdata,
+					this.game.prodigy.player.kennel.data = e.kenneldata,
+					this.game.prodigy.player.data = e.data,
+					this.game.prodigy.player.quests.data = e.questdata,
+					this.game.prodigy.player.backpack.data = e.backpackdata;
 					if (Util.isDefined(e.tutorialdata)) {
-						i.prodigy.player.tutorial.data = e.tutorialdata
+						this.game.prodigy.player.tutorial.data = e.tutorialdata
 					};
 					if (Util.isDefined(e.statedata)) {
-						i.prodigy.player.state.data = e.statedata
+						this.game.prodigy.player.state.data = e.statedata
 					};
 					if (Util.isDefined(e.achievementsdata)) {
-						i.prodigy.player.achievements.data = e.achievementsdata
+						this.game.prodigy.player.achievements.data = e.achievementsdata
 					};
-					if (i.prodigy.player.hasCompletedTutorial() == !0) {
-						i.prodigy.player.house.data = e.housedata
+					if (this.game.prodigy.player.hasCompletedTutorial() == !0) {
+						this.game.prodigy.player.house.data = e.housedata
 					};
 					if (Util.isDefined(e.metadata)) {
-						i.prodigy.player.isMember = e.metadata.isMember,
-						i.prodigy.player.appearanceChanged = e.metadata.appearanceChanged,
-						i.prodigy.player.broadcastId = e.metadata.broadcastId,
-						i.prodigy.player.inPVP = e.metadata.inPVP,
-						i.prodigy.player.updated = e.metadata.updated;
+						this.game.prodigy.player.isMember = e.metadata.isMember,
+						this.game.prodigy.player.appearanceChanged = e.metadata.appearanceChanged,
+						this.game.prodigy.player.broadcastId = e.metadata.broadcastId,
+						this.game.prodigy.player.inPVP = e.metadata.inPVP,
+						this.game.prodigy.player.updated = e.metadata.updated;
 						if (Util.isDefined(e.data.startDate)) {
-							i.prodigy.player.registerDate = new Date(i.prodigy.player.data.startDate)
+							this.game.prodigy.player.registerDate = new Date(this.game.prodigy.player.data.startDate)
 						} else {
-							i.prodigy.player.data.startDate = (new Date).getTime(),
-							i.prodigy.player.registerDate = new Date(i.prodigy.player.data.startDate)
+							this.game.prodigy.player.data.startDate = (new Date).getTime(),
+							this.game.prodigy.player.registerDate = new Date(this.game.prodigy.player.data.startDate)
 						};
 						if (Util.isDefined(e.metadata.parentalLink)) {
-							i.prodigy.player.parentalLink = e.metadata.parentalLink
+							this.game.prodigy.player.parentalLink = e.metadata.parentalLink
 						};
+						Util.isDefined(e.metadata.mountdata) ?
+							this.game.prodigy.player.mount.data = e.metadata.mountdata
 					} else {
-						i.prodigy.player.isMember = !1, // No membership by default
-						i.prodigy.player.data.startDate = (new Date).getTime(), // Fix mail crash
-						i.prodigy.player.registerDate = new Date(i.prodigy.player.data.startDate)
+						this.game.prodigy.player.isMember = !1, // No membership by default
+						this.game.prodigy.player.data.startDate = (new Date).getTime(), // Fix mail crash
+						this.game.prodigy.player.registerDate = new Date(this.game.prodigy.player.data.startDate)
 					};
-					i.prodigy.game.state.states.Login.offlineMode()
+					this.offlineMode()
 				}
 			} catch (error) {
-				i.prodigy.open.messageBoxOkay("A critical error occurred during your character load! This is most-likely from a corrupted/modified save.\n\n\nCheck the console for more details.", "OKAY", null, null, "Character Loader")
-				delete i.prodigy.player.data.reset
 				console.error(error),
+				this.game.prodigy.open.messageBoxOkay("A critical error occurred during your character load! This is most-likely from a corrupted/modified save.\n\n\nCheck the console for more details.", "OKAY", null, null, "Character Loader"),
+				this.game.prodigy.player.data.reset = true,
 				Util.log("Character load failed!", Util.ERROR),
 				Util.log("Load error detected, data loaded returned below.", Util.INFO),
 				console.log(e);
@@ -390,7 +389,8 @@ class ModObj {
 					broadcastId: this.game.prodigy.player.broadcastId,
 					inPVP: this.game.prodigy.player.inPVP,
 					updated: this.game.prodigy.player.updated,
-					parentalLink: this.game.prodigy.player.parentalLink
+					parentalLink: this.game.prodigy.player.parentalLink,
+					mountdata: this.game.prodigy.player.mount.data
 				},
 				gameVersion: this.game.prodigy.version
 			};
