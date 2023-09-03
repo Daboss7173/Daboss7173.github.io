@@ -144,6 +144,14 @@
 							<img alt="Walk Speed" src="/oldprodigy/images/WalkSpeed.png"></img>
 						</div>
 					</a>
+				
+					<a onclick="AddMod('FastGameSpeed', '1-30-0')" class="button" style="top: 68px; left: 12px; position: absolute">
+						<img id="mod-FastGameSpeed-1-30-0" src="/oldprodigy/images/ModSelectButton.png">
+						
+						<div class="intext" id="select-mod-version">
+							<img alt="Fast Game Speed" src="/oldprodigy/images/FastGameSpeed.png"></img>
+						</div>
+					</a>
 					
 					<a onclick="StartGameMod('1-30-0')" class="button" style="top: 371px; right: 12px; position: absolute">
 						<img alt="Start" src="/oldprodigy/images/Start.png">
@@ -199,35 +207,39 @@
 					<img alt="1-39-0" src="/oldprodigy/images/1-39-0.png">
 				</a>
 				
-				<a onclick="EnterGame('1-50-0')" class="button" style="top: 68px; right: 12px; position: absolute">
+				<a onclick="EnterGame('1-46-0')" class="button" style="top: 68px; right: 12px; position: absolute">
+					<img alt="1-46-0" src="/oldprodigy/images/1-46-0.png">
+				</a>
+				
+				<a onclick="EnterGame('1-50-0')" class="button" style="top: 124px; right: 12px; position: absolute">
 					<img alt="1-50-0" src="/oldprodigy/images/1-50-0.png">
 				</a>
 				
-				<a onclick="EnterGame('1-51-0')" class="button" style="top: 124px; right: 12px; position: absolute">
+				<a onclick="EnterGame('1-51-0')" class="button" style="top: 180px; right: 12px; position: absolute">
 					<img alt="1-51-0" src="/oldprodigy/images/1-51-0.png">
 				</a>
 				
-				<a onclick="EnterGame('1-60-0')" class="button" style="top: 180px; right: 12px; position: absolute">
+				<a onclick="EnterGame('1-60-0')" class="button" style="top: 236px; right: 12px; position: absolute">
 					<img alt="1-60-0" src="/oldprodigy/images/1-60-0.png">
 				</a>
 				
-				<a onclick="EnterGame('1-70-0')" class="button" style="top: 236px; right: 12px; position: absolute">
+				<a onclick="EnterGame('1-70-0')" class="button" style="top: 292px; right: 12px; position: absolute">
 					<img alt="1-70-0" src="/oldprodigy/images/1-70-0.png">
-				</a>
-				
-				<a onclick="EnterGame('1-80-0')" class="button" style="top: 292px; right: 12px; position: absolute">
-					<img alt="1-80-0" src="/oldprodigy/images/1-80-0.png">
 				</a>
 				
 			</div>
 			
 			<div id="page-2" style="display: none">
+				
+				<a onclick="EnterGame('1-80-0')" class="button" style="top: 12px; left: 12px; position: absolute">
+					<img alt="1-80-0" src="/oldprodigy/images/1-80-0.png">
+				</a>
 			
-				<a onclick="EnterGame('1-90-0')" class="button" style="top: 12px; left: 12px; position: absolute">
+				<a onclick="EnterGame('1-90-0')" class="button" style="top: 68px; left: 12px; position: absolute">
 					<img alt="1-90-0" src="/oldprodigy/images/1-90-0.png">
 				</a>
 			
-				<a onclick="openBetaPopup('2-6-0')" class="button" style="top: 68px; left: 12px; position: absolute">
+				<a onclick="openBetaPopup('2-6-0')" class="button" style="top: 124px; left: 12px; position: absolute">
 					<img alt="2-6-0" src="/oldprodigy/images/2-6-0.png">
 				</a>
 				
@@ -389,7 +401,7 @@ DeselectAllMods = function(version) {
 	for(var i = 0; i < selectedMods.length; i += 1) {
 		document.getElementById("mod-" + selectedMods[i] + "-" + version).setAttribute('src', '/oldprodigy/images/ModSelectButton.png')
 	};
-	selectedMods.pop()
+	selectedMods = []
 }
 StartGameMod = function(version) {
 	PlayClick();
