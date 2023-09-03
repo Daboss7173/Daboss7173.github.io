@@ -40,6 +40,12 @@ To save your character, you can just go into the settings menu, go under 'networ
 to your computer, For this I recommend manually choosing a folder to save it in so you can organize it as you need. If there is no network tab in the version
 you're playing in, click the 'other' tab instead.
 
+## Modpacks
+
+This repository features dynamic modpacks, you will be able to toggle mods as you see fit, and be able to combine multiple mods together for dynamic modpacks.
+
+Currently, the only version that supports modpacks is 1-30-0, but there are plans to add more versions in the future!
+
 ## Version choice breakdown!
 
 Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
@@ -78,37 +84,41 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.39.0 | Crazy battle update!?
 
   This version introduced a refresh on the battle system, with a new health meter not using hearts, but a health bar! It also shows how much damage is dealt in
-  each attack, and introduces critical hits. This also has leveling up mid-battle and some new animations to accompany this! This version also has the Firefly Forest reskin,
-  which looks really cool!
+  each attack, and introduces critical hits. This also has leveling up mid-battle and some new animations to accompany this! This version also has the Firefly Forest
+  reskin, which looks really cool!
 
-- 1.50.0 | Lots of significant changes added in!
+- 1.46.2 | Potions and Epic Attacks!?
+  This version added not only Potions, but was also the first to have Epic Attacks! The tutorial route was also re-worked a bit. Rather than going through the heart of
+  Lamplight town, this version just passes through the shop district, and is overall a less drawn-out tutorial.
 
-  This version has a lot of significant changes, For starters EPIC ATTACKS are added now, along with some new battle sound effects! The tutorial route was also re-worked
-  a bit, and now it uses a shorter route that doesn't take you through Lamplight Square and is overall less drawn-out. This is yet another version I truly recommend,
-  in my opinion, it is one of the definitive Prodigy versions.
+- 1.50.0 | Sound Effects Galore!
 
-- 1.51.0 | NEW AVATAR!? EW!
+  This version has added plenty of stuff! New sound effects for the Epic Attacks, as well as a new spell cast sound effect, and spell hit sound effect. There is also a
+  sound effect for when you level up, and a new sound effect for critical hits. The Shiverchill Mountain textures also got updated in this version.
+
+- 1.51.0 | NEW AVATAR!?
 
   This update has always been a bit controversial... The avatar was completely reworked in this version, and instead of using sprite sheets, it used atlases. This means
   that the animations could be a LOT smoother than before! However, it just plain didn't have the same amount of detail that the previous avatar had.
   The loading system also got a bit of internal reworking in this update, meaning that some icons would have some loading issues, which is the main reason I
   recommend 1.50.0 over this update.
 
-- 1.60.0 | ARGH! OUR SHIP IS SINKING MATEYS! I THINK WE MIGHT WRECK!
+- 1.60.0 | ARGH! OUR SHIP IS SINKING SHILLING! WE'RE GONNA WRECK!
 
   Ahem - anyway, this update was one of the first with the Starlight Festival! This update also introduced the new in-game chat, although it's not a big deal anyway since
-  this is in offline mode... Ooh! Also, this brought in Shipwreck Shore, replacing Barnacle Cove! This also has Pippet Battles!
+  this is in offline mode... Ooh! Also, this brought in Shipwreck Shore, replacing Barnacle Cove! This also has Pippet Battles! Also, the Skywatch textures were also
+  redone in this version.
 
 - 1.70.0 | Huh I can dab now? Cool
 
-  This update added in some quest progress popups for when you enter the following areas: Firefly Forest, Shiverchill Mountain, Skywatch, Bonfire Spire, and Shipwreck Shore.
-  Pretty nifty, but is there anything significant- Also the Dark Tower got completely redesigned with a tileset model- COUNT ME IN!
-  Oh and aside from all that stuff, you can dab now. Does that mean it's coming back- Also there's Winterfest, and 4 new epics are added in now. Pretty nifty.
+  This update added in some quest progress popups for when you enter the following areas: Firefly Forest, Shiverchill Mountain, Skywatch, Bonfire Spire, and Shipwreck
+  Shore. Also the Dark Tower got completely redesigned with a tileset model. The Bonfire Spire textures were redone in this version as well.
+  Oh and aside from all that stuff, you can dab now. There's also Winterfest, and 4 new epics are added in now. Pretty nifty.
 
 - 1.80.0 | A battle overhaul!?
 
-  Wow, that was quick- YOU HAVE SEEN NOTHING YET SONNY BOY! Huh. Ok - Anyway, the battle got changed a bit so that instead of having up to 4 pets, you only have up to 2. HOWEVER
-  They are all on screen at the same time and the battle background uses tilesets now.
+  Wow, that was quick- YOU HAVE SEEN NOTHING YET SONNY BOY! Huh. Ok - Anyway, the battle got changed a bit so that instead of having up to 4 pets, you only have up to 2.
+  HOWEVER They are all on screen at the same time and the battle background uses tilesets now.
 
 - 1.90.0 | Bunnies Vs. Foxes!
 
@@ -117,11 +127,9 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 
 - 2.6.0 | Another battle overhaul!
 
-  What? Again? That was quick- Ah don't worry about it, that'll be the last major revision for the next 4 and a half years! Whew, thank goodness. Anyway, this marks a point
-  where a lot of previously bitmap-based fonts start to get replaced by vector fonts. There are also a lot of more obscure and internal changes but who cares about that, the
-  battle revision is the focus here. Anyway to go into more detail about the battle revision, basically everything has a LOT of health now, attacks do more damage, higher
-  leveled players/pets are way more powerful, and relics and wands have spells associated with them rather than choosing them in a spellbook. The older spells also were
-  completely phased out in favor of newer spells with smoother animation, but that's the gist.
+  The battle system has been revised once again! This time the entire battle GUI was overhauled, and all of the old spells got phased out in favor of newer, more smoothly
+  animated spells. Not only that, but the health/balancing systems have been re-worked so that players, especially higher leveled players have a TON of health. This also
+  marks a point where a lot of fonts start to get replaced by vector fonts.
 
 Well- okay, maybe it's still a bit overwhelming. At least you know what you're getting in each version though!
 
