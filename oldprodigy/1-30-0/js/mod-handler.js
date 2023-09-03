@@ -3,6 +3,10 @@ var GameMods = {
 		{
 			id: "WalkSpeed",
 			patch: "initWalkSpeedMod"
+		},
+		{
+			id: "FastGameSpeed",
+			patch: "initFastGameSpeedMod"
 		}
 	]
 };
@@ -70,6 +74,23 @@ class ModHandler {
 				width: 525,
 				align: "center"
 			})
+		}
+	}
+	
+	initFastGameSpeedMod() {
+		var i = Phaser.TweenManager.prototype.add,
+			e = this.game,
+			t = 3;
+		Phaser.TweenManager.prototype.add = function(a) {
+			a.timeScale = t, i.call(this, a)
+		};
+		var a = Phaser.Timer.prototype.add;
+		Phaser.Timer.prototype.add = function(d, b, c) {
+			d /= t, a.call(this, d, b, c)
+		};
+		var s = Phaser.Tween.prototype.delay;
+		Phaser.Tween.prototype.delay = function(a, b) {
+			a /= t; return s.call(this, a, b)
 		}
 	}
 }
