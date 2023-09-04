@@ -60,10 +60,15 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
   This is a version that I recommend in particular, it's kind of like 1.11.0 - but it's generally a lot more stable. In fact this version
   is one of the most stable Prodigy versions on this site!
 
-- 1.17.0 | The oldest version with tileset-style maps!
+- 1.17.0 | The oldest version with tiled maps!
 
   This version was the first to introduce a new tutorial, more in-depth than 1.16.5 and before, which would end up being used all the way up to 1.30.0!
   Not only did this version have that, but it also introduced the precursor to the modern firefly forest (before they updated the tileset and updated Flora's sprite)
+
+- 1.18.2 | All Hallow's Eve!
+
+  This version is really neat because it has the first Pumpkinfest! This means Halloween decorations are all around the map, and there's a Pumpkinfest shop, with all-kinds
+  of exclusive, creepy items and gear you can buy with your gold! Other than that it's pretty much just like 1.17.0.
 
 - 1.24.0 | A whole lot of stuff added in!
 
