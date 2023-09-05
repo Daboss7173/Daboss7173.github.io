@@ -380,14 +380,14 @@ ModSelector = function(version) {
 		document.getElementById(currentModPage.id).style.display = "none",
 		currentModPage = ModPages[version],
 		document.getElementById(currentModPage.id).style.display = "block",
-		document.getElementById("mod-back").onclick = ModSelector,
+		document.getElementById("mod-back").href = "javascript:ModSelector()",
 		document.getElementById("select-mod-version").style.display = "none",
 		document.getElementById("select-mod-play").style.display = "block"
 	} else {
 		document.getElementById(currentModPage.id).style.display = "none",
 		currentModPage = ModPages.selection,
 		document.getElementById(currentModPage.id).style.display = "block",
-		document.getElementById("mod-back").onclick = closeBetaPopup,
+		document.getElementById("mod-back").href = "javascript:closeBetaPopup()",
 		document.getElementById("select-mod-version").style.display = "block",
 		document.getElementById("select-mod-play").style.display = "none"
 	}
