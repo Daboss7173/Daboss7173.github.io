@@ -11,4 +11,4 @@ What went wrong:
 
 How can I replicate this:
 
-Console log output (optional):
+Console log output:
