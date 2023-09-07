@@ -51,7 +51,19 @@
     
 <body>
 
-	<div class="beta-popup" id="beta-popup">
+	<div class="warning-panel" id="beta-popup">
+		<img alt="Caution!" src="/oldprodigy/images/WarningPanel.png">
+
+		<div class="warning-body">
+			<div>You are about to enter a w.i.p version, wish to proceed?</div>
+	</div>
+		<a href="javascript:EnterGame(betaConfirmCallback)" class="button" style="bottom: 24px; left: 24px;">
+			<img alt="Yes" src="/oldprodigy/images/Yes.png">
+		</a>
+		
+		<a href="javascript:closeBetaPopup()" class="button" style="bottom: 24px; right: 24px;">
+			<img alt="No" src="/oldprodigy/images/No.png">
+		</a>
 	</div>
     
 	<div class="select-panel" id="version-select">
