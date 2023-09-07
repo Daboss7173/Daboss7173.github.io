@@ -91,187 +91,187 @@
 	
 <body>
 
-	<div class="warning-panel" id="beta-popup">
-		<img alt="Warning!" src="/oldprodigy/images/WarningPanel.png">
+	<div class="warning-panel" id="beta-popup" draggable="false">
+		<img alt="Warning!" src="/oldprodigy/images/WarningPanel.png" draggable="false">
 		
-		<div class="warning-body">
+		<div class="warning-body" draggable="false">
 			<div>This version is still in beta, and may not function as intended. Expect the unexpected every now and again, and be sure to save frequently.</div>
 			<br>
 			<div>Do you want to continue?</div>
 		</div>
 		
-		<a href="javascript:EnterGame(betaConfirmCallback)" class="button" style="bottom: 24px; left: 24px;">
-			<img alt="Yes" src="/oldprodigy/images/Yes.png">
+		<a href="javascript:EnterGame(betaConfirmCallback)" class="button" style="bottom: 24px; left: 24px;" draggable="false">
+			<img alt="Yes" src="/oldprodigy/images/Yes.png" draggable="false">
 		</a>
 		
-		<a href="javascript:closeBetaPopup()" class="button" style="bottom: 24px; right: 24px;">
-			<img alt="No" src="/oldprodigy/images/No.png">
+		<a href="javascript:closeBetaPopup()" class="button" style="bottom: 24px; right: 24px;" draggable="false">
+			<img alt="No" src="/oldprodigy/images/No.png" draggable="false">
 		</a>
 	</div>
 	
-	<div class="select-panel" id="mod-select" style="display: none;">
-		<img src="/oldprodigy/images/MenuPanel-3.png">
+	<div class="select-panel" id="mod-select" style="display: none;" draggable="false">
+		<img src="/oldprodigy/images/MenuPanel-3.png" draggable="false">
 		
-		<div class="banner">
-			<img alt="Mod Select" src="/oldprodigy/images/ModSelect-Banner.png">
+		<div class="banner" draggable="false">
+			<img alt="Mod Select" src="/oldprodigy/images/ModSelect-Banner.png" draggable="false">
 		</div>
 		
-		<div class="textbox" id="select-mod-version">
-			<img src="/oldprodigy/images/ModVersionText.png" alt="Choose a version to select mods for.">
+		<div class="textbox" id="select-mod-version" draggable="false">
+			<img src="/oldprodigy/images/ModVersionText.png" alt="Choose a version to select mods for." draggable="false">
 		</div>
 		
-		<div class="textbox" id="select-mod-play" style="display: none;">
-			<img src="/oldprodigy/images/ModSelectText.png" alt="Select the mods you want to play with.">
+		<div class="textbox" id="select-mod-play" style="display: none;" draggable="false">
+			<img src="/oldprodigy/images/ModSelectText.png" alt="Select the mods you want to play with." draggable="false">
 		</div>
 		
-		<div class="overlay">
-			<img src="/oldprodigy/images/MenuPanel-Overlay.png">
+		<div class="overlay" draggable="false">
+			<img src="/oldprodigy/images/MenuPanel-Overlay.png" draggable="false">
 			
-				<div id="versions-1">
+				<div id="versions-1" draggable="false">
 				
-					<a href="javascript:ModSelector('1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute">
-						<img alt="1-30-0" src="/oldprodigy/images/1-30-0.png">
+					<a href="javascript:ModSelector('1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
+						<img alt="1-30-0" src="/oldprodigy/images/1-30-0.png" draggable="false">
 					</a>
 					
 				</div>
 				
-				<div id="mods-1-30-0" style="display: none">
+				<div id="mods-1-30-0" style="display: none" draggable="false">
 				
-					<a href="javascript:AddMod('WalkSpeed', '1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute">
-						<img id="mod-WalkSpeed-1-30-0" src="/oldprodigy/images/ModSelectButton.png">
+					<a href="javascript:AddMod('WalkSpeed', '1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
+						<img id="mod-WalkSpeed-1-30-0" src="/oldprodigy/images/ModSelectButton.png" draggable="false">
 						
-						<div class="intext" id="select-mod-version">
-							<img alt="Walk Speed" src="/oldprodigy/images/WalkSpeed.png"></img>
+						<div class="intext" id="select-mod-version" draggable="false">
+							<img alt="Walk Speed" src="/oldprodigy/images/WalkSpeed.png" draggable="false">
 						</div>
 					</a>
 				
-					<a href="javascript:AddMod('FastGameSpeed', '1-30-0')" class="button" style="top: 68px; left: 12px; position: absolute">
-						<img id="mod-FastGameSpeed-1-30-0" src="/oldprodigy/images/ModSelectButton.png">
+					<a href="javascript:AddMod('FastGameSpeed', '1-30-0')" class="button" style="top: 68px; left: 12px; position: absolute" draggable="false">
+						<img id="mod-FastGameSpeed-1-30-0" src="/oldprodigy/images/ModSelectButton.png" draggable="false">
 						
-						<div class="intext" id="select-mod-version">
-							<img alt="Fast Game Speed" src="/oldprodigy/images/FastGameSpeed.png"></img>
+						<div class="intext" id="select-mod-version" draggable="false">
+							<img alt="Fast Game Speed" src="/oldprodigy/images/FastGameSpeed.png" draggable="false">
 						</div>
 					</a>
 					
-					<a href="javascript:StartGameMod('1-30-0')" class="button" style="top: 371px; right: 12px; position: absolute">
-						<img alt="Start" src="/oldprodigy/images/Start.png">
+					<a href="javascript:StartGameMod('1-30-0')" class="button" style="top: 371px; right: 12px; position: absolute" draggable="false">
+						<img alt="Start" src="/oldprodigy/images/Start.png" draggable="false">
 					</a>
 				
 				</div>
 		</div>
 		
-		<div class="button" style="bottom: 24px; left: 24px;">
-			<a id="mod-back" href="javascript:closeBetaPopup()">
-				<img alt="Go back" src="/oldprodigy/images/Back.png">
+		<div class="button" style="bottom: 24px; left: 24px;" draggable="false">
+			<a id="mod-back" href="javascript:closeBetaPopup() draggable="false"">
+				<img alt="Go back" src="/oldprodigy/images/Back.png" draggable="false">
 			</a>
 		</div>
 	</div>
 	
-	<div class="select-panel" id="version-select">
-		<img src="/oldprodigy/images/MenuPanel-3.png">
+	<div class="select-panel" id="version-select" draggable="false">
+		<img src="/oldprodigy/images/MenuPanel-3.png" draggable="false">
 		
-		<div class="banner">
-			<img alt="Version Select" src="/oldprodigy/images/MenuPanel-Banner.png">
+		<div class="banner" draggable="false">
+			<img alt="Version Select" src="/oldprodigy/images/MenuPanel-Banner.png" draggable="false">
 		</div>
 		
-		<div class="overlay">
-			<img src="/oldprodigy/images/MenuPanel-Overlay.png">
+		<div class="overlay" draggable="false">
+			<img src="/oldprodigy/images/MenuPanel-Overlay.png" draggable="false">
 			
-			<div id="page-1" style="display: block">
+			<div id="page-1" style="display: block" draggable="false">
 			
-				<a href="javascript:EnterGame('1-11-0')" class="button" style="top: 12px; left: 12px; position: absolute">
-					<img alt="1-11-0" src="/oldprodigy/images/1-11-0.png">
+				<a href="javascript:EnterGame('1-11-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
+					<img alt="1-11-0" src="/oldprodigy/images/1-11-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-16-5')" class="button" style="top: 68px; left: 12px; position: absolute">
-					<img alt="1-16-5" src="/oldprodigy/images/1-16-5.png">
+				<a href="javascript:EnterGame('1-16-5')" class="button" style="top: 68px; left: 12px; position: absolute" draggable="false">
+					<img alt="1-16-5" src="/oldprodigy/images/1-16-5.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-17-0')" class="button" style="top: 124px; left: 12px; position: absolute">
-					<img alt="1-17-0" src="/oldprodigy/images/1-17-0.png">
+				<a href="javascript:EnterGame('1-17-0')" class="button" style="top: 124px; left: 12px; position: absolute" draggable="false">
+					<img alt="1-17-0" src="/oldprodigy/images/1-17-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-18-2')" class="button" style="top: 180px; left: 12px; position: absolute">
-					<img alt="1-18-2" src="/oldprodigy/images/1-18-2.png">
+				<a href="javascript:EnterGame('1-18-2')" class="button" style="top: 180px; left: 12px; position: absolute" draggable="false">
+					<img alt="1-18-2" src="/oldprodigy/images/1-18-2.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-24-0')" class="button" style="top: 236px; left: 12px; position: absolute">
-					<img alt="1-24-0" src="/oldprodigy/images/1-24-0.png">
+				<a href="javascript:EnterGame('1-24-0')" class="button" style="top: 236px; left: 12px; position: absolute" draggable="false">
+					<img alt="1-24-0" src="/oldprodigy/images/1-24-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-30-0')" class="button" style="top: 292px; left: 12px; position: absolute">
-					<img alt="1-30-0" src="/oldprodigy/images/1-30-0.png">
+				<a href="javascript:EnterGame('1-30-0')" class="button" style="top: 292px; left: 12px; position: absolute" draggable="false">
+					<img alt="1-30-0" src="/oldprodigy/images/1-30-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-37-0')" class="button" style="top: 12px; right: 12px; position: absolute">
-					<img alt="1-37-0" src="/oldprodigy/images/1-37-0.png">
+				<a href="javascript:EnterGame('1-37-0')" class="button" style="top: 12px; right: 12px; position: absolute" draggable="false">
+					<img alt="1-37-0" src="/oldprodigy/images/1-37-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-39-0')" class="button" style="top: 68px; right: 12px; position: absolute">
-					<img alt="1-39-0" src="/oldprodigy/images/1-39-0.png">
+				<a href="javascript:EnterGame('1-39-0')" class="button" style="top: 68px; right: 12px; position: absolute" draggable="false">
+					<img alt="1-39-0" src="/oldprodigy/images/1-39-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-46-2')" class="button" style="top: 124px; right: 12px; position: absolute">
-					<img alt="1-46-2" src="/oldprodigy/images/1-46-2.png">
+				<a href="javascript:EnterGame('1-46-2')" class="button" style="top: 124px; right: 12px; position: absolute" draggable="false">
+					<img alt="1-46-2" src="/oldprodigy/images/1-46-2.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-50-0')" class="button" style="top: 180px; right: 12px; position: absolute">
-					<img alt="1-50-0" src="/oldprodigy/images/1-50-0.png">
+				<a href="javascript:EnterGame('1-50-0')" class="button" style="top: 180px; right: 12px; position: absolute" draggable="false">
+					<img alt="1-50-0" src="/oldprodigy/images/1-50-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-51-0')" class="button" style="top: 236px; right: 12px; position: absolute">
-					<img alt="1-51-0" src="/oldprodigy/images/1-51-0.png">
+				<a href="javascript:EnterGame('1-51-0')" class="button" style="top: 236px; right: 12px; position: absolute" draggable="false">
+					<img alt="1-51-0" src="/oldprodigy/images/1-51-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-60-0')" class="button" style="top: 292px; right: 12px; position: absolute">
-					<img alt="1-60-0" src="/oldprodigy/images/1-60-0.png">
+				<a href="javascript:EnterGame('1-60-0')" class="button" style="top: 292px; right: 12px; position: absolute" draggable="false">
+					<img alt="1-60-0" src="/oldprodigy/images/1-60-0.png" draggable="false">
 				</a>
 				
 			</div>
 			
-			<div id="page-2" style="display: none">
+			<div id="page-2" style="display: none" draggable="false">
 				
-				<a href="javascript:EnterGame('1-70-0')" class="button" style="top: 12px; left: 12px; position: absolute">
-					<img alt="1-70-0" src="/oldprodigy/images/1-70-0.png">
+				<a href="javascript:EnterGame('1-70-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
+					<img alt="1-70-0" src="/oldprodigy/images/1-70-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-80-0')" class="button" style="top: 68px; left: 12px; position: absolute">
-					<img alt="1-80-0" src="/oldprodigy/images/1-80-0.png">
+				<a href="javascript:EnterGame('1-80-0')" class="button" style="top: 68px; left: 12px; position: absolute" draggable="false">
+					<img alt="1-80-0" src="/oldprodigy/images/1-80-0.png" draggable="false">
 				</a>
 			
-				<a href="javascript:EnterGame('1-90-0')" class="button" style="top: 124px; left: 12px; position: absolute">
-					<img alt="1-90-0" src="/oldprodigy/images/1-90-0.png">
+				<a href="javascript:EnterGame('1-90-0')" class="button" style="top: 124px; left: 12px; position: absolute" draggable="false">
+					<img alt="1-90-0" src="/oldprodigy/images/1-90-0.png" draggable="false">
 				</a>
 			
-				<a href="javascript:openBetaPopup('2-6-0')" class="button" style="top: 180px; left: 12px; position: absolute">
-					<img alt="2-6-0" src="/oldprodigy/images/2-6-0.png">
+				<a href="javascript:openBetaPopup('2-6-0')" class="button" style="top: 180px; left: 12px; position: absolute" draggable="false">
+					<img alt="2-6-0" src="/oldprodigy/images/2-6-0.png" draggable="false">
 				</a>
 				
 			</div>
 			
 		</div>
 		
-		<div class="button" style="top: 112px; left: 24px;">
-			<a href="javascript:ExitSelection()">
-				<img alt="Go back" src="/oldprodigy/images/Close.png">
+		<div class="button" style="top: 112px; left: 24px;" draggable="false">
+			<a href="javascript:ExitSelection()" draggable="false">
+				<img alt="Go back" src="/oldprodigy/images/Close.png" draggable="false">
 			</a>
 		</div>
 		
-		<div class="button" style="top: 112px; right: 24px;">
-			<a href="javascript:openMods()">
-				<img alt="Mods" src="/oldprodigy/images/Mods.png">
+		<div class="button" style="top: 112px; right: 24px;" draggable="false" draggable="false">
+			<a href="javascript:openMods()" draggable="false" draggable="false">
+				<img alt="Mods" src="/oldprodigy/images/Mods.png" draggable="false">
 			</a>
 		</div>
 		
-		<div class="button" style="bottom: 24px; left: 24px;">
-			<a href="javascript:BackPage()">
-				<img alt="Go back" src="/oldprodigy/images/Back.png">
+		<div class="button" style="bottom: 24px; left: 24px;" draggable="false">
+			<a href="javascript:BackPage()" draggable="false">
+				<img alt="Go back" src="/oldprodigy/images/Back.png" draggable="false">
 			</a>
 		</div>
 		
-		<div class="button" style="bottom: 24px; right: 24px;">
-			<a href="javascript:NextPage()">
-				<img alt="Next page" src="/oldprodigy/images/Next.png">
+		<div class="button" style="bottom: 24px; right: 24px;" draggable="false">
+			<a href="javascript:NextPage()" draggable="false">
+				<img alt="Next page" src="/oldprodigy/images/Next.png" draggable="false">
 			</a>
 		</div>
 		
