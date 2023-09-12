@@ -73,7 +73,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.24.0 | A whole lot of stuff added in!
 
   This version introduced the new Shiverchill Mountains quests, a new tile-based Lamplight town, as well as a LOT of new menu designs added in.
-  Pretty safe to say a LOT happened between 1.17.0, and this version.
+  Pretty safe to say a LOT happened between 1.18.2 and this version.
 
 - 1.30.0 | Just as many radical changes!
 
@@ -135,6 +135,12 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
   The battle system has been revised once again! This time the entire battle GUI was overhauled, and all of the old spells got phased out in favor of newer, more smoothly
   animated spells. Not only that, but the health/balancing systems have been re-worked so that players, especially higher leveled players have a TON of health. This also
   marks a point where a lot of fonts start to get replaced by vector fonts.
+
+- 2.20.0 | Getting some gale force winds here guys
+
+  This update has the academy! You'll be able to go into the archives, meet Gale, and do all sorts of stuff there. There is also a lot of GUI changes here. The character
+  name now uses a vector font now. The settings menu also got a glow-up! Also, this version happens to be really stable. Like REALLY stable. I definitely recommend giving
+  it a shot!
 
 Well- okay, maybe it's still a bit overwhelming. At least you know what you're getting in each version though!
 
