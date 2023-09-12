@@ -18,6 +18,7 @@
 	}
 	
 	.select-panel {
+		user-select: none;
 		display: block;
 		position: fixed;
 		left: 50%;
@@ -26,6 +27,7 @@
 	}
 	
 	.select-panel .banner {
+		user-select: none;
 		position: fixed;
 		display: block;
 		top: 20px;
@@ -33,6 +35,7 @@
 	}
 	
 	.select-panel .overlay {
+		user-select: none;
 		position: fixed;
 		display: block;
 		top: 185px;
@@ -40,6 +43,7 @@
 	}
 	
 	.select-panel .textbox {
+		user-select: none;
 		position: fixed;
 		display: block;
 		top: 140px;
@@ -50,6 +54,7 @@
 	}
 	
 	.intext {
+		user-select: none;
 		position: absolute;
 		top: 10px;
 		width: 238px;
@@ -62,15 +67,22 @@
 	}
 	
 	.button {
+		user-select: none;
 		display: block;
 		position: fixed;
+		cursor: pointer;
 	}
 	
 	.button:hover {
-		transform: translate(0px, -3px)
+		transform: translate(0px, -3px);
+	}
+	
+	.button:active {
+		transform: translate(0px, 0px);
 	}
 	
 	.warning-panel {
+		user-select: none;
 		display: none;
 		position: fixed;
 		left: 50%;
@@ -79,6 +91,7 @@
 	}
 	
 	.warning-panel .warning-body {
+		user-select: none;
 		position: fixed;
 		display: block;
 		top: 128px;
@@ -100,11 +113,11 @@
 			<div>Do you want to continue?</div>
 		</div>
 		
-		<a href="javascript:EnterGame(betaConfirmCallback)" class="button" style="bottom: 24px; left: 24px;" draggable="false">
+		<a onclick="EnterGame(betaConfirmCallback)" class="button" style="bottom: 24px; left: 24px;" draggable="false">
 			<img alt="Yes" src="/oldprodigy/images/Yes.png" draggable="false">
 		</a>
 		
-		<a href="javascript:closeBetaPopup()" class="button" style="bottom: 24px; right: 24px;" draggable="false">
+		<a onclick="closeBetaPopup()" class="button" style="bottom: 24px; right: 24px;" draggable="false">
 			<img alt="No" src="/oldprodigy/images/No.png" draggable="false">
 		</a>
 	</div>
@@ -129,7 +142,7 @@
 			
 				<div id="versions-1" draggable="false">
 				
-					<a href="javascript:ModSelector('1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
+					<a onclick="ModSelector('1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
 						<img alt="1-30-0" src="/oldprodigy/images/1-30-0.png" draggable="false">
 					</a>
 					
@@ -137,7 +150,7 @@
 				
 				<div id="mods-1-30-0" style="display: none" draggable="false">
 				
-					<a href="javascript:AddMod('WalkSpeed', '1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
+					<a onclick="AddMod('WalkSpeed', '1-30-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
 						<img id="mod-WalkSpeed-1-30-0" src="/oldprodigy/images/ModSelectButton.png" draggable="false">
 						
 						<div class="intext" id="select-mod-version" draggable="false">
@@ -145,7 +158,7 @@
 						</div>
 					</a>
 				
-					<a href="javascript:AddMod('FastGameSpeed', '1-30-0')" class="button" style="top: 68px; left: 12px; position: absolute" draggable="false">
+					<a onclick="AddMod('FastGameSpeed', '1-30-0')" class="button" style="top: 68px; left: 12px; position: absolute" draggable="false">
 						<img id="mod-FastGameSpeed-1-30-0" src="/oldprodigy/images/ModSelectButton.png" draggable="false">
 						
 						<div class="intext" id="select-mod-version" draggable="false">
@@ -153,7 +166,7 @@
 						</div>
 					</a>
 					
-					<a href="javascript:StartGameMod('1-30-0')" class="button" style="top: 371px; right: 12px; position: absolute" draggable="false">
+					<a onclick="StartGameMod('1-30-0')" class="button" style="top: 371px; right: 12px; position: absolute" draggable="false">
 						<img alt="Start" src="/oldprodigy/images/Start.png" draggable="false">
 					</a>
 				
@@ -161,7 +174,7 @@
 		</div>
 		
 		<div class="button" style="bottom: 24px; left: 24px;" draggable="false">
-			<a id="mod-back" href="javascript:closeBetaPopup()" draggable="false">
+			<a id="mod-back" onclick="closeBetaPopup()" draggable="false">
 				<img alt="Go back" src="/oldprodigy/images/Back.png" draggable="false">
 			</a>
 		</div>
@@ -179,51 +192,51 @@
 			
 			<div id="page-1" style="display: block" draggable="false">
 			
-				<a href="javascript:EnterGame('1-11-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-11-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
 					<img alt="1-11-0" src="/oldprodigy/images/1-11-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-16-5')" class="button" style="top: 68px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-16-5')" class="button" style="top: 68px; left: 12px; position: absolute" draggable="false">
 					<img alt="1-16-5" src="/oldprodigy/images/1-16-5.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-17-0')" class="button" style="top: 124px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-17-0')" class="button" style="top: 124px; left: 12px; position: absolute" draggable="false">
 					<img alt="1-17-0" src="/oldprodigy/images/1-17-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-18-2')" class="button" style="top: 180px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-18-2')" class="button" style="top: 180px; left: 12px; position: absolute" draggable="false">
 					<img alt="1-18-2" src="/oldprodigy/images/1-18-2.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-24-0')" class="button" style="top: 236px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-24-0')" class="button" style="top: 236px; left: 12px; position: absolute" draggable="false">
 					<img alt="1-24-0" src="/oldprodigy/images/1-24-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-30-0')" class="button" style="top: 292px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-30-0')" class="button" style="top: 292px; left: 12px; position: absolute" draggable="false">
 					<img alt="1-30-0" src="/oldprodigy/images/1-30-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-37-0')" class="button" style="top: 12px; right: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-37-0')" class="button" style="top: 12px; right: 12px; position: absolute" draggable="false">
 					<img alt="1-37-0" src="/oldprodigy/images/1-37-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-39-0')" class="button" style="top: 68px; right: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-39-0')" class="button" style="top: 68px; right: 12px; position: absolute" draggable="false">
 					<img alt="1-39-0" src="/oldprodigy/images/1-39-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-46-2')" class="button" style="top: 124px; right: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-46-2')" class="button" style="top: 124px; right: 12px; position: absolute" draggable="false">
 					<img alt="1-46-2" src="/oldprodigy/images/1-46-2.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-50-0')" class="button" style="top: 180px; right: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-50-0')" class="button" style="top: 180px; right: 12px; position: absolute" draggable="false">
 					<img alt="1-50-0" src="/oldprodigy/images/1-50-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-51-0')" class="button" style="top: 236px; right: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-51-0')" class="button" style="top: 236px; right: 12px; position: absolute" draggable="false">
 					<img alt="1-51-0" src="/oldprodigy/images/1-51-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-60-0')" class="button" style="top: 292px; right: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-60-0')" class="button" style="top: 292px; right: 12px; position: absolute" draggable="false">
 					<img alt="1-60-0" src="/oldprodigy/images/1-60-0.png" draggable="false">
 				</a>
 				
@@ -231,20 +244,24 @@
 			
 			<div id="page-2" style="display: none" draggable="false">
 				
-				<a href="javascript:EnterGame('1-70-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-70-0')" class="button" style="top: 12px; left: 12px; position: absolute" draggable="false">
 					<img alt="1-70-0" src="/oldprodigy/images/1-70-0.png" draggable="false">
 				</a>
 				
-				<a href="javascript:EnterGame('1-80-0')" class="button" style="top: 68px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-80-0')" class="button" style="top: 68px; left: 12px; position: absolute" draggable="false">
 					<img alt="1-80-0" src="/oldprodigy/images/1-80-0.png" draggable="false">
 				</a>
 			
-				<a href="javascript:EnterGame('1-90-0')" class="button" style="top: 124px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('1-90-0')" class="button" style="top: 124px; left: 12px; position: absolute" draggable="false">
 					<img alt="1-90-0" src="/oldprodigy/images/1-90-0.png" draggable="false">
 				</a>
 			
-				<a href="javascript:openBetaPopup('2-6-0')" class="button" style="top: 180px; left: 12px; position: absolute" draggable="false">
+				<a onclick="EnterGame('2-6-0')" class="button" style="top: 180px; left: 12px; position: absolute" draggable="false">
 					<img alt="2-6-0" src="/oldprodigy/images/2-6-0.png" draggable="false">
+				</a>
+			
+				<a onclick="EnterGame('2-20-0')" class="button" style="top: 236px; left: 12px; position: absolute" draggable="false">
+					<img alt="2-20-0" src="/oldprodigy/images/2-20-0.png" draggable="false">
 				</a>
 				
 			</div>
@@ -252,25 +269,25 @@
 		</div>
 		
 		<div class="button" style="top: 112px; left: 24px;" draggable="false">
-			<a href="javascript:ExitSelection()" draggable="false">
+			<a onclick="ExitSelection()" draggable="false">
 				<img alt="Go back" src="/oldprodigy/images/Close.png" draggable="false">
 			</a>
 		</div>
 		
 		<div class="button" style="top: 112px; right: 24px;" draggable="false" draggable="false">
-			<a href="javascript:openMods()" draggable="false" draggable="false">
+			<a onclick="openMods()" draggable="false" draggable="false">
 				<img alt="Mods" src="/oldprodigy/images/Mods.png" draggable="false">
 			</a>
 		</div>
 		
 		<div class="button" style="bottom: 24px; left: 24px;" draggable="false">
-			<a href="javascript:BackPage()" draggable="false">
+			<a onclick="BackPage()" draggable="false">
 				<img alt="Go back" src="/oldprodigy/images/Back.png" draggable="false">
 			</a>
 		</div>
 		
 		<div class="button" style="bottom: 24px; right: 24px;" draggable="false">
-			<a href="javascript:NextPage()" draggable="false">
+			<a onclick="NextPage()" draggable="false">
 				<img alt="Next page" src="/oldprodigy/images/Next.png" draggable="false">
 			</a>
 		</div>
@@ -380,14 +397,14 @@ ModSelector = function(version) {
 		document.getElementById(currentModPage.id).style.display = "none",
 		currentModPage = ModPages[version],
 		document.getElementById(currentModPage.id).style.display = "block",
-		document.getElementById("mod-back").href = "javascript:ModSelector()",
+		document.getElementById("mod-back").setAttribute("onclick", "ModSelector()"),
 		document.getElementById("select-mod-version").style.display = "none",
 		document.getElementById("select-mod-play").style.display = "block"
 	} else {
 		document.getElementById(currentModPage.id).style.display = "none",
 		currentModPage = ModPages.selection,
 		document.getElementById(currentModPage.id).style.display = "block",
-		document.getElementById("mod-back").href = "javascript:closeBetaPopup()",
+		document.getElementById("mod-back").setAttribute("onclick", "closeBetaPopup()"),
 		document.getElementById("select-mod-version").style.display = "block",
 		document.getElementById("select-mod-play").style.display = "none"
 	}
