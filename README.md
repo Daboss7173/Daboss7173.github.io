@@ -138,7 +138,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 
 - 2.20.0 | Getting some gale force winds here guys
 
-  This update has the academy! You'll be able to go into the archives, meet Gale, and do all sorts of stuff there. There is also a lot of GUI changes here. The character
+  This update has the academy! You'll be able to go into the archives, meet Gale, and do all sorts of stuff there. There are also a lot of GUI changes here. The character
   name now uses a vector font now. The settings menu also got a glow-up! Also, this version happens to be really stable. Like REALLY stable. I definitely recommend giving
   it a shot!
 
