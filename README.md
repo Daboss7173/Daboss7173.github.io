@@ -15,8 +15,6 @@ There are a lot of versions to choose from based on your preferences, covering Y
 I am still actively working on bettering it, so if you have any problems with bugs, glitches, etc. Just make an issue
 and I'll try to address it as soon as I can!
 
-There are also forks of my mods. Check them out whenever you get the chance! They're awesome!
-
 ## How to play
 
 Playing this couldn't be more simple. First thing you have to do is open the site, which is automatically updated from this
