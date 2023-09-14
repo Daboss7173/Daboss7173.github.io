@@ -108,7 +108,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
   The loading system also got a bit of internal reworking in this update, meaning that some icons would have some loading issues, which is the main reason I
   recommend 1.50.0 over this update.
 
-- 1.60.0 | ARGH! OUR SHIP IS SINKING SHILLING! WE'RE GONNA WRECK!
+- 1.60.0 | ARGH! OUR SHIP IS SINKING MATEYS! WE'RE GONNA WRECK!
 
   Ahem - anyway, this update was one of the first with the Starlight Festival! This update also introduced the new in-game chat, although it's not a big deal anyway since
   this is in offline mode... Ooh! Also, this brought in Shipwreck Shore, replacing Barnacle Cove! This also has Pippet Battles! Also, the Skywatch textures were also
