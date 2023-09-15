@@ -117,7 +117,7 @@
 	</style>
 	
 <body>
-	<div id="background-1" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-1.png&quot;);"></div>
+	<div id="background-1" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-1.png&quot;); display: none"></div>
 
 	<div id="background-2" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-2.png&quot;); display: none"></div>
 	
@@ -126,6 +126,8 @@
 	<div id="background-4" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-4.png&quot;); display: none"></div>
 	
 	<div id="background-5" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-5.png&quot;); display: none"></div>
+	
+	<div id="background-6" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-6.png&quot;); display: none"></div>
 	
 	<div class="warning-panel" id="beta-popup" draggable="false">
 		<img alt="Warning!" src="/oldprodigy/images/WarningPanel.png" draggable="false">
@@ -357,6 +359,38 @@ ModPages = {
 		id: "versions-1"
 	}
 },
+Backgrounds = [
+	{
+		element: "background-1",
+		id: "1",
+		nid: 1
+	},
+	{
+		element: "background-2",
+		id: "2",
+		nid: 2
+	},
+	{
+		element: "background-3",
+		id: "3",
+		nid: 3
+	},
+	{
+		element: "background-4",
+		id: "4",
+		nid: 4
+	},
+	{
+		element: "background-5",
+		id: "5",
+		nid: 5
+	},
+	{
+		element: "background-6",
+		id: "6",
+		nid: 6
+	}
+],
 selectedMods = [],
 currentPage = 0,
 currentMenu = Menu.Select,
@@ -378,32 +412,18 @@ getCookie = function(cname) {
 	return "";
 },
 setCookie = function(cname, cvalue) {
-	var d = new Date();
 	document.cookie = cname + "=" + cvalue + ";";
 },
 getSavedBackground = function() {
 	var backgroundId = getCookie("background");
-	switch (backgroundId) {
-		case "5":
-			document.getElementById("background-5").style.display = "block";
-			document.getElementById("background-1").style.display = "none";
-			break;
-		case "4":
-			document.getElementById("background-4").style.display = "block";
-			document.getElementById("background-1").style.display = "none";
-			break;
-		case "3":
-			document.getElementById("background-3").style.display = "block";
-			document.getElementById("background-1").style.display = "none";
-			break;
-		case "2":
-			document.getElementById("background-2").style.display = "block";
-			document.getElementById("background-1").style.display = "none";
-			break;
-		default:
-			document.getElementById("background-1").style.display = "block";
-			break;
-	};
+	for(var i = 0; i < Backgrounds.length; i++) {
+		console.log(i);
+		if (Backgrounds[i].id == backgroundId) {
+			document.getElementById(Backgrounds[i].element).style.display = "block"
+		} else {
+			document.getElementById(Backgrounds[i].element).style.display = "none"
+		}
+	}
 },
 toggleBackground = function() {
 	PlayClick();
@@ -411,27 +431,16 @@ toggleBackground = function() {
 	if (previous == "")
 		previous = "1";
 	var backid;
-	switch (previous) {
-		case "1":
-			backid = "2";
-			break;
-		case "2":
-			backid = "3";
-			break;
-		case "3":
-			backid = "4";
-			break;
-		case "4":
-			backid = "5";
-			break;
-		default:
-			backid = "1";
-			break;
+	for (var i = 0; i < Backgrounds.length; i++) {
+		if(i == previous - 1)
+			backid = i + 1
 	};
+	if (backid >= Backgrounds.length)
+		backid = 0;
+	backid++;
 	console.log(previous);
 	console.log(backid);
 	setCookie("background", backid);
-	document.getElementById("background-" + previous).style.display = "none";
 	getSavedBackground()
 },
 PlayClick = function() {
