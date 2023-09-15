@@ -7,14 +7,28 @@
 	
 	<style>
 	body {
-		background-image: url("/oldprodigy/images/Background.png");
-		background-attachment: fixed;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center center;
-		margin: auto;
-		height: 100%;
 		background-color: #55B9A7;
+	}
+	
+	.bg-image {
+		height: 100%;
+		width: 100%;
+		left: 0px;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		position: fixed;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+	
+	.background-banner {
+		user-select: none;
+		position: fixed;
+		right: 0%;
+		bottom: 0%;
+		transform: translate(-8px, -8px);
 	}
 	
 	.select-panel {
@@ -103,7 +117,16 @@
 	</style>
 	
 <body>
+	<div id="background-1" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-1.png&quot;);"></div>
 
+	<div id="background-2" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-2.png&quot;); display: none"></div>
+	
+	<div id="background-3" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-3.png&quot;); display: none"></div>
+	
+	<div id="background-4" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-4.png&quot;); display: none"></div>
+	
+	<div id="background-5" class="bg-image" style="background-image: url(&quot;/oldprodigy/images/Background-5.png&quot;); display: none"></div>
+	
 	<div class="warning-panel" id="beta-popup" draggable="false">
 		<img alt="Warning!" src="/oldprodigy/images/WarningPanel.png" draggable="false">
 		
@@ -293,6 +316,15 @@
 		</div>
 		
 	</div>
+	
+	<div id="bg-toggle" class="background-banner" draggable="false">
+		<img src="/oldprodigy/images/FreeButton-Banner.png" draggable="false">
+		
+		<a class="button" onclick="toggleBackground()" style="top: 13px; width: 410px; text-align: center;" draggable="false">
+			<img src="/oldprodigy/images/FreeButton-Switch.png" draggable="false">
+		</a>
+		
+	</div>
 		
 </body>
 
@@ -329,6 +361,78 @@ currentPage = 0,
 currentMenu = Menu.Select,
 currentModPage = ModPages.selection,
 (new Audio("/oldprodigy/audio/click.mp3")).load(),
+getCookie = function(cname) {
+	let name = cname + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let ca = decodedCookie.split(';');
+	for(let i = 0; i <ca.length; i++) {
+		let c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+	return "";
+},
+setCookie = function(cname, cvalue) {
+	var d = new Date();
+	document.cookie = cname + "=" + cvalue + ";";
+},
+getSavedBackground = function() {
+	var backgroundId = getCookie("background");
+	switch (backgroundId) {
+		case "5":
+			document.getElementById("background-5").style.display = "block";
+			document.getElementById("background-1").style.display = "none";
+			break;
+		case "4":
+			document.getElementById("background-4").style.display = "block";
+			document.getElementById("background-1").style.display = "none";
+			break;
+		case "3":
+			document.getElementById("background-3").style.display = "block";
+			document.getElementById("background-1").style.display = "none";
+			break;
+		case "2":
+			document.getElementById("background-2").style.display = "block";
+			document.getElementById("background-1").style.display = "none";
+			break;
+		default:
+			document.getElementById("background-1").style.display = "block";
+			break;
+	};
+},
+toggleBackground = function() {
+	PlayClick();
+	var previous = getCookie("background");
+	if (previous == "")
+		previous = "1";
+	var backid;
+	switch (previous) {
+		case "1":
+			backid = "2";
+			break;
+		case "2":
+			backid = "3";
+			break;
+		case "3":
+			backid = "4";
+			break;
+		case "4":
+			backid = "5";
+			break;
+		default:
+			backid = "1";
+			break;
+	};
+	console.log(previous);
+	console.log(backid);
+	setCookie("background", backid);
+	document.getElementById("background-" + previous).style.display = "none";
+	getSavedBackground()
+},
 PlayClick = function() {
 	(new Audio("/oldprodigy/audio/click.mp3")).play()
 },
@@ -424,7 +528,7 @@ DeselectAllMods = function(version) {
 		document.getElementById("mod-" + selectedMods[i] + "-" + version).setAttribute('src', '/oldprodigy/images/ModSelectButton.png')
 	};
 	selectedMods = []
-}
+},
 StartGameMod = function(version) {
 	PlayClick();
 	var ModString = '?mods=' + selectedMods.toString();
@@ -434,7 +538,8 @@ StartGameMod = function(version) {
 	setTimeout(()=> {
 		window.location.href = "/oldprodigy/" + version + "/" + ModString;
 	}, 200);
-}
+},
+getSavedBackground()
 </script>
 
 </html>
