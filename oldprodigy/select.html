@@ -417,7 +417,6 @@ setCookie = function(cname, cvalue) {
 getSavedBackground = function() {
 	var backgroundId = getCookie("background");
 	for(var i = 0; i < Backgrounds.length; i++) {
-		console.log(i);
 		if (Backgrounds[i].id == backgroundId) {
 			document.getElementById(Backgrounds[i].element).style.display = "block"
 		} else {
@@ -438,8 +437,6 @@ toggleBackground = function() {
 	if (backid >= Backgrounds.length)
 		backid = 0;
 	backid++;
-	console.log(previous);
-	console.log(backid);
 	setCookie("background", backid);
 	getSavedBackground()
 },
