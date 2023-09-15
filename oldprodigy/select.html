@@ -416,6 +416,9 @@ setCookie = function(cname, cvalue) {
 },
 getSavedBackground = function() {
 	var backgroundId = getCookie("background");
+	if (backgroundId == "") {
+		backgroundId = "1";
+	};
 	for(var i = 0; i < Backgrounds.length; i++) {
 		if (Backgrounds[i].id == backgroundId) {
 			document.getElementById(Backgrounds[i].element).style.display = "block"
