@@ -625,7 +625,7 @@ generatePages(),
 getSavedBackground();
 resizeFromWindow = function(element) {
 	let verSelect = element;
-	if ((window.innerWidth < verSelect.clientWidth) && (window.innerHeight >= window.clientWidth)) {
+	if ((window.innerWidth < verSelect.clientWidth) && ((window.innerWidth / verSelect.clientWidth) < (window.innerHeight / verSelect.clientHeight))) {
 		verSelect.style.transform = "scale(" + (window.innerWidth / verSelect.clientWidth) + ") translate(-" + (((verSelect.clientWidth / window.innerWidth) / 2) * 100) + "%" + ", -" + (((verSelect.clientWidth / window.innerWidth) / 2) * 100) + "%" + ")"
 	}
 	else if (window.innerHeight < verSelect.clientHeight) {
