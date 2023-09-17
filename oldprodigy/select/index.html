@@ -22,6 +22,7 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-attachment: fixed;
+		background-position: center center;
 	}
 	
 	.background-banner {
@@ -73,7 +74,7 @@
 		position: absolute;
 		top: 10px;
 		width: 238px;
-		font: 14pt "Arial";
+		font: 12pt "Tahoma";
 		text-align: center;
 		font-weight: bold;
 		-webkit-text-stroke: #000;
@@ -220,7 +221,7 @@
 		<div id="select-panel-overlay" class="overlay" draggable="false">
 			<img src="./images/MenuPanel-Overlay.png" draggable="false">
 			
-			<!-- Pages are auto-generated -->
+			<!-- Pages are auto-generated here -->
 			
 		</div>
 		
@@ -360,6 +361,12 @@ Versions = [
 		src: "./images/2-20-0.png",
 		alt: "Version 2.20.0",
 		ver: "2-20-0"
+	},
+	{
+		src: "./images/2-30-0.png",
+		alt: "Version 2.30.0",
+		ver: "2-30-0",
+		beta: true
 	}
 ],
 ModPages = {
@@ -474,17 +481,18 @@ EnterGame = function(version) {
 	}, 200);
 },
 BackPage = function() {
-	PlayClick();
+	PlayClick(),
 	document.getElementById(Pages[currentPage].id).style.display = "none";
 	if (currentPage == 0) {
 		currentPage = Pages.length - 1
 	} else {
 		currentPage -= 1
 	};
-	document.getElementById(Pages[currentPage].id).style.display = "block"
+	document.getElementById(Pages[currentPage].id).style.display = "block";
+	resizeMenuElements();
 },
 NextPage = function() {
-	PlayClick();
+	PlayClick(),
 	document.getElementById(Pages[currentPage].id).style.display = "none";
 	if (currentPage == Pages.length - 1) {
 		currentPage = 0
@@ -492,28 +500,32 @@ NextPage = function() {
 		currentPage += 1
 	};
 	document.getElementById(Pages[currentPage].id).style.display = "block"
+	resizeMenuElements();
 },
 betaConfirmCallback = null,
 openBetaPopup = function(version) {
-	PlayClick();
+	PlayClick(),
 	betaConfirmCallback = version,
 	document.getElementById(currentMenu.id).style.display = "none",
 	currentMenu = Menu.BetaPopup,
-	document.getElementById(currentMenu.id).style.display = "block";
+	document.getElementById(currentMenu.id).style.display = "block",
+	resizeMenuElements();
 },
 closeBetaPopup = function() {
-	PlayClick();
+	PlayClick(),
 	betaConfirmCallback = null; 
 	document.getElementById(currentMenu.id).style.display = "none",
 	currentMenu = Menu.Select,
-	document.getElementById(currentMenu.id).style.display = "block";
+	document.getElementById(currentMenu.id).style.display = "block",
+	resizeMenuElements();
 },
 openMods = function() {
 	PlayClick(),
 	document.getElementById(currentMenu.id).style.display = "none",
 	currentMenu = Menu.ModSelect,
 	document.getElementById(currentMenu.id).style.display = "block",
-	currentModPage = ModPages.selection
+	currentModPage = ModPages.selection,
+	resizeMenuElements();
 },
 ModSelector = function(version) {
 	PlayClick();
@@ -532,7 +544,8 @@ ModSelector = function(version) {
 		document.getElementById("mod-back").setAttribute("onclick", "closeBetaPopup()"),
 		document.getElementById("select-mod-version").style.display = "block",
 		document.getElementById("select-mod-play").style.display = "none"
-	}
+	};
+	resizeMenuElements();
 },
 AddMod = function(modid, version) {
 	PlayClick();
@@ -542,7 +555,7 @@ AddMod = function(modid, version) {
 	} else {
 		document.getElementById("mod-" + modid + "-" + version).setAttribute('src', './images/ModSelectButton.png'),
 		selectedMods.splice(selectedMods.indexOf(modid), 1)
-	}
+	};
 },
 DeselectAllMods = function(version) {
 	for(let i = 0; i < selectedMods.length; i += 1) {
@@ -585,6 +598,9 @@ newVersionButton = function(i, pageId, columnLength, column) {
 		textImage = document.createElement("img"),
 		textElement = document.createElement("div");
 	currentButton.setAttribute("onclick", "EnterGame(\"" + Versions[i].ver + "\")");
+	if (Versions[i].beta == true) {
+		currentButton.setAttribute("onclick", "openBetaPopup(\"" + Versions[i].ver + "\")");
+	};
 	currentButton.setAttribute("class", "button");
 	currentButton.setAttribute("draggable", false);
 	currentButton.style.position = "absolute";
@@ -621,8 +637,6 @@ newPage = function(id) {
 	};
 	document.getElementById("select-panel-overlay").appendChild(page);
 }
-generatePages(),
-getSavedBackground();
 resizeFromWindow = function(element) {
 	let verSelect = element;
 	if ((window.innerWidth < verSelect.clientWidth) && ((window.innerWidth / verSelect.clientWidth) < (window.innerHeight / verSelect.clientHeight))) {
@@ -635,12 +649,18 @@ resizeFromWindow = function(element) {
 		verSelect.style.transform = "scale(1) translate(-50%, -50%)"
 	}
 },
+resizeMenuElements = function() {
+	resizeFromWindow(document.getElementById("version-select")),
+	resizeFromWindow(document.getElementById("mod-select"));
+},
 window.onresize = function() {
-	resizeFromWindow(document.getElementById("version-select"));
-	resizeFromWindow(document.getElementById("mod-select"))
-};
-resizeFromWindow(document.getElementById("version-select")),
-resizeFromWindow(document.getElementById("mod-select"));
+	resizeMenuElements()
+},
+window.onload = function() {
+	resizeMenuElements(),
+	getSavedBackground();
+},
+generatePages()
 </script>
 
 </html>
