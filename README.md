@@ -97,7 +97,8 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.50.0 | Sound Effects Galore!
 
   This version has added plenty of stuff! New sound effects for the Epic Attacks, as well as a new spell cast sound effect, and spell hit sound effect. There is also a
-  sound effect for when you level up, and a new sound effect for critical hits. The Shiverchill Mountain textures also got updated in this version.
+  sound effect for when you level up, and a new sound effect for critical hits. The Shiverchill Mountain textures also got updated in this version. The Twilight Wheel even
+  got added in this version!
 
 - 1.51.0 | NEW AVATAR!?
 
@@ -137,8 +138,11 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 2.20.0 | Getting some gale force winds here guys
 
   This update has the academy! You'll be able to go into the archives, meet Gale, and do all sorts of stuff there. There are also a lot of GUI changes here. The character
-  name now uses a vector font now. The settings menu also got a glow-up! Also, this version happens to be really stable. Like REALLY stable. I definitely recommend giving
-  it a shot!
+  name now uses a vector font now. The settings menu also got a glow-up!
+
+- 2.30.0 | Brrr! It's getting cold again!
+  This update changed the logo to a more simplified version! Also, Winterfest is back and Howard Cornelius's sprite was switched up! Also, they added the nicknamers back
+  in Shiverchill Mountains, Firefly Forest, Skywatch, and Bonfire Spire! They also updated the sprite for the Nicknamer, as well as the menu!
 
 Well- okay, maybe it's still a bit overwhelming. At least you know what you're getting in each version though!
 
