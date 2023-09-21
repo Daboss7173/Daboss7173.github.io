@@ -365,8 +365,7 @@ Versions = [
 	{
 		src: "./images/2-30-0.png",
 		alt: "Version 2.30.0",
-		ver: "2-30-0",
-		beta: true
+		ver: "2-30-0"
 	}
 ],
 ModPages = {
@@ -420,17 +419,20 @@ getCookie = function(cname) {
 	let ca = decodedCookie.split(';');
 	for(let i = 0; i <ca.length; i++) {
 		let c = ca[i];
-			while (c.charAt(0) == ' ') {
-				c = c.substring(1);
-			}
-			if (c.indexOf(name) == 0) {
-				return c.substring(name.length, c.length);
-			}
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
 		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
 	return "";
 },
-setCookie = function(cname, cvalue) {
-	document.cookie = cname + "=" + cvalue + ";";
+setCookie = function(cname, cvalue, exdays) {
+	const d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	let expires = "expires="+ d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 },
 getSavedBackground = function() {
 	let backgroundId = getCookie("background");
@@ -458,7 +460,7 @@ toggleBackground = function() {
 	if (backid >= Backgrounds.length)
 		backid = 0;
 	backid++;
-	setCookie("background", backid);
+	setCookie("background", backid, 4096);
 	getSavedBackground()
 },
 PlayClick = function() {
