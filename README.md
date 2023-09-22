@@ -42,7 +42,9 @@ you're playing in, click the 'other' tab instead.
 
 This repository features dynamic modpacks, you will be able to toggle mods as you see fit, and be able to combine multiple mods together for dynamic modpacks.
 
-Currently, the only version that supports modpacks is 1-30-0, but there are plans to add more versions in the future!
+Currently, these are the versions that support modpacks:
+ - 1-30-0
+ - 1-50-0
 
 ## Version choice breakdown!
 
@@ -131,9 +133,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 
 - 2.6.0 | Another battle overhaul!
 
-  The battle system has been revised once again! This time the entire battle GUI was overhauled, and all of the old spells got phased out in favor of newer, more smoothly
-  animated spells. Not only that, but the health/balancing systems have been re-worked so that players, especially higher leveled players have a TON of health. This also
-  marks a point where a lot of fonts start to get replaced by vector fonts.
+  The battle system has been revised once again! This time the entire battle GUI was overhauled, and all of the old spells got phased out in favor of newer, more smoothly animated spells. Not only that, but the health/balancing systems have been re-worked so that players, especially higher leveled players have a TON of health. This also marks a point where a lot of fonts start to get replaced by vector fonts.
 
 - 2.20.0 | Getting some gale force winds here guys
 
