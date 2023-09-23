@@ -84,8 +84,7 @@ class ModHandler {
 	initFastGameSpeedMod() {
 		var i = Phaser.TweenManager.prototype.add,
 			e = this.game,
-			t = 3, // Speed multiplier
-			S = 3; // Star bar speed multiplier
+			t = 3; // Speed multiplier
 		Phaser.TweenManager.prototype.add = function(a) {
 			a.timeScale = t, i.call(this, a)
 		};
@@ -96,43 +95,11 @@ class ModHandler {
 		var s = Phaser.Tween.prototype.delay;
 		Phaser.Tween.prototype.delay = function(a, b) {
 			a /= t; return s.call(this, a, b)
-		},
-		Prodigy.Container.Hearts.prototype.updateStarsBar = function (e) {
-			var t = Prodigy.Creature.starsToLevel(this.level > 0 ? this.level - 1 : 0);
-			this.currentStars < t && (this.currentStars = t);
-			var i = Math.round((this.currentStars - t) / (this.starsToLevel + (this.currentStars - t)) * 100) / 100;
-			if (this.level >= 100 && (i = 1), i !== this.starPercentage) {
-				var a = 20,
-					s = this.reverse ? this.starsBase.x + Math.round((1 - i) * (278 - a)) : this.starsBase.x - Math.round((1 - i) * (278 - a));
-				if (e) {
-					if (i < this.starPercentage) {
-						var r = this.game.add.tween(this.starsFill).to({
-								x: this.starsBase.x
-							}, 1e3, Phaser.Easing.Quadratic.Out, !1, 700 / S),
-							o = this.game.add.tween(this.starsFill).to({
-								alpha: 0
-							}, 100, Phaser.Easing.Linear.None),
-							n = this.game.add.tween(this.starsFill).to({
-								x: s
-							}, 1e3, Phaser.Easing.Quadratic.Out);
-						o.onComplete.add(function () {
-							this.starsFill.alpha = 1, this.starsFill.x = this.starsBase.x + (this.reverse ? 278 : -278)
-						}, this), r.chain(o), o.chain(n), r.start() 
-					} else {
-						this.game.add.tween(this.starsFill).to({
-							x: s
-						}, 1e3, Phaser.Easing.Quadratic.Out, !0, 700 / S)
-					};
-					this.bumpStars()
-				} else this.starsFill.x = s;
-				this.starPercentage = i
-			}
-		},
-		Prodigy.Container.Hearts.prototype.bumpStars = function () {
-			this.game.add.tween(this.starsIcon.scale).to({
-				y: 1.4,
-				x: 1.4
-			}, 220, Phaser.Easing.Quadratic.Out, !0, 800 / S, 2, !0)
+		};
+		var r = Phaser.Tween.prototype.to;
+		Phaser.Tween.prototype.to = function(a, b, d, e, f, g, h) {
+			if (Util.isDefined(f)) f /= t;
+			return r.call(this, a, b, d, e, f, g, h)
 		}
 	}
 	
