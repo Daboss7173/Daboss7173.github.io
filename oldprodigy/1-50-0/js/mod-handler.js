@@ -17,12 +17,57 @@ var GameMods = {
 
 class ModHandler {
 	constructor(e) {
-		this.game = e
+		this.game = e;
+		this.animations = new (class {
+			constructor(e) {
+				this.animations = [];
+			}
+			getAll() {
+				let ret = [];
+				for (let i = 0; i < this.animations.length; i++)
+					ret.push(this.animations[i].animation);
+				return ret
+			}
+			register(animation, speed) {
+				this.animations.push({
+					animation: animation,
+					baseSpeed: speed
+				})
+			}
+			clear() {
+				this.animations = []
+			}
+		})();
+		this.tweens = new (class {
+			constructor(e) {
+				this.tweens = [];
+			}
+			getAll() {
+				return this.tweens
+			}
+			getTweens() {
+				let ret = [];
+				for (let i = 0; i < this.tweens.length; i++)
+					ret.push(this.tweens[i].tween);
+				return ret
+			}
+			register(tweenParent, addedTween, delay, duration) {
+				this.tweens.push({
+					tween: addedTween,
+					_parent: tweenParent,
+					baseDelay: delay,
+					baseDuration: duration
+				})
+			}
+			clear() {
+				this.tweens = [];
+			}
+		})()
 	}
 	
 	log(message) {
 		if (Util.isDefined(message)) {
-			console.log("%c %c %c Old Prodigy Mod Handler | " + message + " %c %c ",
+			console.log("%c %c %c " + message + " %c %c ",
 			"background: #1724",
 			"background: #172a",
 			"background: #172f; color: #FFF",
@@ -31,9 +76,20 @@ class ModHandler {
 		}
 	}
 	
+	info(message) {
+		if (Util.isDefined(message)) {
+			console.log("%c %c %c " + message + " %c %c ",
+			"background: #14b4",
+			"background: #14ba",
+			"background: #14bf; color: #FFF",
+			"background: #14ba",
+			"background: #14b4")
+		}
+	}
+	
 	error(message) {
 		if (Util.isDefined(message)) {
-			console.log("%c %c %c Old Prodigy Mod Handler | " + message + " %c %c ",
+			console.log("%c %c %c " + message + " %c %c ",
 			"background: #a114",
 			"background: #a11a",
 			"background: #a11f; color: #FFF",
@@ -84,23 +140,83 @@ class ModHandler {
 	initFastGameSpeedMod() {
 		var i = Phaser.TweenManager.prototype.add,
 			e = this.game,
-			t = 3; // Speed multiplier
-		Phaser.TweenManager.prototype.add = function(a) {
-			a.timeScale = t, i.call(this, a)
+			a = Phaser.Timer.prototype.add,
+			s = Phaser.Tween.prototype.delay,
+			r = Phaser.Tween.prototype.to,
+			l = Boot.prototype.update,
+			p = Phaser.AnimationManager.prototype.play,
+			c = Prodigy.TweenController.prototype.set,
+			g = Phaser.AnimationManager.prototype.add,
+			u = Phaser.Game.prototype.update,
+			f = this.animations,
+			v = this.tweens;
+		Phaser.Game.prototype.update = function(a) {
+			for (let i = 0; i < f.animations.length; i++)
+				!Util.isDefined(f.animations[i].animation._parent) && f.animations.splice(i, 1);
+			for (let o = 0, t = v.getAll(); o < t.length; o++)
+				!(t[o]._parent.src.alive) && t.splice(o, 1);
+			return u.call(this, a)
 		};
-		var a = Phaser.Timer.prototype.add;
-		Phaser.Timer.prototype.add = function(d, b, c) {
-			d /= t, a.call(this, d, b, c)
-		};
-		var s = Phaser.Tween.prototype.delay;
-		Phaser.Tween.prototype.delay = function(a, b) {
-			a /= t; return s.call(this, a, b)
-		};
-		var r = Phaser.Tween.prototype.to;
-		Phaser.Tween.prototype.to = function(a, b, d, e, f, g, h) {
-			if (Util.isDefined(f)) f /= t;
-			return r.call(this, a, b, d, e, f, g, h)
-		}
+		window.setGameSpeed = function(speedMultiplier) {
+			var t = speedMultiplier;
+			if (t < 0.1) {
+				ModHooks.error("Supplied speed multiplier is too low. Try a larger speed value.");
+				return;
+			};
+			Phaser.TweenManager.prototype.add = function(a) {
+				a.timeScale = t, i.call(this, a)
+			},
+			Phaser.Timer.prototype.add = function(d, b, c) {
+				d /= t;
+				return a.call(this, d, b, c)
+			},
+			Phaser.Tween.prototype.delay = function(a, b) {
+				a /= t;
+				return s.call(this, a, b)
+			},
+			Phaser.Tween.prototype.to = function(a, b, d, e, f, g, h) {
+				if (Util.isDefined(f)) f /= t;
+				return r.call(this, a, b, d, e, f, g, h)
+			},
+			Phaser.AnimationManager.prototype.add = function(a, b, d, e, h) {
+				let originalSpeed = 10;
+				if (Util.isDefined(d)) {
+					originalSpeed = d;
+					d *= t;
+				}
+				let animation = g.call(this, a, b, d, e, h);
+				f.register(animation, originalSpeed);
+				return animation
+			},
+			Phaser.AnimationManager.prototype.play = function(a, b, c, d) {
+				if (Util.isDefined(b) && !isNaN(b)) b *= t;
+				return p.call(this, a, b, c, d)
+			},
+			Prodigy.TweenController.prototype.set = function(e, i, a, s) {
+				let r = a,
+					o = s;
+				if (Util.isDefined(a)) a /= t;
+				if (Util.isDefined(s)) s /= t;
+				let ret = c.call(this, e, i, a, s);
+				v.register(this, this.tweens[this.tweens.length - 1], r, o);
+				return ret
+			};
+			if (Util.isDefined(e.tweens))
+				for (var o = e.tweens.getAll(), n = 0; n < o.length; n++)
+					o[n].timeScale = t;
+			if (Util.isDefined(f))
+				for (var y = f.getAll(), m = 0; m < y.length; m++) 
+					y[m].speed = t * (Util.isDefined(f.animations[m].baseSpeed) ? f.animations[m].baseSpeed : 10);
+			if (Util.isDefined(v))
+				for (var b = v.getAll(), w = 0, P = v.getTweens(); w < b.length; w++) {
+					P[w].delay = b[w].baseDelay / t;
+					P[w].duration = (P[w].frames.length * b[w].baseDelay * b[w].baseDuration) / t;
+				}
+		},
+		window.setGameSpeed(3); // Game Speed Multiplier
+		setTimeout(()=> {
+			this.info("Use \"setGameSpeed(speed)\" to change the game speed at anytime.")
+		}, 1e3)
 	}
 	
 	initRebalancedBattleMod() {
@@ -112,12 +228,12 @@ class ModHandler {
 				n = i.getElement(),
 				l = 0,
 				f = 0;
-			Util.isDefined(t) ? (l = 1 + (t.getLevel() - 1), f = (l + 13) / 14) : (f = 1);
+			Util.isDefined(t) ? (l = 1 + (t.getLevel() - 1), f = (l + 10) / 11) : (f = 1);
 			return "Glacial Shield" !== e.name && 0 === i.modifiers.ignoreElement && (this.isStrong(o, n) ? r += 4 : this.isWeak(o, n) && (r -= 3, 0 >= r && (r = 2))), r = Math.floor(10 * r * s * f), Math.max(Math.floor(r + (Util.isDefined(a) ? a : 0)), 0)
 		},
 		Prodigy.Creature.getHeartsFromCurve = function (e, t, i) {
 			var a = Prodigy.Creature.HP_BONUS[e],
-				s = Math.floor((20 + a) * i / 20),
+				s = Math.floor((20 + a) * (i - 1) / 20),
 				r = Math.floor((20 + a) * (t - 1) / 20);
 			return 20 * (s - r)
 		},
