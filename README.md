@@ -50,14 +50,23 @@ Currently, these are the versions that support modpacks:
 
 Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 
-- 1.11.0 | The oldest version that can run essentially flawlessly.
+- 1.10.0 | The grand-daddy of all of these Prodigy versions
 
-  Now don't get me wrong, this isn't the oldest version of Prodigy ever, but it's pretty old! Lots of old elements around that aren't seen in newer versions.
-  This was the last archived version to include some classic GUI elements.
+  This version is really special, because it's the oldest one on this site! This is also the oldest version that has been preserved via the Internet Archive. This version
+  features a tutorial that is different from all of these versions! You start off in the Academy, but then it falls under attack! You help defend the academy by battling
+  off some of the monsters that are attacking the Academy! The wizard maker is also different here! You also setup which pet you start with in battle just before the
+  battle starts, rather than in the pet menu.
 
-- 1.16.5 | The oldest version with all of the legacy quests, and the element selection.
+- 1.11.0 | Tick... tock... tick... tock...
 
-  This is a version that I recommend in particular, it's kind of like 1.11.0 - but it's generally a lot more stable. In fact this version
+  Ooh boy, this version's wild! This version added in Clockwork town! This also changed most of the menus in the game, being more static rather than being full of
+  animation, as well as a different, less drawn out tutorial that takes place at the Lamplight Docks, rather than the Academy Entrance. The tutorial in this version isn't
+  really that fleshed out though, you don't obtain starter pets or anything of the like. Sorta just an in-between phase before 1-17-0 rolled about.
+
+- 1.16.5 | The oldest version with all of the legacy quests!
+
+  This version was also the last version to include element selection, rather than a spellbook. This is a version that I recommend in particular, it's kind of like
+  1.11.0 - but it's generally a lot more stable. In fact this version
   is one of the most stable Prodigy versions on this site!
 
 - 1.17.0 | The oldest version with tiled maps!
