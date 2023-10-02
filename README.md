@@ -141,11 +141,13 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
   name now uses a vector font now. The settings menu also got a glow-up!
 
 - 2.30.0 | Brrr! It's getting cold again!
+
   This update changed the logo to a more simplified version! Also, Winterfest is back and Howard Cornelius's sprite was switched up! Also, they added the nicknamers back
   in Shiverchill Mountains, Firefly Forest, Skywatch, and Bonfire Spire! They also updated the sprite for the Nicknamer, as well as the menu! This update added a new pet
   as well! Silvertusk!
 
 - 2.45.0 | Ok! I'm going all-out with this one!
+
   This update, above all things added All Out Attacks to the game! This update also added in a new pet, Brumble! Also, the loading times are VASTLY faster than before, this
   means you are gonna be spending less time waiting for the game to load, and more time playing the game!
 
