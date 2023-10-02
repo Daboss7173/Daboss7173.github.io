@@ -1,0 +1,21 @@
+{"frames": {
+
+"bg":
+{
+	"frame": {"x":2,"y":2,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "https://web.archive.org/web/20200330044140/http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "zone-plains.png",
+	"format": "RGBA8888",
+	"size": {"w":1284,"h":724},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e74eb37620195d5922424e4c40b2b6bb:20a133a6dd713e45ae054dcd855fb9c2:6bb2bb4154820d6b500ef49be2e6fc6d$"
+}
+}

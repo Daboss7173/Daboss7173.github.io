@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prodigy 1.10.0</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="The legendary math game Prodigy is now legendary again, and no longer a math game!"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="icon" type="image/png" href="https://web.archive.org/web/20150910093225im_/https://www.prodigygame.com/Includes/Images/favicon.gif">
+    <link rel="stylesheet" href="https://web.archive.org/web/20150910093225im_/https://www.prodigygame.com//Includes/Styles/Fonts/Font-Awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://web.archive.org/web/20150910093225im_/https://www.prodigygame.com/assets/styles/main.css?v=1-17-0">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400,500,600,700' rel='stylesheet' type='text/css'>
+    <style>
+        html {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #55B9A7;
+            height: 100%;
+            padding: 0 !important;
+        }
+        
+        #game-container {
+            height: 100%;
+        }
+        
+        #game-wrapper {
+            height: 100%;
+        }
+        
+        input.game-input {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0px 10px;
+            border-radius: 10px;
+            border: 1px solid #363636;
+            background-color: #fff5eb;
+            color: #363636;
+            text-align: left;
+        }
+        
+        .head-bar {
+            height: 45px;
+            width: 100%;
+            position: fixed;
+        }
+        
+        .head-content {
+            width: 100%;
+            position: relative;
+            height: 100%;
+        }
+        
+        .full-nav-button {
+            border: 1px solid #596ED9;
+            border-top: none;
+            font-weight: bold;
+            color: #f89825;
+            margin-top: 0;
+            font-size: 1.3em;
+            padding: 10px 10px;
+            height: 100%;
+            width: 100%;
+            background-color: #6579DC;
+            color: white;
+        }
+        
+        .full-nav-button:hover {
+            background: none;
+            background-color: #596ED9;
+            border: none;
+            color: #f2f2f2;
+            box-shadow: none;
+        }
+        
+        .announcement {
+            margin-bottom: 0;
+            position: absolute;
+            width: 100%;
+        }
+        
+        .announcement-close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            color: #a94442;
+        }
+        
+        .announcement-close:hover {
+            color: #c94442;
+            cursor: pointer;
+        }
+        
+        .announcement .alert {
+            padding-right: 50px;
+        }
+        
+        iframe {
+            display: none;
+        }
+        
+        #membership-flow {
+            display: none;
+            position: static;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: white;
+        }
+        
+        .iframe-ios-fix {
+            /*iOS fix for scrolling issues with iframe*/
+            -webkit-overflow-scrolling: touch;
+            overflow-y: scroll;
+        }
+        
+        #membership-flow iframe {
+            display: block;
+            height: 100%;
+            width: 100%;
+            border: none;
+        }
+        
+        .gone {
+            display: none;
+        }
+        
+        #first-loading-screen {
+            height: 100%;
+            width: 100%;
+            background-color: #55B9A7;
+        }
+        
+        .alert {
+            margin-top: 0;
+            border-radius: 0;
+            text-align: center;
+        }
+        
+        .alert-warning {
+            background-color: #FCF8E3;
+            color: #8A6D3B;
+        }
+    </style>
+</head>
+<div id='game-container'></div>
+<div id='external-content'></div>
+<div id='external-ui'></div>
+<div id='notices'></div>
+<div id='popups'>
+<div id='dynamic-popups'></div></div>
+ <script src="https://web.archive.org/web/20150910093225im_/https://www.prodigygame.com/assets/scripts/app/build/public.min.js?v=$webVersion"></script>
+    <script src="https://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/jquery.min.js"></script> 
+    <script src="https://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/play.js?v=prodigy-1-10-0"></script> 
+    <script src="https://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/popup.js?v=prodigy-1-10-0"></script> 
+    <script src="https://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/Controllers/LargeNotice.js?v=prodigy-1-10-0"></script> 
+    <script src="https://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/Controllers/Register.js?v=prodigy-1-10-0"></script>
+    <script src="./js/lodash.min.js"></script> 
+    <script src="https://web.archive.org/web/20150325160935im_/https://prodigygame.com/Includes/Scripts/Controllers/Notice.js?v=prodigy-1-10-0"></script> 
+    <script src="https://web.archive.org/web/20160921010444/https://www.prodigygame.com/assets/scripts/app/build/game-helpers.min.js"></script>
+    <script src="https://web.archive.org/web/20160921010444/https://www.prodigygame.com/assets/scripts/app/entry/game.js"></script>
+    <script src="https://web.archive.org/web/20160921010444/https://prodigy.blob.core.windows.net/edu-controls-2-2-9/controls.min.js"></script>
+    <script src="https://web.archive.org/web/20160921010444/https://prodigy.blob.core.windows.net/edu-question-interface-2-2-6/question.min.js"></script>
+    <script src="./js/phaser.min.js"></script>
+    <script src="./js/game.min.js"></script>
+    <script src="./js/easystar-0.2.0.min.js"></script>
+    <script src='./js/socket.io-1.3.5.js'></script>
+    <script type="text/javascript">
+
+    var prodigyWeb = {};
+    prodigyWeb.country = 2;
+    window.onerror = function(error, file, line){
+
+        // var error = "Error: "+error+" File: "+file+" Line: "+line;
+
+        // WebService.logBug(error, 'Beta 2', "Exception");
+    };
+    window.onload = function() {
+
+        document.addEventListener("contextmenu", function(e){
+            e.preventDefault();
+        }, false);
+
+        var sso = {};
+                Boot.init(sso);
+
+    };
+
+
+    window.onresize = function() {
+        scroll(0,0);
+    };
+
+
+
+</script> 
+
+<script>
+
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-40390561-1']);
+     _gaq.push(['_trackPageview']);
+
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+    //
+</script> 
+<script type="text/javascript">
+
+ /* <![CDATA[ */
+ var google_conversion_id = 1008327338;
+ var google_conversion_label = "rgONCLa1jgQQqrXn4AM";
+ var google_custom_params = window.google_tag_params;
+ var google_remarketing_only = true;
+ /* ]]> */
+</script> 
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script> 
+<script>
+
+        $('.announcement-close').click(function(){
+            $('#service-announcement').remove();
+        });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+{"frames": {
+
+"bg":
+{
+	"frame": {"x":2,"y":2,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"face/face_0":
+{
+	"frame": {"x":1284,"y":2,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"face/face_1":
+{
+	"frame": {"x":1284,"y":202,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"face/face_2":
+{
+	"frame": {"x":1284,"y":402,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"face/face_3":
+{
+	"frame": {"x":1484,"y":2,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"face/face_4":
+{
+	"frame": {"x":1484,"y":202,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"face/face_5":
+{
+	"frame": {"x":1548,"y":402,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"face/face_6":
+{
+	"frame": {"x":1684,"y":2,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"face/face_7":
+{
+	"frame": {"x":1684,"y":202,"w":198,"h":198},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":198,"h":198},
+	"sourceSize": {"w":198,"h":198},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"lantern":
+{
+	"frame": {"x":1484,"y":402,"w":35,"h":165},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":165},
+	"sourceSize": {"w":35,"h":165},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"light":
+{
+	"frame": {"x":1812,"y":606,"w":50,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":50},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"npc/npc_0":
+{
+	"frame": {"x":1284,"y":602,"w":86,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":100},
+	"sourceSize": {"w":86,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"npc/npc_1":
+{
+	"frame": {"x":1372,"y":602,"w":86,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":100},
+	"sourceSize": {"w":86,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"npc/npc_2":
+{
+	"frame": {"x":1460,"y":602,"w":86,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":100},
+	"sourceSize": {"w":86,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"npc/npc_3":
+{
+	"frame": {"x":1748,"y":402,"w":86,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":100},
+	"sourceSize": {"w":86,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"npc/npc_4":
+{
+	"frame": {"x":1748,"y":504,"w":86,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":100},
+	"sourceSize": {"w":86,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"npc/npc_5":
+{
+	"frame": {"x":1548,"y":602,"w":86,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":100},
+	"sourceSize": {"w":86,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"npc/npc_6":
+{
+	"frame": {"x":1636,"y":602,"w":86,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":100},
+	"sourceSize": {"w":86,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"npc/npc_7":
+{
+	"frame": {"x":1724,"y":606,"w":86,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":100},
+	"sourceSize": {"w":86,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "https://web.archive.org/web/20200330050748/http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "zone-forest.png",
+	"format": "RGBA8888",
+	"size": {"w":1884,"h":724},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:3b7525c2b8adbe26e9e6d7513280c721:d7d262b03a4e8f06606a2af52e179efe:ed97f6a873a4aac1b24e0f3094cdde75$"
+}
+}
