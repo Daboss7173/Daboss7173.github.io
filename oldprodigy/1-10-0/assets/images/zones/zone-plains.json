@@ -145,9 +145,9 @@
 	"pivot": {"x":0.5,"y":0.5}
 }},
 "meta": {
-	"app": "https://web.archive.org/web/20200330050412/http://www.codeandweb.com/texturepacker",
+	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "zone-tech.png",
+	"image": "zone-plains.png",
 	"format": "RGBA8888",
 	"size": {"w":1378,"h":926},
 	"scale": "1",
