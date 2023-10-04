@@ -102,6 +102,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
   reskin, which looks really cool!
 
 - 1.46.2 | Potions and Epic Attacks!?
+
   This version added not only Potions, but was also the first to have Epic Attacks! The tutorial route was also re-worked a bit. Rather than going through the heart of
   Lamplight town, this version just passes through the shop district, and is overall a less drawn-out tutorial.
 
