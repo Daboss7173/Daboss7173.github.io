@@ -1,0 +1,57 @@
+{"frames": {
+
+"bg":
+{
+	"frame": {"x":2,"y":104,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"loadcharacter":
+{
+	"frame": {"x":2,"y":2,"w":300,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":80},
+	"sourceSize": {"w":300,"h":80},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"student":
+{
+	"frame": {"x":412,"y":2,"w":299,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":299,"h":100},
+	"sourceSize": {"w":299,"h":100},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"offline":
+{
+	"frame": {"x":713,"y":2,"w":299,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":299,"h":80},
+	"sourceSize": {"w":299,"h":80},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"website":
+{
+	"frame": {"x":304,"y":2,"w":106,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":106,"h":90},
+	"sourceSize": {"w":106,"h":90},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "https://web.archive.org/web/20161113054108/http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "login.png",
+	"format": "RGBA8888",
+	"size": {"w":1284,"h":826},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d9a4b25ba947f832d2d54c1b78e315b7:13fdbff1298ebe22cbd839737c241a48:ffb62af756263e4644c882ff552ab6d3$"
+}
+}
