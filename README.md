@@ -89,11 +89,16 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
   This version had the updated Skywatch, the updated Bonfire Spire, AND an updated map screen! This version also introduced achievements and all kinds of
   other, more subtle changes. This version is another one that I really recommend trying out, another definitive update.
 
-- 1.37.0 | New Lamplight Town and tutorial!
+- 1.35.2 | Lamplight Town is now reborn a-new!
 
-  This version had a brand-new tutorial, which is the base for the MODERN DAY Prodigy tutorial, even though it's been changed in multiple ways, the resemblance is
-  uncanny! This also brought in the modern-style Lamplight Town, now some things are arranged differently, but it's still essentially the same. This version
-  also has Winterfest, which is pretty cool if you're interested in that.
+  This version had a brand-new tutorial, which is the base for the MODERN DAY Prodigy tutorial, despite being changed in multiple ways since, the resemblance is
+  remarkable! This also brought in the modern-style Lamplight Town, and the modern house. Now a few things in Lamplight Town are arranged differently, but it's still
+  essentially the same. This version also had the first Pumpkinfest in this new Lamplight Town take! Julia Ghoulia FTW!
+
+- 1.37.0 | Things are starting to get REAL EPIC!
+
+  This version changed a few things, the pet store got redesigned, and implimented outside of beta test-groups. Also, WE HAVE EPICS NOW! Not just one, but ALL OF THEM!
+  Magmischief, Florafox, ArcturSUS ඞ, and Divodile were all added in this update! This version also added in the first Winterfest in the modern Lamplight Town! 
 
 - 1.39.0 | Crazy battle update!?
 
