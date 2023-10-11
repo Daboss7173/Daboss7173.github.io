@@ -164,7 +164,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 2.45.0 | Ok! I'm going all-out with this one!
 
   This update, above all things added All Out Attacks to the game! This update also added in a new pet, Brumble! Also, the loading times are VASTLY faster than before, this
-  means you are gonna be spending less time waiting for the game to load, and more time playing the game!
+  means you are gonna be spending less time waiting for the game to load, and more time playing the game! Also, Gale fixed the Earth pedestal in this update!
 
 Well- okay, maybe it's still a bit overwhelming. At least you know what you're getting in each version though!
 
