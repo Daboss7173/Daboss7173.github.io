@@ -454,7 +454,7 @@
 		CreateSpriteAction: 677,
 		EnableSaveAction: 678,
 		ExplodeAction: 679,
-		FlipCreatureAction, 680,
+		FlipCreatureAction: 680,
 		GetDailyRewardCountAction: 681,
 		GetZoneStateAction: 682,
 		Service: 775,
