@@ -755,7 +755,6 @@
 		Panel: 1197,
 		PanelButton: 1198,
 		ProgressBar: 1199,
-		ScrollBar: 1200,
 		Slider: 1201,
 		StackButton: 1202,
 		EFontStyle: 1203,
