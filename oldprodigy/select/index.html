@@ -33,6 +33,14 @@
 		transform: translate(-8px, -8px);
 	}
 	
+	.definitive-banner {
+		user-select: none;
+		position: fixed;
+		left: 0%;
+		bottom: 0%;
+		transform: translate(+8px, -8px);
+	}
+	
 	.select-panel {
 		user-select: none;
 		display: block;
@@ -348,6 +356,15 @@
 			</a>
 		</div>
 		
+	</div>
+	
+	<div id="definitive-edition" class="definitive-banner" draggable="false">
+		<img src="./images/FreeButton-Banner.png" draggable="false" style="width: 410px; text-align: center;">
+		<div style="left: 50%; top: 0px; transform: translate(-50%); position: fixed; width: 300px;">
+			<a class="button" onclick="playDefinitiveEdition()" style="top: 13px;" draggable="false">
+				<img src="./images/FreeButton-Definitive.png" draggable="false">
+			</a>
+		</div>
 	</div>
 		
 </body>
@@ -753,7 +770,13 @@ newPage = function(id) {
 		page.style.display = "none"
 	};
 	document.getElementById("select-panel-overlay").appendChild(page);
-}
+},
+playDefinitiveEdition = function() {
+	PlayClick();
+	setTimeout(()=> {
+		window.location.href = "http://oldprodigy.byethost5.com/play/";
+	}, 200);
+},
 resizeFromWindow = function(element) {
 	let verSelect = element;
 	if ((window.innerWidth < verSelect.clientWidth) && ((window.innerWidth / verSelect.clientWidth) < (window.innerHeight / verSelect.clientHeight))) {
