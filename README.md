@@ -15,6 +15,18 @@ There are a lot of versions to choose from based on your preferences, covering Y
 I am still actively working on bettering it, so if you have any problems with bugs, glitches, etc. Just make an issue
 and I'll try to address it as soon as I can!
 
+## Definitive Edition
+
+If you go to the Old Prodigy version selection, you'll see a button on the bottom left which will take you to Old Prodigy Definitive Edition.
+
+This is currently what I'm mainly working on, and there is a lot more modification and fine-tuning I can do with it since I'm not sustaining
+multiple versions at the same time. While the versions below are just amazing bases to build on top of, this is it's own seperate entity based
+off of 1-50-0, and built on top of with security enhancements, configuration enhancements, and general engine enhancements, as well as other
+modifications ran with no other configuration required.
+
+Now, while Definitive Edition is closed source, the other versions below are FULLY open source, and if that's a pet peeve for you, there's no
+shame in choosing any of the fully open source versions below, and modifying them yourself to your own liking.
+
 ## How to play
 
 Playing this couldn't be more simple. First thing you have to do is open the site, which is automatically updated from this
