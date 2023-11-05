@@ -1,24 +1,71 @@
 <!DOCTYPE html>
 <head>
-<title>Daboss7173's Coding Projects</title>
-<meta name="description" content="This is where Daboss7173 does his coding projects"/>
-<style type="text/css">
-body {
-	background-color: #5a9cff
-}
+	<title>Daboss7173's Coding Projects</title>
+	<meta name="description" content="Wanna mess around with some teenager's coding projects? Well this is the place!"/>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+	<style type="text/css">
+		body {
+			background-color: #7db2d7;
+		}
 
-.title {
-	font-family: Tahoma, Geneva, sans-serif;
-	font-size: 50px
-}
+		.title {
+			font-family: Ubuntu, sans-serif;
+			font-size: 50px;
+			border-bottom: 1px solid;
+			border-color: #0002;
+			height: 70px;
+		}
 
-</style>
+		.button {
+			background: linear-gradient(#15d798, #12946a);
+			border: 1px solid #189a6f;
+			border-radius: 7px;
+			box-shadow: 0 4px #006e4b;
+			width: 210px;
+			height: 60px;
+			color: #ffffff;
+			display: inline-block;
+			font: normal normal 26px/60px "Ubuntu", sans-serif;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		.button:hover {
+			background:    linear-gradient(#25dfa3, #18ae7d);
+			border:        1px solid #1ca577;
+			box-shadow:    0 4px #018a5d;
+		}
+
+		.button:active {
+			transform: 	   translate(0px, 4px);
+			box-shadow:    none;
+		}
+		
+		.footer-container {
+			position: absolute;
+			bottom: 20px;
+			width: -webkit-fill-available;
+		}
+		
+		.footer {
+			font-family: Ubuntu, sans-serif;
+			position: relative;
+		}
+	</style>
 </head>
 
-<body class="title">
-<div align="center">Daboss7173's Coding Projects
-</div>
-<div align="center" style="position: relative; top: 20px">
-<button onclick="window.location.href='/oldprodigy'" id="oldprodigy" style="background: linear-gradient(rgb(85, 186, 151), rgb(69, 143, 130)); border: 1px solid rgb(65, 141, 168); border-radius: 11px; padding: 20px 30px; color: rgb(255, 255, 255); display: inline-block; font: 26px / 1 &quot;Open Sans&quot;, sans-serif; text-align: center; text-shadow: rgb(0, 0, 0) 1px 1px;">Old Prodigy</button>
-</div>
+<body>
+	<div class="title" align="center">
+	- Daboss7173's Projects -
+	</div>
+	<div align="center" style="position: relative; top: 30px">
+		<button onclick="window.location.href='/oldprodigy'" id="oldprodigy" class="button">
+		Old Prodigy
+		</button>
+	</div>
+	<div class="footer-container">
+		<div class="footer" align="center">
+			<a href="https://github.com/Daboss7173/Daboss7173.github.io">Check out my Github!</a>
+		</div>
+	</div>
 </html>
