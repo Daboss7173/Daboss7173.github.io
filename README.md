@@ -21,7 +21,7 @@ If you go to the Old Prodigy version selection, you'll see a button on the botto
 
 This is currently what I'm mainly working on, and there is a lot more modification and fine-tuning I can do with it since I'm not sustaining
 multiple versions at the same time. While the versions below are just amazing bases to build on top of, this is it's own seperate entity based
-off of 1-50-0, and built on top of with security enhancements, configuration enhancements, and general engine enhancements, as well as other
+off of 1-50-0, and built on top of with security enhancements, performance enhancements, and general engine enhancements, as well as other
 modifications ran with no other configuration required.
 
 Now, while Definitive Edition is closed source, the other versions below are FULLY open source, and if that's a pet peeve for you, there's no
