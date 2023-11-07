@@ -50,6 +50,8 @@ modifications ran with no other configuration required.
 Now, while Definitive Edition is closed source, the other versions below are FULLY open source, and if that's a pet peeve for you, there's no
 shame in choosing any of the fully open source versions below, and modifying them yourself to your own liking.
 
+https://oldprodigy.byethost5.com/play/
+
 ## Modpacks
 
 This repository features dynamic modpacks, you will be able to toggle mods as you see fit, and be able to combine multiple mods together for dynamic modpacks.
