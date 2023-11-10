@@ -81,8 +81,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.16.5 | The oldest version with all of the legacy quests!
 
   This version was also the last version to include element selection, rather than a spellbook. This is a version that I recommend in particular, it's kind of like
-  1.11.0 - but it's generally a lot more stable. In fact this version
-  is one of the most stable Prodigy versions on this site!
+  1.11.0 - but it's generally a lot more stable. In fact this version is one of the most stable Prodigy versions on this site!
 
 - 1.17.0 | The oldest version with tiled maps!
 
@@ -102,7 +101,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.30.0 | Just as many radical changes!
 
   This version had the updated Skywatch, the updated Bonfire Spire, AND an updated map screen! This version also introduced achievements and all kinds of
-  other, more subtle changes. This version is another one that I really recommend trying out, another definitive update.
+  other, more subtle changes. This version is another one that I really recommend trying out, another awesome update.
 
 - 1.35.2 | Lamplight Town is now reborn a-new!
 
