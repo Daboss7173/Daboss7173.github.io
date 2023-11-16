@@ -47,7 +47,7 @@ multiple versions at the same time. While the versions below are just amazing ba
 off of 1-50-0, and built on top of with security enhancements, performance enhancements, and general engine enhancements, as well as other
 modifications ran with no other configuration required.
 
-Now, while Definitive Edition is closed source, the other versions below are FULLY open source, and if that's a pet peeve for you, there's no
+Now, while Definitive Edition is closed source, the versions below are FULLY open source, and if that's a pet peeve for you, there's no
 shame in choosing any of the fully open source versions below, and modifying them yourself to your own liking.
 
 [http://oldprodigy.byethost5.com/play/](http://oldprodigy.byethost5.com/play/)
@@ -147,13 +147,13 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.70.0 | Huh I can dab now? Cool
 
   This update added in some quest progress popups for when you enter the following areas: Firefly Forest, Shiverchill Mountain, Skywatch, Bonfire Spire, and Shipwreck
-  Shore. Also the Dark Tower got completely redesigned with a tileset model. The Bonfire Spire textures were redone in this version as well.
-  Oh and aside from all that stuff, you can dab now. There's also Winterfest, and 4 new epics are added in now. Pretty nifty.
+  Shore. Also the Dark Tower got completely redesigned. The Bonfire Spire textures were redone in this version as well. Oh and aside from all that stuff, you can dab now.
+  There's also Winterfest, and 4 new epics are added in. Pretty nifty.
 
 - 1.80.0 | A battle overhaul!?
 
   Wow, that was quick- YOU HAVE SEEN NOTHING YET SONNY BOY! Huh. Ok - Anyway, the battle got changed a bit so that instead of having up to 4 pets, you only have up to 2.
-  HOWEVER They are all on screen at the same time and the battle background uses tilesets now.
+  HOWEVER They are all on screen at the same time and the battle background uses a different style now.
 
 - 1.90.0 | Bunnies Vs. Foxes!
 
@@ -162,7 +162,9 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 
 - 2.6.0 | Another battle overhaul!
 
-  The battle system has been revised once again! This time the entire battle GUI was overhauled, and all of the old spells got phased out in favor of newer, more smoothly animated spells. Not only that, but the health/balancing systems have been re-worked so that players, especially higher leveled players have a TON of health. This also marks a point where a lot of fonts start to get replaced by vector fonts.
+  The battle system has been revised once again! This time the entire battle GUI was overhauled, and all of the old spells got phased out in favor of newer, more smoothly
+  animated spells. Not only that, but the health/balancing systems have been re-worked so that players, especially higher leveled players have a TON of health. This also marks a
+  point where a lot of pixel fonts start to get replaced by webfonts.
 
 - 2.20.0 | Getting some gale force winds here guys
 
