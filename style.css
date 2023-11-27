@@ -31,20 +31,22 @@ body {
 }
 
 .button:hover {
-	background:    linear-gradient(#25dfa3, #18ae7d);
-	border:        1px solid #1ca577;
-	box-shadow:    0 4px #018a5d;
+	background: linear-gradient(#25dfa3, #18ae7d);
+	border: 1px solid #1ca577;
+	box-shadow: 0 4px #018a5d;
 }
 
 .button:active {
-	transform: 	   translate(0px, 4px);
-	box-shadow:    none;
+	transform: translate(0px, 4px);
+	box-shadow: none;
 }
 
 .footer-container {
 	position: absolute;
 	bottom: 20px;
 	width: -webkit-fill-available;
+	width: -moz-fill-available;
+	width: fill-available;
 }
 
 .footer {
