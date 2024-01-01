@@ -69,7 +69,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 
   This version is really special, because it's the oldest one on this site! This is also the oldest version that has been preserved via the Internet Archive. This version
   features a tutorial that is different from all of these versions! You start off in the Academy, but then it falls under attack! You help defend the academy by battling
-  off some of the monsters that are attacking the Academy! The wizard maker is also different here! You also setup which pet you start with in battle just before the
+  off some of the monsters that are attacking the Academy! The wizard maker is also different here! You also setup which pets you battle with just before the
   battle starts, rather than in the pet menu.
 
 - 1.11.0 | Tick... tock... tick... tock...
@@ -80,13 +80,13 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 
 - 1.16.5 | The oldest version with all of the legacy quests!
 
-  This version was also the last version to include element selection, rather than a spellbook. This is a version that I recommend in particular, it's kind of like
-  1.11.0 - but it's generally a lot more stable. In fact this version is one of the most stable Prodigy versions on this site!
+  This version was also the last version to include element selection, rather than a spellbook. A lot of the menus and fonts were switched around as well. This is a version
+  that I recommend in particular. It's kind of like 1.11.0, but it's generally a lot more stable.
 
 - 1.17.0 | The oldest version with tiled maps!
 
   This version was the first to introduce a new tutorial, more in-depth than 1.16.5 and before, which would end up being used all the way up to 1.30.0!
-  Not only did this version have that, but it also introduced the precursor to the modern firefly forest (before they updated the tileset and updated Flora's sprite)
+  Not only did this version have that, but it also introduced the precursor to the modern firefly forest (before they updated the tileset and graphics)
 
 - 1.18.2 | All Hallow's Eve!
 
@@ -101,7 +101,8 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.30.0 | Just as many radical changes!
 
   This version had the updated Skywatch, the updated Bonfire Spire, AND an updated map screen! This version also introduced achievements and all kinds of
-  other, more subtle changes. This version is another one that I really recommend trying out, another awesome update.
+  other, more subtle changes. This version is another one that I really recommend trying out, another awesome update. This is also the version that was used in Prodigy
+  Reborn, if you remember that relic of the past (rip)
 
 - 1.35.2 | Lamplight Town is now reborn a-new!
 
@@ -134,9 +135,9 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 1.51.0 | NEW AVATAR!?
 
   This update has always been a bit controversial... The avatar was completely reworked in this version, and instead of using sprite sheets, it used atlases. This means
-  that the animations could be a LOT smoother than before! However, it just plain didn't have the same amount of detail that the previous avatar had.
-  The loading system also got a bit of internal reworking in this update, meaning that some icons would have some loading issues, which is the main reason I
-  recommend 1.50.0 over this update.
+  that the animations could be a LOT smoother than before! It also made it easier for the developers at Prodigy to make new animations for the player. However, it just
+  plain didn't have the same amount of detail that the previous avatar had. The loading system also got a bit of internal reworking in this update, meaning that some icons
+  would have some loading issues, which is the main reason I recommend 1.50.0 over this update.
 
 - 1.60.0 | ARGH! OUR SHIP IS SINKING MATEYS! WE'RE GONNA WRECK!
 
@@ -163,8 +164,8 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 - 2.6.0 | Another battle overhaul!
 
   The battle system has been revised once again! This time the entire battle GUI was overhauled, and all of the old spells got phased out in favor of newer, more smoothly
-  animated spells. Not only that, but the health/balancing systems have been re-worked so that players, especially higher leveled players have a TON of health. This also marks a
-  point where a lot of pixel fonts start to get replaced by webfonts.
+  animated spells. Not only that, but the health/balancing systems have been re-worked so that players, especially higher leveled players have a TON of health. This also
+  marks a point where a lot of pixel fonts start to get replaced by webfonts.
 
 - 2.20.0 | Getting some gale force winds here guys
 
