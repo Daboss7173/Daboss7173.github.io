@@ -70,6 +70,7 @@ shame in choosing any of the fully open source versions below, and modifying the
 This repository features dynamic modpacks, you will be able to toggle mods as you see fit, and be able to combine multiple mods together for dynamic modpacks.
 
 Currently, these are the versions that support modpacks:
+ - 1-10-0
  - 1-30-0
  - 1-50-0
  - 2-45-0
