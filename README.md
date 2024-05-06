@@ -5,13 +5,6 @@ Right now I only have one public one. Old Prodigy.
 
 # Old Prodigy
 
-Lets get some of the obvious out of the way. This was done by craftersshaft first with Prodigy Reborn, and was the inspiration for this project.
-
-Check them out!
-https://github.com/craftersshaft/
-
-
-
 This is some pretty simple modding of older versions of Prodigy, to get them to work right now, in the present day!
 If you want a little dose of nostalgia from older Prodigy versions, no matter what the purpose - 
 seeing the older battle systems, the older quests, or anything of the sort - 
@@ -21,6 +14,17 @@ There are a lot of versions to choose from based on your preferences, covering Y
 
 I am still actively working on bettering it, so if you have any problems with bugs, glitches, etc. Just make an issue
 and I'll try to address it as soon as I can!
+
+## But First Some Disclaimers
+
+Lets get some of the obvious stuff out of the way. This was done by craftersshaft first with Prodigy Reborn, and was the inspiration for this
+project.
+
+Check them out!
+https://github.com/craftersshaft/
+
+This should also go without saying, but I am not associated with any of the people that have made forks of my repository. I do not recommend
+playing on them, as they all have a healthy mix of outdated versions, poor organization, duplicate versions, and multiple bugs.
 
 ## How to play
 
@@ -48,6 +52,8 @@ you're playing in, click the 'other' tab instead.
 ## Definitive Edition
 
 If you go to the Old Prodigy version selection, you'll see a button on the bottom left which will take you to Old Prodigy Definitive Edition.
+
+This is the Old Prodigy version that I most highly recommend checking out, as it is the most stable and has the most features.
 
 This is currently what I'm mainly working on, and there is a lot more modification and fine-tuning I can do with it since I'm not sustaining
 multiple versions at the same time. While the versions below are just amazing bases to build on top of, this is it's own seperate entity based
