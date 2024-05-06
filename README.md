@@ -75,6 +75,10 @@ Currently, these are the versions that support modpacks:
  - 1-50-0
  - 2-45-0
 
+If you are looking to submit a modpack, you may add me on Discord and I might just feature it on this site!
+
+Discord Tag: daboss7173
+
 ## Version choice breakdown!
 
 Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
