@@ -5,7 +5,7 @@ Right now I only have one public one. Old Prodigy.
 
 # Old Prodigy
 
-This is some pretty simple modding of older versions of Prodigy, to get them to work right now, in the present day!
+This is some pretty simple modding of older versions of Prodigy to get them to work right now, in the present day!
 If you want a little dose of nostalgia from older Prodigy versions, no matter what the purpose - 
 seeing the older battle systems, the older quests, or anything of the sort - 
 then you know where you are, and you know what to do!
@@ -108,8 +108,8 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 
 - 1.18.2 | All Hallow's Eve!
 
-  This version is really neat because it has the first Pumpkinfest! This means Halloween decorations are all around the map, and there's a Pumpkinfest shop, with all-kinds
-  of exclusive, creepy items and gear you can buy with your gold! Other than that it's pretty much just like 1.17.0.
+  This version is really neat because it has the first Pumpkinfest! This means Halloween decorations are all around the map, and there's a Pumpkinfest shop with all-kinds
+  of exclusive, creepy items and gear you can buy with your gold! Other than that it's pretty much just like the previous version.
 
 - 1.24.0 | A whole lot of stuff added in!
 
@@ -198,7 +198,7 @@ Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
 
 - 2.45.0 | Ok! I'm going all-out with this one!
 
-  This update, above all things added All Out Attacks to the game! This update also added in a new pet, Brumble! Also, the loading times are VASTLY faster than before, this
+  This update above all things added All Out Attacks to the game! This update also added in a new pet, Brumble! Also, the loading times are VASTLY faster than before, this
   means you are gonna be spending less time waiting for the game to load, and more time playing the game! Also, Gale fixed the Earth pedestal in this update!
 
 Well- okay, maybe it's still a bit overwhelming. At least you know what you're getting in each version though!
@@ -210,8 +210,8 @@ There's one version I haven't mentioned yet, it is the least buggy out of all of
 - The current version | The most functional build!
 
   Huh? The current version? This isn't Old Prodigy! Well - maybe not, but it is THE Prodigy, it is more Prodigy than any of these versions. The full-game experience is
-  to be experienced there. There is no other version of Prodigy with fully-fledged multiplayer. There is no other version with fully functional leaderboards. There is no other
-  version with the intricately designed education system, and there is no other version that consistently gets updated by a dedicated team of truly wonderful people. For that,
-  you need to play Prodigy, as it is now.
+  to be experienced there. There is no other version of Prodigy with fully-fledged multiplayer. There is no other version with fully functional leaderboards. There is no
+  other version with the intricately designed education system, and there is no other version that consistently gets updated by a dedicated team of truly wonderful
+  people. For that, you need to play Prodigy, as it is now.
 
 In case you don't know how to get there somehow, here's the link: https://sso.prodigygame.com/game/login/
