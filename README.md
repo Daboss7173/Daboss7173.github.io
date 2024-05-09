@@ -24,7 +24,9 @@ Check them out!
 https://github.com/craftersshaft/
 
 This should also go without saying, but I am not associated with any of the people that have made forks of my repository. I do not recommend
-playing on them, as they all have a healthy mix of outdated versions, poor organization, duplicate versions, and multiple bugs.
+playing on them for a variety of reasons (mainly the ocd inducing level of duplicate versions and poor, inconsistant organization)
+
+So yeah. You can check them out if you want. I'm not gonna stop you or anything, but don't say I didn't warn you.
 
 ## How to play
 
