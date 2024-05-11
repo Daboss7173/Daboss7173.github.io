@@ -741,14 +741,11 @@ DeselectAllMods = function(version) {
 	selectedMods = []
 },
 StartGameMod = function(version) {
-	if (selectedMods.length < 1) {
+	if (selectedMods.length < 1 || version == null) {
 		return;
 	}
 	PlayClick();
 	let ModString = '?mods=' + selectedMods.toString();
-	if (selectedMods.length < 1) {
-		ModString = ""
-	};
 	setTimeout(()=> {
 		window.location.href = "../" + version + "/" + ModString;
 	}, 200);
