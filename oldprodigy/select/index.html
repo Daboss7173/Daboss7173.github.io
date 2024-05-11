@@ -90,6 +90,13 @@
 		color: rgb(255, 255, 255);
 	}
 	
+	.button-disabled {
+		filter: brightness(0.5);
+		user-select: none;
+		display: block;
+		position: fixed;
+	}
+	
 	.button {
 		user-select: none;
 		display: block;
@@ -237,10 +244,6 @@
 							<img alt="Fast Game Speed" src="./images/FastGameSpeed.png" draggable="false">
 						</div>
 					</a>
-					
-					<a onclick="StartGameMod('1-10-0')" class="button" style="top: 280px; right: 12px; position: absolute" draggable="false">
-						<img alt="Start" src="./images/Start.png" draggable="false">
-					</a>
 				
 				</div>
 				
@@ -260,10 +263,6 @@
 						<div class="intext" id="select-mod-version" draggable="false">
 							<img alt="Fast Game Speed" src="./images/FastGameSpeed.png" draggable="false">
 						</div>
-					</a>
-					
-					<a onclick="StartGameMod('1-30-0')" class="button" style="top: 280px; right: 12px; position: absolute" draggable="false">
-						<img alt="Start" src="./images/Start.png" draggable="false">
 					</a>
 				
 				</div>
@@ -293,10 +292,6 @@
 							<img alt="Rebalanced Battles" src="./images/RebalancedBattles.png" draggable="false">
 						</div>
 					</a>
-					
-					<a onclick="StartGameMod('1-50-0')" class="button" style="top: 280px; right: 12px; position: absolute" draggable="false">
-						<img alt="Start" src="./images/Start.png" draggable="false">
-					</a>
 				
 				</div>
 
@@ -325,10 +320,6 @@
 							<img alt="Imitation Titan" src="./images/ImitationTitan.png" draggable="false">
 						</div>
 					</a>
-					
-					<a onclick="StartGameMod('2-45-0')" class="button" style="top: 280px; right: 12px; position: absolute" draggable="false">
-						<img alt="Start" src="./images/Start.png" draggable="false">
-					</a>
 				
 				</div>
 		</div>
@@ -338,6 +329,11 @@
 				<img alt="Go back" src="./images/Back.png" draggable="false">
 			</a>
 		</div>
+			
+		<a id="mod-select-apply"  onclick="StartGameMod(currentModVersion)" class="button-disabled" style="bottom: 104px; right: 24px; position: absolute; display: block;" draggable="false">
+			<img alt="Start" src="./images/Apply.png" draggable="false">
+		</a>
+		
 	</div>
 	
 	<div class="select-panel" id="version-select" draggable="false">
@@ -579,6 +575,7 @@ selectedMods = [],
 currentPage = 0,
 currentMenu = Menu.Select,
 currentModPage = ModPages.selection,
+currentModVersion = null,
 (new Audio("./audio/click.mp3")).load(),
 getCookie = function(cname) {
 	let name = cname + "=";
@@ -702,17 +699,23 @@ ModSelector = function(version) {
 		DeselectAllMods(version),
 		document.getElementById(currentModPage.id).style.display = "none",
 		currentModPage = ModPages[version],
+		currentModVersion = version,
 		document.getElementById(currentModPage.id).style.display = "block",
 		document.getElementById("mod-back").setAttribute("onclick", "ModSelector()"),
 		document.getElementById("select-mod-version").style.display = "none",
-		document.getElementById("select-mod-play").style.display = "block"
+		document.getElementById("select-mod-play").style.display = "block",
+		//document.getElementById("mod-select-apply").style.display = "block",
+		document.getElementById("mod-select-apply").className = "button-disabled"
 	} else {
 		document.getElementById(currentModPage.id).style.display = "none",
 		currentModPage = ModPages.selection,
+		currentModVersion = null,
 		document.getElementById(currentModPage.id).style.display = "block",
 		document.getElementById("mod-back").setAttribute("onclick", "closeBetaPopup()"),
 		document.getElementById("select-mod-version").style.display = "block",
-		document.getElementById("select-mod-play").style.display = "none"
+		document.getElementById("select-mod-play").style.display = "none",
+		//document.getElementById("mod-select-apply").style.display = "none",
+		document.getElementById("mod-select-apply").className = "button-disabled"
 	};
 	resizeMenuElements();
 },
@@ -725,6 +728,11 @@ AddMod = function(modid, version) {
 		document.getElementById("mod-" + modid + "-" + version).setAttribute('src', './images/ModSelectButton.png'),
 		selectedMods.splice(selectedMods.indexOf(modid), 1)
 	};
+	if (selectedMods.length < 1) {
+		document.getElementById("mod-select-apply").className = "button-disabled"
+	} else {
+		document.getElementById("mod-select-apply").className = "button"
+	}
 },
 DeselectAllMods = function(version) {
 	for(let i = 0; i < selectedMods.length; i += 1) {
@@ -733,6 +741,9 @@ DeselectAllMods = function(version) {
 	selectedMods = []
 },
 StartGameMod = function(version) {
+	if (selectedMods.length < 1) {
+		return;
+	}
 	PlayClick();
 	let ModString = '?mods=' + selectedMods.toString();
 	if (selectedMods.length < 1) {
