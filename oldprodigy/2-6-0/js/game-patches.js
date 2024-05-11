@@ -49,6 +49,13 @@ class ModObj {
 		QI.getUpdatedData = function() {
 			return 0
 		};
+		importer(53).InputField.createInputField = function(t, i, n, o, s, l, c, h, u) {
+				void 0 === u && (u = "text");
+				var p = (importer(156))("#" + n);
+				Util.isValid(p) && p.remove();
+				var d = new (importer(53)).InputField(t, i, n, o, s, l, c - 15, h);
+				return d.setAttribute("type", u), d
+			}
 		importer(701).ResultsMenu.prototype.onMainPlayerLevelUp = function(t) {
 			
 		},
@@ -328,6 +335,9 @@ class ModObj {
 						if (Util.isDefined(e.metadata.type)) {
 							i.prodigy.player.type = e.metadata.type
 						};
+						if (Util.isDefined(e.metadata.memberPrompt)) {
+							i.prodigy.player.memberPrompt = e.metadata.memberPrompt
+						};
 						if (!Util.isDefined(e.metadata.hasBam)) {
 							i.prodigy.player.data.stars = (importer(305)).StarConverter.convertLegacyStarsToModern(i.prodigy.player.data.stars);
 							for(var it = i.prodigy.player.kennel.getPets(), iu = 0; iu < it.length; iu++) {
@@ -494,6 +504,7 @@ class ModObj {
 					inPVP: this.game.prodigy.player.inPVP,
 					updated: this.game.prodigy.player.updated,
 					parentalLink: this.game.prodigy.player.parentalLink,
+					memberPrompt: this.game.prodigy.player.memberPrompt,
 					hasBam: true,
 					type: this.game.prodigy.player.type,
 					modifiers: this.game.prodigy.player.modifiers.data,
