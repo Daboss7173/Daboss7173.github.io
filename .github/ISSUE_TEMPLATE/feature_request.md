@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea to add here!
+about: Here you can suggest a mod to add/create. You can also suggest an update for Definitive Edition. Other issues are subject to closure.
 title: "*Feature request title here*"
 labels: Suggestion
 assignees: ''
