@@ -55,11 +55,7 @@ class ModHandler {
 	}
 	
 	initWalkSpeedMod() {
-		let init = Player.prototype.init;
-		Player.prototype.init = function() {
-			init.call(this)
-			this.walkSpeed = 1
-		}
+		let walkSpeed = 1;
 		
 		let openOther = SystemMenu.prototype.openOther;
 		SystemMenu.prototype.openOther = function() {
@@ -67,14 +63,14 @@ class ModHandler {
 			new BitmapFont(this.game, this.content, 0, 230, "walk speed", {
 				width: 400,
 				align: "center"
-			}), this.walkSpeedBar = new ProgressBar(this.game, this.content, 50, 260, 300, 80, 1, this.game.prodigy.player.walkSpeed/20), this.walkSpeedBar.setDraggable(), this.walkSpeedBar.setBarAnimationSpeed(ProgressBar.SPEED_VERYSLOW)
+			}), this.walkSpeedBar = new ProgressBar(this.game, this.content, 50, 260, 300, 80, 1, walkSpeed/20), this.walkSpeedBar.setDraggable(), this.walkSpeedBar.setBarAnimationSpeed(ProgressBar.SPEED_VERYSLOW)
 		};
 		
 		let menuUpdate = SystemMenu.prototype.menuUpdate;
 		SystemMenu.prototype.menuUpdate = function() {
 			menuUpdate.call(this);
-			if (Util.isDefined(this.walkSpeedBar) && this.game.prodigy.player.walkSpeed !== this.walkSpeedBar.getPercent()*20)
-				this.game.prodigy.player.walkSpeed = this.walkSpeedBar.getPercent()*20;
+			if (Util.isDefined(this.walkSpeedBar) && walkSpeed !== this.walkSpeedBar.getPercent()*20)
+				walkSpeed = this.walkSpeedBar.getPercent()*20;
 		};
 		
 		let clearContents = SystemMenu.prototype.clearContents;
@@ -91,7 +87,7 @@ class ModHandler {
 			var a = this.path.findBasicPath(this.user.x + e, this.user.y + t, this.game.input.x + e, this.game.input.y + t);
 			a[0].x -= e, a[0].y -= t;
 			var i = this.path.getCallback(Math.floor(a[0].x / this.tileSize), Math.floor(a[0].y / this.tileSize));
-			this.user.setPath(a, i, this.game.prodigy.player.walkSpeed)
+			this.user.setPath(a, i, walkSpeed)
 		}
 	}
 	
