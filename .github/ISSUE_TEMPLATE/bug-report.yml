@@ -2,7 +2,6 @@ name: Bug Report
 description: Something is going wrong and it needs to be fixed!
 title: "*Your bug report title here*"
 labels: Bug
-assignees: ''
 body:
   - type: input
     attributes:
