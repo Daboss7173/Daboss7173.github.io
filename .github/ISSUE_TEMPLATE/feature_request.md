@@ -1,5 +1,5 @@
 name: Feature request
-about: Request a new feature to be added to the site!
+description: Request a new feature to be added to the site!
 title: "*Feature request title here*"
 labels: Suggestion
 assignees: ''
