@@ -1,217 +1,116 @@
 # Daboss7173.github.io
 
-Here are some coding projects I work on.
-Right now I only have one public one. Old Prodigy.
+This is essentially one of my many creative outlets. This was originally meant to just host all of my coding stuff, but it's
+essentially turned into "The Old Prodigy Website" - so yeah.
 
 # Old Prodigy
 
-This is some pretty simple modding of older versions of Prodigy to get them to work right now, in the present day!
-If you want a little dose of nostalgia from older Prodigy versions, no matter what the purpose - 
-seeing the older battle systems, the older quests, or anything of the sort - 
-then you know where you are, and you know what to do!
+Yep, that's right. Prodigy Reborn is back in business!
 
-There are a lot of versions to choose from based on your preferences, covering YEARS worth of updates from Prodigy's team!
+This time is different though, rather than just one version, there are several versions that cover YEARS worth of updates and content
+from Prodigy's team! You can choose any one to try out based on your preferences, or several! The sky's the limit!
 
-I am still actively working on bettering it, so if you have any problems with bugs, glitches, etc. Just make an issue
-and I'll try to address it as soon as I can!
+## Disclaimers
 
-## But First Some Disclaimers
+Old Prodigy was done first by Craftersshaft before me as "Prodigy Reborn 1.0" - and it was the inspiration for this project!
 
-Lets get some of the obvious stuff out of the way. This was done by craftersshaft first with Prodigy Reborn, and was the inspiration for this
-project.
+[Crafterrshaft's Github](https://github.com/craftersshaft/)
 
-Check them out!
-https://github.com/craftersshaft/
+This game was made by Prodigy Education, which is a team of people co-founded by Alex Peters & Rohan Mahimker, and those two are still
+head of Prodigy Education to this day!
 
-This should also go without saying, but I am not associated with any of the people that have made forks of my repository. If there is a
-problem with a fork of this repository, contact the person responsible for the fork. Not me. Thank you.
+For more information about them, [click this link!](https://www.prodigygame.com/main-en/about-prodigy/)
+
+I am not associated with Prodigy Education or any associates/subsidiaries.
+
+I am not associated with anyone who has forked this repository. If there is a problem with a fork of this repository; contact the
+person responsible for the fork, not me.
+
+IF there is a bug in this repository, be sure to make a well-formatted issue about it. I'll try to fix it as soon as I can.
 
 ## How to play
 
-Playing this couldn't be more simple. First thing you have to do is open the site, which is automatically updated from this
-repository!
+First thing you have to do is get to the version selection. The following link will do just that:
 
-To do so, you just click this link: https://daboss7173.github.io/oldprodigy/select
+[https://daboss7173.github.io/oldprodigy/select](https://daboss7173.github.io/oldprodigy/select)
 
-Once you're there, you can select a version to play. There are LOTS of versions to choose from, so try not to be overwhelmed
-by the number of choices, and there are still more versions and updates to come!
+Once you're there all you have to do is select a version, which will take you to the Old Prodigy login page. You don't have to worry
+about logging in though. All you really have to do at this point is make your wizard!
 
-Once you've selected a version, it'll take you to the login screen where you have 3 options. To create a new wizard, to start in offline mode,
-or to load a previous save.
+You can create a new wizard by selecting "New Character" on the login screen. This will take you to the wizard maker, and you will be
+able to choose your wizard's appearance at will. First, you will choose if you are a male or female. Next, you will be able to change
+your hair style, eye color, skin color, and hair color to your liking!
 
-If you want to start a quick game and not configure how your character appears, you should choose offline mode.
+Once you're created your wizard, you will get to play through the Old Prodigy tutorial, which will guide you through the basics of
+the game.
 
-If you want to start a new game and configure your character however you want, you should choose to create a new character.
+One of the first things you will notice is that there is no math in the game. That's right! Old Prodigy doesn't have math! You just
+choose your spell and cast them, no math necessary!
 
-If you want to load a character that you've already saved, you click load character and select your save file.
-
-To save your character, you can just go into the settings menu, go under 'network' and click the button called "save character". It'll automatically download
-to your computer, For this I recommend manually choosing a folder to save it in so you can organize it as you need. If there is no network tab in the version
-you're playing in, click the 'other' tab instead.
-
-## Definitive Edition
-
-If you go to the Old Prodigy version selection, you'll see a button on the bottom left which will take you to Old Prodigy Definitive Edition.
-
-This is the Old Prodigy version that I most highly recommend checking out, as it is the most stable and has the most features.
-
-This is currently what I'm mainly working on, and there is a lot more modification and fine-tuning I can do with it since I'm not sustaining
-multiple versions at the same time. While the versions below are just amazing bases to build on top of, this is it's own seperate entity based
-off of 1-50-0, and built on top of with security enhancements, performance enhancements, and general engine enhancements, as well as other
-modifications ran with no other configuration required.
-
-Now, while Definitive Edition is closed source, the versions below are FULLY open source, and if that's a pet peeve for you, there's no
-shame in choosing any of the fully open source versions below, and modifying them yourself to your own liking.
-
-[http://oldprodigy.byethost5.com/play/](http://oldprodigy.byethost5.com/play/)
+Once you're done for the day, you're gonna have to save your character. You can do so by simply clicking the gear icon in your HUD, and
+then navigating the settings for the "Save Character" button. Once clicked, a new window will open up which will allow you to save your
+wizard to your computer and return to it later. Once you're back to play Old Prodigy, you can select the "Load Character" option on the
+Login screen.
 
 ## Modpacks
 
-This repository features dynamic modpacks, you will be able to toggle mods as you see fit, and be able to combine multiple mods together for dynamic modpacks.
+This repository features a modpack system which allows for loading specific mods into the game! This means you can choose the mods that
+you want to play with, and then use them in-game.
 
-Currently, these are the versions that support modpacks:
- - 1-10-0
- - 1-30-0
- - 1-50-0
- - 2-45-0
+To use these modpacks, you have to click the "Mods" button at the top-right of the version select UI. Then, you may select a version
+which will bring up the mod selection menu. Once it's up, you can choose the mods you want, and then click apply to use them in-game!
 
-If you are looking to submit a modpack, you may add me on Discord and I might just feature it on this site!
+These are the versions of the game that currently support modpacks at the moment:
+- 1-10-0
+- 1-30-0
+- 1-50-0
+- 2-45-0
 
-Discord Tag: daboss7173
+## Version Choice Breakdown!
 
-## Version choice breakdown!
+There are a lot of Prodigy versions to choose from.
 
-Okay, maybe the versions are a bit overwhelming. Let's break it down a bit!
+A good starting point would be checking out Prodigy Definitive Edition. This is by far the most stable build of Prodigy on this site. If
+you want to learn more about Prodigy Definitive Edition, you may scroll down a bit further.
 
-- 1.10.0 | The grand-daddy of all of these Prodigy versions
+As for those of you not playing Prodigy Definitive Edition, there's still a whole lot of other versions, albeit without all of the beefy
+modifications in Prodigy Definitive Edition, these other versions are still definitely worth a play if you're looking for a different
+experience.
 
-  This version is really special, because it's the oldest one on this site! This is also the oldest version that has been preserved via the Internet Archive. This version
-  features a tutorial that is different from all of these versions! You start off in the Academy, but then it falls under attack! You help defend the academy by battling
-  off some of the monsters that are attacking the Academy! The wizard maker is also different here! You also setup which pets you battle with just before the
-  battle starts, rather than in the pet menu.
+The first page in the version selection is all of the earlier versions, the further you go, the later the versions you'll see. If you're
+looking for a super early experience, select something from the first page. If you're looking for something a bit later, try the second
+page. The possibilities are truely endless.
 
-- 1.11.0 | Tick... tock... tick... tock...
+## Prodigy Definitive Edition
 
-  Ooh boy, this version's wild! This version added in Clockwork town! This also changed most of the menus in the game, being more static rather than being full of
-  animation, as well as a different, less drawn out tutorial that takes place at the Lamplight Docks, rather than the Academy Entrance. The tutorial in this version isn't
-  really that fleshed out though, you don't obtain starter pets or anything of the like. Sorta just an in-between phase before 1-17-0 rolled about.
+Prodigy Definitive Edition is a little different. This is meant to be the successor to Prodigy Reborn, but a bit beefier and with a
+different version of Prodigy. Unlike the rest of the versions, this is extremely stable and has all kinds of modifications and features
+added in with no extra configuration required!
 
-- 1.16.5 | The oldest version with all of the legacy quests!
+Lets scratch the surface shall we?
 
-  This version was also the last version to include element selection, rather than a spellbook. A lot of the menus and fonts were switched around as well. This is a version
-  that I recommend in particular. It's kind of like 1.11.0, but it's generally a lot more stable.
+- MAJOR Performance Enhancements
+- VSync
+- FPS Display
+- Save Encryption
+- Walk Speed Configuration
+- Mailing System
+- Phaser 2.20.0 Port
+- Holliday Events
+- Google Authentication and Autosaves
 
-- 1.17.0 | The oldest version with tiled maps!
-
-  This version was the first to introduce a new tutorial, more in-depth than 1.16.5 and before, which would end up being used all the way up to 1.30.0!
-  Not only did this version have that, but it also introduced the precursor to the modern firefly forest (before they updated the tileset and graphics)
-
-- 1.18.2 | All Hallow's Eve!
-
-  This version is really neat because it has the first Pumpkinfest! This means Halloween decorations are all around the map, and there's a Pumpkinfest shop with all-kinds
-  of exclusive, creepy items and gear you can buy with your gold! Other than that it's pretty much just like the previous version.
-
-- 1.24.0 | A whole lot of stuff added in!
-
-  This version introduced the new Shiverchill Mountains quests, a new tile-based Lamplight town, as well as a LOT of new menu designs added in.
-  Pretty safe to say a LOT happened between 1.18.2 and this version.
-
-- 1.30.0 | Just as many radical changes!
-
-  This version had the updated Skywatch, the updated Bonfire Spire, AND an updated map screen! This version also introduced achievements and all kinds of
-  other, more subtle changes. This version is another one that I really recommend trying out, another awesome update. This is also the version that was used in Prodigy
-  Reborn, if you remember that relic of the past (rip)
-
-- 1.35.2 | Lamplight Town is now reborn a-new!
-
-  This version had a brand-new tutorial, which is the base for the MODERN DAY Prodigy tutorial, despite being changed in multiple ways since, the resemblance is
-  remarkable! This also brought in the modern-style Lamplight Town, and the modern house. Now a few things in Lamplight Town are arranged differently, but it's still
-  essentially the same. This version also had the first Pumpkinfest in this new Lamplight Town take! Julia Ghoulia FTW!
-
-- 1.37.0 | Things are starting to get REAL EPIC!
-
-  This version changed a few things, the pet store got redesigned, and implimented outside of beta test-groups. Also, WE HAVE EPICS NOW! Not just one, but ALL OF THEM!
-  Magmischief, Florafox, ArcturSUS ඞ, and Divodile were all added in this update! This version also added in the first Winterfest in the modern Lamplight Town! 
-
-- 1.39.0 | Crazy battle update!?
-
-  This version introduced a refresh on the battle system, with a new health meter not using hearts, but a health bar! It also shows how much damage is dealt in
-  each attack, and introduces critical hits. This also has leveling up mid-battle and some new animations to accompany this! This version also has the Firefly Forest
-  reskin, which looks really cool!
-
-- 1.46.2 | Potions and Epic Attacks!?
-
-  This version added not only Potions, but was also the first to have Epic Attacks! The tutorial route was also re-worked a bit. Rather than going through the heart of
-  Lamplight town, this version just passes through the shop district, and is overall a less drawn-out tutorial.
-
-- 1.50.0 | Sound Effects Galore!
-
-  This version has added plenty of stuff! New sound effects for the Epic Attacks, as well as a new spell cast sound effect, and spell hit sound effect. There is also a
-  sound effect for when you level up, and a new sound effect for critical hits. The Shiverchill Mountain textures also got updated in this version. The Twilight Wheel even
-  got added in this version!
-
-- 1.51.0 | NEW AVATAR!?
-
-  This update has always been a bit controversial... The avatar was completely reworked in this version, and instead of using sprite sheets, it used atlases. This means
-  that the animations could be a LOT smoother than before! It also made it easier for the developers at Prodigy to make new animations for the player. However, it just
-  plain didn't have the same amount of detail that the previous avatar had. The loading system also got a bit of internal reworking in this update, meaning that some icons
-  would have some loading issues, which is the main reason I recommend 1.50.0 over this update.
-
-- 1.60.0 | ARGH! OUR SHIP IS SINKING MATEYS! WE'RE GONNA WRECK!
-
-  Ahem - anyway, this update was one of the first with the Starlight Festival! This update also introduced the new in-game chat, although it's not a big deal anyway since
-  this is in offline mode... Ooh! Also, this brought in Shipwreck Shore, replacing Barnacle Cove! This also has Pippet Battles! Also, the Skywatch textures were also
-  redone in this version.
-
-- 1.70.0 | Huh I can dab now? Cool
-
-  This update added in some quest progress popups for when you enter the following areas: Firefly Forest, Shiverchill Mountain, Skywatch, Bonfire Spire, and Shipwreck
-  Shore. Also the Dark Tower got completely redesigned. The Bonfire Spire textures were redone in this version as well. Oh and aside from all that stuff, you can dab now.
-  There's also Winterfest, and 4 new epics are added in. Pretty nifty.
-
-- 1.80.0 | A battle overhaul!?
-
-  Wow, that was quick- YOU HAVE SEEN NOTHING YET SONNY BOY! Huh. Ok - Anyway, the battle got changed a bit so that instead of having up to 4 pets, you only have up to 2.
-  HOWEVER They are all on screen at the same time and the battle background uses a different style now.
-
-- 1.90.0 | Bunnies Vs. Foxes!
-
-  The leaderboards got overhauled a bit and overall look way brighter than before. Also, the Dyno Dig Oasis quests are phased out now, Professor Scoog is now a shopkeeper.
-  This version also includes some general stability improvements, and the first Springfest in Prodigy was also here. Also a lot of new music was added in!
-
-- 2.6.0 | Another battle overhaul!
-
-  The battle system has been revised once again! This time the entire battle GUI was overhauled, and all of the old spells got phased out in favor of newer, more smoothly
-  animated spells. Not only that, but the health/balancing systems have been re-worked so that players, especially higher leveled players have a TON of health. This also
-  marks a point where a lot of pixel fonts start to get replaced by webfonts.
-
-- 2.20.0 | Getting some gale force winds here guys
-
-  This update has the academy! You'll be able to go into the archives, meet Gale, and do all sorts of stuff there. There are also a lot of GUI changes here. The character
-  name now uses a vector font now. The settings menu also got a glow-up!
-
-- 2.30.0 | Brrr! It's getting cold again!
-
-  This update changed the logo to a more simplified version! Also, Winterfest is back and Howard Cornelius's sprite was switched up! Also, they added the nicknamers back
-  in Shiverchill Mountains, Firefly Forest, Skywatch, and Bonfire Spire! They also updated the sprite for the Nicknamer, as well as the menu! This update added a new pet
-  as well! Silvertusk!
-
-- 2.45.0 | Ok! I'm going all-out with this one!
-
-  This update above all things added All Out Attacks to the game! This update also added in a new pet, Brumble! Also, the loading times are VASTLY faster than before, this
-  means you are gonna be spending less time waiting for the game to load, and more time playing the game! Also, Gale fixed the Earth pedestal in this update!
-
-Well- okay, maybe it's still a bit overwhelming. At least you know what you're getting in each version though!
+Yep, you heard that right, that's just scratching the surface. This version is based off of 1-50-0, which is already one of the most
+stable and reliable of the Prodigy versions, so you can probably imagine what months of hard work can do to something like that.
 
 ## The other version
 
 There's one version I haven't mentioned yet, it is the least buggy out of all of these versions.
 
-- The current version | The most functional build!
+The current version | The most functional build!
 
-  Huh? The current version? This isn't Old Prodigy! Well - maybe not, but it is THE Prodigy, it is more Prodigy than any of these versions. The full-game experience is
-  to be experienced there. There is no other version of Prodigy with fully-fledged multiplayer. There is no other version with fully functional leaderboards. There is no
-  other version with the intricately designed education system, and there is no other version that consistently gets updated by a dedicated team of truly wonderful
-  people. For that, you need to play Prodigy, as it is now.
+Huh? The current version? This isn't Old Prodigy! Well - maybe not, but it is THE Prodigy, it is more Prodigy than any of these versions.
+The full-game experience is to be experienced there. There is no other version with the intricately designed education system, and there
+is no other version that consistently gets updated by a dedicated team of truly wonderful people. For that, you need to play Prodigy as
+it is now.
 
 In case you don't know how to get there somehow, here's the link: https://sso.prodigygame.com/game/login/
