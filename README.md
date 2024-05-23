@@ -23,10 +23,16 @@ For more information about them, [click this link!](https://www.prodigygame.com/
 
 I am not associated with Prodigy Education or any associates/subsidiaries.
 
-I am not associated with anyone who has forked this repository. If there is a problem with a fork of this repository; contact the
-person responsible for the fork, not me.
-
 IF there is a bug in this repository, be sure to make a well-formatted issue about it. I'll try to fix it as soon as I can.
+
+There are also various forks of this repository, you can check them out if you get the chance. I can not guarentee the quality of play
+as much as I can here, but I can say they have some cool stuff you might like. There are currently 3 notable forks of this repository.
+
+ - [https://slappygig.github.io/](https://slappygig.github.io/)
+ - [https://xpmuser.github.io/](https://xpmuser.github.io/)
+ - [https://ao28th28.github.io/](https://ao28th28.github.io/) this one and the xpmuser one are just duplicates made by the same person,
+so i don't know why you would choose one over the other, but here they both are anyway.
+
 
 ## How to play
 
