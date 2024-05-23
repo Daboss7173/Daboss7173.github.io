@@ -2,7 +2,6 @@ name: Feature request
 description: Request a new feature to be added to the site!
 title: "*Feature request title here*"
 labels: Suggestion
-assignees: ''
 body:
   - type: input
     attributes:
