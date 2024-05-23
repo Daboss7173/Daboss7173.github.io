@@ -18,6 +18,6 @@ body:
       required: false
   - type: textarea
     attributes:
-      label: Any additional context: (optional)
+      label: Any additional context (optional)
     validations:
       required: false
