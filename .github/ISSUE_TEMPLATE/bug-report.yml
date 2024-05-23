@@ -1,0 +1,24 @@
+name: Bug Report
+description: Something is going wrong and it needs to be fixed!
+title: "*Your bug report title here*"
+labels: Bug
+assignees: ''
+body:
+  - type: input
+    attributes:
+      label: What went wrong?
+      description: Tell me what went happened in-game that was not expected.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: How can I reproduce this?
+      description: Tell me how I can trigger this bug again.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What did the console output?
+      description: Even if there is no error in the console, you should still list whatever was logged when the bug occurred.
+    validations:
+      required: true
