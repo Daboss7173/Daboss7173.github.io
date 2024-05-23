@@ -27,6 +27,7 @@ IF there is a bug in this repository, be sure to make a well-formatted issue abo
 
 There are also various forks of this repository, you can check them out if you get the chance. I can not guarentee the quality of play
 as much as I can here, but I can say they have some cool stuff you might like. There are currently 3 notable forks of this repository.
+(which essentially means they actually have sites up)
 
  - [https://slappygig.github.io/](https://slappygig.github.io/)
  - [https://xpmuser.github.io/](https://xpmuser.github.io/)
