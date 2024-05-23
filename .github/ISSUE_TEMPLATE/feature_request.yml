@@ -8,6 +8,8 @@ body:
       label: What would you like to add?
       description: (stop asking me to add new versions, i'll do that in my own time.)
       placeholder: Something cool!
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: How would you like this to be implemented? (optional)
