@@ -83,7 +83,7 @@
 		position: absolute;
 		top: 10px;
 		width: 238px;
-		font: 12pt "Tahoma";
+		font: 18px "Ubuntu";
 		text-align: center;
 		font-weight: bold;
 		-webkit-text-stroke: #000;
@@ -132,6 +132,35 @@
 		font: 16px "Ubuntu", sans-serif;
 		font-weight: bold;
 		color: rgb(0, 0, 0);
+	}
+	
+	.theme-config {
+		user-select: none;
+		display: none;
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	
+	.slider {
+	    -webkit-appearance: none;
+		height: 50px;
+		width: 200px;
+		position: fixed;
+		background: url("./images/slider-bar.png");
+		cursor: pointer;
+	}
+	
+	.slider::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 50px;
+		height: 50px;
+		border: 0;
+		background: url("./images/slider-thumb.png");
+		cursor: pointer;
+	}
 	</style>
 	
 <body>
@@ -148,6 +177,30 @@
 	<div id="background-6" class="bg-image" style="background-image: url(&quot;./images/Background-6.png&quot;); display: none"></div>
 	
 	<div id="background-7" class="bg-image" style="background-image: url(&quot;./images/Background-7.png&quot;); display: none"></div>
+	
+	<div class="theme-config" id="theme-popup" draggable="false">
+		<img src="./images/ThemeConfigPanel.png" draggable="false"/>
+		
+		<a class="button" style="top: -12px; right: -12px;" onclick="closeBetaPopup()" draggable="false">
+			<img alt="Close" src="./images/Icon-Close.png" draggable="false"/>
+		</a>
+		
+		<a class="button" style="top: 130px; left: 50px;" onclick="toggleTheme()" draggable="false">
+			<img id="theme-switch" alt="Switch Theme" src="./images/FreeButton-Theme-Classic.png" draggable="false"/>
+		</a>
+		
+		<a class="button" style="top: 210px; left: 50px;" onclick="toggleBackground()" draggable="false">
+			<img alt="Switch Background" src="./images/FreeButton-Switch.png" draggable="false"/>
+		</a>
+		
+		<img alt="Background Brightness" src="./images/BackgroundBrightnessText.png" style="position: fixed; top: 285px; left: 50%; transform: translate(-50%, 0px);" draggable="false"/>
+		
+		<input id="bg-slider" class="slider" type="range" min="0" max="2" value="1" step="0.01" style="top: 310px; left: 50%; transform: translate(-50%, 0px)"/>
+		<img id="bg-slider-left" class="button" onclick="decrementBrightness()" style="top: 312px; left: 52px;" src="./images/slider-left.png"/>
+		<img id="bg-slider-right" class="button" onclick="incrementBrightness()" style="top: 312px; right: 48px;" src="./images/slider-right.png"/>
+		
+		<img class="button" onclick="resetOptions()" style="bottom: 20px; left: 100px;" src="./images/Reset.png"/>
+	</div>
 	
 	<div class="warning-panel" id="beta-popup" draggable="false">
 		<img alt="Warning!" src="./images/WarningPanel.png" draggable="false">
@@ -380,8 +433,8 @@
 	<div id="bg-toggle" class="background-banner" draggable="false">
 		<img src="./images/FreeButton-Banner.png" draggable="false" style="width: 410px; text-align: center;">
 		<div style="left: 50%; top: 0px; transform: translate(-50%); position: fixed; width: 300px;">
-			<a class="button" onclick="toggleBackground()" style="top: 13px;" draggable="false">
-				<img src="./images/FreeButton-Switch.png" draggable="false">
+			<a id="change-theme-button" class="button" onclick="openThemeChange()" style="top: 13px;" draggable="false">
+				<img src="./images/FreeButton-Theme.png" draggable="false">
 			</a>
 		</div>
 		
@@ -408,6 +461,9 @@ Menu = {
 	},
 	ModSelect: {
 		id: "mod-select"
+	},
+	ThemeConfig: {
+		id: "theme-popup"
 	}
 },
 Pages = [],
@@ -629,6 +685,173 @@ toggleBackground = function() {
 	setCookie("background", backid, 4096);
 	getSavedBackground()
 },
+getSavedTheme = function() {
+	let theme = getCookie("theme");
+	if (theme == "")
+		theme = "clean";
+	if (theme == "clean") {
+		cleanTheme();
+	} else {
+		classicTheme();
+	}
+	setCookie("theme", theme, 4096)
+},
+toggleTheme = function() {
+	PlayClick();
+	let previous = getCookie("theme");
+	if (previous == "" || previous == "clean") {
+		classicTheme();
+		setCookie("theme", "classic", 4096)
+	} else {
+		cleanTheme();
+		setCookie("theme", "clean", 4096)
+	}
+	
+},
+openThemeChange = function() {
+	if (currentMenu != Menu.Select)
+		return;
+	PlayClick(),
+	document.getElementById(currentMenu.id).style.display = "none",
+	currentMenu = Menu.ThemeConfig,
+	document.getElementById(currentMenu.id).style.display = "block",
+	resizeMenuElements();
+	disableThemeButton();
+},
+classicTheme = function() {
+    let images = document.getElementsByTagName("img");
+    for(let it in images) {
+		if (isNaN(images[it]) && !isFunction(images[it])) {
+			switch (images[it].getAttribute("src")) {
+				case "./images/MenuPanel-3.png":
+					images[it].setAttribute("src", "./images/classic/MenuPanel-3.png");
+					break;
+				case "./images/FreeButton-Banner.png":
+					images[it].setAttribute("src", "./images/classic/FreeButton-Banner.png");
+					break;
+				case "./images/MenuPanel-Banner.png":
+					images[it].setAttribute("src", "./images/classic/MenuPanel-Banner.png");
+					break;
+				case "./images/MenuPanel-Overlay.png":
+					images[it].setAttribute("src", "./images/classic/MenuPanel-Overlay.png");
+					break;
+				case "./images/ModSelect-Banner.png":
+					images[it].setAttribute("src", "./images/classic/ModSelect-Banner.png");
+					break;
+				case "./images/WarningPanel.png":
+					images[it].setAttribute("src", "./images/classic/WarningPanel.png");
+					break;
+				case "./images/ThemeConfigPanel.png":
+					images[it].setAttribute("src", "./images/classic/ThemeConfigPanel.png");
+					break;
+			}
+		}
+    };
+	let themeButton = document.getElementById("theme-switch");
+	themeButton.setAttribute("src", "./images/FreeButton-Theme-Clean.png");
+},
+cleanTheme = function() {
+    let images = document.getElementsByTagName("img");
+    for(let it in images) {
+		if (isNaN(images[it]) && !isFunction(images[it])) {
+			switch (images[it].getAttribute("src")) {
+				case "./images/classic/MenuPanel-3.png":
+					images[it].setAttribute("src", "./images/MenuPanel-3.png");
+					break;
+				case "./images/classic/FreeButton-Banner.png":
+					images[it].setAttribute("src", "./images/FreeButton-Banner.png");
+					break;
+				case "./images/classic/MenuPanel-Banner.png":
+					images[it].setAttribute("src", "./images/MenuPanel-Banner.png");
+					break;
+				case "./images/classic/MenuPanel-Overlay.png":
+					images[it].setAttribute("src", "./images/MenuPanel-Overlay.png");
+					break;
+				case "./images/classic/ModSelect-Banner.png":
+					images[it].setAttribute("src", "./images/ModSelect-Banner.png");
+					break;
+				case "./images/classic/WarningPanel.png":
+					images[it].setAttribute("src", "./images/WarningPanel.png");
+					break;
+				case "./images/classic/ThemeConfigPanel.png":
+					images[it].setAttribute("src", "./images/ThemeConfigPanel.png");
+					break;
+			}
+		}
+    };
+	let themeButton = document.getElementById("theme-switch");
+	themeButton.setAttribute("src", "./images/FreeButton-Theme-Classic.png");
+},
+enableThemeButton = function() {
+	let button = document.getElementById("change-theme-button");
+	button.setAttribute("class", "button");
+},
+disableThemeButton = function() {
+	let button = document.getElementById("change-theme-button");
+	button.setAttribute("class", "button-disabled");
+},
+getSavedBrightness = function() {
+	let bgLum = getCookie("bgLum");
+	let slider = document.getElementById("bg-slider");
+	if(bgLum == "")
+		bgLum = "1";
+	slider.value = bgLum;
+	setBackgroundBrightness(parseFloat(bgLum));
+},
+setBackgroundBrightness = function(value) {
+	let backgrounds = document.getElementsByClassName("bg-image");
+	for(let it = 0; it < backgrounds.length; it++) {
+		backgrounds[it].style.filter = "brightness(" + value + ")"
+	}
+	setCookie("bgLum", value, 4096);
+	let left = document.getElementById("bg-slider-left");
+	let right = document.getElementById("bg-slider-right");
+	if (parseFloat(value) >= 2) {
+		left.setAttribute("class", "button")
+		right.setAttribute("class", "button-disabled")
+	}
+	else if (parseFloat(value) <= 0) {
+		left.setAttribute("class", "button-disabled")
+		right.setAttribute("class", "button")
+	}
+	else {
+		left.setAttribute("class", "button")
+		right.setAttribute("class", "button")
+	}
+},
+incrementBrightness = function() {
+	let slider = document.getElementById("bg-slider");
+	let value = parseFloat(slider.value);
+	let result = (value + 0.1).toFixed(2);
+	if(value >= 2)
+		return;
+	if (result > 2)
+		result = 2;
+	PlayClick();
+	slider.value = (result).toString();
+	setBackgroundBrightness(result);
+},
+decrementBrightness = function() {
+	let slider = document.getElementById("bg-slider");
+	let value = parseFloat(slider.value);
+	let result = (value - 0.1).toFixed(2);
+	if (value <= 0)
+		return;
+	if (result < 0)
+		result = 0;
+	PlayClick();
+	slider.value = (result).toString();
+	setBackgroundBrightness(result);
+},
+resetOptions = function() {
+	PlayClick();
+	setTimeout(()=> {
+		setCookie("bgLum", "1", 4096);
+		setCookie("background", "1", 4096);
+		setCookie("theme", "clean", 4096);
+		window.location.reload();
+	}, 200);
+},
 PlayClick = function() {
 	(new Audio("./audio/click.mp3")).play()
 },
@@ -679,6 +902,7 @@ openBetaPopup = function(version) {
 	currentMenu = Menu.BetaPopup,
 	document.getElementById(currentMenu.id).style.display = "block",
 	resizeMenuElements();
+	disableThemeButton();
 },
 closeBetaPopup = function() {
 	PlayClick(),
@@ -687,6 +911,7 @@ closeBetaPopup = function() {
 	currentMenu = Menu.Select,
 	document.getElementById(currentMenu.id).style.display = "block",
 	resizeMenuElements();
+	enableThemeButton();
 },
 openMods = function() {
 	PlayClick(),
@@ -695,6 +920,7 @@ openMods = function() {
 	document.getElementById(currentMenu.id).style.display = "block",
 	currentModPage = ModPages.selection,
 	resizeMenuElements();
+	disableThemeButton();
 },
 ModSelector = function(version) {
 	PlayClick();
@@ -841,7 +1067,9 @@ resizeFromWindow = function(element) {
 },
 resizeMenuElements = function() {
 	resizeFromWindow(document.getElementById("version-select")),
-	resizeFromWindow(document.getElementById("mod-select"));
+	resizeFromWindow(document.getElementById("mod-select")),
+	resizeFromWindow(document.getElementById("beta-popup")),
+	resizeFromWindow(document.getElementById("theme-popup"));
 },
 window.onresize = function() {
 	resizeMenuElements()
@@ -850,10 +1078,22 @@ window.onload = function() {
 	document.addEventListener("contextmenu", function(e) {
 		e.preventDefault();
 	}, false);
-	resizeMenuElements()
-	getSavedBackground()
+	resizeMenuElements();
 },
-generatePages()
+isFunction = function(foo) {
+	return foo instanceof Function;
+},
+getSavedBackground(),
+getSavedTheme(),
+getSavedBrightness(),
+generatePages();
+
+(() => {
+	let slider = document.getElementById("bg-slider");
+	slider.oninput = function() {
+		setBackgroundBrightness(parseFloat(this.value));
+	};
+})();
 </script>
 
 </html>
