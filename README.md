@@ -97,14 +97,12 @@ added in with no extra configuration required!
 Lets scratch the surface shall we?
 
 - MAJOR Performance Enhancements
-- VSync
 - FPS Display
-- Save Encryption
 - Walk Speed Configuration
 - Mailing System
-- Phaser 2.20.0 Port
 - Holliday Events
-- Google Authentication and Autosaves
+- Google Login
+- Multiplayer
 
 Yep, you heard that right, that's just scratching the surface. This version is based off of 1-50-0, which is already one of the most
 stable and reliable of the Prodigy versions, so you can probably imagine what months of hard work can do to something like that.
