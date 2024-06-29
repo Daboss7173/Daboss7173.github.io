@@ -67,6 +67,7 @@ These are the versions of the game that currently support modpacks at the moment
 - 1-10-0
 - 1-30-0
 - 1-50-0
+- 1-70-0
 - 2-45-0
 
 ## Version Choice Breakdown!
