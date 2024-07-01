@@ -164,17 +164,62 @@ class ModHandler {
 			"C+": .85,
 			C: .775,
 			"C-": .7
-		}, Prodigy.Attacks.prototype.calculateDamage = function(e, t, i, a, s) {
-			Util.isDefined(a) || (a = 0);
-			var r = 0;
-			Util.isDefined(e) && Util.isDefined(e.data.damage) && (r = e.data.damage);
-			var o = e.data.element,
-				n = i.getElement(),
-				l = 0,
-				d = "B",
-				h = 0;
-			return Util.isDefined(t) ? (l = t.getLevel() - 1 + 1, d = Util.isDefined(t.source) && Util.isDefined(t.source.power) ? t.source.power : d, h = (l + 10) / 11) : h = 1, "Glacial Shield" !== e.data.name && 0 === i.modifiers.ignoreElement && (this.isStrong(o, n) ? r += 4 : this.isWeak(o, n) && 0 >= (r -= 3) && (r = 2)), r = Math.floor(10 * r * s * h * Prodigy.Creature.ATTACK_BONUS[d]), Math.max(Math.floor(r + (Util.isDefined(a) ? a : 0)), 0)
-		}, Prodigy.Creature.HEALTH_CURVE = {
+		},
+		Prodigy.Attacks.prototype.calculateDamage = function ( atk, src, target, mod, comboBonus )
+		{
+			if ( !Util.isDefined(mod) )
+			{
+				mod = 0;
+			}
+
+			var damage = 0;
+			if ( Util.isDefined(atk) && Util.isDefined(atk.data.damage) )
+			{ damage = atk.data.damage; }
+
+			var typeA = atk.data.element;
+			var typeB = target.getElement();
+			let damageLevelMultiplier, damageBonusMultiplier;
+			
+			// Damage rebalancing
+			if (Util.isDefined(src)) {
+				if (!Util.isDefined(src.source))
+					damageBonusMultiplier = Prodigy.Creature.ATTACK_BONUS["B"];
+				else
+					damageBonusMultiplier = Prodigy.Creature.ATTACK_BONUS[src.source.power];
+				let level = parseInt(src.getLevel());
+				damageLevelMultiplier = (level + 10) / 11;
+				console.log("Level damage bonus: " + damageLevelMultiplier);
+				console.log("Power damage multiplier: " + damageBonusMultiplier);
+			} else {
+				console.log("Attack source data unavailable - using default damage system.");
+				damageLevelMultiplier = damageBonusMultiplier = 1;
+			}
+
+			// Weakness/strength
+
+			if ( atk.data.name !== 'Glacial Shield' && target.modifiers.ignoreElement === 0 )
+			{
+				if ( this.isStrong(typeA, typeB) )
+				{
+					console.log("powerful attack")
+					damage += 4;
+				}
+				else if ( this.isWeak(typeA, typeB) )
+				{
+					console.log("weak attack")
+					damage -= 3;
+					if ( damage <= 0 )
+					{
+						damage = 2;
+					}
+				}
+			}
+			console.log("Base damage: " + damage)
+			damage = Math.floor(damage * 10 * comboBonus * damageLevelMultiplier * damageBonusMultiplier);
+			console.log("Final damage: " + damage)
+			return Math.max(Math.floor(damage + ((Util.isDefined(mod)) ? mod : 0)), 0);
+		}
+		Prodigy.Creature.HEALTH_CURVE = {
 			"A+": 31,
 			A: 29,
 			"A-": 28,
@@ -226,11 +271,11 @@ class ModHandler {
 			}
 			return Util.isDefined(a) && this.clearUnprocessedLevelEvents(), this.updated = !0, s
 		}, Attack.prototype.damage = function() {
-			this.calculateDamageDone(), Util.isDefined(this.atk.type) && "epic-attack" === this.atk.type && (Util.isDefined(this.epic) ? this.game.prodigy.effects.characterImage(this.game.prodigy.create.sprite(this.epic.x, this.epic.y - 50, "battle", "text-epic-attack")) : this.game.prodigy.effects.characterImage(this.game.prodigy.create.sprite(this.source.x, this.source.y - 50, "battle", "text-epic-attack"))), this.potionActive = !1, this.shieldTime = 0;
+			this.calculateDamageDone(), Util.isDefined(this.atk.data.type) && "epic-attack" === this.atk.data.type && (Util.isDefined(this.epic) ? this.game.prodigy.effects.characterImage(this.game.prodigy.create.sprite(this.epic.x, this.epic.y - 50, "battle", "text-epic-attack")) : this.game.prodigy.effects.characterImage(this.game.prodigy.create.sprite(this.source.x, this.source.y - 50, "battle", "text-epic-attack"))), this.potionActive = !1, this.shieldTime = 0;
 			var e = 0;
 			if (Util.isDefined(this.target.source.modifiers) && Util.isDefined(this.target.source.modifiers.potion)) {
 				var t = Items.getItemData("item", this.target.source.modifiers.potion);
-				if (Util.isDefined(t.subType) && "elemental" === t.subType && Util.isDefined(this.atk.element) && ("all" === t.element || this.atk.element === t.element)) {
+				if (Util.isDefined(t.subType) && "elemental" === t.subType && Util.isDefined(this.atk.data.element) && ("all" === t.element || this.atk.data.element === t.element)) {
 					this.potionActive = !0, this.shieldTime = 1e3, e = t.potency * this.damageDone / 10, this.damageDone -= Math.round(e);
 					var i = this.target.sprites.add(this.game.prodigy.create.sprite(0, -75, "icons", "potion-buff-" + t.element));
 					i.anchor.setTo(.5, .5);
@@ -241,20 +286,24 @@ class ModHandler {
 							x: 4,
 							y: 4
 						}, 1300, Phaser.Easing.Quadratic.Out);
-					a.start(), s.onComplete.add((function() {
+					a.start(), s.onComplete.add(function() {
 						i.destroy()
-					}), i), s.start()
+					}, i), s.start()
 				}
 			}
 			var r = "",
-				o = Math.random() < this.CRITICAL_HIT_THRESHOLD + this.criticalThresholdBonus && "PVP" !== this.game.state.current || "epic-attack" === this.atk.type;
-			o ? (this.damageDone = Math.round(1.5 * this.damageDone), this.game.prodigy.effects.characterImage(this.game.prodigy.create.sprite(this.target.x, this.source.y + 50, "battle", "text-critical-hit"), 1e3 + this.shieldTime), r = "critical-hit") : r = "normal-hit", this.processStars(), this.lastTargetHp = this.target.source.getCurrentHearts(), this.target.source.changeCurrentHearts(-this.damageDone), this.game.prodigy.effects.characterText("-" + this.damageDone, this.target.x, this.source.y, this.shieldTime, {
+				n = Math.random() < this.CRITICAL_HIT_THRESHOLD + this.criticalThresholdBonus && "PVP" !== this.game.state.current || "epic-attack" === this.atk.data.type;
+			n ? (this.damageDone = Math.round(1.5 * this.damageDone), this.game.prodigy.effects.characterImage(this.game.prodigy.create.sprite(this.target.x, this.source.y + 50, "battle", "text-critical-hit"), 1e3 + this.shieldTime), r = "critical-hit") : r = "normal-hit", this.processStars(), this.lastTargetHp = this.target.source.getCurrentHearts(), this.target.source.changeCurrentHearts(-this.damageDone), this.target.source.getCurrentHearts() <= 0 && this.target.source.modifiers.barrier === !0 ? (this.game.prodigy.effects.characterText("-999", this.target.x, this.source.y, this.shieldTime, {
 				size: 1,
 				font: "battle",
 				mono: 44
-			}), this.game.prodigy.audio.playSFX(Prodigy.Controller.AudioController.SFX_PACKS.BATTLE, r);
-			var n = null;
-			o || 0 !== this.target.source.modifiers.ignoreElement || (this.game.prodigy.attacks.isStrong(this.atk.element, this.target.source.getElement()) ? n = "Powerful!" : this.game.prodigy.attacks.isWeak(this.atk.element, this.target.source.getElement()) && (n = "Weak...")), Util.isDefined(n) && (this.delayComplete = !0, this.game.prodigy.effects.characterText(n, this.target.x, this.source.y + 50, 1e3 + this.shieldTime))
+			}), n = !0, this.game.prodigy.effects.characterImage(this.game.prodigy.create.sprite(this.target.x, this.source.y + 50, "battle", "text-critical-hit"), 1e3 + this.shieldTime), r = "critical-hit", this.target.retreat()) : this.game.prodigy.effects.characterText("-" + this.damageDone, this.target.x, this.source.y, this.shieldTime, {
+				size: 1,
+				font: "battle",
+				mono: 44
+			}), this.target.source.modifiers.barrier === !0 && (Util.isNullOrUndefined(this.target.barrierSprite) || (this.target.source.getCurrentHearts() > 0 ? this.target.doBarrierAnimation() : this.target.doBarrierBreakAnimation())), this.game.prodigy.audio.playSFX(Prodigy.Controller.AudioController.SFX_PACKS.BATTLE, r);
+			var o = null;
+			n || 0 !== this.target.source.modifiers.ignoreElement || (this.game.prodigy.attacks.isStrong(this.atk.data.element, this.target.source.getElement()) ? o = "Powerful!" : this.game.prodigy.attacks.isWeak(this.atk.data.element, this.target.source.getElement()) && (o = "Weak...")), Util.isDefined(o) && (this.delayComplete = !0, this.game.prodigy.effects.characterText(o, this.target.x, this.source.y + 50, 1e3 + this.shieldTime))
 		}
 	}
 }
