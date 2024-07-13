@@ -7,6 +7,7 @@
 		
 		Walk Speed 					Daboss7173
 		Fast Game Speed				Daboss7173
+		Classic Faces				Daboss7173
 	
 	Written by: Daboss7173
 	Github: https://github.com/Daboss7173/Daboss7173.github.io
@@ -39,6 +40,9 @@ class ModHandler {
 			}, {
 				id: "FastGameSpeed",
 				patch: "initFastGameSpeedMod"
+			}, {
+				id: "ClassicFaces",
+				patch: "initClassicFaceMod"
 			}]
 	}
 	
@@ -131,6 +135,53 @@ class ModHandler {
 		}, window.setGameSpeed(3), setTimeout((() => {
 			this.info('Use "setGameSpeed(speed)" to change the game speed at anytime.')
 		}), 1e3)
+	}
+	
+	initClassicFaceMod() {
+		var assets = this.game.assets.getAssetMap();
+		assets.heads.base = "assets/images/";
+		
+		PlayerContainer.getAssets = function(e, t, a) {
+			var i = new Array;
+			t = 1 === t ? "reduced" : "normal", Util.isDefined(a) || (a = e.equipment.getEquipment("outfit")), i.push(Util.isDefined(a) ? t + "-outfit-" + e.appearance.getGender() + "-" + a : null), i.push(t + "/face/" + e.appearance.getSkinColor()), i.push(t + "-hair-" + e.appearance.getGender() + "-" + e.appearance.getHairStyle() + "-" + e.appearance.getHairColor()), i.push(t + "/eyes/" + e.appearance.getGender() + "/" + e.appearance.getEyeColor()), i.push(Util.isDefined(e.equipment.getEquipment("hat")) ? t + "-hat-" + e.equipment.getEquipment("hat") : null), i.push("normal" === t && Util.isDefined(e.equipment.getEquipment("weapon")) ? t + "-weapon-" + e.equipment.getEquipment("weapon") : null), Util.isDefined(i[0]) || (i[0] = t + "-outfit-" + e.appearance.getGender() + "-13");
+			var s = e.equipment.getEquipment("hat");
+			if (Util.isDefined(s)) {
+				var t = Items.getItemData("hat", s).type;
+				("cover" === t || "wrap" === t) && (i[2] = null)
+			}
+			return i
+		}
+		
+		PlayerContainer.prototype.setup = function() {
+			if (Util.isDefined(this.assets)) {
+				this.sprites.removeAll(!0);
+				var e = this.assets[0],
+					t = this.assets[1],
+					a = this.assets[2],
+					i = this.assets[3],
+					s = this.assets[4],
+					r = this.assets[5],
+					o = this.game.assets.getImageBounds(e),
+					n = Math.floor(-(64 * this.setScale - o[0])),
+					h = -o[3];
+				let isFemale = this.source.appearance.getGender() === "female";
+				if (null !== t && (this.face = new Sprite(this.game, n - (o[0] - (1 != this.setScale ? 93 : 44)), h - (o[1] - (1 != this.setScale ? 82 : 48)), "heads", t), this.sprites.add(this.face), this.faceY = this.face.y), null !== i && (this.eyes = new Sprite(this.game, n - (o[0] - (1 != this.setScale ? (isFemale ? 115 : 113) : 55)), h - (o[1] - (1 != this.setScale ? (isFemale ? 117 : 114) : (isFemale ? 66 : 65))), "heads", i), this.sprites.add(this.eyes), this.eyesY = this.eyes.y), null !== a) {
+					var l = this.game.assets.getImageBounds(a);
+					this.hair = new Sprite(this.game, n - (o[0] - l[0]), h - (o[1] - l[1]), a), this.sprites.add(this.hair), this.hairY = this.hair.y, this.hair.animations.add("walk", [0, 1, 2, 3], 10, !0, !0), this.hair.animations.add("stand", [0], 10, !0, !0), this.hair.animations.add("fct", [0], 10, !0, !0)
+				}
+				if (null !== s) {
+					var p = this.game.assets.getImageBounds(s);
+					this.hat = new Sprite(this.game, n - (o[0] - p[0]), h - (o[1] - p[1]), s), this.sprites.add(this.hat), this.hatY = this.hat.y;
+					var d = Items.getItemData("hat", this.source.equipment.getEquipment("hat"));
+					Util.isDefined(d) && 1 === d.standAnimation ? (this.hat.animations.add("walk", [0, 1, 2, 3], 10, !0, !0), this.hat.animations.add("stand", [0, 1, 2, 3], 10, !0, !0), this.hat.animations.add("fct", [0, 1, 2, 3], 10, !0, !0)) : (this.hat.animations.add("walk", [0, 1, 2, 3], 10, !0, !0), this.hat.animations.add("stand", [0], 10, !0, !0), this.hat.animations.add("fct", [0], 10, !0, !0))
+				}
+				if (this.body = new Sprite(this.game, n, h, e), this.sprites.add(this.body), this.animWalk = this.body.animations.add("walk", [0, 1, 2, 3, 4, 5, 6, 7], 10, !0, !0), this.animStand = this.body.animations.add("stand", [8, 9, 10, 11, 12, 13, 14, 15], 10, !0, !0), this.animFunction = this.body.animations.add("fct", [16, 17, 18, 19, 20, 21, 22, 23], 10, !0, !0), this.animFunction.onComplete.add(this.functionComplete.bind(this)), null !== r) {
+					var u = this.game.assets.getImageBounds(r);
+					this.weapon = new Sprite(this.game, n - (o[0] - u[0]), h - (o[1] - u[1]), r), this.sprites.add(this.weapon), this.weaponY = this.weapon.y
+				}
+				this.transforming && this.showSmoke(), this.sprites.callAll("play", null, "stand"), this.mode = 1, this.complete = !0, this.loading = !1
+			}
+		}
 	}
 }
 
