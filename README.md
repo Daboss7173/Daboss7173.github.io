@@ -85,6 +85,30 @@ The first page in the version selection is all of the earlier versions, the furt
 looking for a super early experience, select something from the first page. If you're looking for something a bit later, try the second
 page. The possibilities are truely endless.
 
+Full version list:
+- 1.10.0 (Earliest version)
+- 1.11.0 (Clockwork Town update)
+- 1.16.5 (UI updates)
+- 1.17.0 (Updated Tutorial and Firefly Forest)
+- 1.18.2 (Pumpkinfest Update)
+- 1.22.1 (Updated Lamplight Town and Shiverchill Mountain)
+- 1.24.0 (Massive UI changes and Bounty Board added)
+- 1.30.0 (Updated Skywatch, Dyno Dig Oasis, and Bonfire Spire)
+- 1.35.2 (Tutorial, Lamplight Town, and Pumpkinfest updated)
+- 1.37.0 (Winterfest and Epics)
+- 1.39.0 (Massive battle update)
+- 1.46.2 (Potions, Epics Subspace, and Epic Attacks added)
+- 1.50.0 (New sound effects and Twilight Wheel)
+- 1.51.0 (New wizard appearance update)
+- 1.60.0 (Shipwreck Shore and Starlight Festival update)
+- 1.70.0 (Dark Tower and Winterfest update)
+- 1.80.0 (Battle team update)
+- 1.90.0 (Springfest update)
+- 2.6.0 (Massive battle revision)
+- 2.20.0 (Academy and a bunch of fonts updated)
+- 2.30.0 (Winterfest update)
+- 2.45.0 (All Out Attack update)
+
 ## Prodigy Definitive Edition
 
 Prodigy Definitive Edition is a little different. This is meant to be the successor to Prodigy Reborn, but a bit beefier and with a
