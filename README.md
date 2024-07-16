@@ -109,6 +109,9 @@ Full version list:
 - 2.30.0 (Winterfest update)
 - 2.45.0 (All Out Attack update)
 
+Beta version list:
+- 3.15.3 -UNSTABLE- (Harmony Island update)
+
 ## Prodigy Definitive Edition
 
 Prodigy Definitive Edition is a little different. This is meant to be the successor to Prodigy Reborn, but a bit beefier and with a
