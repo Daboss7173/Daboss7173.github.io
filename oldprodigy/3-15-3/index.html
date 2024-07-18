@@ -22,7 +22,7 @@
         
         body {
             margin: 0;
-            background-color: #55B9A7;
+            background: linear-gradient(0deg, rgba(248,208,148,1) 0%, rgba(252,181,118,1) 100%);
             height: 100%;
             padding: 0 !important;
         }
@@ -138,7 +138,7 @@
         #first-loading-screen {
             height: 100%;
             width: 100%;
-            background-color: #55B9A7;
+            background: linear-gradient(0deg, rgba(248,208,148,1) 0%, rgba(252,181,118,1) 100%);
         }
         
         .alert {
@@ -151,6 +151,125 @@
             background-color: #FCF8E3;
             color: #8A6D3B;
         }
+		
+		.login-options-panel {
+			border: 41px solid;
+			border-image-source: url("https://sso-cdn.prodigygame.com/assets/paper-fe78c9177081028bf4f3948e3da96d36858e5b8d396b563d2254843849e3eedf.png");
+			border-image-slice: 40 fill;
+			border-image-width: 40px;
+			border-image-repeat: repeat;
+			width: 100%;
+			max-width: 360px;
+			margin: 240px auto;
+			border-width: 29px;
+			display: none;
+		}
+		
+		.game-button {
+			display: inline-flex;
+			justify-content: stretch;
+			padding: 0;
+			box-sizing: border-box;
+			border: 2px solid #363636;
+			box-shadow: 0 4px 0 0 rgba(37,21,45,0.5);
+			border-radius: 7px;
+			font-family: 'Paytone One', sans-serif;
+			text-decoration: none;
+			min-width: 300px;
+			margin-bottom: 10px;
+		}
+
+		.game-button:hover {
+			text-decoration: none
+		}
+
+		.game-button-inner {
+			flex-grow: 1;
+			text-align: center;
+			margin: 4px;
+			border-radius: 4px;
+			padding: 6px 10px 7px;
+			font-size: 18px;
+			line-height: 1.22
+		}
+		
+		.game-button-sapphire {
+			background-image: linear-gradient(to bottom, #45a0dd, #4162c0);
+			color: white
+		}
+
+		.game-button-sapphire .game-button-inner {
+			background-image: linear-gradient(to bottom, #4887d5, #45addc)
+		}
+
+		.game-button-sapphire:hover {
+			background-image: linear-gradient(to bottom, #477cc9, #303c80);
+			color: white
+		}
+
+		.game-button-sapphire:hover .game-button-inner {
+			background-image: linear-gradient(to bottom, #3659ba, #4883cf)
+		}
+
+		.game-button-sapphire:active {
+			background-image: linear-gradient(to bottom, #4160be, #45abdb)
+		}
+
+		.game-button-sapphire:active .game-button-inner {
+			background-image: linear-gradient(to bottom, #45b1de, #4886d4)
+		}
+
+		.game-button-emerald {
+			background-image: linear-gradient(to bottom, #68d376, #236366);
+			color: white
+		}
+
+		.game-button-emerald .game-button-inner {
+			background-image: linear-gradient(to bottom, #1da38a, #5ec38a)
+		}
+
+		.game-button-emerald:hover {
+			background-image: linear-gradient(to bottom, #1b9885, #174160);
+			color: white
+		}
+
+		.game-button-emerald:hover .game-button-inner {
+			background-image: linear-gradient(to bottom, #266a70, #1d9c88)
+		}
+
+		.game-button-emerald:active {
+			background-image: linear-gradient(to bottom, #226167, #77d686)
+		}
+
+		.game-button-emerald:active .game-button-inner {
+			background-image: linear-gradient(to bottom, #66c88a, #1a967d)
+		}
+		
+		.game-button-ruby {
+			background-image: linear-gradient(to bottom, #ef6c6e, #ab3a49);
+			color: white
+		}
+
+		.game-button-ruby .game-button-inner {
+			background-image: linear-gradient(to bottom, #dd4658, #f67071)
+		}
+
+		.game-button-ruby:hover {
+			background-image: linear-gradient(to bottom, #d0445a, #6e2843);
+			color: white
+		}
+
+		.game-button-ruby:hover .game-button-inner {
+			background-image: linear-gradient(to bottom, #ad3e4f, #ee475b)
+		}
+
+		.game-button-ruby:active {
+			background-image: linear-gradient(to bottom, #a33240, #f86668)
+		}
+
+		.game-button-ruby:active .game-button-inner {
+			background-image: linear-gradient(to bottom, #f87272, #dc4456)
+		}
     </style>
 </head>
 <script id="advanced-modal-base-template" type="text/x-handlebars-template">
@@ -293,24 +412,36 @@
     <div id='first-loading-screen'></div>
 
     <div id="game-wrapper">
-        <div id='game-container'>
+        <div id='game-container'></div>
 
-        </div>
+        <div id='external-content'></div>
 
-        <div id='external-content'>
+        <div id='external-ui'></div>
 
-        </div>
-
-        <div id='external-ui'>
-
-        </div>
-
-        <div id='notices'>
-        </div>
+        <div id='notices'></div>
 
         <div id='popups'>
             <div id='dynamic-popups'></div>
         </div>
+		
+		<div id="login-container" style="
+			position: absolute;
+			top: 0px;
+			height: 100%;
+			width: 100%;
+		">
+			<div id='login-options' class="login-options-panel">
+				<button name="button" type="submit" class="game-button game-button-sapphire" onclick="LoadCharacter();">
+				  <span class="game-button-inner">Load Character</span>
+				</button>
+				<button name="button" type="submit" class="game-button game-button-ruby" onclick="OfflineMode();">
+				  <span class="game-button-inner">Offline Mode</span>
+				</button>
+				<button name="button" type="submit" class="game-button game-button-emerald" onclick="NewWizard();">
+				  <span class="game-button-inner">New Wizard</span>
+				</button>
+			</div>
+		</div>
     </div>
 
     <div id="membership-flow"></div>
