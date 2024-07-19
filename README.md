@@ -110,7 +110,7 @@ Full version list:
 - 2.45.0 (All Out Attack update)
 
 Beta version list:
-- 3.15.3 -UNSTABLE- (Harmony Island update)
+- 3.15.3 (Harmony Island update)
 
 ## Prodigy Definitive Edition
 
