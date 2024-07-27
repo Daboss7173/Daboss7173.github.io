@@ -3,7 +3,10 @@
 <html>
 	<head>
 	<title>Old Prodigy (Version Selection)</title>
+	<meta name="description" content="Old Prodigy is back and better than ever! Relive the original experience with a plethora of versions you can choose from!">
+
 	<link rel="icon" type="image/x-icon" href="../assets/favicon.png">
+
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:regular,bold&amp;subset=Latin">
 	</head>
 	
@@ -63,15 +66,15 @@
 		user-select: none;
 		position: fixed;
 		display: block;
-		top: 185px;
-		left: 11px;
+		top: 195px;
+		left: 0px;
 	}
 	
 	.select-panel .textbox {
 		user-select: none;
 		position: fixed;
 		display: block;
-		top: 140px;
+		top: 104px;
 		width: 540px;
 		font: 14pt "Arial";
 		text-align: center;
@@ -256,7 +259,15 @@
 		</div>
 			
 		<a id="mod-select-apply"  onclick="StartGameMod(currentModVersion)" class="button-disabled" style="bottom: 104px; right: 24px; position: absolute; display: block;" draggable="false">
-			<img alt="Start" src="./images/Apply.png" draggable="false">
+			<img alt="Apply" src="./images/Apply.png" draggable="false">
+		</a>
+		
+		<!-- These buttons will enable automatically whenever multiple pages are detected -->
+		<a class="button-disabled" id="mod-previous" onclick="PreviousModPage()" style="top: 134px; left: 24px;" draggable="false">
+			<img alt="Previous page" src="./images/Previous.png" draggable="false">
+		</a>
+		<a class="button-disabled" id="mod-next" onclick="NextModPage()" style="top: 134px; right: 24px;" draggable="false">
+			<img alt="Next page" src="./images/Next.png" draggable="false">
 		</a>
 		
 	</div>
@@ -268,6 +279,10 @@
 			<img alt="Version Select" src="./images/MenuPanel-Banner.png" draggable="false">
 		</div>
 		
+		<div class="textbox" id="select-mod-version" draggable="false">
+			<img src="./images/VersionSelectText.png" alt="Choose a version to play!" draggable="false">
+		</div>
+		
 		<div id="select-panel-overlay" class="overlay" draggable="false">
 			<img src="./images/MenuPanel-Overlay.png" draggable="false">
 			
@@ -275,13 +290,13 @@
 			
 		</div>
 		
-		<div class="button" style="top: 112px; left: 24px;" draggable="false">
+		<div class="button" style="top: 134px; left: 24px;" draggable="false">
 			<a onclick="ExitSelection()" draggable="false">
-				<img alt="Go back" src="./images/Close.png" draggable="false">
+				<img alt="Close" src="./images/Close.png" draggable="false">
 			</a>
 		</div>
 		
-		<div class="button" style="top: 112px; right: 24px;" draggable="false" draggable="false">
+		<div class="button" style="top: 134px; right: 24px;" draggable="false" draggable="false">
 			<a onclick="openMods()" draggable="false" draggable="false">
 				<img alt="Mods" src="./images/Mods.png" draggable="false">
 			</a>
@@ -289,7 +304,7 @@
 		
 		<div class="button" style="bottom: 104px; left: 24px;" draggable="false">
 			<a onclick="BackPage()" draggable="false">
-				<img alt="Go back" src="./images/Back.png" draggable="false">
+				<img alt="Previous page" src="./images/Previous.png" draggable="false">
 			</a>
 		</div>
 		
@@ -531,7 +546,64 @@ ModList = [{
 		alt: "Imitation Titan",
 		url: "ImitationTitan"
 	}]
-}];
+}/* USED TO TEST MULTIPAGE FUNCTIONALITY | DO NOT USE IN PRODUCTION
+, {
+	custom: true,
+	button: {
+		src: "./images/TESTING.png",
+		alt: "Testing",
+		ver: "TEST1"
+	},
+	mods: []
+}, {
+	custom: true,
+	button: {
+		src: "./images/TESTING.png",
+		alt: "Testing",
+		ver: "TEST2"
+	},
+	mods: []
+}, {
+	custom: true,
+	button: {
+		src: "./images/TESTING.png",
+		alt: "Testing",
+		ver: "TEST3"
+	},
+	mods: []
+}, {
+	custom: true,
+	button: {
+		src: "./images/TESTING.png",
+		alt: "Testing",
+		ver: "TEST4"
+	},
+	mods: []
+}, {
+	custom: true,
+	button: {
+		src: "./images/TESTING.png",
+		alt: "Testing",
+		ver: "TEST5"
+	},
+	mods: []
+}, {
+	custom: true,
+	button: {
+		src: "./images/TESTING.png",
+		alt: "Testing",
+		ver: "TEST6"
+	},
+	mods: []
+}, {
+	custom: true,
+	button: {
+		src: "./images/TESTING.png",
+		alt: "Testing",
+		ver: "TEST7"
+	},
+	mods: []
+}*/];
 Backgrounds = [
 	{
 		element: "background-1",
@@ -817,7 +889,7 @@ EnterGame = function(version) {
 BackPage = function() {
 	PlayClick(),
 	document.getElementById(Pages[currentPage].id).style.display = "none";
-	if (currentPage == 0) {
+	if (currentPage === 0) {
 		currentPage = Pages.length - 1
 	} else {
 		currentPage -= 1
@@ -828,13 +900,35 @@ BackPage = function() {
 NextPage = function() {
 	PlayClick(),
 	document.getElementById(Pages[currentPage].id).style.display = "none";
-	if (currentPage == Pages.length - 1) {
+	if (currentPage === Pages.length - 1) {
 		currentPage = 0
 	} else {
 		currentPage += 1
 	};
 	document.getElementById(Pages[currentPage].id).style.display = "block"
 	resizeMenuElements();
+},
+PreviousModPage = function() {
+	if (currentModPage !== ModPages.select[selectedModPage] || ModPages.select.length < 2)
+		return;
+		
+	if (selectedModPage === 0) {
+		selectedModPage = ModPages.select.length - 1
+	} else {
+		selectedModPage--
+	};
+	ModSelector();
+},
+NextModPage = function() {
+	if (currentModPage !== ModPages.select[selectedModPage] || ModPages.select.length < 2)
+		return;
+		
+	if (selectedModPage === ModPages.select.length - 1) {
+		selectedModPage = 0
+	} else {
+		selectedModPage++
+	};
+	ModSelector();
 },
 betaConfirmCallback = null,
 openBetaPopup = function(version) {
@@ -861,6 +955,8 @@ openMods = function() {
 	currentMenu = Menu.ModSelect,
 	document.getElementById(currentMenu.id).style.display = "block",
 	currentModPage = ModPages.select[selectedModPage],
+	document.getElementById("mod-previous").className = ModPages.select.length > 1 ? "button" : "button-disabled",
+	document.getElementById("mod-next").className =  ModPages.select.length > 1 ? "button" : "button-disabled",
 	resizeMenuElements();
 	disableThemeButton();
 },
@@ -876,6 +972,8 @@ ModSelector = function(version) {
 		document.getElementById("select-mod-play").style.display = "block",
 		//document.getElementById("mod-select-apply").style.display = "block",
 		document.getElementById("mod-select-apply").className = "button-disabled",
+		document.getElementById("mod-previous").className = "button-disabled",
+		document.getElementById("mod-next").className = "button-disabled",
 		DeselectAllMods(version)
 	} else {
 		DeselectAllMods(currentModVersion),
@@ -887,7 +985,9 @@ ModSelector = function(version) {
 		document.getElementById("select-mod-version").style.display = "block",
 		document.getElementById("select-mod-play").style.display = "none",
 		//document.getElementById("mod-select-apply").style.display = "none",
-		document.getElementById("mod-select-apply").className = "button-disabled"
+		document.getElementById("mod-select-apply").className = "button-disabled",
+		document.getElementById("mod-previous").className = ModPages.select.length > 1 ? "button" : "button-disabled",
+		document.getElementById("mod-next").className =  ModPages.select.length > 1 ? "button" : "button-disabled"
 	};
 	resizeMenuElements();
 },
@@ -955,26 +1055,26 @@ generateModPages = function() {
 		document.getElementById("mod-select-overlay").appendChild(page);
 		return page;
 	}
-	function addVersionButton(ver, curPage, column, columnLength) {
+	function addVersionButton(ver, curPage, column, columnLength, useCustom) {
 		let currentButton = document.createElement("a"),
 			panelImage = document.createElement("img"),
 			textImage = document.createElement("img"),
 			textElement = document.createElement("div");
 			
-		currentButton.setAttribute("onclick", "ModSelector(\"" + Versions[ver.baseVersion].ver + "\")");
+		currentButton.setAttribute("onclick", "ModSelector(\"" + (useCustom ? (ver.button.ver) : (Versions[ver.baseVersion].ver)) + "\")");
 		currentButton.setAttribute("class", "button");
 		currentButton.setAttribute("draggable", false);
 		currentButton.style.position = "absolute";
 		currentButton.style.top = (10 + (columnLength * 50)) + "px";
 		if (column == 1) {
-			currentButton.style.left = "12px"
+			currentButton.style.left = "23px"
 		} else {
-			currentButton.style.right = "12px"
+			currentButton.style.right = "23px"
 		};
 		panelImage.setAttribute("src", "./images/ModSelectButton.png");
 		panelImage.setAttribute("draggable", false)
-		textImage.setAttribute("src", Versions[ver.baseVersion].src);
-		textImage.setAttribute("alt", Versions[ver.baseVersion].alt);
+		textImage.setAttribute("src", (useCustom ? (ver.button.src) : (Versions[ver.baseVersion].src)));
+		textImage.setAttribute("alt", (useCustom ? (ver.button.alt) : (Versions[ver.baseVersion].alt)));
 		textImage.setAttribute("draggable", false);
 		textElement.setAttribute("class", "intext");
 		textElement.setAttribute("draggable", false);
@@ -983,25 +1083,25 @@ generateModPages = function() {
 		currentButton.appendChild(textElement);
 		curPage.appendChild(currentButton);
 	}
-	function addModButton(ver, mod, curPage, column, columnLength) {
+	function addModButton(ver, mod, curPage, column, columnLength, useCustom) {
 		let currentButton = document.createElement("a"),
 			panelImage = document.createElement("img"),
 			textImage = document.createElement("img"),
 			textElement = document.createElement("div");
 			
-		currentButton.setAttribute("onclick", "AddMod(\"" + ver.mods[mod].url + "\", \"" + Versions[ver.baseVersion].ver + "\")");
+		currentButton.setAttribute("onclick", "AddMod(\"" + ver.mods[mod].url + "\", \"" + (useCustom ? (ver.button.ver) : (Versions[ver.baseVersion].ver)) + "\")");
 		currentButton.setAttribute("class", "button");
 		currentButton.setAttribute("draggable", false);
 		currentButton.style.position = "absolute";
 		currentButton.style.top = (10 + (columnLength * 50)) + "px";
 		if (column == 1) {
-			currentButton.style.left = "12px"
+			currentButton.style.left = "23px"
 		} else {
-			currentButton.style.right = "12px"
+			currentButton.style.right = "23px"
 		};
 		panelImage.setAttribute("src", "./images/ModSelectButton.png");
 		panelImage.setAttribute("draggable", false);
-		panelImage.setAttribute("id", "mod-" + ver.mods[mod].url + "-" + Versions[ver.baseVersion].ver);
+		panelImage.setAttribute("id", "mod-" + ver.mods[mod].url + "-" + (useCustom ? (ver.button.ver) : (Versions[ver.baseVersion].ver)));
 		textImage.setAttribute("src", ver.mods[mod].src);
 		textImage.setAttribute("alt", ver.mods[mod].alt);
 		textImage.setAttribute("draggable", false);
@@ -1011,7 +1111,7 @@ generateModPages = function() {
 		currentButton.appendChild(panelImage);
 		currentButton.appendChild(textElement);
 		curPage.appendChild(currentButton);
-		logProgress("New " + Versions[ver.baseVersion].ver + " mod: " + ver.mods[mod].url);
+		logProgress("New " + (useCustom ? (ver.button.ver) : (Versions[ver.baseVersion].ver)) + " mod: " + ver.mods[mod].url);
 	}
 	logProgress("Start generating...");
 	let column = 3;
@@ -1028,18 +1128,19 @@ generateModPages = function() {
 			curPage = addVersionPage();
 			column = 1;
 		};
-		addVersionButton(ver, curPage, column, columnLength);
-		let verPage = addModPage(Versions[ver.baseVersion].ver);
+		let useCustom = !!ver.custom;
+		addVersionButton(ver, curPage, column, columnLength, useCustom);
+		let verPage = addModPage((useCustom ? (ver.button.ver) : (Versions[ver.baseVersion].ver)));
 		let verCol = 1;
 		let verColLength = 0;
 		verPage.style.display = "none";
 		for (var mod = 0; mod < ver.mods.length; mod++) {
 			if (verColLength > 4) {
 				verColLength = 0;
-				verColn++;
-				logProgress("New " + Versions[ver.baseVersion].ver + " column: " + column);
+				verCol++;
+				logProgress("New " + (useCustom ? (ver.button.ver) : (Versions[ver.baseVersion].ver)) + " column: " + column);
 			};
-			addModButton(ver, mod, verPage, verCol, verColLength);
+			addModButton(ver, mod, verPage, verCol, verColLength, useCustom);
 			verColLength++;
 		}
 		columnLength++;
@@ -1087,9 +1188,9 @@ newVersionButton = function(i, pageId, columnLength, column) {
 	currentButton.style.position = "absolute";
 	currentButton.style.top = (10 + (columnLength * 50)) + "px";
 	if (column == 1) {
-		currentButton.style.left = "12px"
+		currentButton.style.left = "23px"
 	} else {
-		currentButton.style.right = "12px"
+		currentButton.style.right = "23px"
 	};
 	panelImage.setAttribute("src", "./images/ModSelectButton.png");
 	panelImage.setAttribute("draggable", false)
