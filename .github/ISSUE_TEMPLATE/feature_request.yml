@@ -34,10 +34,11 @@ body:
         - Something super awesome from a fork you play
         - A new Prodigy version
         - Other
-      validations:
-        required: true
+    validations:
+      required: true
   - type: checkboxes
     attributes:
+      label: I agree to the following:
       options:
         - label: By checking this box, I confirm that this issue is NOT about adding a new Prodigy version.
           required: true
