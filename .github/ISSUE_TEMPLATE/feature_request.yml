@@ -24,3 +24,22 @@ body:
       placeholder: Accidental tiktok dance.
     validations:
       required: false
+  - type: dropdown
+    attributes:
+      label: Type of suggestion
+      description: Select which type of feature request you're submitting.
+      options:
+        - New Prodigy Definitive Edition feature
+        - New modpack
+        - Something super awesome from a fork you play
+        - A new Prodigy version
+        - Other
+      validations:
+        required: true
+  - type: checkboxes
+    attributes:
+      options:
+        - label: By checking this box, I confirm that this issue is NOT about adding a new Prodigy version.
+          required: true
+        - label: By checking this box, I confirm that I haven't already made an issue about the topic being presented in this issue.
+          required: true
