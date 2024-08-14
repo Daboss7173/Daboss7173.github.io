@@ -28,7 +28,6 @@ body:
     attributes:
       label: Type of suggestion
       description: Select which type of feature request you're submitting.
-      placeholder: Your suggestion type
       options:
         - New Prodigy Definitive Edition feature
         - New modpack
