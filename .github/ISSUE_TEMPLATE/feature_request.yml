@@ -1,5 +1,5 @@
 name: Feature request
-description: A **short and sweet** title for your issue that **briefly** describes what your issue is about. If you wanna go into detail, do that below.
+description: You have a cool new idea or an already fully baked mod you would like to be featured!
 title: "*Coolest title ever*"
 labels: Suggestion
 body:
@@ -28,10 +28,12 @@ body:
     attributes:
       label: Type of suggestion
       description: Select which type of feature request you're submitting.
+      placeholder: Your suggestion type
       options:
         - New Prodigy Definitive Edition feature
         - New modpack
         - Something super awesome from a fork you play
+        - Something you made by yourself
         - A new Prodigy version
         - Other
     validations:
@@ -44,3 +46,4 @@ body:
           required: true
         - label: By checking this box, I confirm that I haven't already made an issue about the topic being presented in this issue.
           required: true
+        - label: By checking this box, I confirm that this issue template is being used to suggest a feature, not report a bug, and that if I want to make a bug report, I should not be using this issue template.
