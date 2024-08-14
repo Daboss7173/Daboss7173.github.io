@@ -1,13 +1,13 @@
 name: Feature request
-description: Request a new feature to be added to the site!
-title: "*Feature request title here*"
+description: A **short and sweet** title for your issue that **briefly** describes what your issue is about. If you wanna go into detail, do that below.
+title: "*Coolest title ever*"
 labels: Suggestion
 body:
-  - type: input
+  - type: textarea
     attributes:
       label: What would you like to add?
-      description: (stop asking me to add new versions, i'll do that in my own time.)
-      placeholder: Something cool!
+      description: Here you can go into detail about what you want to add. Try to be specific enough so that I can tell what it is you want to change. (stop asking me to add new versions, i'll do that in my own time.)
+      placeholder: Make a wizard do the dab because it's so trendy and would never be outdated ever.
     validations:
       required: true
   - type: textarea
@@ -20,5 +20,7 @@ body:
   - type: textarea
     attributes:
       label: Any additional context (optional)
+      description: Any other important context you may have for making this issue.
+      placeholder: Accidental tiktok dance.
     validations:
       required: false
