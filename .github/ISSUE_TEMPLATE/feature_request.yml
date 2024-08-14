@@ -38,7 +38,7 @@ body:
       required: true
   - type: checkboxes
     attributes:
-      label: I agree to the following:
+      label: I agree to the following
       options:
         - label: By checking this box, I confirm that this issue is NOT about adding a new Prodigy version.
           required: true
