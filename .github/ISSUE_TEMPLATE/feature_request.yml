@@ -43,6 +43,7 @@ body:
       options:
         - label: By checking this box, I confirm that this issue is NOT about adding a new Prodigy version.
           required: true
-        - label: By checking this box, I confirm that I haven't already made an issue about the topic being presented in this issue.
+        - label: By checking this box, I confirm that there are no open issues about this suggestion.
           required: true
         - label: By checking this box, I confirm that this issue template is being used to suggest a feature, not report a bug, and that if I want to make a bug report, I should not be using this issue template.
+          required: true
