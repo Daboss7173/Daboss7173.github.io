@@ -8,6 +8,9 @@ var GameMods = {
 	}, {
 		id: "RebalancedBattles",
 		patch: "initRebalancedBattleMod"
+	}, {
+		id: "ImitationTitan",
+		patch: "initImitationTitanMod"
 	}]
 };
 class ModHandler {
@@ -305,6 +308,30 @@ class ModHandler {
 			var o = null;
 			n || 0 !== this.target.source.modifiers.ignoreElement || (this.game.prodigy.attacks.isStrong(this.atk.data.element, this.target.source.getElement()) ? o = "Powerful!" : this.game.prodigy.attacks.isWeak(this.atk.data.element, this.target.source.getElement()) && (o = "Weak...")), Util.isDefined(o) && (this.delayComplete = !0, this.game.prodigy.effects.characterText(o, this.target.x, this.source.y + 50, 1e3 + this.shieldTime))
 		}
+	}
+	initImitationTitanMod() {
+		let titan = {
+			id: 1314,
+			assetID: 2,
+			health: 4e6,
+			startDate: "2023-10-01T21:40:01.408Z",
+			endDate: "2035-10-01T21:40:01.408Z",
+			processed: !1,
+			hits: 0,
+			rewardData: null,
+			maxHealth: 4e6,
+			rewards: [100, 60, 30, 10],
+			increments: [71, 40, 20, 10]
+		};
+		this.game.prodigy.network.getTitan = function(t, a, o) {
+			return Util.isDefined(a) && a.call(this, titan), titan
+		}, this.game.prodigy.network.getTitans = function(t, a) {
+			return Util.isDefined(t) && t.call(this, titan), titan
+		}, this.game.prodigy.network.hitTitan = function(a, o, r) {
+			return Util.isDefined(o) && o.call(this, titan)
+		}, this.game.prodigy.titansNetworkHandler.isTitanAlive = function() {
+			return !0
+		}, this.game.prodigy.titansNetworkHandler.titan = titan;
 	}
 }
 
