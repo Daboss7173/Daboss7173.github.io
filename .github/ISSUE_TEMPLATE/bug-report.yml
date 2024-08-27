@@ -9,6 +9,12 @@ body:
       description: Tell me what went happened in-game that was not expected.
     validations:
       required: true
+  - type: input
+    attributes:
+      label: Which version?
+      description: Which Old Prodigy version did this bug occur in?
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: How can I reproduce this?
