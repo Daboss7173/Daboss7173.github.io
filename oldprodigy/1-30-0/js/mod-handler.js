@@ -1,3 +1,17 @@
+/*
+	Simple mod interface for Prodigy version 1-30-0
+	
+	Installed Mods: 
+		
+		| Mod Name |               	| Author |
+		
+		Walk Speed 					Daboss7173
+		Fast Game Speed				Daboss7173
+		Classic Faces				Daboss7173
+	
+	Written by: Daboss7173
+	Github: https://github.com/Daboss7173/Daboss7173.github.io
+*/
 var GameMods = {
 	available: [{
 		id: "WalkSpeed",
@@ -5,6 +19,9 @@ var GameMods = {
 	}, {
 		id: "FastGameSpeed",
 		patch: "initFastGameSpeedMod"
+	}, {
+		id: "ClassicFaces",
+		patch: "initClassicFaceMod"
 	}]
 };
 class ModHandler {
@@ -150,6 +167,67 @@ class ModHandler {
 		}, window.setGameSpeed(3), setTimeout((() => {
 			this.info('Use "setGameSpeed(speed)" to change the game speed at anytime.')
 		}), 1e3)
+	}
+	
+	initClassicFaceMod() {
+		var assets = this.game.prodigy.assets._assets;
+		assets.heads.base = "https://daboss7173.github.io/oldprodigy/1-30-0/assets/images/";
+		
+		Prodigy.Container.PlayerContainer.getAssets = function (e, t, i, a) {
+			var s = new Array;
+			t = 1 === t ? "reduced" : "normal", a ? s.push(null) : (Util.isDefined(i) || (i = e.equipment.getEquipment("outfit")), s.push(Util.isDefined(i) ? t + "-outfit-" + e.appearance.getGender() + "-" + i : null)), s.push(t + "/face/" + e.appearance.getSkinColor()), s.push(t + "-hair-" + e.appearance.getGender() + "-" + e.appearance.getHairStyle() + "-" + e.appearance.getHairColor()), s.push(t + "/eyes/" + e.appearance.getGender() + "/" + e.appearance.getEyeColor()), s.push(Util.isDefined(e.equipment.getEquipment("hat")) ? t + "-hat-" + e.equipment.getEquipment("hat") : null), s.push("normal" === t && Util.isDefined(e.equipment.getEquipment("weapon")) ? t + "-weapon-" + e.equipment.getEquipment("weapon") : null), Util.isDefined(s[0]) || (s[0] = t + "-outfit-" + e.appearance.getGender() + "-13");
+			var r = e.equipment.getEquipment("hat");
+			if (Util.isDefined(r)) {
+				var t = Items.getItemData("hat", r).type;
+				("cover" === t || "wrap" === t) && (s[2] = null), "mask" === t && (s[2] = null)
+			}
+			return s
+		}
+		
+		Prodigy.Container.PlayerContainer.prototype.setup = function (e, t) {
+			if (t && Util.isDefined(this.assets) && Util.isDefined(this.game)) {
+				this.sprites.removeAll(!0);
+				var i = this.assets[0],
+					a = this.assets[1],
+					s = this.assets[2],
+					r = this.assets[3],
+					o = this.assets[4],
+					n = this.assets[5],
+					h = this.game.prodigy.assets.getImageBounds(i),
+					l = Math.floor(-(64 * this.setScale - h[0])),
+					d = -h[3];
+				let isFemale = this.source.appearance.getGender() === "female";
+				if (null !== a && (this.face = this.game.prodigy.create.sprite(l - (h[0] - (1 != this.setScale ? 93 : 44)), d - (h[1] - (1 != this.setScale ? 82 : 48)), "heads", a), this.face.inputEnabled = !0, this.face.events.onInputDown.add(this.playerClicked.bind(this)), this.sprites.add(this.face), this.faceY = this.face.y), null !== r && (this.eyes = this.game.prodigy.create.sprite(l - (h[0] - (1 != this.setScale ? (isFemale ? 115 : 113) : 55)), d - (h[1] - (1 != this.setScale ? (isFemale ? 117 : 114) : (isFemale ? 66 : 65))), "heads", r), this.sprites.add(this.eyes), this.eyesY = this.eyes.y), null !== s) {
+					var p = this.game.prodigy.assets.getImageBounds(s);
+					this.hair = this.game.prodigy.create.sprite(l - (h[0] - p[0]), d - (h[1] - p[1]), s), this.sprites.add(this.hair), this.hairY = this.hair.y, this.hair.animations.add("walk", [0, 1, 2, 3], 10, !0, !0), this.hair.animations.add("stand", [0], 10, !0, !0), this.hair.animations.add("fct", [0], 10, !0, !0)
+				}
+				if (!this.headOnly) {
+					this.body = this.game.prodigy.create.sprite(l, d, i), this.body.inputEnabled = !0, this.body.events.onInputDown.add(this.playerClicked.bind(this)), this.sprites.add(this.body), this.animWalk = this.body.animations.add("walk", [0, 1, 2, 3, 4, 5, 6, 7], 10, !0, !0), this.animStand = this.body.animations.add("stand", [8, 9, 10, 11, 12, 13, 14, 15], 10, !0, !0);
+					try {
+						this.animFunction = this.body.animations.add("fct", [16, 17, 18, 19, 20, 21, 22, 23], 10, !0, !0), this.animFunction.onComplete.add(this.functionComplete.bind(this))
+					} catch (c) {}
+				}
+				if (null !== o) {
+					var g = this.game.prodigy.assets.getImageBounds(o);
+					this.hat = this.game.prodigy.create.sprite(l - (h[0] - g[0]), d - (h[1] - g[1]), o), this.sprites.add(this.hat), this.hatY = this.hat.y;
+					var u = Items.getItemData("hat", this.source.equipment.getEquipment("hat"));
+					if (Util.isDefined(u) && 1 === u.standAnimation) this.hat.animations.add("walk", [0, 1, 2, 3], 10, !0, !0), this.hat.animations.add("stand", [0, 1, 2, 3], 10, !0, !0), this.hat.animations.add("fct", [0, 1, 2, 3], 10, !0, !0);
+					else {
+						try {
+							this.hat.animations.add("walk", [0, 1, 2, 3], 10, !0, !0)
+						} catch (c) {
+							this.hat.animations.add("walk", [0], 10, !0, !0)
+						}
+						this.hat.animations.add("stand", [0], 10, !0, !0), this.hat.animations.add("fct", [0], 10, !0, !0)
+					}
+				}
+				if (null !== n && !this.headOnly) {
+					var y = this.game.prodigy.assets.getImageBounds(n);
+					this.weapon = this.game.prodigy.create.sprite(l - (h[0] - y[0]), d - (h[1] - y[1]), n), this.sprites.add(this.weapon), this.weaponY = this.weapon.y
+				}
+				this.transforming && this.showSmoke(), this.sprites.callAll("play", null, "stand"), this.mode = 1, Util.isDefined(this.loadedCallback) && this.loadedCallback(), this.complete = !0, this.loading = !1, console.log(this.sprites)
+			}
+		}
 	}
 }
 
