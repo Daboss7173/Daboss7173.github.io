@@ -33,5 +33,5 @@ body:
       options:
         - label: By checking this box, I confirm that this bug report is being made for a bug that occurred on THIS website (daboss7173.github.io / oldprodigy.onrender.com), and NOT XPMUser's website (xpmuser.github.io)
           required: true
-        - label: By checking this box, I confirm that this issue is not being used to report a problem with an existing feature, and not to suggest a new feature.
+        - label: By checking this box, I confirm that this issue is being used to report a problem with an existing feature, and not to suggest a new feature.
           required: true
