@@ -23,12 +23,17 @@ For more information about them, [click this link!](https://www.prodigygame.com/
 
 I am not associated with Prodigy Education or any associates/subsidiaries.
 
-IF there is a bug in this repository, be sure to make a well-formatted issue about it. I'll try to fix it as soon as I can.
-
 There are also various forks of this repository, you can check them out if you get the chance. I can not guarentee the quality of play
 as much as I can here, but I can say they have some cool stuff you might like.
 
 https://github.com/Daboss7173/Daboss7173.github.io/network/members
+
+If there is a bug in this repository, be sure to make a well-formatted issue about it. I'll try to fix it as soon as I can.
+
+Also, if there's a bug with a fork of this repository, make an issue on the fork. Please don't report other repositories on this
+repository. Save us both the headache.
+
+Oh, and if it's XPMUser's fork (which it probably is) you can report it on his [Discord Server](https://discord.gg/9HMtcgFQRc).
 
 
 ## How to play
