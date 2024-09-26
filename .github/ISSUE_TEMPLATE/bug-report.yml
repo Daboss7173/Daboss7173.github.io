@@ -23,7 +23,7 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: What did the console output?
+      label: What did the logs output? (press F12 or CTRL+SHIFT+J to see console logs)
       description: Even if there is no error in the console, you should still list whatever was logged when the bug occurred.
     validations:
       required: true
