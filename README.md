@@ -5,7 +5,7 @@ essentially turned into "The Old Prodigy Website" - so yeah.
 
 # Old Prodigy
 
-Yep, that's right. Prodigy Reborn is back in business!
+Yep, that's right. Prodigy Reborn is back and better than ever!
 
 This time is different though, rather than just one version, there are several versions that cover YEARS worth of updates and content
 from Prodigy's team! You can choose any one to try out based on your preferences, or several! The sky's the limit!
@@ -30,11 +30,13 @@ https://github.com/Daboss7173/Daboss7173.github.io/network/members
 
 If there is a bug in this repository, be sure to make a well-formatted issue about it. I'll try to fix it as soon as I can.
 
-Also, if there's a bug with a fork of this repository, make an issue on the fork. Please don't report other repositories on this
-repository. Save us both the headache.
+Also, if there's a bug with a fork of this repository, make an issue on the fork. Please do NOT report bugs from other repositories on 
+this repository. Save us both the headache.
 
-Oh, and if it's XPMUser's fork (which it probably is) you can report it on his [Discord Server](https://discord.gg/9HMtcgFQRc).
+Oh, and if it's XPMUser's fork you can report it on his [Discord Server](https://discord.gg/9HMtcgFQRc).
 
+Also, you shouldn't mix saves from different versions. I try to keep it as compatible as I can, but you'll usually lose some save data,
+so beware
 
 ## How to play
 
@@ -88,7 +90,7 @@ experience.
 
 The first page in the version selection is all of the earlier versions, the further you go, the later the versions you'll see. If you're
 looking for a super early experience, select something from the first page. If you're looking for something a bit later, try the second
-page. The possibilities are truely endless.
+page. 
 
 Full version list:
 - 1.10.0 (Earliest version)
@@ -97,7 +99,7 @@ Full version list:
 - 1.17.0 (Updated Tutorial and Firefly Forest)
 - 1.18.2 (Pumpkinfest Update)
 - 1.22.1 (Updated Lamplight Town and Shiverchill Mountain)
-- 1.24.0 (Massive UI changes and Bounty Board added)
+- 1.24.0 (Bounty Board update)
 - 1.30.0 (Updated Skywatch, Dyno Dig Oasis, and Bonfire Spire)
 - 1.35.2 (Tutorial, Lamplight Town, and Pumpkinfest updated)
 - 1.37.0 (Winterfest and Epics)
