@@ -138,6 +138,8 @@ Lets scratch the surface shall we?
 Yep, you heard that right, that's just scratching the surface. This version is based off of 1-50-0, which is already one of the most
 stable and reliable of the Prodigy versions, so you can probably imagine what months of hard work can do to something like that.
 
+[https://oldprodigy.onrender.com/play/](https://oldprodigy.onrender.com/play/)
+
 ## The other version
 
 There's one version I haven't mentioned yet, it is the least buggy out of all of these versions.
