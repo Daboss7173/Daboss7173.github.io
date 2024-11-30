@@ -33,10 +33,10 @@ If there is a bug in this repository, be sure to make a well-formatted issue abo
 Also, if there's a bug with a fork of this repository, make an issue on the fork. Please do NOT report bugs from other repositories on 
 this repository. Save us both the headache.
 
-Oh, and if it's XPMUser's fork you can report it on his [Discord Server](https://discord.gg/9HMtcgFQRc).
+Oh, and if it's XPMUser's fork you can report it [here](https://github.com/XPMUser/XPMUser.github.io/issues).
 
 Also, you shouldn't mix saves from different versions. I try to keep it as compatible as I can, but you'll usually lose some save data,
-so beware
+so beware!
 
 ## How to play
 
