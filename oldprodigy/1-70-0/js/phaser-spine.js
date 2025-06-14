@@ -1,11 +1,3378 @@
 /*!
- * phaser-spine - version 3.0.10 
+ * phaser-spine - version 2.2.0 
  * Spine plugin for Phaser.io!
  *
  * OrangeGames
- * Build at 30-11-2017
+ * Build at 19-09-2016
  * Released under MIT License 
  */
 
-var spine={radDeg:180/Math.PI,degRad:Math.PI/180,Float32Array:"undefined"==typeof Float32Array?Array:Float32Array,Uint32Array:"undefined"==typeof Uint32Array?Array:Uint32Array,Uint16Array:"undefined"==typeof Uint16Array?Array:Uint16Array};spine.temp=new spine.Float32Array(2),spine.BoneData=function(a,b){this.name=a,this.parent=b},spine.BoneData.prototype={length:0,x:0,y:0,rotation:0,scaleX:1,scaleY:1,inheritScale:!0,inheritRotation:!0},spine.BlendMode={normal:0,additive:1,multiply:2,screen:3},spine.SlotData=function(a,b){this.name=a,this.boneData=b},spine.SlotData.prototype={r:1,g:1,b:1,a:1,attachmentName:null,blendMode:spine.BlendMode.normal},spine.IkConstraintData=function(a){this.name=a,this.bones=[]},spine.IkConstraintData.prototype={target:null,bendDirection:1,mix:1},spine.TransformConstraintData=function(a){this.name=a},spine.TransformConstraintData.prototype={bone:null,target:null,translateMix:1,x:0,y:0},spine.Bone=function(a,b,c){this.data=a,this.skeleton=b,this.parent=c,this.setToSetupPose()},spine.Bone.yDown=!1,spine.Bone.prototype={x:0,y:0,rotation:0,scaleX:1,scaleY:1,a:0,b:0,worldX:0,c:0,d:0,worldY:0,worldSignX:1,worldSignY:1,update:function(){this.updateWorldTransform(this.x,this.y,this.rotation,this.scaleX,this.scaleY)},updateWorldTransformWith:function(){this.updateWorldTransform(this.x,this.y,this.rotation,this.scaleX,this.scaleY)},updateWorldTransform:function(a,b,c,d,e){this.appliedRotation=c,this.appliedScaleX=d,this.appliedScaleY=e,c*=spine.degRad;var f=Math.cos(c),g=Math.sin(c),h=f*d,i=-g*e,j=g*d,k=f*e,l=this.parent;if(!l){var m=this.skeleton;return m.flipX&&(a=-a,h=-h,i=-i),m.flipY!=spine.Bone.yDown&&(b=-b,j=-j,k=-k),this.a=h,this.b=i,this.c=j,this.d=k,this.worldX=a,this.worldY=b,this.worldSignX=d<0?-1:1,void(this.worldSignY=e<0?-1:1)}var n=l.a,o=l.b,p=l.c,q=l.d;if(this.worldX=n*a+o*b+l.worldX,this.worldY=p*a+q*b+l.worldY,this.worldSignX=l.worldSignX*(d<0?-1:1),this.worldSignY=l.worldSignY*(e<0?-1:1),this.data.inheritRotation&&this.data.inheritScale)this.a=n*h+o*j,this.b=n*i+o*k,this.c=p*h+q*j,this.d=p*i+q*k;else{if(this.data.inheritRotation){n=1,o=0,p=0,q=1;do{c=l.appliedRotation*spine.degRad,f=Math.cos(c),g=Math.sin(c);var r=n*f+o*g;if(o=n*-g+o*f,n=r,r=p*f+q*g,q=p*-g+q*f,p=r,!l.data.inheritRotation)break;l=l.parent}while(l);this.a=n*h+o*j,this.b=n*i+o*k,this.c=p*h+q*j,this.d=p*i+q*k}else if(this.data.inheritScale){n=1,o=0,p=0,q=1;do{c=l.appliedRotation*spine.degRad,f=Math.cos(c),g=Math.sin(c);var s=l.appliedScaleX,t=l.appliedScaleY,u=f*s,v=-g*t,w=g*s,x=f*t,r=n*u+o*w;if(o=n*v+o*x,n=r,r=p*u+q*w,q=p*v+q*x,p=r,s<0&&(c=-c),f=Math.cos(-c),g=Math.sin(-c),r=n*f+o*g,o=n*-g+o*f,n=r,r=p*f+q*g,q=p*-g+q*f,p=r,!l.data.inheritScale)break;l=l.parent}while(l);this.a=n*h+o*j,this.b=n*i+o*k,this.c=p*h+q*j,this.d=p*i+q*k}else this.a=h,this.b=i,this.c=j,this.d=k;this.skeleton.flipX&&(this.a=-this.a,this.b=-this.b),this.skeleton.flipY!=spine.Bone.yDown&&(this.c=-this.c,this.d=-this.d)}},setToSetupPose:function(){var a=this.data;this.x=a.x,this.y=a.y,this.rotation=a.rotation,this.scaleX=a.scaleX,this.scaleY=a.scaleY},getWorldRotationX:function(){return Math.atan2(this.c,this.a)*spine.radDeg},getWorldRotationY:function(){return Math.atan2(this.d,this.b)*spine.radDeg},getWorldScaleX:function(){return Math.sqrt(this.a*this.a+this.b*this.b)*this.worldSignX},getWorldScaleY:function(){return Math.sqrt(this.c*this.c+this.d*this.d)*this.worldSignY},worldToLocal:function(a){var b=a[0]-this.worldX,c=a[1]-this.worldY,d=this.a,e=this.b,f=this.c,g=this.d,h=1/(d*g-e*f);return a[0]=b*g*h-c*e*h,a[1]=c*d*h-b*f*h,a},localToWorld:function(a){var b=a[0],c=a[1];return a[0]=b*this.a+c*this.b+this.worldX,a[1]=b*this.c+c*this.d+this.worldY,a}},spine.Slot=function(a,b){this.data=a,this.bone=b,this.attachmentVertices=new spine.Float32Array,this.setToSetupPose()},spine.Slot.prototype={r:1,g:1,b:1,a:1,_attachmentTime:0,attachment:null,setAttachment:function(a){this.attachment!=a&&(this.attachment=a,this._attachmentTime=this.bone.skeleton.time,this.attachmentVertices.length=0)},setAttachmentTime:function(a){this._attachmentTime=this.bone.skeleton.time-a},getAttachmentTime:function(){return this.bone.skeleton.time-this._attachmentTime},setToSetupPose:function(){var a=this.data;if(this.r=a.r,this.g=a.g,this.b=a.b,this.a=a.a,a.attachmentName){for(var b=this.bone.skeleton.data.slots,c=0,d=b.length;c<d;c++)if(b[c]==a){this.attachment=null,this.setAttachment(this.bone.skeleton.getAttachmentBySlotIndex(c,a.attachmentName));break}}else this.setAttachment(null)}},spine.IkConstraint=function(a,b){this.data=a,this.mix=a.mix,this.bendDirection=a.bendDirection,this.bones=[];for(var c=0,d=a.bones.length;c<d;c++)this.bones[c]=b.findBone(a.bones[c].name);this.target=b.findBone(a.target.name)},spine.IkConstraint.prototype={apply:function(){this.update()},update:function(){var a=this.target,b=this.bones;switch(b.length){case 1:spine.IkConstraint.apply1(b[0],a.worldX,a.worldY,this.mix);break;case 2:spine.IkConstraint.apply2(b[0],b[1],a.worldX,a.worldY,this.bendDirection,this.mix)}}},spine.IkConstraint.apply1=function(a,b,c,d){var e=a.parent?a.parent.getWorldRotationX():0,f=a.rotation,g=Math.atan2(c-a.worldY,b-a.worldX)*spine.radDeg-e;a.worldSignX!=a.worldSignY!=(a.skeleton.flipX!=(a.skeleton.flipY!=spine.Bone.yDown))&&(g=360-g),g>180?g-=360:g<-180&&(g+=360),a.updateWorldTransform(a.x,a.y,f+(g-f)*d,a.appliedScaleX,a.appliedScaleY)},spine.IkConstraint.apply2=function(a,b,c,d,e,f){if(0!=f){var g,h,i,j=a.x,k=a.y,l=a.appliedScaleX,m=a.appliedScaleY;l<0?(l=-l,g=180,i=-1):(g=0,i=1),m<0&&(m=-m,i=-i);var n=b.x,o=b.y,p=b.appliedScaleX,q=Math.abs(l-m)<=1e-4;q||0==o||(b.worldX=a.a*n+a.worldX,b.worldY=a.c*n+a.worldY,o=0),p<0?(p=-p,h=180):h=0;var r,s,t,u,v=a.parent;if(v){var w=v.a,x=v.b,y=v.c,z=v.d,A=1/(w*z-x*y),B=v.worldX,C=v.worldY,D=c-B,E=d-C;r=(D*z-E*x)*A-j,s=(E*w-D*y)*A-k,D=b.worldX-B,E=b.worldY-C,t=(D*z-E*x)*A-j,u=(E*w-D*y)*A-k}else r=c-j,s=d-k,t=b.worldX-j,u=b.worldY-k;var F,G,H=Math.sqrt(t*t+u*u),I=b.data.length*p;a:if(q){I*=l;var J=(r*r+s*s-H*H-I*I)/(2*H*I);J<-1?J=-1:J>1&&(J=1),G=Math.acos(J)*e;var w=H+I*J,K=I*Math.sin(G);F=Math.atan2(s*w-r*K,r*w+s*K)}else{var w=l*I,x=m*I,L=Math.atan2(s,r),M=w*w,N=x*x,O=H*H,P=r*r+s*s,Q=N*O+M*P-M*N,R=-2*N*H,S=N-M,z=R*R-4*S*Q;if(z>=0){var T=Math.sqrt(z);R<0&&(T=-T),T=-(R+T)/2;var U=T/S,V=Q/T,W=Math.abs(U)<Math.abs(V)?U:V;if(W*W<=P){var E=Math.sqrt(P-W*W)*e;F=L-Math.atan2(E,W),G=Math.atan2(E/m,(W-H)/l);break a}}var X=0,Y=Number.MAX_VALUE,Z=0,$=0,_=0,aa=0,ba=0,ca=0,D=H+w,da=D*D;da>aa&&(_=0,aa=da,ba=D),D=H-w,da=D*D,da<Y&&(X=Math.PI,Y=da,Z=D);var ea=Math.acos(-w*H/(M-N));D=w*Math.cos(ea)+H;var E=x*Math.sin(ea);da=D*D+E*E,da<Y&&(X=ea,Y=da,Z=D,$=E),da>aa&&(_=ea,aa=da,ba=D,ca=E),P<=(Y+aa)/2?(F=L-Math.atan2($*e,Z),G=X*e):(F=L-Math.atan2(ca*e,ba),G=_*e)}var fa=Math.atan2(o,n)*i;F=(F-fa)*spine.radDeg+g,G=(G+fa)*spine.radDeg*i+h,F>180?F-=360:F<-180&&(F+=360),G>180?G-=360:G<-180&&(G+=360);var ga=a.rotation;a.updateWorldTransform(j,k,ga+(F-ga)*f,a.appliedScaleX,a.appliedScaleY),ga=b.rotation,b.updateWorldTransform(n,o,ga+(G-ga)*f,b.appliedScaleX,b.appliedScaleY)}},spine.TransformConstraint=function(a,b){this.data=a,this.translateMix=a.translateMix,this.x=a.x,this.y=a.y,this.bone=b.findBone(a.bone.name),this.target=b.findBone(a.target.name)},spine.TransformConstraint.prototype={apply:function(){this.update()},update:function(){var a=this.translateMix;if(a>0){var b=spine.temp;b[0]=x,b[1]=y,this.target.localToWorld(b);var c=this.bone;c.worldX+=(b[0]-c.worldX)*a,c.worldY+=(b[1]-c.worldY)*a}}},spine.Skin=function(a){this.name=a,this.attachments={}},spine.Skin.prototype={addAttachment:function(a,b,c){this.attachments[a+":"+b]=c},getAttachment:function(a,b){return this.attachments[a+":"+b]},_attachAll:function(a,b){for(var c in b.attachments){var d=c.indexOf(":"),e=parseInt(c.substring(0,d)),f=c.substring(d+1),g=a.slots[e];if(g.attachment&&g.attachment.name==f){var h=this.getAttachment(e,f);h&&g.setAttachment(h)}}}},spine.Animation=function(a,b,c){this.name=a,this.timelines=b,this.duration=c},spine.Animation.prototype={apply:function(a,b,c,d,e){d&&0!=this.duration&&(c%=this.duration,b>0&&(b%=this.duration));for(var f=this.timelines,g=0,h=f.length;g<h;g++)f[g].apply(a,b,c,e,1)},mix:function(a,b,c,d,e,f){d&&0!=this.duration&&(c%=this.duration,b>0&&(b%=this.duration));for(var g=this.timelines,h=0,i=g.length;h<i;h++)g[h].apply(a,b,c,e,f)}},spine.Animation.binarySearch=function(a,b,c){var d=0,e=Math.floor(a.length/c)-2;if(!e)return c;for(var f=e>>>1;;){if(a[(f+1)*c]<=b?d=f+1:e=f,d==e)return(d+1)*c;f=d+e>>>1}},spine.Animation.binarySearch1=function(a,b){var c=0,d=a.length-2;if(!d)return 1;for(var e=d>>>1;;){if(a[e+1]<=b?c=e+1:d=e,c==d)return c+1;e=c+d>>>1}},spine.Animation.linearSearch=function(a,b,c){for(var d=0,e=a.length-c;d<=e;d+=c)if(a[d]>b)return d;return-1},spine.Curves=function(a){var b=19*(a-1);this.curves=new spine.Float32Array(b),this.curves.length=b},spine.Curves.prototype={setLinear:function(a){this.curves[19*a]=0},setStepped:function(a){this.curves[19*a]=1},setCurve:function(a,b,c,d,e){var f=.1,g=f*f,h=g*f,i=3*f,j=3*g,k=6*g,l=6*h,m=2*-b+d,n=2*-c+e,o=3*(b-d)+1,p=3*(c-e)+1,q=b*i+m*j+o*h,r=c*i+n*j+p*h,s=m*k+o*l,t=n*k+p*l,u=o*l,v=p*l,w=19*a,x=this.curves;x[w++]=2;for(var y=q,z=r,A=w+19-1;w<A;w+=2)x[w]=y,x[w+1]=z,q+=s,r+=t,s+=u,t+=v,y+=q,z+=r},getCurvePercent:function(a,b){b=b<0?0:b>1?1:b;var c=this.curves,d=19*a,e=c[d];if(0===e)return b;if(1==e)return 0;d++;for(var f=0,g=d,h=d+19-1;d<h;d+=2)if(f=c[d],f>=b){var i,j;return d==g?(i=0,j=0):(i=c[d-2],j=c[d-1]),j+(c[d+1]-j)*(b-i)/(f-i)}var k=c[d-1];return k+(1-k)*(b-f)/(1-f)}},spine.RotateTimeline=function(a){this.curves=new spine.Curves(a),this.frames=new spine.Float32Array(2*a),this.frames.length=2*a},spine.RotateTimeline.prototype={boneIndex:0,getFrameCount:function(){return this.frames.length/2},setFrame:function(a,b,c){a*=2,this.frames[a]=b,this.frames[a+1]=c},apply:function(a,b,c,d,e){var f=this.frames;if(!(c<f[0])){var g=a.bones[this.boneIndex];if(c>=f[f.length-2]){for(var h=g.data.rotation+f[f.length-1]-g.rotation;h>180;)h-=360;for(;h<-180;)h+=360;return void(g.rotation+=h*e)}var i=spine.Animation.binarySearch(f,c,2),j=f[i-1],k=f[i],l=1-(c-k)/(f[i-2]-k);l=this.curves.getCurvePercent(i/2-1,l);for(var h=f[i+1]-j;h>180;)h-=360;for(;h<-180;)h+=360;for(h=g.data.rotation+(j+h*l)-g.rotation;h>180;)h-=360;for(;h<-180;)h+=360;g.rotation+=h*e}}},spine.TranslateTimeline=function(a){this.curves=new spine.Curves(a),this.frames=new spine.Float32Array(3*a),this.frames.length=3*a},spine.TranslateTimeline.prototype={boneIndex:0,getFrameCount:function(){return this.frames.length/3},setFrame:function(a,b,c,d){a*=3,this.frames[a]=b,this.frames[a+1]=c,this.frames[a+2]=d},apply:function(a,b,c,d,e){var f=this.frames;if(!(c<f[0])){var g=a.bones[this.boneIndex];if(c>=f[f.length-3])return g.x+=(g.data.x+f[f.length-2]-g.x)*e,void(g.y+=(g.data.y+f[f.length-1]-g.y)*e);var h=spine.Animation.binarySearch(f,c,3),i=f[h-2],j=f[h-1],k=f[h],l=1-(c-k)/(f[h+-3]-k);l=this.curves.getCurvePercent(h/3-1,l),g.x+=(g.data.x+i+(f[h+1]-i)*l-g.x)*e,g.y+=(g.data.y+j+(f[h+2]-j)*l-g.y)*e}}},spine.ScaleTimeline=function(a){this.curves=new spine.Curves(a),this.frames=new spine.Float32Array(3*a),this.frames.length=3*a},spine.ScaleTimeline.prototype={boneIndex:0,getFrameCount:function(){return this.frames.length/3},setFrame:function(a,b,c,d){a*=3,this.frames[a]=b,this.frames[a+1]=c,this.frames[a+2]=d},apply:function(a,b,c,d,e){var f=this.frames;if(!(c<f[0])){var g=a.bones[this.boneIndex];if(c>=f[f.length-3])return g.scaleX+=(g.data.scaleX*f[f.length-2]-g.scaleX)*e,void(g.scaleY+=(g.data.scaleY*f[f.length-1]-g.scaleY)*e);var h=spine.Animation.binarySearch(f,c,3),i=f[h-2],j=f[h-1],k=f[h],l=1-(c-k)/(f[h+-3]-k);l=this.curves.getCurvePercent(h/3-1,l),g.scaleX+=(g.data.scaleX*(i+(f[h+1]-i)*l)-g.scaleX)*e,g.scaleY+=(g.data.scaleY*(j+(f[h+2]-j)*l)-g.scaleY)*e}}},spine.ColorTimeline=function(a){this.curves=new spine.Curves(a),this.frames=new spine.Float32Array(5*a),this.frames.length=5*a},spine.ColorTimeline.prototype={slotIndex:0,getFrameCount:function(){return this.frames.length/5},setFrame:function(a,b,c,d,e,f){a*=5,this.frames[a]=b,this.frames[a+1]=c,this.frames[a+2]=d,this.frames[a+3]=e,this.frames[a+4]=f},apply:function(a,b,c,d,e){var f=this.frames;if(!(c<f[0])){var g,h,i,j;if(c>=f[f.length-5]){var k=f.length-1;g=f[k-3],h=f[k-2],i=f[k-1],j=f[k]}else{var l=spine.Animation.binarySearch(f,c,5),m=f[l-4],n=f[l-3],o=f[l-2],p=f[l-1],q=f[l],r=1-(c-q)/(f[l-5]-q);r=this.curves.getCurvePercent(l/5-1,r),g=m+(f[l+1]-m)*r,h=n+(f[l+2]-n)*r,i=o+(f[l+3]-o)*r,j=p+(f[l+4]-p)*r}var s=a.slots[this.slotIndex];e<1?(s.r+=(g-s.r)*e,s.g+=(h-s.g)*e,s.b+=(i-s.b)*e,s.a+=(j-s.a)*e):(s.r=g,s.g=h,s.b=i,s.a=j)}}},spine.AttachmentTimeline=function(a){this.curves=new spine.Curves(a),this.frames=new spine.Float32Array(a),this.frames.length=a,this.attachmentNames=[],this.attachmentNames.length=a},spine.AttachmentTimeline.prototype={slotIndex:0,getFrameCount:function(){return this.frames.length},setFrame:function(a,b,c){this.frames[a]=b,this.attachmentNames[a]=c},apply:function(a,b,c,d,e){var f=this.frames;if(c<f[0])return void(b>c&&this.apply(a,b,Number.MAX_VALUE,null,0));b>c&&(b=-1);var g=c>=f[f.length-1]?f.length-1:spine.Animation.binarySearch1(f,c)-1;if(!(f[g]<b)){var h=this.attachmentNames[g];a.slots[this.slotIndex].setAttachment(h?a.getAttachmentBySlotIndex(this.slotIndex,h):null)}}},spine.EventTimeline=function(a){this.frames=new spine.Float32Array(a),this.frames.length=a,this.events=[],this.events.length=a},spine.EventTimeline.prototype={getFrameCount:function(){return this.frames.length},setFrame:function(a,b){this.frames[a]=b.time,this.events[a]=b},apply:function(a,b,c,d,e){if(d){var f=this.frames,g=f.length;if(b>c)this.apply(a,b,Number.MAX_VALUE,d,e),b=-1;else if(b>=f[g-1])return;if(!(c<f[0])){var h;if(b<f[0])h=0;else{h=spine.Animation.binarySearch1(f,b);for(var i=f[h];h>0&&f[h-1]==i;)h--}for(var j=this.events;h<g&&c>=f[h];h++)d[d.length]=j[h]}}}},spine.DrawOrderTimeline=function(a){this.frames=new spine.Float32Array(a),this.frames.length=a,this.drawOrders=[],this.drawOrders.length=a},spine.DrawOrderTimeline.prototype={getFrameCount:function(){return this.frames.length},setFrame:function(a,b,c){this.frames[a]=b,this.drawOrders[a]=c},apply:function(a,b,c,d,e){var f=this.frames;if(!(c<f[0])){var g;g=c>=f[f.length-1]?f.length-1:spine.Animation.binarySearch1(f,c)-1;var h=a.drawOrder,i=a.slots,j=this.drawOrders[g];if(j)for(var k=0,l=j.length;k<l;k++)h[k]=a.slots[j[k]];else for(var k=0,l=i.length;k<l;k++)h[k]=i[k]}}},spine.FfdTimeline=function(a){this.curves=new spine.Curves(a),this.frames=new spine.Float32Array(a),this.frames.length=a,this.frameVertices=[],this.frameVertices.length=a},spine.FfdTimeline.prototype={slotIndex:0,attachment:0,getFrameCount:function(){return this.frames.length},setFrame:function(a,b,c){this.frames[a]=b,this.frameVertices[a]=c},apply:function(a,b,c,d,e){var f=a.slots[this.slotIndex],g=f.attachment;if(g&&(g==this.attachment||g.inheritFFD&&g.parentMesh==this.attachment)){var h=this.frames;if(!(c<h[0])){var i=this.frameVertices,j=i[0].length,k=f.attachmentVertices;if(k.length!=j&&(f.attachmentVertices=k=new spine.Float32Array(j),e=1),c>=h[h.length-1]){var l=i[h.length-1];if(e<1)for(var m=0;m<j;m++)k[m]+=(l[m]-k[m])*e;else for(var m=0;m<j;m++)k[m]=l[m]}else{var n=spine.Animation.binarySearch1(h,c),o=h[n],p=1-(c-o)/(h[n-1]-o);p=this.curves.getCurvePercent(n-1,p<0?0:p>1?1:p);var q=i[n-1],r=i[n];if(e<1)for(var m=0;m<j;m++){var s=q[m];k[m]+=(s+(r[m]-s)*p-k[m])*e}else for(var m=0;m<j;m++){var s=q[m];k[m]=s+(r[m]-s)*p}}}}}},spine.IkConstraintTimeline=function(a){this.curves=new spine.Curves(a),this.frames=new spine.Float32Array(3*a),this.frames.length=3*a},spine.IkConstraintTimeline.prototype={ikConstraintIndex:0,getFrameCount:function(){return this.frames.length/3},setFrame:function(a,b,c,d){a*=3,this.frames[a]=b,this.frames[a+1]=c,this.frames[a+2]=d},apply:function(a,b,c,d,e){var f=this.frames;if(!(c<f[0])){var g=a.ikConstraints[this.ikConstraintIndex];if(c>=f[f.length-3])return g.mix+=(f[f.length-2]-g.mix)*e,void(g.bendDirection=f[f.length-1]);var h=spine.Animation.binarySearch(f,c,3),i=f[h+-2],j=f[h],k=1-(c-j)/(f[h+-3]-j);k=this.curves.getCurvePercent(h/3-1,k);var l=i+(f[h+1]-i)*k;g.mix+=(l-g.mix)*e,g.bendDirection=f[h+-1]}}},spine.SkeletonData=function(){this.bones=[],this.slots=[],this.skins=[],this.events=[],this.animations=[],this.ikConstraints=[],this.transformConstraints=[]},spine.SkeletonData.prototype={name:null,defaultSkin:null,width:0,height:0,version:null,hash:null,findBone:function(a){for(var b=this.bones,c=0,d=b.length;c<d;c++)if(b[c].name==a)return b[c];return null},findBoneIndex:function(a){for(var b=this.bones,c=0,d=b.length;c<d;c++)if(b[c].name==a)return c;return-1},findSlot:function(a){for(var b=this.slots,c=0,d=b.length;c<d;c++)if(b[c].name==a)return b[c];return null},findSlotIndex:function(a){for(var b=this.slots,c=0,d=b.length;c<d;c++)if(b[c].name==a)return c;return-1},findSkin:function(a){for(var b=this.skins,c=0,d=b.length;c<d;c++)if(b[c].name==a)return b[c];return null},findEvent:function(a){for(var b=this.events,c=0,d=b.length;c<d;c++)if(b[c].name==a)return b[c];return null},findAnimation:function(a){for(var b=this.animations,c=0,d=b.length;c<d;c++)if(b[c].name==a)return b[c];return null},findIkConstraint:function(a){for(var b=this.ikConstraints,c=0,d=b.length;c<d;c++)if(b[c].name==a)return b[c];return null},findTransformConstraints:function(a){for(var b=this.transformConstraints,c=0,d=b.length;c<d;c++)if(b[c].name==a)return b[c];return null}},spine.Skeleton=function(a){this.data=a,this.bones=[];for(var b=0,c=a.bones.length;b<c;b++){var d=a.bones[b],e=d.parent?this.bones[a.bones.indexOf(d.parent)]:null;this.bones[b]=new spine.Bone(d,this,e)}this.slots=[],this.drawOrder=[];for(var b=0,c=a.slots.length;b<c;b++){var f=a.slots[b],g=this.bones[a.bones.indexOf(f.boneData)],h=new spine.Slot(f,g);this.slots[b]=h,this.drawOrder[b]=h}this.ikConstraints=[];for(var b=0,c=a.ikConstraints.length;b<c;b++)this.ikConstraints[b]=new spine.IkConstraint(a.ikConstraints[b],this);this.transformConstraints=[];for(var b=0,c=a.transformConstraints.length;b<c;b++)this.transformConstraints[b]=new spine.TransformConstraint(a.transformConstraints[b],this);this.cache=[],this.updateCache()},spine.Skeleton.prototype={x:0,y:0,skin:null,r:1,g:1,b:1,a:1,time:0,flipX:!1,flipY:!1,updateCache:function(){var a=this.bones,b=this.cache,c=this.ikConstraints,d=this.transformConstraints,e=c.length,f=d.length;b.length=0;for(var g=0,h=a.length;g<h;g++){var i=a[g];b[b.length]=i;for(var j=0;j<e;j++){var k=c[j];if(i==k.bones[k.bones.length-1]){b[b.length]=k;break}}}for(var g=0;g<f;g++)for(var l=d[g],j=b.length-1;j>=0;j--){var m=b[j];if(m==l.bone||m==l.target){b.splice(j+1,0,l);break}}},updateWorldTransform:function(){for(var a=this.cache,b=0,c=a.length;b<c;b++)a[b].update()},setToSetupPose:function(){this.setBonesToSetupPose(),this.setSlotsToSetupPose()},setBonesToSetupPose:function(){for(var a=this.bones,b=0,c=a.length;b<c;b++)a[b].setToSetupPose();for(var d=this.ikConstraints,b=0,c=d.length;b<c;b++){var e=d[b];e.bendDirection=e.data.bendDirection,e.mix=e.data.mix}for(var f=this.transformConstraints,b=0,c=f.length;b<c;b++){var e=f[b];e.translateMix=e.data.translateMix,e.x=e.data.x,e.y=e.data.y}},setSlotsToSetupPose:function(){for(var a=this.slots,b=this.drawOrder,c=0,d=a.length;c<d;c++)b[c]=a[c],a[c].setToSetupPose(c)},getRootBone:function(){return this.bones.length?this.bones[0]:null},findBone:function(a){for(var b=this.bones,c=0,d=b.length;c<d;c++)if(b[c].data.name==a)return b[c];return null},findBoneIndex:function(a){for(var b=this.bones,c=0,d=b.length;c<d;c++)if(b[c].data.name==a)return c;return-1},findSlot:function(a){for(var b=this.slots,c=0,d=b.length;c<d;c++)if(b[c].data.name==a)return b[c];return null},findSlotIndex:function(a){for(var b=this.slots,c=0,d=b.length;c<d;c++)if(b[c].data.name==a)return c;return-1},setSkinByName:function(a){var b=this.data.findSkin(a);if(!b)throw"Skin not found: "+a;this.setSkin(b)},setSkin:function(a){if(a)if(this.skin)a._attachAll(this,this.skin);else for(var b=this.slots,c=0,d=b.length;c<d;c++){var e=b[c],f=e.data.attachmentName;if(f){var g=a.getAttachment(c,f);g&&e.setAttachment(g)}}this.skin=a},getAttachmentBySlotName:function(a,b){return this.getAttachmentBySlotIndex(this.data.findSlotIndex(a),b)},getAttachmentBySlotIndex:function(a,b){if(this.skin){var c=this.skin.getAttachment(a,b);if(c)return c}return this.data.defaultSkin?this.data.defaultSkin.getAttachment(a,b):null},setAttachment:function(a,b){for(var c=this.slots,d=0,e=c.length;d<e;d++){var f=c[d];if(f.data.name==a){var g=null;if(b&&(g=this.getAttachmentBySlotIndex(d,b),!g))throw"Attachment not found: "+b+", for slot: "+a;return void f.setAttachment(g)}}throw"Slot not found: "+a},findIkConstraint:function(a){for(var b=this.ikConstraints,c=0,d=b.length;c<d;c++)if(b[c].data.name==a)return b[c];return null},findTransformConstraint:function(a){for(var b=this.transformConstraints,c=0,d=b.length;c<d;c++)if(b[c].data.name==a)return b[c];return null},update:function(a){this.time+=a}},spine.EventData=function(a){this.name=a},spine.EventData.prototype={intValue:0,floatValue:0,stringValue:null},spine.Event=function(a,b){this.time=a,this.data=b},spine.Event.prototype={intValue:0,floatValue:0,stringValue:null},spine.AttachmentType={region:0,boundingbox:1,mesh:2,weightedmesh:3,linkedmesh:4,weightedlinkedmesh:5},spine.RegionAttachment=function(a){this.name=a,this.offset=new spine.Float32Array(8),this.offset.length=8,this.uvs=new spine.Float32Array(8),this.uvs.length=8},spine.RegionAttachment.prototype={type:spine.AttachmentType.region,x:0,y:0,rotation:0,scaleX:1,scaleY:1,width:0,height:0,r:1,g:1,b:1,a:1,path:null,rendererObject:null,regionOffsetX:0,regionOffsetY:0,regionWidth:0,regionHeight:0,regionOriginalWidth:0,regionOriginalHeight:0,setUVs:function(a,b,c,d,e){var f=this.uvs;e?(f[2]=a,f[3]=d,f[4]=a,f[5]=b,f[6]=c,f[7]=b,f[0]=c,f[1]=d):(f[0]=a,f[1]=d,f[2]=a,f[3]=b,f[4]=c,f[5]=b,f[6]=c,f[7]=d)},updateOffset:function(){var a=this.width/this.regionOriginalWidth*this.scaleX,b=this.height/this.regionOriginalHeight*this.scaleY,c=-this.width/2*this.scaleX+this.regionOffsetX*a,d=-this.height/2*this.scaleY+this.regionOffsetY*b,e=c+this.regionWidth*a,f=d+this.regionHeight*b,g=this.rotation*spine.degRad,h=Math.cos(g),i=Math.sin(g),j=c*h+this.x,k=c*i,l=d*h+this.y,m=d*i,n=e*h+this.x,o=e*i,p=f*h+this.y,q=f*i,r=this.offset;r[0]=j-m,r[1]=l+k,r[2]=j-q,r[3]=p+k,r[4]=n-q,r[5]=p+o,r[6]=n-m,r[7]=l+o},computeVertices:function(a,b,c,d){a+=c.worldX,b+=c.worldY;var e=c.a,f=c.b,g=c.c,h=c.d,i=this.offset;d[0]=i[0]*e+i[1]*f+a,d[1]=i[0]*g+i[1]*h+b,d[2]=i[2]*e+i[3]*f+a,d[3]=i[2]*g+i[3]*h+b,d[4]=i[4]*e+i[5]*f+a,d[5]=i[4]*g+i[5]*h+b,d[6]=i[6]*e+i[7]*f+a,d[7]=i[6]*g+i[7]*h+b}},spine.MeshAttachment=function(a){this.name=a},spine.MeshAttachment.prototype={type:spine.AttachmentType.mesh,vertices:null,uvs:null,regionUVs:null,triangles:null,hullLength:0,r:1,g:1,b:1,a:1,path:null,inheritFFD:!0,parentMesh:null,rendererObject:null,regionU:0,regionV:0,regionU2:0,regionV2:0,regionRotate:!1,regionOffsetX:0,regionOffsetY:0,regionWidth:0,regionHeight:0,regionOriginalWidth:0,regionOriginalHeight:0,edges:null,width:0,height:0,updateUVs:function(){var a=this.regionU2-this.regionU,b=this.regionV2-this.regionV,c=this.regionUVs.length;if(this.uvs&&this.uvs.length==c||(this.uvs=new spine.Float32Array(c)),this.regionRotate)for(var d=0;d<c;d+=2)this.uvs[d]=this.regionU+this.regionUVs[d+1]*a,this.uvs[d+1]=this.regionV+b-this.regionUVs[d]*b;else for(var d=0;d<c;d+=2)this.uvs[d]=this.regionU+this.regionUVs[d]*a,this.uvs[d+1]=this.regionV+this.regionUVs[d+1]*b},computeWorldVertices:function(a,b,c,d){var e=c.bone;a+=e.worldX,b+=e.worldY;var f=e.a,g=e.b,h=e.c,i=e.d,j=this.vertices,k=j.length;c.attachmentVertices.length==k&&(j=c.attachmentVertices);for(var l=0;l<k;l+=2){var m=j[l],n=j[l+1];d[l]=m*f+n*g+a,d[l+1]=m*h+n*i+b}},setParentMesh:function(a){this.parentMesh=a,a&&(this.vertices=a.vertices,this.regionUVs=a.regionUVs,this.triangles=a.triangles,this.hullLength=a.hullLength,this.edges=a.edges,this.width=a.width,this.height=a.height)}},spine.WeightedMeshAttachment=function(a){this.name=a},spine.WeightedMeshAttachment.prototype={type:spine.AttachmentType.weightedmesh,bones:null,weights:null,uvs:null,regionUVs:null,triangles:null,hullLength:0,r:1,g:1,b:1,a:1,path:null,inheritFFD:!0,parentMesh:null,rendererObject:null,regionU:0,regionV:0,regionU2:0,regionV2:0,regionRotate:!1,regionOffsetX:0,regionOffsetY:0,regionWidth:0,regionHeight:0,regionOriginalWidth:0,regionOriginalHeight:0,edges:null,width:0,height:0,updateUVs:function(a,b,c,d,e){var f=this.regionU2-this.regionU,g=this.regionV2-this.regionV,h=this.regionUVs.length;if(this.uvs&&this.uvs.length==h||(this.uvs=new spine.Float32Array(h)),this.regionRotate)for(var i=0;i<h;i+=2)this.uvs[i]=this.regionU+this.regionUVs[i+1]*f,this.uvs[i+1]=this.regionV+g-this.regionUVs[i]*g;else for(var i=0;i<h;i+=2)this.uvs[i]=this.regionU+this.regionUVs[i]*f,this.uvs[i+1]=this.regionV+this.regionUVs[i+1]*g},computeWorldVertices:function(a,b,c,d){var e,f,g,h,i,j,k,l=c.bone.skeleton.bones,m=this.weights,n=this.bones,o=0,p=0,q=0,r=0,s=n.length;if(c.attachmentVertices.length)for(var t=c.attachmentVertices;p<s;o+=2){for(f=0,g=0,e=n[p++]+p;p<e;p++,q+=3,r+=2)h=l[n[p]],i=m[q]+t[r],j=m[q+1]+t[r+1],k=m[q+2],f+=(i*h.a+j*h.b+h.worldX)*k,g+=(i*h.c+j*h.d+h.worldY)*k;d[o]=f+a,d[o+1]=g+b}else for(;p<s;o+=2){for(f=0,g=0,e=n[p++]+p;p<e;p++,q+=3)h=l[n[p]],i=m[q],j=m[q+1],k=m[q+2],f+=(i*h.a+j*h.b+h.worldX)*k,g+=(i*h.c+j*h.d+h.worldY)*k;d[o]=f+a,d[o+1]=g+b}},setParentMesh:function(a){this.parentMesh=a,a&&(this.bones=a.bones,this.weights=a.weights,this.regionUVs=a.regionUVs,this.triangles=a.triangles,this.hullLength=a.hullLength,this.edges=a.edges,this.width=a.width,this.height=a.height)}},spine.BoundingBoxAttachment=function(a){this.name=a,this.vertices=new spine.Float32Array},spine.BoundingBoxAttachment.prototype={type:spine.AttachmentType.boundingbox,computeWorldVertices:function(a,b,c,d){a+=c.worldX,b+=c.worldY;for(var e=c.a,f=c.b,g=c.c,h=c.d,i=this.vertices,j=0,k=i.length;j<k;j+=2){var l=i[j],m=i[j+1];d[j]=l*e+m*f+a,d[j+1]=l*g+m*h+b}}},spine.AnimationStateData=function(a){this.skeletonData=a,this.animationToMixTime={}},spine.AnimationStateData.prototype={defaultMix:0,setMixByName:function(a,b,c){var d=this.skeletonData.findAnimation(a);if(!d)throw"Animation not found: "+a;var e=this.skeletonData.findAnimation(b);if(!e)throw"Animation not found: "+b;this.setMix(d,e,c)},setMix:function(a,b,c){this.animationToMixTime[a.name+":"+b.name]=c},getMix:function(a,b){var c=a.name+":"+b.name;return this.animationToMixTime.hasOwnProperty(c)?this.animationToMixTime[c]:this.defaultMix}},spine.TrackEntry=function(){},spine.TrackEntry.prototype={next:null,previous:null,animation:null,loop:!1,delay:0,time:0,lastTime:-1,endTime:0,timeScale:1,mixTime:0,mixDuration:0,mix:1,onStart:null,onEnd:null,onComplete:null,onEvent:null},spine.AnimationState=function(a){this.data=a,this.tracks=[],this.events=[]},spine.AnimationState.prototype={onStart:null,onEnd:null,onComplete:null,onEvent:null,timeScale:1,update:function(a){a*=this.timeScale;for(var b=0;b<this.tracks.length;b++){var c=this.tracks[b];if(c){if(c.time+=a*c.timeScale,c.previous){var d=a*c.previous.timeScale;c.previous.time+=d,c.mixTime+=d}var e=c.next;e?(e.time=c.lastTime-e.delay,e.time>=0&&this.setCurrent(b,e)):!c.loop&&c.lastTime>=c.endTime&&this.clearTrack(b)}}},apply:function(a){for(var b=0;b<this.tracks.length;b++){var c=this.tracks[b];if(c){this.events.length=0;var d=c.time,e=c.lastTime,f=c.endTime,g=c.loop;!g&&d>f&&(d=f);var h=c.previous;if(h){var i=h.time;!h.loop&&i>h.endTime&&(i=h.endTime),h.animation.apply(a,i,i,h.loop,null);var j=c.mixTime/c.mixDuration*c.mix;j>=1&&(j=1,c.previous=null),c.animation.mix(a,c.lastTime,d,g,this.events,j)}else 1==c.mix?c.animation.apply(a,c.lastTime,d,g,this.events):c.animation.mix(a,c.lastTime,d,g,this.events,c.mix);for(var k=0,l=this.events.length;k<l;k++){var m=this.events[k];c.onEvent&&c.onEvent(b,m),this.onEvent&&this.onEvent(b,m)}if(g?e%f>d%f:e<f&&d>=f){var n=Math.floor(d/f);c.onComplete&&c.onComplete(b,n),this.onComplete&&this.onComplete(b,n)}c.lastTime=c.time}}},clearTracks:function(){for(var a=0,b=this.tracks.length;a<b;a++)this.clearTrack(a);this.tracks.length=0},clearTrack:function(a){if(!(a>=this.tracks.length)){var b=this.tracks[a];b&&(b.onEnd&&b.onEnd(a),this.onEnd&&this.onEnd(a),this.tracks[a]=null)}},_expandToIndex:function(a){if(a<this.tracks.length)return this.tracks[a];for(;a>=this.tracks.length;)this.tracks[this.tracks.length]=null;return null},setCurrent:function(a,b){var c=this._expandToIndex(a);if(c){var d=c.previous;c.previous=null,c.onEnd&&c.onEnd(a),this.onEnd&&this.onEnd(a),b.mixDuration=this.data.getMix(c.animation,b.animation),b.mixDuration>0&&(b.mixTime=0,d&&c.mixTime/c.mixDuration<.5?b.previous=d:b.previous=c)}this.tracks[a]=b,b.onStart&&b.onStart(a),this.onStart&&this.onStart(a)},setAnimationByName:function(a,b,c){var d=this.data.skeletonData.findAnimation(b);if(!d)throw"Animation not found: "+b;return this.setAnimation(a,d,c)},setAnimation:function(a,b,c){var d=new spine.TrackEntry;return d.animation=b,d.loop=c,d.endTime=b.duration,this.setCurrent(a,d),d},addAnimationByName:function(a,b,c,d){var e=this.data.skeletonData.findAnimation(b);if(!e)throw"Animation not found: "+b;return this.addAnimation(a,e,c,d)},addAnimation:function(a,b,c,d){var e=new spine.TrackEntry;e.animation=b,e.loop=c,e.endTime=b.duration;var f=this._expandToIndex(a);if(f){for(;f.next;)f=f.next;f.next=e}else this.tracks[a]=e;return d<=0&&(f?d+=f.endTime-this.data.getMix(f.animation,b):d=0),e.delay=d,e},getCurrent:function(a){return a>=this.tracks.length?null:this.tracks[a]}},spine.SkeletonJson=function(a){this.attachmentLoader=a,this.linkedMeshes=[]},spine.SkeletonJson.prototype={scale:1,readSkeletonData:function(a,b){var c=new spine.SkeletonData;c.name=b;var d=a.skeleton;d&&(c.hash=d.hash,c.version=d.spine,c.width=d.width||0,c.height=d.height||0);for(var e=a.bones,f=0,g=e.length;f<g;f++){var h=e[f],i=null;if(h.parent&&(i=c.findBone(h.parent),!i))throw"Parent bone not found: "+h.parent;var j=new spine.BoneData(h.name,i);j.length=(h.length||0)*this.scale,j.x=(h.x||0)*this.scale,j.y=(h.y||0)*this.scale,j.rotation=h.rotation||0,j.scaleX=h.hasOwnProperty("scaleX")?h.scaleX:1,j.scaleY=h.hasOwnProperty("scaleY")?h.scaleY:1,j.inheritScale=!h.hasOwnProperty("inheritScale")||h.inheritScale,j.inheritRotation=!h.hasOwnProperty("inheritRotation")||h.inheritRotation,c.bones[f]=j}var k=a.ik;if(k)for(var f=0,g=k.length;f<g;f++){for(var l=k[f],m=new spine.IkConstraintData(l.name),e=l.bones,n=0,o=e.length;n<o;n++){var p=c.findBone(e[n]);if(!p)throw"IK bone not found: "+e[n];m.bones[n]=p}if(m.target=c.findBone(l.target),!m.target)throw"Target bone not found: "+l.target;m.bendDirection=!l.hasOwnProperty("bendPositive")||l.bendPositive?1:-1,m.mix=l.hasOwnProperty("mix")?l.mix:1,c.ikConstraints[f]=m}var q=a.transform;if(q)for(var f=0,g=q.length;f<g;f++){var r=q[f],s=new spine.TransformConstraintData(r.name);if(s.bone=c.findBone(r.bone),!s.bone)throw"Bone not found: "+r.bone;if(s.target=c.findBone(r.target),!s.target)throw"Target bone not found: "+r.target;s.mix=r.hasOwnProperty("translateMix")?l.translateMix:1,s.x=(r.x||0)*this.scale,s.y=(r.y||0)*this.scale,c.transformConstraints[f]=s}for(var t=a.slots,f=0,g=t.length;f<g;f++){var u=t[f],j=c.findBone(u.bone);if(!j)throw"Slot bone not found: "+u.bone;var v=new spine.SlotData(u.name,j),w=u.color;w&&(v.r=this.toColor(w,0),v.g=this.toColor(w,1),v.b=this.toColor(w,2),v.a=this.toColor(w,3)),v.attachmentName=u.attachment,v.blendMode=spine.BlendMode[u.blend||"normal"],c.slots[f]=v}var x=a.skins;for(var y in x)if(x.hasOwnProperty(y)){var z=x[y],A=new spine.Skin(y);for(var B in z)if(z.hasOwnProperty(B)){var C=c.findSlotIndex(B),D=z[B];for(var E in D)if(D.hasOwnProperty(E)){var F=this.readAttachment(A,C,E,D[E]);F&&A.addAttachment(C,E,F);
-}}c.skins[c.skins.length]=A,"default"==A.name&&(c.defaultSkin=A)}for(var f=0,g=this.linkedMeshes.length;f<g;f++){var G=this.linkedMeshes[f],A=G.skin?c.findSkin(G.skin):c.defaultSkin;if(!A)throw"Skin not found: "+G.skin;var i=A.getAttachment(G.slotIndex,G.parent);if(!i)throw"Parent mesh not found: "+G.parent;G.mesh.setParentMesh(i),G.mesh.updateUVs()}this.linkedMeshes.length=0;var H=a.events;for(var I in H)if(H.hasOwnProperty(I)){var J=H[I],K=new spine.EventData(I);K.intValue=J.int||0,K.floatValue=J.float||0,K.stringValue=J.string||null,c.events[c.events.length]=K}var L=a.animations;for(var M in L)L.hasOwnProperty(M)&&this.readAnimation(M,L[M],c);return c},readAttachment:function(a,b,c,d){c=d.name||c;var e=d.type||"region";"skinnedmesh"==e&&(e="weightedmesh"),e=spine.AttachmentType[e];var f=d.path||c,g=this.scale;switch(e){case spine.AttachmentType.region:var h=this.attachmentLoader.newRegionAttachment(a,c,f);if(!h)return null;h.path=f,h.x=(d.x||0)*g,h.y=(d.y||0)*g,h.scaleX=d.hasOwnProperty("scaleX")?d.scaleX:1,h.scaleY=d.hasOwnProperty("scaleY")?d.scaleY:1,h.rotation=d.rotation||0,h.width=(d.width||0)*g,h.height=(d.height||0)*g;var i=d.color;return i&&(h.r=this.toColor(i,0),h.g=this.toColor(i,1),h.b=this.toColor(i,2),h.a=this.toColor(i,3)),h.updateOffset(),h;case spine.AttachmentType.mesh:case spine.AttachmentType.linkedmesh:var j=this.attachmentLoader.newMeshAttachment(a,c,f);return j?(j.path=f,i=d.color,i&&(j.r=this.toColor(i,0),j.g=this.toColor(i,1),j.b=this.toColor(i,2),j.a=this.toColor(i,3)),j.width=(d.width||0)*g,j.height=(d.height||0)*g,d.parent?(j.inheritFFD=!d.hasOwnProperty("ffd")||d.ffd,this.linkedMeshes[this.linkedMeshes.length]={mesh:j,skin:d.skin,slotIndex:b,parent:d.parent}):(j.vertices=this.getFloatArray(d,"vertices",g),j.triangles=this.getUint32Array(d,"triangles"),j.regionUVs=this.getFloatArray(d,"uvs",1),j.updateUVs(),j.hullLength=2*(d.hull||0),d.edges&&(j.edges=this.getUint16Array(d,"edges"))),j):null;case spine.AttachmentType.weightedmesh:case spine.AttachmentType.weightedlinkedmesh:var j=this.attachmentLoader.newWeightedMeshAttachment(a,c,f);if(!j)return null;if(j.path=f,i=d.color,i&&(j.r=this.toColor(i,0),j.g=this.toColor(i,1),j.b=this.toColor(i,2),j.a=this.toColor(i,3)),j.width=(d.width||0)*g,j.height=(d.height||0)*g,d.parent)j.inheritFFD=!d.hasOwnProperty("ffd")||d.ffd,this.linkedMeshes[this.linkedMeshes.length]={mesh:j,skin:d.skin,slotIndex:b,parent:d.parent};else{for(var k=this.getFloatArray(d,"uvs",1),l=this.getFloatArray(d,"vertices",1),m=new spine.Float32Array(3*k.length*3),n=new spine.Uint32Array(3*k.length),o=0,p=0,q=0,r=l.length;o<r;){var s=0|l[o++];n[p++]=s;for(var t=o+4*s;o<t;)n[p++]=l[o],m[q++]=l[o+1]*g,m[q++]=l[o+2]*g,m[q++]=l[o+3],o+=4}j.bones=n,j.weights=m,j.triangles=this.getUint32Array(d,"triangles"),j.regionUVs=k,j.updateUVs(),j.hullLength=2*(d.hull||0),d.edges&&(j.edges=this.getUint16Array(d,"edges"))}return j;case spine.AttachmentType.boundingbox:var u=this.attachmentLoader.newBoundingBoxAttachment(a,c),l=d.vertices;u.vertices=new spine.Float32Array(l.length);for(var o=0,r=l.length;o<r;o++)u.vertices[o]=l[o]*g;return u}throw"Unknown attachment type: "+e},readAnimation:function(a,b,c){var d=[],e=0,f=b.slots;for(var g in f)if(f.hasOwnProperty(g)){var h=f[g],i=c.findSlotIndex(g);for(var j in h)if(h.hasOwnProperty(j)){var k=h[j];if("color"==j){var l=new spine.ColorTimeline(k.length);l.slotIndex=i;for(var m=0,n=0,o=k.length;n<o;n++){var p=k[n],q=p.color,r=this.toColor(q,0),s=this.toColor(q,1),t=this.toColor(q,2),u=this.toColor(q,3);l.setFrame(m,p.time,r,s,t,u),this.readCurve(l,m,p),m++}d[d.length]=l,e=Math.max(e,l.frames[5*l.getFrameCount()-5])}else{if("attachment"!=j)throw"Invalid timeline type for a slot: "+j+" ("+g+")";var l=new spine.AttachmentTimeline(k.length);l.slotIndex=i;for(var m=0,n=0,o=k.length;n<o;n++){var p=k[n];l.setFrame(m++,p.time,p.name)}d[d.length]=l,e=Math.max(e,l.frames[l.getFrameCount()-1])}}}var v=b.bones;for(var w in v)if(v.hasOwnProperty(w)){var x=c.findBoneIndex(w);if(x==-1)throw"Bone not found: "+w;var y=v[w];for(var j in y)if(y.hasOwnProperty(j)){var k=y[j];if("rotate"==j){var l=new spine.RotateTimeline(k.length);l.boneIndex=x;for(var m=0,n=0,o=k.length;n<o;n++){var p=k[n];l.setFrame(m,p.time,p.angle),this.readCurve(l,m,p),m++}d[d.length]=l,e=Math.max(e,l.frames[2*l.getFrameCount()-2])}else{if("translate"!=j&&"scale"!=j)throw"Invalid timeline type for a bone: "+j+" ("+w+")";var l,z=1;"scale"==j?l=new spine.ScaleTimeline(k.length):(l=new spine.TranslateTimeline(k.length),z=this.scale),l.boneIndex=x;for(var m=0,n=0,o=k.length;n<o;n++){var p=k[n],A=(p.x||0)*z,B=(p.y||0)*z;l.setFrame(m,p.time,A,B),this.readCurve(l,m,p),m++}d[d.length]=l,e=Math.max(e,l.frames[3*l.getFrameCount()-3])}}}var C=b.ik;for(var D in C)if(C.hasOwnProperty(D)){var E=c.findIkConstraint(D),k=C[D],l=new spine.IkConstraintTimeline(k.length);l.ikConstraintIndex=c.ikConstraints.indexOf(E);for(var m=0,n=0,o=k.length;n<o;n++){var p=k[n],F=p.hasOwnProperty("mix")?p.mix:1,G=!p.hasOwnProperty("bendPositive")||p.bendPositive?1:-1;l.setFrame(m,p.time,F,G),this.readCurve(l,m,p),m++}d[d.length]=l,e=Math.max(e,l.frames[3*l.getFrameCount()-3])}var H=b.ffd;for(var I in H){var J=c.findSkin(I),h=H[I];for(g in h){var i=c.findSlotIndex(g),K=h[g];for(var L in K){var k=K[L],l=new spine.FfdTimeline(k.length),M=J.getAttachment(i,L);if(!M)throw"FFD attachment not found: "+L;l.slotIndex=i,l.attachment=M;var N,O=M.type==spine.AttachmentType.mesh;N=O?M.vertices.length:M.weights.length/3*2;for(var m=0,n=0,o=k.length;n<o;n++){var P,p=k[n];if(p.vertices){var Q=p.vertices,P=new spine.Float32Array(N);P.length=N;var R=p.offset||0,S=Q.length;if(1==this.scale)for(var T=0;T<S;T++)P[T+R]=Q[T];else for(var T=0;T<S;T++)P[T+R]=Q[T]*this.scale;if(O)for(var U=M.vertices,T=0,S=P.length;T<S;T++)P[T]+=U[T]}else O?P=M.vertices:(P=new spine.Float32Array(N),P.length=N);l.setFrame(m,p.time,P),this.readCurve(l,m,p),m++}d[d.length]=l,e=Math.max(e,l.frames[l.getFrameCount()-1])}}}var V=b.drawOrder;if(V||(V=b.draworder),V){for(var l=new spine.DrawOrderTimeline(V.length),W=c.slots.length,m=0,n=0,o=V.length;n<o;n++){var X=V[n],Y=null;if(X.offsets){Y=new spine.Uint32Array(W),Y.length=W;for(var T=W-1;T>=0;T--)Y[T]=4294967295;var Z=X.offsets,$=new spine.Uint32Array(W-Z.length);$.length=W-Z.length;for(var _=0,aa=0,T=0,S=Z.length;T<S;T++){var ba=Z[T],i=c.findSlotIndex(ba.slot);if(i==-1)throw"Slot not found: "+ba.slot;for(;_!=i;)$[aa++]=_++;Y[_+ba.offset]=_++}for(;_<W;)$[aa++]=_++;for(var T=W-1;T>=0;T--)4294967295==Y[T]&&(Y[T]=$[--aa])}l.setFrame(m++,X.time,Y)}d[d.length]=l,e=Math.max(e,l.frames[l.getFrameCount()-1])}var ca=b.events;if(ca){for(var l=new spine.EventTimeline(ca.length),m=0,n=0,o=ca.length;n<o;n++){var da=ca[n],ea=c.findEvent(da.name);if(!ea)throw"Event not found: "+da.name;var fa=new spine.Event(da.time,ea);fa.intValue=da.hasOwnProperty("int")?da.int:ea.intValue,fa.floatValue=da.hasOwnProperty("float")?da.float:ea.floatValue,fa.stringValue=da.hasOwnProperty("string")?da.string:ea.stringValue,l.setFrame(m++,fa)}d[d.length]=l,e=Math.max(e,l.frames[l.getFrameCount()-1])}c.animations[c.animations.length]=new spine.Animation(a,d,e)},readCurve:function(a,b,c){var d=c.curve;d?"stepped"==d?a.curves.setStepped(b):d instanceof Array&&a.curves.setCurve(b,d[0],d[1],d[2],d[3]):a.curves.setLinear(b)},toColor:function(a,b){if(8!=a.length)throw"Color hexidecimal length must be 8, recieved: "+a;return parseInt(a.substring(2*b,2*b+2),16)/255},getFloatArray:function(a,b,c){var d=a[b],e=new spine.Float32Array(d.length),f=0,g=d.length;if(1==c)for(;f<g;f++)e[f]=d[f];else for(;f<g;f++)e[f]=d[f]*c;return e},getUint32Array:function(a,b){for(var c=a[b],d=new spine.Uint32Array(c.length),e=0,f=c.length;e<f;e++)d[e]=0|c[e];return d},getUint16Array:function(a,b){for(var c=a[b],d=new spine.Uint16Array(c.length),e=0,f=c.length;e<f;e++)d[e]=0|c[e];return d}},spine.Atlas=function(a,b){this.textureLoader=b,this.pages=[],this.regions=[];var c=new spine.AtlasReader(a),d=[];d.length=4;for(var e=null;;){var f=c.readLine();if(null===f)break;if(f=c.trim(f),f.length)if(e){var g=new spine.AtlasRegion;g.name=f,g.page=e,g.rotate="true"==c.readValue(),c.readTuple(d);var h=parseInt(d[0]),i=parseInt(d[1]);c.readTuple(d);var j=parseInt(d[0]),k=parseInt(d[1]);g.u=h/e.width,g.v=i/e.height,g.rotate?(g.u2=(h+k)/e.width,g.v2=(i+j)/e.height):(g.u2=(h+j)/e.width,g.v2=(i+k)/e.height),g.x=h,g.y=i,g.width=Math.abs(j),g.height=Math.abs(k),4==c.readTuple(d)&&(g.splits=[parseInt(d[0]),parseInt(d[1]),parseInt(d[2]),parseInt(d[3])],4==c.readTuple(d)&&(g.pads=[parseInt(d[0]),parseInt(d[1]),parseInt(d[2]),parseInt(d[3])],c.readTuple(d))),g.originalWidth=parseInt(d[0]),g.originalHeight=parseInt(d[1]),c.readTuple(d),g.offsetX=parseInt(d[0]),g.offsetY=parseInt(d[1]),g.index=parseInt(c.readValue()),this.regions[this.regions.length]=g}else{e=new spine.AtlasPage,e.name=f,2==c.readTuple(d)&&(e.width=parseInt(d[0]),e.height=parseInt(d[1]),c.readTuple(d)),e.format=spine.Atlas.Format[d[0]],c.readTuple(d),e.minFilter=spine.Atlas.TextureFilter[d[0]],e.magFilter=spine.Atlas.TextureFilter[d[1]];var l=c.readValue();e.uWrap=spine.Atlas.TextureWrap.clampToEdge,e.vWrap=spine.Atlas.TextureWrap.clampToEdge,"x"==l?e.uWrap=spine.Atlas.TextureWrap.repeat:"y"==l?e.vWrap=spine.Atlas.TextureWrap.repeat:"xy"==l&&(e.uWrap=e.vWrap=spine.Atlas.TextureWrap.repeat),b.load(e,f,this),this.pages[this.pages.length]=e}else e=null}},spine.Atlas.prototype={findRegion:function(a){for(var b=this.regions,c=0,d=b.length;c<d;c++)if(b[c].name==a)return b[c];return null},dispose:function(){for(var a=this.pages,b=0,c=a.length;b<c;b++)this.textureLoader.unload(a[b].rendererObject)},updateUVs:function(a){for(var b=this.regions,c=0,d=b.length;c<d;c++){var e=b[c];e.page==a&&(e.u=e.x/a.width,e.v=e.y/a.height,e.rotate?(e.u2=(e.x+e.height)/a.width,e.v2=(e.y+e.width)/a.height):(e.u2=(e.x+e.width)/a.width,e.v2=(e.y+e.height)/a.height))}}},spine.Atlas.Format={alpha:0,intensity:1,luminanceAlpha:2,rgb565:3,rgba4444:4,rgb888:5,rgba8888:6},spine.Atlas.TextureFilter={nearest:0,linear:1,mipMap:2,mipMapNearestNearest:3,mipMapLinearNearest:4,mipMapNearestLinear:5,mipMapLinearLinear:6},spine.Atlas.TextureWrap={mirroredRepeat:0,clampToEdge:1,repeat:2},spine.AtlasPage=function(){},spine.AtlasPage.prototype={name:null,format:null,minFilter:null,magFilter:null,uWrap:null,vWrap:null,rendererObject:null,width:0,height:0},spine.AtlasRegion=function(){},spine.AtlasRegion.prototype={page:null,name:null,x:0,y:0,width:0,height:0,u:0,v:0,u2:0,v2:0,offsetX:0,offsetY:0,originalWidth:0,originalHeight:0,index:0,rotate:!1,splits:null,pads:null},spine.AtlasReader=function(a){this.lines=a.split(/\r\n|\r|\n/)},spine.AtlasReader.prototype={index:0,trim:function(a){return a.replace(/^\s+|\s+$/g,"")},readLine:function(){return this.index>=this.lines.length?null:this.lines[this.index++]},readValue:function(){var a=this.readLine(),b=a.indexOf(":");if(b==-1)throw"Invalid line: "+a;return this.trim(a.substring(b+1))},readTuple:function(a){var b=this.readLine(),c=b.indexOf(":");if(c==-1)throw"Invalid line: "+b;for(var d=0,e=c+1;d<3;d++){var f=b.indexOf(",",e);if(f==-1)break;a[d]=this.trim(b.substr(e,f-e)),e=f+1}return a[d]=this.trim(b.substring(e)),d+1}},spine.AtlasAttachmentLoader=function(a){this.atlas=a},spine.AtlasAttachmentLoader.prototype={newRegionAttachment:function(a,b,c){var d=this.atlas.findRegion(c);if(!d)throw"Region not found in atlas: "+c+" (region attachment: "+b+")";var e=new spine.RegionAttachment(b);return e.rendererObject=d,e.setUVs(d.u,d.v,d.u2,d.v2,d.rotate),e.regionOffsetX=d.offsetX,e.regionOffsetY=d.offsetY,e.regionWidth=d.width,e.regionHeight=d.height,e.regionOriginalWidth=d.originalWidth,e.regionOriginalHeight=d.originalHeight,e},newMeshAttachment:function(a,b,c){var d=this.atlas.findRegion(c);if(!d)throw"Region not found in atlas: "+c+" (mesh attachment: "+b+")";var e=new spine.MeshAttachment(b);return e.rendererObject=d,e.regionU=d.u,e.regionV=d.v,e.regionU2=d.u2,e.regionV2=d.v2,e.regionRotate=d.rotate,e.regionOffsetX=d.offsetX,e.regionOffsetY=d.offsetY,e.regionWidth=d.width,e.regionHeight=d.height,e.regionOriginalWidth=d.originalWidth,e.regionOriginalHeight=d.originalHeight,e},newWeightedMeshAttachment:function(a,b,c){var d=this.atlas.findRegion(c);if(!d)throw"Region not found in atlas: "+c+" (weighted mesh attachment: "+b+")";var e=new spine.WeightedMeshAttachment(b);return e.rendererObject=d,e.regionU=d.u,e.regionV=d.v,e.regionU2=d.u2,e.regionV2=d.v2,e.regionRotate=d.rotate,e.regionOffsetX=d.offsetX,e.regionOffsetY=d.offsetY,e.regionWidth=d.width,e.regionHeight=d.height,e.regionOriginalWidth=d.originalWidth,e.regionOriginalHeight=d.originalHeight,e},newBoundingBoxAttachment:function(a,b){return new spine.BoundingBoxAttachment(b)}},spine.SkeletonBounds=function(){this.polygonPool=[],this.polygons=[],this.boundingBoxes=[]},spine.SkeletonBounds.prototype={minX:0,minY:0,maxX:0,maxY:0,update:function(a,b){var c=a.slots,d=c.length,e=a.x,f=a.y,g=this.boundingBoxes,h=this.polygonPool,i=this.polygons;g.length=0;for(var j=0,k=i.length;j<k;j++)h[h.length]=i[j];i.length=0;for(var j=0;j<d;j++){var l=c[j],m=l.attachment;if(m.type==spine.AttachmentType.boundingbox){g[g.length]=m;var n,o=h.length;o>0?(n=h[o-1],h.splice(o-1,1)):n=new spine.Float32Array,i[i.length]=n,n.length=m.vertices.length,m.computeWorldVertices(e,f,l.bone,n)}}b&&this.aabbCompute()},aabbCompute:function(){for(var a=this.polygons,b=Number.MAX_VALUE,c=Number.MAX_VALUE,d=-Number.MAX_VALUE,e=-Number.MAX_VALUE,f=0,g=a.length;f<g;f++)for(var h=a[f],i=0,j=h.length;i<j;i+=2){var k=h[i],l=h[i+1];b=Math.min(b,k),c=Math.min(c,l),d=Math.max(d,k),e=Math.max(e,l)}this.minX=b,this.minY=c,this.maxX=d,this.maxY=e},aabbContainsPoint:function(a,b){return a>=this.minX&&a<=this.maxX&&b>=this.minY&&b<=this.maxY},aabbIntersectsSegment:function(a,b,c,d){var e=this.minX,f=this.minY,g=this.maxX,h=this.maxY;if(a<=e&&c<=e||b<=f&&d<=f||a>=g&&c>=g||b>=h&&d>=h)return!1;var i=(d-b)/(c-a),j=i*(e-a)+b;if(j>f&&j<h)return!0;if(j=i*(g-a)+b,j>f&&j<h)return!0;var k=(f-b)/i+a;return k>e&&k<g||(k=(h-b)/i+a,k>e&&k<g)},aabbIntersectsSkeleton:function(a){return this.minX<a.maxX&&this.maxX>a.minX&&this.minY<a.maxY&&this.maxY>a.minY},containsPoint:function(a,b){for(var c=this.polygons,d=0,e=c.length;d<e;d++)if(this.polygonContainsPoint(c[d],a,b))return this.boundingBoxes[d];return null},intersectsSegment:function(a,b,c,d){for(var e=this.polygons,f=0,g=e.length;f<g;f++)if(e[f].intersectsSegment(a,b,c,d))return this.boundingBoxes[f];return null},polygonContainsPoint:function(a,b,c){for(var d=a.length,e=d-2,f=!1,g=0;g<d;g+=2){var h=a[g+1],i=a[e+1];if(h<c&&i>=c||i<c&&h>=c){var j=a[g];j+(c-h)/(i-h)*(a[e]-j)<b&&(f=!f)}e=g}return f},polygonIntersectsSegment:function(a,b,c,d,e){for(var f=a.length,g=b-d,h=c-e,i=b*e-c*d,j=a[f-2],k=a[f-1],l=0;l<f;l+=2){var m=a[l],n=a[l+1],o=j*n-k*m,p=j-m,q=k-n,r=g*q-h*p,s=(i*p-g*o)/r;if((s>=j&&s<=m||s>=m&&s<=j)&&(s>=b&&s<=d||s>=d&&s<=b)){var t=(i*q-h*o)/r;if((t>=k&&t<=n||t>=n&&t<=k)&&(t>=c&&t<=e||t>=e&&t<=c))return!0}j=m,k=n}return!1},getPolygon:function(a){var b=this.boundingBoxes.indexOf(a);return b==-1?null:this.polygons[b]},getWidth:function(){return this.maxX-this.minX},getHeight:function(){return this.maxY-this.minY}};var __extends=this&&this.__extends||function(){var a=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(a,b){a.__proto__=b}||function(a,b){for(var c in b)b.hasOwnProperty(c)&&(a[c]=b[c])};return function(b,c){function d(){this.constructor=b}a(b,c),b.prototype=null===c?Object.create(c):(d.prototype=c.prototype,new d)}}(),PhaserSpine;!function(a){var b=function(b){function c(a,c){var d=b.call(this,a,c)||this;return d.addSpineCache(),d.addSpineFactory(),d.addSpineLoader(),d}return __extends(c,b),c.prototype.addSpineLoader=function(){Phaser.Loader.prototype.spine=function(a,b,c){var d=this,e=a+"Atlas",f={atlas:e,basePath:""===b.substring(0,b.lastIndexOf("/"))?".":b.substring(0,b.lastIndexOf("/")),variants:void 0};void 0===c?c=[""]:f.variants=c,c.forEach(function(a){d.onFileComplete.add(function(b,c){if(c===e){new spine.Atlas(d.game.cache.getText(c),{load:function(b,c,e){d.image(c,f.basePath+"/"+c.substr(0,c.lastIndexOf("."))+a+".png")}})}}),d.text(e,b.substr(0,b.lastIndexOf("."))+a+".atlas")}),this.json(a,b),this.game.cache.addSpine(a,f)}},c.prototype.addSpineFactory=function(){Phaser.GameObjectFactory.prototype.spine=function(b,c,d,e,f){void 0===f&&(f=this.world);var g=new a.Spine(this.game,d,e);return g.setToSetupPose(),g.position.x=b,g.position.y=c,f.add(g)},Phaser.GameObjectCreator.prototype.spine=function(b,c,d,e,f){return new a.Spine(this.game,d,e)}},c.prototype.addSpineCache=function(){Phaser.Cache.prototype.spine={},Phaser.Cache.prototype.addSpine=function(a,b){this.spine[a]=b},Phaser.Cache.prototype.getSpine=function(a){return!this.spine.hasOwnProperty(a),this.spine[a]}},c.RESOLUTION_REGEXP=/@(.+)x/,c}(Phaser.Plugin);a.SpinePlugin=b}(PhaserSpine||(PhaserSpine={})),Phaser.Rope.prototype.postUpdate=function(){},spine.Bone.yDown=!0;var PhaserSpine;!function(a){var b=function(b){function c(c,d,e){var f=b.call(this,c)||this;f.imageScale=1;var g=f.game.cache.getSpine(d);void 0!==e&&g.variants.indexOf(e)!==-1?f.imageScale=f.getScaleFromVariant(e):g.variants&&g.variants.length>=1&&(f.imageScale=f.getScaleFromVariant(g.variants[0]));var h=new a.SpineTextureLoader(c),i=new spine.Atlas(c.cache.getText(g.atlas),h),j=new spine.AtlasAttachmentLoader(i),k=new spine.SkeletonJson(j);if(f.skeletonData=k.readSkeletonData(c.cache.getJSON(d)),!f.skeletonData)throw new Error("Spine data must be preloaded using Loader.spine");f.onEvent=new Phaser.Signal,f.onComplete=new Phaser.Signal,f.onEnd=new Phaser.Signal,f.skeleton=new spine.Skeleton(f.skeletonData),f.skeleton.updateWorldTransform(),f.stateData=new spine.AnimationStateData(f.skeletonData),f.state=new spine.AnimationState(f.stateData),f.state.onEvent=f.onEvent.dispatch.bind(f.onEvent),f.state.onComplete=f.onComplete.dispatch.bind(f.onComplete),f.state.onEnd=f.onEnd.dispatch.bind(f.onEnd),f.slotContainers=[];for(var l=0,m=f.skeleton.slots.length;l<m;l++){var n=f.skeleton.slots[l],o=n.attachment,p=new Phaser.Group(c);if(f.slotContainers.push(p),f.add(p),o instanceof spine.RegionAttachment){var q=o.rendererObject.name,r=f.createSprite(n,o);n.currentSprite=r,n.currentSpriteName=q,p.add(r)}else{if(!(o instanceof spine.WeightedMeshAttachment))continue;var s=f.createMesh(n,o);n.currentMesh=s,n.currentMeshName=o.name,p.add(s)}}return f.autoUpdate=!0,f}return __extends(c,b),Object.defineProperty(c.prototype,"autoUpdate",{get:function(){return this.updateTransform===a.Spine.prototype.autoUpdateTransform},set:function(b){this.updateTransform=b?a.Spine.prototype.autoUpdateTransform:PIXI.DisplayObjectContainer.prototype.updateTransform},enumerable:!0,configurable:!0}),c.prototype.getScaleFromVariant=function(b){var c=a.SpinePlugin.RESOLUTION_REGEXP.exec(b);return c?parseFloat(c[1]):1},c.prototype.setTint=function(a){this.globalTint=a;for(var b=this.skeleton.slots,c=0;c<b.length;c++){var d=b[c];d.currentSprite&&(d.currentSprite.tint=a)}},c.prototype.update=function(a){if(void 0!==a){this.state.update(a),this.state.apply(this.skeleton),this.skeleton.updateWorldTransform();for(var b=this.skeleton.drawOrder,c=this.skeleton.slots,d=0,e=b.length;d<e;d++)void 0!==b[d].currentSprite&&(this.children[d]=b[d].currentSprite.parent);for(var d=0,e=c.length;d<e;d++){var f=c[d],g=f.attachment,h=this.slotContainers[d];if(g){var i=g.type;if(i===spine.AttachmentType.region){if(g.rendererObject&&(!f.currentSpriteName||f.currentSpriteName!==g.name)){var j=g.rendererObject.name;if(void 0!==f.currentSprite&&(f.currentSprite.visible=!1),f.sprites=f.sprites||{},void 0!==f.sprites[j])f.sprites[j].visible=!0;else{var k=this.createSprite(f,g);h.add(k)}f.currentSprite=f.sprites[j],f.currentSpriteName=j}var l=f.bone;h.position.x=g.x*l.a+g.y*l.b+l.worldX,h.position.y=g.x*l.c+g.y*l.d+l.worldY,h.scale.x=l.getWorldScaleX(),h.scale.y=l.getWorldScaleY(),h.rotation=(l.getWorldRotationX()-g.rotation)*Math.PI/180,l.getWorldScaleY()<0&&(h.scale.y=-h.scale.y),l.getWorldScaleX()<0&&(h.scale.x=-h.scale.x),(l.getWorldScaleY()<0||l.getWorldScaleX()<0)&&(h.rotation=-h.rotation),f.currentSprite.blendMode=f.blendMode,this.globalTint||(f.currentSprite.tint=f.currentSprite.tint=parseInt(Phaser.Color.componentToHex(255*f.r).substring(0,2)+Phaser.Color.componentToHex(255*f.g).substring(0,2)+Phaser.Color.componentToHex(255*f.b).substring(0,2),16))}else{if(i!==spine.AttachmentType.weightedmesh&&i!==spine.AttachmentType.weightedlinkedmesh){h.visible=!1;continue}if(!f.currentMeshName||f.currentMeshName!==g.name){var m=g.name;if(void 0!==f.currentMesh&&(f.currentMesh.visible=!1),f.meshes=f.meshes||{},void 0!==f.meshes[m])f.meshes[m].visible=!0;else{var n=this.createMesh(f,g);h.add(n)}f.currentMesh=f.meshes[m],f.currentMeshName=m}g.computeWorldVertices(f.bone.skeleton.x,f.bone.skeleton.y,f,f.currentMesh.vertices)}h.visible=!0,h.alpha=f.a}else h.visible=!1}}},c.prototype.destroy=function(a,c){b.prototype.destroy.call(this,!0,c)},c.prototype.autoUpdateTransform=function(){if(c.globalAutoUpdate){this.lastTime=this.lastTime||Date.now();var a=.001*(Date.now()-this.lastTime);this.lastTime=Date.now(),this.update(a)}else this.lastTime=0;PIXI.DisplayObjectContainer.prototype.updateTransform.call(this)},c.prototype.createSprite=function(a,b){var c=b.rendererObject,d=c.page.rendererObject,e=new PIXI.Rectangle(c.x,c.y,c.rotate?c.height:c.width,c.rotate?c.width:c.height),f=new PIXI.Texture(d,e),g=new Phaser.Sprite(this.game,0,0,f),h=c.rotate?.5*Math.PI:0;if(g.scale.x=c.width/c.originalWidth*b.scaleX/this.imageScale,g.scale.y=c.height/c.originalHeight*b.scaleY/this.imageScale,g.rotation=h,g.anchor.x=(.5*c.originalWidth-c.offsetX)/c.width,g.anchor.y=1-(.5*c.originalHeight-c.offsetY)/c.height,g.alpha=b.a,c.rotate){var i=g.scale.x;g.scale.x=g.scale.y,g.scale.y=i}return a.sprites=a.sprites||{},a.sprites[c.name]=g,g},c.prototype.createMesh=function(a,b){var c=b.rendererObject,d=c.page.rendererObject,e=new PIXI.Texture(d),f=new Phaser.Rope(this.game,0,0,e);return f.drawMode=1,f.canvasPadding=1.5,f.vertices=new spine.Float32Array(b.uvs.length),f.uvs=b.uvs,f.indices=b.triangles,f.alpha=b.a,a.meshes=a.meshes||{},a.meshes[b.name]=f,f},c.prototype.setMixByName=function(a,b,c){this.stateData.setMixByName(a,b,c)},c.prototype.setAnimationByName=function(a,b,c){void 0===c&&(c=!1);var d=this.state.data.skeletonData.findAnimation(b);return d?this.state.setAnimation(a,d,c):null},c.prototype.addAnimationByName=function(a,b,c,d){void 0===c&&(c=!1),void 0===d&&(d=0);var e=this.state.data.skeletonData.findAnimation(b);return e?this.state.addAnimation(a,e,c,d):null},c.prototype.getCurrentAnimationForTrack=function(a){return this.state.tracks[a]&&this.state.tracks[a].animation?this.state.tracks[a].animation.name:""},c.prototype.setSkinByName=function(a){var b=this.skeleton.data.findSkin(a);b&&this.skeleton.setSkin(b)},c.prototype.setSkin=function(a){this.skeleton.setSkin(a)},c.prototype.setToSetupPose=function(){this.skeleton.setToSetupPose()},c.prototype.createCombinedSkin=function(a){for(var b=[],c=1;c<arguments.length;c++)b[c-1]=arguments[c];if(0!==b.length){for(var d=new spine.Skin(a),e=0;e<b.length;e++){var f=b[e],g=this.skeleton.data.findSkin(f);if(!g)return;for(var h in g.attachments){var i=h.split(":"),j=i[0],k=i[1],l=g.attachments[h];if(void 0===j||void 0===k)return;void 0===d.getAttachment(j,k)&&d.addAttachment(j,k,l)}}return this.skeleton.data.skins.push(d),d}},c.globalAutoUpdate=!0,c}(Phaser.Group);a.Spine=b}(PhaserSpine||(PhaserSpine={}));var PhaserSpine;!function(a){var b=function(){function a(a){this.load=function(a,b,c){var d=this.game.make.image(0,0,b);a.rendererObject=d.texture.baseTexture},this.unload=function(a){a.destroy()},this.game=a}return a}();a.SpineTextureLoader=b}(PhaserSpine||(PhaserSpine={}));
+
+/******************************************************************************
+ * Spine Runtimes Software License
+ * Version 2.3
+ *
+ * Copyright (c) 2013-2015, Esoteric Software
+ * All rights reserved.
+ *
+ * You are granted a perpetual, non-exclusive, non-sublicensable and
+ * non-transferable license to use, install, execute and perform the Spine
+ * Runtimes Software (the "Software") and derivative works solely for personal
+ * or internal use. Without the written permission of Esoteric Software (see
+ * Section 2 of the Spine Software License Agreement), you may not (a) modify,
+ * translate, adapt or otherwise create derivative works, improvements of the
+ * Software or develop new applications using the Software or (b) remove,
+ * delete, alter or obscure any trademarks or any copyright, trademark, patent
+ * or other intellectual property or proprietary rights notices on or in the
+ * Software, including any copy thereof. Redistributions in binary or source
+ * form must include this license and terms.
+ *
+ * THIS SOFTWARE IS PROVIDED BY ESOTERIC SOFTWARE "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ * EVENT SHALL ESOTERIC SOFTWARE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *****************************************************************************/
+
+var spine = {
+	radDeg: 180 / Math.PI,
+	degRad: Math.PI / 180,
+	Float32Array: typeof(Float32Array) === 'undefined' ? Array : Float32Array,
+	Uint32Array: typeof(Uint32Array) === 'undefined' ? Array : Uint32Array,
+	Uint16Array: typeof(Uint16Array) === 'undefined' ? Array : Uint16Array
+};
+spine.temp = new spine.Float32Array(2);
+
+spine.BoneData = function (name, parent) {
+	this.name = name;
+	this.parent = parent;
+};
+spine.BoneData.prototype = {
+	length: 0,
+	x: 0, y: 0,
+	rotation: 0,
+	scaleX: 1, scaleY: 1,
+	inheritScale: true,
+	inheritRotation: true
+};
+
+spine.BlendMode = {
+	normal: 0,
+	additive: 1,
+	multiply: 2,
+	screen: 3
+};
+
+spine.SlotData = function (name, boneData) {
+	this.name = name;
+	this.boneData = boneData;
+};
+spine.SlotData.prototype = {
+	r: 1, g: 1, b: 1, a: 1,
+	attachmentName: null,
+	blendMode: spine.BlendMode.normal
+};
+
+spine.IkConstraintData = function (name) {
+	this.name = name;
+	this.bones = [];
+};
+spine.IkConstraintData.prototype = {
+	target: null,
+	bendDirection: 1,
+	mix: 1
+};
+
+spine.TransformConstraintData = function (name) {
+	this.name = name;
+};
+spine.TransformConstraintData.prototype = {
+	bone: null,
+	target: null,
+	translateMix: 1,
+	x: 0, y: 0
+};
+
+spine.Bone = function (boneData, skeleton, parent) {
+	this.data = boneData;
+	this.skeleton = skeleton;
+	this.parent = parent;
+	this.setToSetupPose();
+};
+spine.Bone.yDown = false;
+spine.Bone.prototype = {
+	x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1,
+	a: 0, b: 0, worldX: 0,
+	c: 0, d: 0, worldY: 0,
+	worldSignX: 1, worldSignY: 1,
+	update: function () {
+		this.updateWorldTransform(this.x, this.y, this.rotation, this.scaleX, this.scaleY);
+	},
+	updateWorldTransformWith: function () {
+		this.updateWorldTransform(this.x, this.y, this.rotation, this.scaleX, this.scaleY);
+	},
+	updateWorldTransform: function (x, y, rotation, scaleX, scaleY) {
+		this.appliedRotation = rotation;
+		this.appliedScaleX = scaleX;
+		this.appliedScaleY = scaleY;
+
+		rotation *= spine.degRad;
+		var cos = Math.cos(rotation), sin = Math.sin(rotation);
+		var la = cos * scaleX, lb = -sin * scaleY, lc = sin * scaleX, ld = cos * scaleY;
+		var parent = this.parent;
+		if (!parent) { // Root bone.
+			var skeleton = this.skeleton;
+			if (skeleton.flipX) {
+				x = -x;
+				la = -la;
+				lb = -lb;
+			}
+			if (skeleton.flipY != spine.Bone.yDown) {
+				y = -y;
+				lc = -lc;
+				ld = -ld;
+			}
+			this.a = la;
+			this.b = lb;
+			this.c = lc;
+			this.d = ld;
+			this.worldX = x;
+			this.worldY = y;
+			this.worldSignX = scaleX < 0 ? -1 : 1;
+			this.worldSignY = scaleY < 0 ? -1 : 1;
+			return;
+		}
+
+		var pa = parent.a, pb = parent.b, pc = parent.c, pd = parent.d;
+		this.worldX = pa * x + pb * y + parent.worldX;
+		this.worldY = pc * x + pd * y + parent.worldY;
+		this.worldSignX = parent.worldSignX * (scaleX < 0 ? -1 : 1);
+		this.worldSignY = parent.worldSignY * (scaleY < 0 ? -1 : 1);
+
+		if (this.data.inheritRotation && this.data.inheritScale) {
+			this.a = pa * la + pb * lc;
+			this.b = pa * lb + pb * ld;
+			this.c = pc * la + pd * lc;
+			this.d = pc * lb + pd * ld;
+		} else {
+			if (this.data.inheritRotation) { // No scale inheritance.
+				pa = 1;
+				pb = 0;
+				pc = 0;
+				pd = 1;
+				do {
+					rotation = parent.appliedRotation * spine.degRad;
+					cos = Math.cos(rotation);
+					sin = Math.sin(rotation);
+					var temp = pa * cos + pb * sin;
+					pb = pa * -sin + pb * cos;
+					pa = temp;
+					temp = pc * cos + pd * sin;
+					pd = pc * -sin + pd * cos;
+					pc = temp;
+
+					if (!parent.data.inheritRotation) break;
+					parent = parent.parent;
+				} while (parent);
+				this.a = pa * la + pb * lc;
+				this.b = pa * lb + pb * ld;
+				this.c = pc * la + pd * lc;
+				this.d = pc * lb + pd * ld;
+			} else if (this.data.inheritScale) { // No rotation inheritance.
+				pa = 1;
+				pb = 0;
+				pc = 0;
+				pd = 1;
+				do {
+					rotation = parent.appliedRotation * spine.degRad;
+					cos = Math.cos(rotation);
+					sin = Math.sin(rotation);
+					var psx = parent.appliedScaleX, psy = parent.appliedScaleY;
+					var za = cos * psx, zb = -sin * psy, zc = sin * psx, zd = cos * psy;
+					var temp = pa * za + pb * zc;
+					pb = pa * zb + pb * zd;
+					pa = temp;
+					temp = pc * za + pd * zc;
+					pd = pc * zb + pd * zd;
+					pc = temp;
+
+					if (psx < 0) rotation = -rotation;
+					cos = Math.cos(-rotation);
+					sin = Math.sin(-rotation);
+					temp = pa * cos + pb * sin;
+					pb = pa * -sin + pb * cos;
+					pa = temp;
+					temp = pc * cos + pd * sin;
+					pd = pc * -sin + pd * cos;
+					pc = temp;
+
+					if (!parent.data.inheritScale) break;
+					parent = parent.parent;
+				} while (parent);
+				this.a = pa * la + pb * lc;
+				this.b = pa * lb + pb * ld;
+				this.c = pc * la + pd * lc;
+				this.d = pc * lb + pd * ld;
+			} else {
+				this.a = la;
+				this.b = lb;
+				this.c = lc;
+				this.d = ld;
+			}
+			if (this.skeleton.flipX) {
+				this.a = -this.a;
+				this.b = -this.b;
+			}
+			if (this.skeleton.flipY != spine.Bone.yDown) {
+				this.c = -this.c;
+				this.d = -this.d;
+			}
+		}
+	},
+	setToSetupPose: function () {
+		var data = this.data;
+		this.x = data.x;
+		this.y = data.y;
+		this.rotation = data.rotation;
+		this.scaleX = data.scaleX;
+		this.scaleY = data.scaleY;
+	},
+	getWorldRotationX: function () {
+		return Math.atan2(this.c, this.a) * spine.radDeg;
+	},
+	getWorldRotationY: function () {
+		return Math.atan2(this.d, this.b) * spine.radDeg;
+	},
+	getWorldScaleX: function () {
+		return Math.sqrt(this.a * this.a + this.b * this.b) * this.worldSignX;
+	},
+	getWorldScaleY: function () {
+		return Math.sqrt(this.c * this.c + this.d * this.d) * this.worldSignY;
+	},
+	worldToLocal: function (world) {
+		var x = world[0] - this.worldX, y = world[1] - this.worldY;
+		var a = this.a, b = this.b, c = this.c, d = this.d;
+		var invDet = 1 / (a * d - b * c);
+		world[0] = (x * d * invDet - y * b * invDet);
+		world[1] = (y * a * invDet - x * c * invDet);
+		return world;
+	},
+	localToWorld: function (local) {
+		var x = local[0], y = local[1];
+		local[0] = x * this.a + y * this.b + this.worldX;
+		local[1] = x * this.c + y * this.d + this.worldY;
+		return local;
+	}
+};
+
+spine.Slot = function (slotData, bone) {
+	this.data = slotData;
+	this.bone = bone;
+	this.attachmentVertices = new spine.Float32Array();
+	this.setToSetupPose();
+};
+spine.Slot.prototype = {
+	r: 1, g: 1, b: 1, a: 1,
+	_attachmentTime: 0,
+	attachment: null,
+	setAttachment: function (attachment) {
+		if (this.attachment == attachment) return;
+		this.attachment = attachment;
+		this._attachmentTime = this.bone.skeleton.time;
+		this.attachmentVertices.length = 0;
+	},
+	setAttachmentTime: function (time) {
+		this._attachmentTime = this.bone.skeleton.time - time;
+	},
+	getAttachmentTime: function () {
+		return this.bone.skeleton.time - this._attachmentTime;
+	},
+	setToSetupPose: function () {
+		var data = this.data;
+		this.r = data.r;
+		this.g = data.g;
+		this.b = data.b;
+		this.a = data.a;
+
+		if (!data.attachmentName)
+			this.setAttachment(null);
+		else {
+			var slotDatas = this.bone.skeleton.data.slots;
+			for (var i = 0, n = slotDatas.length; i < n; i++) {
+				if (slotDatas[i] == data) {
+					this.attachment = null;
+					this.setAttachment(this.bone.skeleton.getAttachmentBySlotIndex(i, data.attachmentName));
+					break;
+				}
+			}
+		}
+	}
+};
+
+spine.IkConstraint = function (data, skeleton) {
+	this.data = data;
+	this.mix = data.mix;
+	this.bendDirection = data.bendDirection;
+
+	this.bones = [];
+	for (var i = 0, n = data.bones.length; i < n; i++)
+		this.bones[i] = skeleton.findBone(data.bones[i].name);
+	this.target = skeleton.findBone(data.target.name);
+};
+spine.IkConstraint.prototype = {
+	apply: function () {
+		this.update();
+	},
+	update: function () {
+		var target = this.target;
+		var bones = this.bones;
+		switch (bones.length) {
+			case 1:
+				spine.IkConstraint.apply1(bones[0], target.worldX, target.worldY, this.mix);
+				break;
+			case 2:
+				spine.IkConstraint.apply2(bones[0], bones[1], target.worldX, target.worldY, this.bendDirection, this.mix);
+				break;
+		}
+	},
+};
+/** Adjusts the bone rotation so the tip is as close to the target position as possible. The target is specified in the world
+ * coordinate system. */
+spine.IkConstraint.apply1 = function (bone, targetX, targetY, alpha) {
+	var parentRotation = !bone.parent ? 0 : bone.parent.getWorldRotationX();
+	var rotation = bone.rotation;
+	var rotationIK = Math.atan2(targetY - bone.worldY, targetX - bone.worldX) * spine.radDeg - parentRotation;
+	if ((bone.worldSignX != bone.worldSignY) != (bone.skeleton.flipX != (bone.skeleton.flipY != spine.Bone.yDown)))
+		rotationIK = 360 - rotationIK;
+	if (rotationIK > 180) rotationIK -= 360;
+	else if (rotationIK < -180) rotationIK += 360;
+	bone.updateWorldTransform(bone.x, bone.y, rotation + (rotationIK - rotation) * alpha, bone.appliedScaleX, bone.appliedScaleY);
+};
+/** Adjusts the parent and child bone rotations so the tip of the child is as close to the target position as possible. The
+ * target is specified in the world coordinate system.
+ * @param child A direct descendant of the parent bone. */
+spine.IkConstraint.apply2 = function (parent, child, targetX, targetY, bendDir, alpha) {
+	if (alpha == 0) return;
+	var px = parent.x, py = parent.y, psx = parent.appliedScaleX, psy = parent.appliedScaleY;
+	var os1, os2, s2;
+	if (psx < 0) {
+		psx = -psx;
+		os1 = 180;
+		s2 = -1;
+	} else {
+		os1 = 0;
+		s2 = 1;
+	}
+	if (psy < 0) {
+		psy = -psy;
+		s2 = -s2;
+	}
+	var cx = child.x, cy = child.y, csx = child.appliedScaleX;
+	var u = Math.abs(psx - psy) <= 0.0001;
+	if (!u && cy != 0) {
+		child.worldX = parent.a * cx + parent.worldX;
+		child.worldY = parent.c * cx + parent.worldY;
+		cy = 0;
+	}
+	if (csx < 0) {
+		csx = -csx;
+		os2 = 180;
+	} else
+		os2 = 0;
+	var pp = parent.parent;
+	var tx, ty, dx, dy;
+	if (!pp) {
+		tx = targetX - px;
+		ty = targetY - py;
+		dx = child.worldX - px;
+		dy = child.worldY - py;
+	} else {
+		var a = pp.a, b = pp.b, c = pp.c, d = pp.d, invDet = 1 / (a * d - b * c);
+		var wx = pp.worldX, wy = pp.worldY, x = targetX - wx, y = targetY - wy;
+		tx = (x * d - y * b) * invDet - px;
+		ty = (y * a - x * c) * invDet - py;
+		x = child.worldX - wx;
+		y = child.worldY - wy;
+		dx = (x * d - y * b) * invDet - px;
+		dy = (y * a - x * c) * invDet - py;
+	}
+	var l1 = Math.sqrt(dx * dx + dy * dy), l2 = child.data.length * csx, a1, a2;
+	outer:
+		if (u) {
+			l2 *= psx;
+			var cos = (tx * tx + ty * ty - l1 * l1 - l2 * l2) / (2 * l1 * l2);
+			if (cos < -1) cos = -1;
+			else if (cos > 1) cos = 1;
+			a2 = Math.acos(cos) * bendDir;
+			var a = l1 + l2 * cos, o = l2 * Math.sin(a2);
+			a1 = Math.atan2(ty * a - tx * o, tx * a + ty * o);
+		} else {
+			var a = psx * l2, b = psy * l2, ta = Math.atan2(ty, tx);
+			var aa = a * a, bb = b * b, ll = l1 * l1, dd = tx * tx + ty * ty;
+			var c0 = bb * ll + aa * dd - aa * bb, c1 = -2 * bb * l1, c2 = bb - aa;
+			var d = c1 * c1 - 4 * c2 * c0;
+			if (d >= 0) {
+				var q = Math.sqrt(d);
+				if (c1 < 0) q = -q;
+				q = -(c1 + q) / 2;
+				var r0 = q / c2, r1 = c0 / q;
+				var r = Math.abs(r0) < Math.abs(r1) ? r0 : r1;
+				if (r * r <= dd) {
+					var y = Math.sqrt(dd - r * r) * bendDir;
+					a1 = ta - Math.atan2(y, r);
+					a2 = Math.atan2(y / psy, (r - l1) / psx);
+					break outer;
+				}
+			}
+			var minAngle = 0, minDist = Number.MAX_VALUE, minX = 0, minY = 0;
+			var maxAngle = 0, maxDist = 0, maxX = 0, maxY = 0;
+			var x = l1 + a, dist = x * x;
+			if (dist > maxDist) {
+				maxAngle = 0;
+				maxDist = dist;
+				maxX = x;
+			}
+			x = l1 - a;
+			dist = x * x;
+			if (dist < minDist) {
+				minAngle = Math.PI;
+				minDist = dist;
+				minX = x;
+			}
+			var angle = Math.acos(-a * l1 / (aa - bb));
+			x = a * Math.cos(angle) + l1;
+			var y = b * Math.sin(angle);
+			dist = x * x + y * y;
+			if (dist < minDist) {
+				minAngle = angle;
+				minDist = dist;
+				minX = x;
+				minY = y;
+			}
+			if (dist > maxDist) {
+				maxAngle = angle;
+				maxDist = dist;
+				maxX = x;
+				maxY = y;
+			}
+			if (dd <= (minDist + maxDist) / 2) {
+				a1 = ta - Math.atan2(minY * bendDir, minX);
+				a2 = minAngle * bendDir;
+			} else {
+				a1 = ta - Math.atan2(maxY * bendDir, maxX);
+				a2 = maxAngle * bendDir;
+			}
+		}
+	var os = Math.atan2(cy, cx) * s2;
+	a1 = (a1 - os) * spine.radDeg + os1;
+	a2 = (a2 + os) * spine.radDeg * s2 + os2;
+	if (a1 > 180) a1 -= 360;
+	else if (a1 < -180) a1 += 360;
+	if (a2 > 180) a2 -= 360;
+	else if (a2 < -180) a2 += 360;
+	var rotation = parent.rotation;
+	parent.updateWorldTransform(px, py, rotation + (a1 - rotation) * alpha, parent.appliedScaleX, parent.appliedScaleY);
+	rotation = child.rotation;
+	child.updateWorldTransform(cx, cy, rotation + (a2 - rotation) * alpha, child.appliedScaleX, child.appliedScaleY);
+};
+
+spine.TransformConstraint = function (data, skeleton) {
+	this.data = data;
+	this.translateMix = data.translateMix;
+	this.x = data.x;
+	this.y = data.y;
+	this.bone = skeleton.findBone(data.bone.name);
+	this.target = skeleton.findBone(data.target.name);
+};
+spine.TransformConstraint.prototype = {
+	apply: function () {
+		this.update();
+	},
+	update: function () {
+		var translateMix = this.translateMix;
+		if (translateMix > 0) {
+			var temp = spine.temp;
+			temp[0] = x;
+			temp[1] = y;
+			this.target.localToWorld(temp);
+			var bone = this.bone;
+			bone.worldX += (temp[0] - bone.worldX) * translateMix;
+			bone.worldY += (temp[1] - bone.worldY) * translateMix;
+		}
+	},
+};
+
+spine.Skin = function (name) {
+	this.name = name;
+	this.attachments = {};
+};
+spine.Skin.prototype = {
+	addAttachment: function (slotIndex, name, attachment) {
+		this.attachments[slotIndex + ":" + name] = attachment;
+	},
+	getAttachment: function (slotIndex, name) {
+		return this.attachments[slotIndex + ":" + name];
+	},
+	_attachAll: function (skeleton, oldSkin) {
+		for (var key in oldSkin.attachments) {
+			var colon = key.indexOf(":");
+			var slotIndex = parseInt(key.substring(0, colon));
+			var name = key.substring(colon + 1);
+			var slot = skeleton.slots[slotIndex];
+			if (slot.attachment && slot.attachment.name == name) {
+				var attachment = this.getAttachment(slotIndex, name);
+				if (attachment) slot.setAttachment(attachment);
+			}
+		}
+	}
+};
+
+spine.Animation = function (name, timelines, duration) {
+	this.name = name;
+	this.timelines = timelines;
+	this.duration = duration;
+};
+spine.Animation.prototype = {
+	apply: function (skeleton, lastTime, time, loop, events) {
+		if (loop && this.duration != 0) {
+			time %= this.duration;
+			if (lastTime > 0) lastTime %= this.duration;
+		}
+		var timelines = this.timelines;
+		for (var i = 0, n = timelines.length; i < n; i++)
+			timelines[i].apply(skeleton, lastTime, time, events, 1);
+	},
+	mix: function (skeleton, lastTime, time, loop, events, alpha) {
+		if (loop && this.duration != 0) {
+			time %= this.duration;
+			if (lastTime > 0) lastTime %= this.duration;
+		}
+		var timelines = this.timelines;
+		for (var i = 0, n = timelines.length; i < n; i++)
+			timelines[i].apply(skeleton, lastTime, time, events, alpha);
+	}
+};
+spine.Animation.binarySearch = function (values, target, step) {
+	var low = 0;
+	var high = Math.floor(values.length / step) - 2;
+	if (!high) return step;
+	var current = high >>> 1;
+	while (true) {
+		if (values[(current + 1) * step] <= target)
+			low = current + 1;
+		else
+			high = current;
+		if (low == high) return (low + 1) * step;
+		current = (low + high) >>> 1;
+	}
+};
+spine.Animation.binarySearch1 = function (values, target) {
+	var low = 0;
+	var high = values.length - 2;
+	if (!high) return 1;
+	var current = high >>> 1;
+	while (true) {
+		if (values[current + 1] <= target)
+			low = current + 1;
+		else
+			high = current;
+		if (low == high) return low + 1;
+		current = (low + high) >>> 1;
+	}
+};
+spine.Animation.linearSearch = function (values, target, step) {
+	for (var i = 0, last = values.length - step; i <= last; i += step)
+		if (values[i] > target) return i;
+	return -1;
+};
+
+spine.Curves = function (frameCount) {
+	var count = (frameCount - 1) * 19/*BEZIER_SIZE*/;
+	this.curves = new spine.Float32Array(count); // type, x, y, ...
+	this.curves.length = count;
+};
+spine.Curves.prototype = {
+	setLinear: function (frameIndex) {
+		this.curves[frameIndex * 19/*BEZIER_SIZE*/] = 0/*LINEAR*/;
+	},
+	setStepped: function (frameIndex) {
+		this.curves[frameIndex * 19/*BEZIER_SIZE*/] = 1/*STEPPED*/;
+	},
+	/** Sets the control handle positions for an interpolation bezier curve used to transition from this keyframe to the next.
+	 * cx1 and cx2 are from 0 to 1, representing the percent of time between the two keyframes. cy1 and cy2 are the percent of
+	 * the difference between the keyframe's values. */
+	setCurve: function (frameIndex, cx1, cy1, cx2, cy2) {
+		var subdiv1 = 1 / 10/*BEZIER_SEGMENTS*/, subdiv2 = subdiv1 * subdiv1, subdiv3 = subdiv2 * subdiv1;
+		var pre1 = 3 * subdiv1, pre2 = 3 * subdiv2, pre4 = 6 * subdiv2, pre5 = 6 * subdiv3;
+		var tmp1x = -cx1 * 2 + cx2, tmp1y = -cy1 * 2 + cy2, tmp2x = (cx1 - cx2) * 3 + 1, tmp2y = (cy1 - cy2) * 3 + 1;
+		var dfx = cx1 * pre1 + tmp1x * pre2 + tmp2x * subdiv3, dfy = cy1 * pre1 + tmp1y * pre2 + tmp2y * subdiv3;
+		var ddfx = tmp1x * pre4 + tmp2x * pre5, ddfy = tmp1y * pre4 + tmp2y * pre5;
+		var dddfx = tmp2x * pre5, dddfy = tmp2y * pre5;
+
+		var i = frameIndex * 19/*BEZIER_SIZE*/;
+		var curves = this.curves;
+		curves[i++] = 2/*BEZIER*/;
+
+		var x = dfx, y = dfy;
+		for (var n = i + 19/*BEZIER_SIZE*/ - 1; i < n; i += 2) {
+			curves[i] = x;
+			curves[i + 1] = y;
+			dfx += ddfx;
+			dfy += ddfy;
+			ddfx += dddfx;
+			ddfy += dddfy;
+			x += dfx;
+			y += dfy;
+		}
+	},
+	getCurvePercent: function (frameIndex, percent) {
+		percent = percent < 0 ? 0 : (percent > 1 ? 1 : percent);
+		var curves = this.curves;
+		var i = frameIndex * 19/*BEZIER_SIZE*/;
+		var type = curves[i];
+		if (type === 0/*LINEAR*/) return percent;
+		if (type == 1/*STEPPED*/) return 0;
+		i++;
+		var x = 0;
+		for (var start = i, n = i + 19/*BEZIER_SIZE*/ - 1; i < n; i += 2) {
+			x = curves[i];
+			if (x >= percent) {
+				var prevX, prevY;
+				if (i == start) {
+					prevX = 0;
+					prevY = 0;
+				} else {
+					prevX = curves[i - 2];
+					prevY = curves[i - 1];
+				}
+				return prevY + (curves[i + 1] - prevY) * (percent - prevX) / (x - prevX);
+			}
+		}
+		var y = curves[i - 1];
+		return y + (1 - y) * (percent - x) / (1 - x); // Last point is 1,1.
+	}
+};
+
+spine.RotateTimeline = function (frameCount) {
+	this.curves = new spine.Curves(frameCount);
+	this.frames = new spine.Float32Array(frameCount * 2); // time, angle, ...
+	this.frames.length = frameCount * 2;
+};
+spine.RotateTimeline.prototype = {
+	boneIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 2;
+	},
+	setFrame: function (frameIndex, time, angle) {
+		frameIndex *= 2;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = angle;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
+
+		var bone = skeleton.bones[this.boneIndex];
+
+		if (time >= frames[frames.length - 2]) { // Time is after last frame.
+			var amount = bone.data.rotation + frames[frames.length - 1] - bone.rotation;
+			while (amount > 180)
+				amount -= 360;
+			while (amount < -180)
+				amount += 360;
+			bone.rotation += amount * alpha;
+			return;
+		}
+
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch(frames, time, 2);
+		var prevFrameValue = frames[frameIndex - 1];
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex - 2/*PREV_FRAME_TIME*/] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex / 2 - 1, percent);
+
+		var amount = frames[frameIndex + 1/*FRAME_VALUE*/] - prevFrameValue;
+		while (amount > 180)
+			amount -= 360;
+		while (amount < -180)
+			amount += 360;
+		amount = bone.data.rotation + (prevFrameValue + amount * percent) - bone.rotation;
+		while (amount > 180)
+			amount -= 360;
+		while (amount < -180)
+			amount += 360;
+		bone.rotation += amount * alpha;
+	}
+};
+
+spine.TranslateTimeline = function (frameCount) {
+	this.curves = new spine.Curves(frameCount);
+	this.frames = new spine.Float32Array(frameCount * 3); // time, x, y, ...
+	this.frames.length = frameCount * 3;
+};
+spine.TranslateTimeline.prototype = {
+	boneIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 3;
+	},
+	setFrame: function (frameIndex, time, x, y) {
+		frameIndex *= 3;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = x;
+		this.frames[frameIndex + 2] = y;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
+
+		var bone = skeleton.bones[this.boneIndex];
+
+		if (time >= frames[frames.length - 3]) { // Time is after last frame.
+			bone.x += (bone.data.x + frames[frames.length - 2] - bone.x) * alpha;
+			bone.y += (bone.data.y + frames[frames.length - 1] - bone.y) * alpha;
+			return;
+		}
+
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch(frames, time, 3);
+		var prevFrameX = frames[frameIndex - 2];
+		var prevFrameY = frames[frameIndex - 1];
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex + -3/*PREV_FRAME_TIME*/] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex / 3 - 1, percent);
+
+		bone.x += (bone.data.x + prevFrameX + (frames[frameIndex + 1/*FRAME_X*/] - prevFrameX) * percent - bone.x) * alpha;
+		bone.y += (bone.data.y + prevFrameY + (frames[frameIndex + 2/*FRAME_Y*/] - prevFrameY) * percent - bone.y) * alpha;
+	}
+};
+
+spine.ScaleTimeline = function (frameCount) {
+	this.curves = new spine.Curves(frameCount);
+	this.frames = new spine.Float32Array(frameCount * 3); // time, x, y, ...
+	this.frames.length = frameCount * 3;
+};
+spine.ScaleTimeline.prototype = {
+	boneIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 3;
+	},
+	setFrame: function (frameIndex, time, x, y) {
+		frameIndex *= 3;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = x;
+		this.frames[frameIndex + 2] = y;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
+
+		var bone = skeleton.bones[this.boneIndex];
+
+		if (time >= frames[frames.length - 3]) { // Time is after last frame.
+			bone.scaleX += (bone.data.scaleX * frames[frames.length - 2] - bone.scaleX) * alpha;
+			bone.scaleY += (bone.data.scaleY * frames[frames.length - 1] - bone.scaleY) * alpha;
+			return;
+		}
+
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch(frames, time, 3);
+		var prevFrameX = frames[frameIndex - 2];
+		var prevFrameY = frames[frameIndex - 1];
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex + -3/*PREV_FRAME_TIME*/] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex / 3 - 1, percent);
+
+		bone.scaleX += (bone.data.scaleX * (prevFrameX + (frames[frameIndex + 1/*FRAME_X*/] - prevFrameX) * percent) - bone.scaleX) * alpha;
+		bone.scaleY += (bone.data.scaleY * (prevFrameY + (frames[frameIndex + 2/*FRAME_Y*/] - prevFrameY) * percent) - bone.scaleY) * alpha;
+	}
+};
+
+spine.ColorTimeline = function (frameCount) {
+	this.curves = new spine.Curves(frameCount);
+	this.frames = new spine.Float32Array(frameCount * 5); // time, r, g, b, a, ...
+	this.frames.length = frameCount * 5;
+};
+spine.ColorTimeline.prototype = {
+	slotIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 5;
+	},
+	setFrame: function (frameIndex, time, r, g, b, a) {
+		frameIndex *= 5;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = r;
+		this.frames[frameIndex + 2] = g;
+		this.frames[frameIndex + 3] = b;
+		this.frames[frameIndex + 4] = a;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
+
+		var r, g, b, a;
+		if (time >= frames[frames.length - 5]) {
+			// Time is after last frame.
+			var i = frames.length - 1;
+			r = frames[i - 3];
+			g = frames[i - 2];
+			b = frames[i - 1];
+			a = frames[i];
+		} else {
+			// Interpolate between the previous frame and the current frame.
+			var frameIndex = spine.Animation.binarySearch(frames, time, 5);
+			var prevFrameR = frames[frameIndex - 4];
+			var prevFrameG = frames[frameIndex - 3];
+			var prevFrameB = frames[frameIndex - 2];
+			var prevFrameA = frames[frameIndex - 1];
+			var frameTime = frames[frameIndex];
+			var percent = 1 - (time - frameTime) / (frames[frameIndex - 5/*PREV_FRAME_TIME*/] - frameTime);
+			percent = this.curves.getCurvePercent(frameIndex / 5 - 1, percent);
+
+			r = prevFrameR + (frames[frameIndex + 1/*FRAME_R*/] - prevFrameR) * percent;
+			g = prevFrameG + (frames[frameIndex + 2/*FRAME_G*/] - prevFrameG) * percent;
+			b = prevFrameB + (frames[frameIndex + 3/*FRAME_B*/] - prevFrameB) * percent;
+			a = prevFrameA + (frames[frameIndex + 4/*FRAME_A*/] - prevFrameA) * percent;
+		}
+		var slot = skeleton.slots[this.slotIndex];
+		if (alpha < 1) {
+			slot.r += (r - slot.r) * alpha;
+			slot.g += (g - slot.g) * alpha;
+			slot.b += (b - slot.b) * alpha;
+			slot.a += (a - slot.a) * alpha;
+		} else {
+			slot.r = r;
+			slot.g = g;
+			slot.b = b;
+			slot.a = a;
+		}
+	}
+};
+
+spine.AttachmentTimeline = function (frameCount) {
+	this.curves = new spine.Curves(frameCount);
+	this.frames = new spine.Float32Array(frameCount); // time, ...
+	this.frames.length = frameCount;
+	this.attachmentNames = [];
+	this.attachmentNames.length = frameCount;
+};
+spine.AttachmentTimeline.prototype = {
+	slotIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length;
+	},
+	setFrame: function (frameIndex, time, attachmentName) {
+		this.frames[frameIndex] = time;
+		this.attachmentNames[frameIndex] = attachmentName;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) {
+			if (lastTime > time) this.apply(skeleton, lastTime, Number.MAX_VALUE, null, 0);
+			return;
+		} else if (lastTime > time) //
+			lastTime = -1;
+
+		var frameIndex = time >= frames[frames.length - 1] ? frames.length - 1 : spine.Animation.binarySearch1(frames, time) - 1;
+		if (frames[frameIndex] < lastTime) return;
+
+		var attachmentName = this.attachmentNames[frameIndex];
+		skeleton.slots[this.slotIndex].setAttachment(
+			!attachmentName ? null : skeleton.getAttachmentBySlotIndex(this.slotIndex, attachmentName));
+	}
+};
+
+spine.EventTimeline = function (frameCount) {
+	this.frames = new spine.Float32Array(frameCount); // time, ...
+	this.frames.length = frameCount;
+	this.events = [];
+	this.events.length = frameCount;
+};
+spine.EventTimeline.prototype = {
+	getFrameCount: function () {
+		return this.frames.length;
+	},
+	setFrame: function (frameIndex, event) {
+		this.frames[frameIndex] = event.time;
+		this.events[frameIndex] = event;
+	},
+	/** Fires events for frames > lastTime and <= time. */
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		if (!firedEvents) return;
+
+		var frames = this.frames;
+		var frameCount = frames.length;
+
+		if (lastTime > time) { // Fire events after last time for looped animations.
+			this.apply(skeleton, lastTime, Number.MAX_VALUE, firedEvents, alpha);
+			lastTime = -1;
+		} else if (lastTime >= frames[frameCount - 1]) // Last time is after last frame.
+			return;
+		if (time < frames[0]) return; // Time is before first frame.
+
+		var frameIndex;
+		if (lastTime < frames[0])
+			frameIndex = 0;
+		else {
+			frameIndex = spine.Animation.binarySearch1(frames, lastTime);
+			var frame = frames[frameIndex];
+			while (frameIndex > 0) { // Fire multiple events with the same frame.
+				if (frames[frameIndex - 1] != frame) break;
+				frameIndex--;
+			}
+		}
+		var events = this.events;
+		for (; frameIndex < frameCount && time >= frames[frameIndex]; frameIndex++)
+			firedEvents[firedEvents.length] = events[frameIndex];
+	}
+};
+
+spine.DrawOrderTimeline = function (frameCount) {
+	this.frames = new spine.Float32Array(frameCount); // time, ...
+	this.frames.length = frameCount;
+	this.drawOrders = [];
+	this.drawOrders.length = frameCount;
+};
+spine.DrawOrderTimeline.prototype = {
+	getFrameCount: function () {
+		return this.frames.length;
+	},
+	setFrame: function (frameIndex, time, drawOrder) {
+		this.frames[frameIndex] = time;
+		this.drawOrders[frameIndex] = drawOrder;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
+
+		var frameIndex;
+		if (time >= frames[frames.length - 1]) // Time is after last frame.
+			frameIndex = frames.length - 1;
+		else
+			frameIndex = spine.Animation.binarySearch1(frames, time) - 1;
+
+		var drawOrder = skeleton.drawOrder;
+		var slots = skeleton.slots;
+		var drawOrderToSetupIndex = this.drawOrders[frameIndex];
+		if (!drawOrderToSetupIndex) {
+			for (var i = 0, n = slots.length; i < n; i++)
+				drawOrder[i] = slots[i];
+		} else {
+			for (var i = 0, n = drawOrderToSetupIndex.length; i < n; i++)
+				drawOrder[i] = skeleton.slots[drawOrderToSetupIndex[i]];
+		}
+
+	}
+};
+
+spine.FfdTimeline = function (frameCount) {
+	this.curves = new spine.Curves(frameCount);
+	this.frames = new spine.Float32Array(frameCount);
+	this.frames.length = frameCount;
+	this.frameVertices = [];
+	this.frameVertices.length = frameCount;
+};
+spine.FfdTimeline.prototype = {
+	slotIndex: 0,
+	attachment: 0,
+	getFrameCount: function () {
+		return this.frames.length;
+	},
+	setFrame: function (frameIndex, time, vertices) {
+		this.frames[frameIndex] = time;
+		this.frameVertices[frameIndex] = vertices;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var slot = skeleton.slots[this.slotIndex];
+		var slotAttachment = slot.attachment;
+		if (!slotAttachment) return;
+		if (slotAttachment != this.attachment && (!slotAttachment.inheritFFD || slotAttachment.parentMesh != this.attachment)) return;
+
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
+
+		var frameVertices = this.frameVertices;
+		var vertexCount = frameVertices[0].length;
+
+		var vertices = slot.attachmentVertices;
+		if (vertices.length != vertexCount) {
+			slot.attachmentVertices = vertices = new spine.Float32Array(vertexCount);
+			alpha = 1;
+		}
+
+		if (time >= frames[frames.length - 1]) { // Time is after last frame.
+			var lastVertices = frameVertices[frames.length - 1];
+			if (alpha < 1) {
+				for (var i = 0; i < vertexCount; i++)
+					vertices[i] += (lastVertices[i] - vertices[i]) * alpha;
+			} else {
+				for (var i = 0; i < vertexCount; i++)
+					vertices[i] = lastVertices[i];
+			}
+			return;
+		}
+
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch1(frames, time);
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex - 1] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex - 1, percent < 0 ? 0 : (percent > 1 ? 1 : percent));
+
+		var prevVertices = frameVertices[frameIndex - 1];
+		var nextVertices = frameVertices[frameIndex];
+
+		if (alpha < 1) {
+			for (var i = 0; i < vertexCount; i++) {
+				var prev = prevVertices[i];
+				vertices[i] += (prev + (nextVertices[i] - prev) * percent - vertices[i]) * alpha;
+			}
+		} else {
+			for (var i = 0; i < vertexCount; i++) {
+				var prev = prevVertices[i];
+				vertices[i] = prev + (nextVertices[i] - prev) * percent;
+			}
+		}
+	}
+};
+
+spine.IkConstraintTimeline = function (frameCount) {
+	this.curves = new spine.Curves(frameCount);
+	this.frames = new spine.Float32Array(frameCount * 3); // time, mix, bendDirection, ...
+	this.frames.length = frameCount * 3;
+};
+spine.IkConstraintTimeline.prototype = {
+	ikConstraintIndex: 0,
+	getFrameCount: function () {
+		return this.frames.length / 3;
+	},
+	setFrame: function (frameIndex, time, mix, bendDirection) {
+		frameIndex *= 3;
+		this.frames[frameIndex] = time;
+		this.frames[frameIndex + 1] = mix;
+		this.frames[frameIndex + 2] = bendDirection;
+	},
+	apply: function (skeleton, lastTime, time, firedEvents, alpha) {
+		var frames = this.frames;
+		if (time < frames[0]) return; // Time is before first frame.
+
+		var ikConstraint = skeleton.ikConstraints[this.ikConstraintIndex];
+
+		if (time >= frames[frames.length - 3]) { // Time is after last frame.
+			ikConstraint.mix += (frames[frames.length - 2] - ikConstraint.mix) * alpha;
+			ikConstraint.bendDirection = frames[frames.length - 1];
+			return;
+		}
+
+		// Interpolate between the previous frame and the current frame.
+		var frameIndex = spine.Animation.binarySearch(frames, time, 3);
+		var prevFrameMix = frames[frameIndex + -2/*PREV_FRAME_MIX*/];
+		var frameTime = frames[frameIndex];
+		var percent = 1 - (time - frameTime) / (frames[frameIndex + -3/*PREV_FRAME_TIME*/] - frameTime);
+		percent = this.curves.getCurvePercent(frameIndex / 3 - 1, percent);
+
+		var mix = prevFrameMix + (frames[frameIndex + 1/*FRAME_MIX*/] - prevFrameMix) * percent;
+		ikConstraint.mix += (mix - ikConstraint.mix) * alpha;
+		ikConstraint.bendDirection = frames[frameIndex + -1/*PREV_FRAME_BEND_DIRECTION*/];
+	}
+};
+
+spine.SkeletonData = function () {
+	this.bones = [];
+	this.slots = [];
+	this.skins = [];
+	this.events = [];
+	this.animations = [];
+	this.ikConstraints = [];
+	this.transformConstraints = [];
+};
+spine.SkeletonData.prototype = {
+	name: null,
+	defaultSkin: null,
+	width: 0, height: 0,
+	version: null, hash: null,
+	/** @return May be null. */
+	findBone: function (boneName) {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			if (bones[i].name == boneName) return bones[i];
+		return null;
+	},
+	/** @return -1 if the bone was not found. */
+	findBoneIndex: function (boneName) {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			if (bones[i].name == boneName) return i;
+		return -1;
+	},
+	/** @return May be null. */
+	findSlot: function (slotName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++) {
+			if (slots[i].name == slotName) return slot[i];
+		}
+		return null;
+	},
+	/** @return -1 if the bone was not found. */
+	findSlotIndex: function (slotName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++)
+			if (slots[i].name == slotName) return i;
+		return -1;
+	},
+	/** @return May be null. */
+	findSkin: function (skinName) {
+		var skins = this.skins;
+		for (var i = 0, n = skins.length; i < n; i++)
+			if (skins[i].name == skinName) return skins[i];
+		return null;
+	},
+	/** @return May be null. */
+	findEvent: function (eventName) {
+		var events = this.events;
+		for (var i = 0, n = events.length; i < n; i++)
+			if (events[i].name == eventName) return events[i];
+		return null;
+	},
+	/** @return May be null. */
+	findAnimation: function (animationName) {
+		var animations = this.animations;
+		for (var i = 0, n = animations.length; i < n; i++)
+			if (animations[i].name == animationName) return animations[i];
+		return null;
+	},
+	/** @return May be null. */
+	findIkConstraint: function (constraintName) {
+		var ikConstraints = this.ikConstraints;
+		for (var i = 0, n = ikConstraints.length; i < n; i++)
+			if (ikConstraints[i].name == constraintName) return ikConstraints[i];
+		return null;
+	},
+	/** @return May be null. */
+	findTransformConstraints: function (constraintName) {
+		var transformConstraints = this.transformConstraints;
+		for (var i = 0, n = transformConstraints.length; i < n; i++)
+			if (transformConstraints[i].name == constraintName) return transformConstraints[i];
+		return null;
+	}
+};
+
+spine.Skeleton = function (skeletonData) {
+	this.data = skeletonData;
+
+	this.bones = [];
+	for (var i = 0, n = skeletonData.bones.length; i < n; i++) {
+		var boneData = skeletonData.bones[i];
+		var parent = !boneData.parent ? null : this.bones[skeletonData.bones.indexOf(boneData.parent)];
+		this.bones[i] = new spine.Bone(boneData, this, parent);
+	}
+
+	this.slots = [];
+	this.drawOrder = [];
+	for (var i = 0, n = skeletonData.slots.length; i < n; i++) {
+		var slotData = skeletonData.slots[i];
+		var bone = this.bones[skeletonData.bones.indexOf(slotData.boneData)];
+		var slot = new spine.Slot(slotData, bone);
+		this.slots[i] = slot;
+		this.drawOrder[i] = slot;
+	}
+
+	this.ikConstraints = [];
+	for (var i = 0, n = skeletonData.ikConstraints.length; i < n; i++)
+		this.ikConstraints[i] = new spine.IkConstraint(skeletonData.ikConstraints[i], this);
+
+	this.transformConstraints = [];
+	for (var i = 0, n = skeletonData.transformConstraints.length; i < n; i++)
+		this.transformConstraints[i] = new spine.TransformConstraint(skeletonData.transformConstraints[i], this);
+
+	this.cache = [];
+	this.updateCache();
+};
+spine.Skeleton.prototype = {
+	x: 0, y: 0,
+	skin: null,
+	r: 1, g: 1, b: 1, a: 1,
+	time: 0,
+	flipX: false, flipY: false,
+	/** Caches information about bones and constraints. Must be called if bones or constraints are added or removed. */
+	updateCache: function () {
+		var bones = this.bones;
+		var updateCache = this.cache;
+		var ikConstraints = this.ikConstraints;
+		var transformConstraints = this.transformConstraints;
+		var ikConstraintsCount = ikConstraints.length;
+		var transformConstraintsCount = transformConstraints.length;
+		updateCache.length = 0;
+
+		for (var i = 0, n = bones.length; i < n; i++) {
+			var bone = bones[i];
+			updateCache[updateCache.length] = bone;
+			for (var ii = 0; ii < ikConstraintsCount; ii++) {
+				var ikConstraint = ikConstraints[ii];
+				if (bone == ikConstraint.bones[ikConstraint.bones.length - 1]) {
+					updateCache[updateCache.length] = ikConstraint;
+					break;
+				}
+			}
+		}
+
+		for (var i = 0; i < transformConstraintsCount; i++) {
+			var transformConstraint = transformConstraints[i];
+			for (var ii = updateCache.length - 1; ii >= 0; ii--) {
+				var object = updateCache[ii];
+				if (object == transformConstraint.bone || object == transformConstraint.target) {
+					updateCache.splice(ii + 1, 0, transformConstraint);
+					break;
+				}
+			}
+		}
+	},
+	/** Updates the world transform for each bone and applies constraints. */
+	updateWorldTransform: function () {
+		var updateCache = this.cache;
+		for (var i = 0, n = updateCache.length; i < n; i++)
+			updateCache[i].update();
+	},
+	/** Sets the bones, constraints, and slots to their setup pose values. */
+	setToSetupPose: function () {
+		this.setBonesToSetupPose();
+		this.setSlotsToSetupPose();
+	},
+	/** Sets the bones and constraints to their setup pose values. */
+	setBonesToSetupPose: function () {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			bones[i].setToSetupPose();
+
+		var ikConstraints = this.ikConstraints;
+		for (var i = 0, n = ikConstraints.length; i < n; i++) {
+			var constraint = ikConstraints[i];
+			constraint.bendDirection = constraint.data.bendDirection;
+			constraint.mix = constraint.data.mix;
+		}
+
+		var transformConstraints = this.transformConstraints;
+		for (var i = 0, n = transformConstraints.length; i < n; i++) {
+			var constraint = transformConstraints[i];
+			constraint.translateMix = constraint.data.translateMix;
+			constraint.x = constraint.data.x;
+			constraint.y = constraint.data.y;
+		}
+	},
+	setSlotsToSetupPose: function () {
+		var slots = this.slots;
+		var drawOrder = this.drawOrder;
+		for (var i = 0, n = slots.length; i < n; i++) {
+			drawOrder[i] = slots[i];
+			slots[i].setToSetupPose(i);
+		}
+	},
+	/** @return May return null. */
+	getRootBone: function () {
+		return this.bones.length ? this.bones[0] : null;
+	},
+	/** @return May be null. */
+	findBone: function (boneName) {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			if (bones[i].data.name == boneName) return bones[i];
+		return null;
+	},
+	/** @return -1 if the bone was not found. */
+	findBoneIndex: function (boneName) {
+		var bones = this.bones;
+		for (var i = 0, n = bones.length; i < n; i++)
+			if (bones[i].data.name == boneName) return i;
+		return -1;
+	},
+	/** @return May be null. */
+	findSlot: function (slotName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++)
+			if (slots[i].data.name == slotName) return slots[i];
+		return null;
+	},
+	/** @return -1 if the bone was not found. */
+	findSlotIndex: function (slotName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++)
+			if (slots[i].data.name == slotName) return i;
+		return -1;
+	},
+	setSkinByName: function (skinName) {
+		var skin = this.data.findSkin(skinName);
+		if (!skin) throw "Skin not found: " + skinName;
+		this.setSkin(skin);
+	},
+	/** Sets the skin used to look up attachments before looking in the {@link SkeletonData#getDefaultSkin() default skin}.
+	 * Attachments from the new skin are attached if the corresponding attachment from the old skin was attached. If there was
+	 * no old skin, each slot's setup mode attachment is attached from the new skin.
+	 * @param newSkin May be null. */
+	setSkin: function (newSkin) {
+		if (newSkin) {
+			if (this.skin)
+				newSkin._attachAll(this, this.skin);
+			else {
+				var slots = this.slots;
+				for (var i = 0, n = slots.length; i < n; i++) {
+					var slot = slots[i];
+					var name = slot.data.attachmentName;
+					if (name) {
+						var attachment = newSkin.getAttachment(i, name);
+						if (attachment) slot.setAttachment(attachment);
+					}
+				}
+			}
+		}
+		this.skin = newSkin;
+	},
+	/** @return May be null. */
+	getAttachmentBySlotName: function (slotName, attachmentName) {
+		return this.getAttachmentBySlotIndex(this.data.findSlotIndex(slotName), attachmentName);
+	},
+	/** @return May be null. */
+	getAttachmentBySlotIndex: function (slotIndex, attachmentName) {
+		if (this.skin) {
+			var attachment = this.skin.getAttachment(slotIndex, attachmentName);
+			if (attachment) return attachment;
+		}
+		if (this.data.defaultSkin) return this.data.defaultSkin.getAttachment(slotIndex, attachmentName);
+		return null;
+	},
+	/** @param attachmentName May be null. */
+	setAttachment: function (slotName, attachmentName) {
+		var slots = this.slots;
+		for (var i = 0, n = slots.length; i < n; i++) {
+			var slot = slots[i];
+			if (slot.data.name == slotName) {
+				var attachment = null;
+				if (attachmentName) {
+					attachment = this.getAttachmentBySlotIndex(i, attachmentName);
+					if (!attachment) throw "Attachment not found: " + attachmentName + ", for slot: " + slotName;
+				}
+				slot.setAttachment(attachment);
+				return;
+			}
+		}
+		throw "Slot not found: " + slotName;
+	},
+	/** @return May be null. */
+	findIkConstraint: function (constraintName) {
+		var ikConstraints = this.ikConstraints;
+		for (var i = 0, n = ikConstraints.length; i < n; i++)
+			if (ikConstraints[i].data.name == constraintName) return ikConstraints[i];
+		return null;
+	},
+	/** @return May be null. */
+	findTransformConstraint: function (constraintName) {
+		var transformConstraints = this.transformConstraints;
+		for (var i = 0, n = transformConstraints.length; i < n; i++)
+			if (transformConstraints[i].data.name == constraintName) return transformConstraints[i];
+		return null;
+	},
+	update: function (delta) {
+		this.time += delta;
+	}
+};
+
+spine.EventData = function (name) {
+	this.name = name;
+};
+spine.EventData.prototype = {
+	intValue: 0,
+	floatValue: 0,
+	stringValue: null
+};
+
+spine.Event = function (time, data) {
+	this.time = time;
+	this.data = data;
+};
+spine.Event.prototype = {
+	intValue: 0,
+	floatValue: 0,
+	stringValue: null
+};
+
+spine.AttachmentType = {
+	region: 0,
+	boundingbox: 1,
+	mesh: 2,
+	weightedmesh: 3,
+	linkedmesh: 4,
+	weightedlinkedmesh: 5
+};
+
+spine.RegionAttachment = function (name) {
+	this.name = name;
+	this.offset = new spine.Float32Array(8);
+	this.offset.length = 8;
+	this.uvs = new spine.Float32Array(8);
+	this.uvs.length = 8;
+};
+spine.RegionAttachment.prototype = {
+	type: spine.AttachmentType.region,
+	x: 0, y: 0,
+	rotation: 0,
+	scaleX: 1, scaleY: 1,
+	width: 0, height: 0,
+	r: 1, g: 1, b: 1, a: 1,
+	path: null,
+	rendererObject: null,
+	regionOffsetX: 0, regionOffsetY: 0,
+	regionWidth: 0, regionHeight: 0,
+	regionOriginalWidth: 0, regionOriginalHeight: 0,
+	setUVs: function (u, v, u2, v2, rotate) {
+		var uvs = this.uvs;
+		if (rotate) {
+			uvs[2/*X2*/] = u;
+			uvs[3/*Y2*/] = v2;
+			uvs[4/*X3*/] = u;
+			uvs[5/*Y3*/] = v;
+			uvs[6/*X4*/] = u2;
+			uvs[7/*Y4*/] = v;
+			uvs[0/*X1*/] = u2;
+			uvs[1/*Y1*/] = v2;
+		} else {
+			uvs[0/*X1*/] = u;
+			uvs[1/*Y1*/] = v2;
+			uvs[2/*X2*/] = u;
+			uvs[3/*Y2*/] = v;
+			uvs[4/*X3*/] = u2;
+			uvs[5/*Y3*/] = v;
+			uvs[6/*X4*/] = u2;
+			uvs[7/*Y4*/] = v2;
+		}
+	},
+	updateOffset: function () {
+		var regionScaleX = this.width / this.regionOriginalWidth * this.scaleX;
+		var regionScaleY = this.height / this.regionOriginalHeight * this.scaleY;
+		var localX = -this.width / 2 * this.scaleX + this.regionOffsetX * regionScaleX;
+		var localY = -this.height / 2 * this.scaleY + this.regionOffsetY * regionScaleY;
+		var localX2 = localX + this.regionWidth * regionScaleX;
+		var localY2 = localY + this.regionHeight * regionScaleY;
+		var radians = this.rotation * spine.degRad;
+		var cos = Math.cos(radians);
+		var sin = Math.sin(radians);
+		var localXCos = localX * cos + this.x;
+		var localXSin = localX * sin;
+		var localYCos = localY * cos + this.y;
+		var localYSin = localY * sin;
+		var localX2Cos = localX2 * cos + this.x;
+		var localX2Sin = localX2 * sin;
+		var localY2Cos = localY2 * cos + this.y;
+		var localY2Sin = localY2 * sin;
+		var offset = this.offset;
+		offset[0/*X1*/] = localXCos - localYSin;
+		offset[1/*Y1*/] = localYCos + localXSin;
+		offset[2/*X2*/] = localXCos - localY2Sin;
+		offset[3/*Y2*/] = localY2Cos + localXSin;
+		offset[4/*X3*/] = localX2Cos - localY2Sin;
+		offset[5/*Y3*/] = localY2Cos + localX2Sin;
+		offset[6/*X4*/] = localX2Cos - localYSin;
+		offset[7/*Y4*/] = localYCos + localX2Sin;
+	},
+	computeVertices: function (x, y, bone, vertices) {
+		x += bone.worldX;
+		y += bone.worldY;
+		var m00 = bone.a, m01 = bone.b, m10 = bone.c, m11 = bone.d;
+		var offset = this.offset;
+		vertices[0/*X1*/] = offset[0/*X1*/] * m00 + offset[1/*Y1*/] * m01 + x;
+		vertices[1/*Y1*/] = offset[0/*X1*/] * m10 + offset[1/*Y1*/] * m11 + y;
+		vertices[2/*X2*/] = offset[2/*X2*/] * m00 + offset[3/*Y2*/] * m01 + x;
+		vertices[3/*Y2*/] = offset[2/*X2*/] * m10 + offset[3/*Y2*/] * m11 + y;
+		vertices[4/*X3*/] = offset[4/*X3*/] * m00 + offset[5/*X3*/] * m01 + x;
+		vertices[5/*X3*/] = offset[4/*X3*/] * m10 + offset[5/*X3*/] * m11 + y;
+		vertices[6/*X4*/] = offset[6/*X4*/] * m00 + offset[7/*Y4*/] * m01 + x;
+		vertices[7/*Y4*/] = offset[6/*X4*/] * m10 + offset[7/*Y4*/] * m11 + y;
+	}
+};
+
+spine.MeshAttachment = function (name) {
+	this.name = name;
+};
+spine.MeshAttachment.prototype = {
+	type: spine.AttachmentType.mesh,
+	vertices: null,
+	uvs: null,
+	regionUVs: null,
+	triangles: null,
+	hullLength: 0,
+	r: 1, g: 1, b: 1, a: 1,
+	path: null,
+	inheritFFD: true,
+	parentMesh: null,
+	rendererObject: null,
+	regionU: 0, regionV: 0, regionU2: 0, regionV2: 0, regionRotate: false,
+	regionOffsetX: 0, regionOffsetY: 0,
+	regionWidth: 0, regionHeight: 0,
+	regionOriginalWidth: 0, regionOriginalHeight: 0,
+	edges: null,
+	width: 0, height: 0,
+	updateUVs: function () {
+		var width = this.regionU2 - this.regionU, height = this.regionV2 - this.regionV;
+		var n = this.regionUVs.length;
+		if (!this.uvs || this.uvs.length != n) this.uvs = new spine.Float32Array(n);
+		if (this.regionRotate) {
+			for (var i = 0; i < n; i += 2) {
+				this.uvs[i] = this.regionU + this.regionUVs[i + 1] * width;
+				this.uvs[i + 1] = this.regionV + height - this.regionUVs[i] * height;
+			}
+		} else {
+			for (var i = 0; i < n; i += 2) {
+				this.uvs[i] = this.regionU + this.regionUVs[i] * width;
+				this.uvs[i + 1] = this.regionV + this.regionUVs[i + 1] * height;
+			}
+		}
+	},
+	computeWorldVertices: function (x, y, slot, worldVertices) {
+		var bone = slot.bone;
+		x += bone.worldX;
+		y += bone.worldY;
+		var m00 = bone.a, m01 = bone.b, m10 = bone.c, m11 = bone.d;
+		var vertices = this.vertices;
+		var verticesCount = vertices.length;
+		if (slot.attachmentVertices.length == verticesCount) vertices = slot.attachmentVertices;
+		for (var i = 0; i < verticesCount; i += 2) {
+			var vx = vertices[i];
+			var vy = vertices[i + 1];
+			worldVertices[i] = vx * m00 + vy * m01 + x;
+			worldVertices[i + 1] = vx * m10 + vy * m11 + y;
+		}
+	},
+	setParentMesh: function (parentMesh) {
+		this.parentMesh = parentMesh;
+		if (parentMesh) {
+			this.vertices = parentMesh.vertices;
+			this.regionUVs = parentMesh.regionUVs;
+			this.triangles = parentMesh.triangles;
+			this.hullLength = parentMesh.hullLength;
+			this.edges = parentMesh.edges;
+			this.width = parentMesh.width;
+			this.height = parentMesh.height;
+		}
+	}
+};
+
+spine.WeightedMeshAttachment = function (name) {
+	this.name = name;
+};
+spine.WeightedMeshAttachment.prototype = {
+	type: spine.AttachmentType.weightedmesh,
+	bones: null,
+	weights: null,
+	uvs: null,
+	regionUVs: null,
+	triangles: null,
+	hullLength: 0,
+	r: 1, g: 1, b: 1, a: 1,
+	path: null,
+	inheritFFD: true,
+	parentMesh: null,
+	rendererObject: null,
+	regionU: 0, regionV: 0, regionU2: 0, regionV2: 0, regionRotate: false,
+	regionOffsetX: 0, regionOffsetY: 0,
+	regionWidth: 0, regionHeight: 0,
+	regionOriginalWidth: 0, regionOriginalHeight: 0,
+	edges: null,
+	width: 0, height: 0,
+	updateUVs: function (u, v, u2, v2, rotate) {
+		var width = this.regionU2 - this.regionU, height = this.regionV2 - this.regionV;
+		var n = this.regionUVs.length;
+		if (!this.uvs || this.uvs.length != n) this.uvs = new spine.Float32Array(n);
+		if (this.regionRotate) {
+			for (var i = 0; i < n; i += 2) {
+				this.uvs[i] = this.regionU + this.regionUVs[i + 1] * width;
+				this.uvs[i + 1] = this.regionV + height - this.regionUVs[i] * height;
+			}
+		} else {
+			for (var i = 0; i < n; i += 2) {
+				this.uvs[i] = this.regionU + this.regionUVs[i] * width;
+				this.uvs[i + 1] = this.regionV + this.regionUVs[i + 1] * height;
+			}
+		}
+	},
+	computeWorldVertices: function (x, y, slot, worldVertices) {
+		var skeletonBones = slot.bone.skeleton.bones;
+		var weights = this.weights;
+		var bones = this.bones;
+
+		var w = 0, v = 0, b = 0, f = 0, n = bones.length, nn;
+		var wx, wy, bone, vx, vy, weight;
+		if (!slot.attachmentVertices.length) {
+			for (; v < n; w += 2) {
+				wx = 0;
+				wy = 0;
+				nn = bones[v++] + v;
+				for (; v < nn; v++, b += 3) {
+					bone = skeletonBones[bones[v]];
+					vx = weights[b];
+					vy = weights[b + 1];
+					weight = weights[b + 2];
+					wx += (vx * bone.a + vy * bone.b + bone.worldX) * weight;
+					wy += (vx * bone.c + vy * bone.d + bone.worldY) * weight;
+				}
+				worldVertices[w] = wx + x;
+				worldVertices[w + 1] = wy + y;
+			}
+		} else {
+			var ffd = slot.attachmentVertices;
+			for (; v < n; w += 2) {
+				wx = 0;
+				wy = 0;
+				nn = bones[v++] + v;
+				for (; v < nn; v++, b += 3, f += 2) {
+					bone = skeletonBones[bones[v]];
+					vx = weights[b] + ffd[f];
+					vy = weights[b + 1] + ffd[f + 1];
+					weight = weights[b + 2];
+					wx += (vx * bone.a + vy * bone.b + bone.worldX) * weight;
+					wy += (vx * bone.c + vy * bone.d + bone.worldY) * weight;
+				}
+				worldVertices[w] = wx + x;
+				worldVertices[w + 1] = wy + y;
+			}
+		}
+	},
+	setParentMesh: function (parentMesh) {
+		this.parentMesh = parentMesh;
+		if (parentMesh) {
+			this.bones = parentMesh.bones;
+			this.weights = parentMesh.weights;
+			this.regionUVs = parentMesh.regionUVs;
+			this.triangles = parentMesh.triangles;
+			this.hullLength = parentMesh.hullLength;
+			this.edges = parentMesh.edges;
+			this.width = parentMesh.width;
+			this.height = parentMesh.height;
+		}
+	}
+};
+
+spine.BoundingBoxAttachment = function (name) {
+	this.name = name;
+	this.vertices = new spine.Float32Array();
+};
+spine.BoundingBoxAttachment.prototype = {
+	type: spine.AttachmentType.boundingbox,
+	computeWorldVertices: function (x, y, bone, worldVertices) {
+		x += bone.worldX;
+		y += bone.worldY;
+		var m00 = bone.a, m01 = bone.b, m10 = bone.c, m11 = bone.d;
+		var vertices = this.vertices;
+		for (var i = 0, n = vertices.length; i < n; i += 2) {
+			var px = vertices[i];
+			var py = vertices[i + 1];
+			worldVertices[i] = px * m00 + py * m01 + x;
+			worldVertices[i + 1] = px * m10 + py * m11 + y;
+		}
+	}
+};
+
+spine.AnimationStateData = function (skeletonData) {
+	this.skeletonData = skeletonData;
+	this.animationToMixTime = {};
+};
+spine.AnimationStateData.prototype = {
+	defaultMix: 0,
+	setMixByName: function (fromName, toName, duration) {
+		var from = this.skeletonData.findAnimation(fromName);
+		if (!from) throw "Animation not found: " + fromName;
+		var to = this.skeletonData.findAnimation(toName);
+		if (!to) throw "Animation not found: " + toName;
+		this.setMix(from, to, duration);
+	},
+	setMix: function (from, to, duration) {
+		this.animationToMixTime[from.name + ":" + to.name] = duration;
+	},
+	getMix: function (from, to) {
+		var key = from.name + ":" + to.name;
+		return this.animationToMixTime.hasOwnProperty(key) ? this.animationToMixTime[key] : this.defaultMix;
+	}
+};
+
+spine.TrackEntry = function () {};
+spine.TrackEntry.prototype = {
+	next: null, previous: null,
+	animation: null,
+	loop: false,
+	delay: 0, time: 0, lastTime: -1, endTime: 0,
+	timeScale: 1,
+	mixTime: 0, mixDuration: 0, mix: 1,
+	onStart: null, onEnd: null, onComplete: null, onEvent: null
+};
+
+spine.AnimationState = function (stateData) {
+	this.data = stateData;
+	this.tracks = [];
+	this.events = [];
+};
+spine.AnimationState.prototype = {
+	onStart: null,
+	onEnd: null,
+	onComplete: null,
+	onEvent: null,
+	timeScale: 1,
+	update: function (delta) {
+		delta *= this.timeScale;
+		for (var i = 0; i < this.tracks.length; i++) {
+			var current = this.tracks[i];
+			if (!current) continue;
+
+			current.time += delta * current.timeScale;
+			if (current.previous) {
+				var previousDelta = delta * current.previous.timeScale;
+				current.previous.time += previousDelta;
+				current.mixTime += previousDelta;
+			}
+
+			var next = current.next;
+			if (next) {
+				next.time = current.lastTime - next.delay;
+				if (next.time >= 0) this.setCurrent(i, next);
+			} else {
+				// End non-looping animation when it reaches its end time and there is no next entry.
+				if (!current.loop && current.lastTime >= current.endTime) this.clearTrack(i);
+			}
+		}
+	},
+	apply: function (skeleton) {
+		for (var i = 0; i < this.tracks.length; i++) {
+			var current = this.tracks[i];
+			if (!current) continue;
+
+			this.events.length = 0;
+
+			var time = current.time;
+			var lastTime = current.lastTime;
+			var endTime = current.endTime;
+			var loop = current.loop;
+			if (!loop && time > endTime) time = endTime;
+
+			var previous = current.previous;
+			if (!previous) {
+				if (current.mix == 1)
+					current.animation.apply(skeleton, current.lastTime, time, loop, this.events);
+				else
+					current.animation.mix(skeleton, current.lastTime, time, loop, this.events, current.mix);
+			} else {
+				var previousTime = previous.time;
+				if (!previous.loop && previousTime > previous.endTime) previousTime = previous.endTime;
+				previous.animation.apply(skeleton, previousTime, previousTime, previous.loop, null);
+
+				var alpha = current.mixTime / current.mixDuration * current.mix;
+				if (alpha >= 1) {
+					alpha = 1;
+					current.previous = null;
+				}
+				current.animation.mix(skeleton, current.lastTime, time, loop, this.events, alpha);
+			}
+
+			for (var ii = 0, nn = this.events.length; ii < nn; ii++) {
+				var event = this.events[ii];
+				if (current.onEvent) current.onEvent(i, event);
+				if (this.onEvent) this.onEvent(i, event);
+			}
+
+			// Check if completed the animation or a loop iteration.
+			if (loop ? (lastTime % endTime > time % endTime) : (lastTime < endTime && time >= endTime)) {
+				var count = Math.floor(time / endTime);
+				if (current.onComplete) current.onComplete(i, count);
+				if (this.onComplete) this.onComplete(i, count);
+			}
+
+			current.lastTime = current.time;
+		}
+	},
+	clearTracks: function () {
+		for (var i = 0, n = this.tracks.length; i < n; i++)
+			this.clearTrack(i);
+		this.tracks.length = 0;
+	},
+	clearTrack: function (trackIndex) {
+		if (trackIndex >= this.tracks.length) return;
+		var current = this.tracks[trackIndex];
+		if (!current) return;
+
+		if (current.onEnd) current.onEnd(trackIndex);
+		if (this.onEnd) this.onEnd(trackIndex);
+
+		this.tracks[trackIndex] = null;
+	},
+	_expandToIndex: function (index) {
+		if (index < this.tracks.length) return this.tracks[index];
+		while (index >= this.tracks.length)
+			this.tracks[this.tracks.length] = null;
+		return null;
+	},
+	setCurrent: function (index, entry) {
+		var current = this._expandToIndex(index);
+		if (current) {
+			var previous = current.previous;
+			current.previous = null;
+
+			if (current.onEnd) current.onEnd(index);
+			if (this.onEnd) this.onEnd(index);
+
+			entry.mixDuration = this.data.getMix(current.animation, entry.animation);
+			if (entry.mixDuration > 0) {
+				entry.mixTime = 0;
+				// If a mix is in progress, mix from the closest animation.
+				if (previous && current.mixTime / current.mixDuration < 0.5)
+					entry.previous = previous;
+				else
+					entry.previous = current;
+			}
+		}
+
+		this.tracks[index] = entry;
+
+		if (entry.onStart) entry.onStart(index);
+		if (this.onStart) this.onStart(index);
+	},
+	setAnimationByName: function (trackIndex, animationName, loop) {
+		var animation = this.data.skeletonData.findAnimation(animationName);
+		if (!animation) throw "Animation not found: " + animationName;
+		return this.setAnimation(trackIndex, animation, loop);
+	},
+	/** Set the current animation. Any queued animations are cleared. */
+	setAnimation: function (trackIndex, animation, loop) {
+		var entry = new spine.TrackEntry();
+		entry.animation = animation;
+		entry.loop = loop;
+		entry.endTime = animation.duration;
+		this.setCurrent(trackIndex, entry);
+		return entry;
+	},
+	addAnimationByName: function (trackIndex, animationName, loop, delay) {
+		var animation = this.data.skeletonData.findAnimation(animationName);
+		if (!animation) throw "Animation not found: " + animationName;
+		return this.addAnimation(trackIndex, animation, loop, delay);
+	},
+	/** Adds an animation to be played delay seconds after the current or last queued animation.
+	 * @param delay May be <= 0 to use duration of previous animation minus any mix duration plus the negative delay. */
+	addAnimation: function (trackIndex, animation, loop, delay) {
+		var entry = new spine.TrackEntry();
+		entry.animation = animation;
+		entry.loop = loop;
+		entry.endTime = animation.duration;
+
+		var last = this._expandToIndex(trackIndex);
+		if (last) {
+			while (last.next)
+				last = last.next;
+			last.next = entry;
+		} else
+			this.tracks[trackIndex] = entry;
+
+		if (delay <= 0) {
+			if (last)
+				delay += last.endTime - this.data.getMix(last.animation, animation);
+			else
+				delay = 0;
+		}
+		entry.delay = delay;
+
+		return entry;
+	},
+	/** May be null. */
+	getCurrent: function (trackIndex) {
+		if (trackIndex >= this.tracks.length) return null;
+		return this.tracks[trackIndex];
+	}
+};
+
+spine.SkeletonJson = function (attachmentLoader) {
+	this.attachmentLoader = attachmentLoader;
+	this.linkedMeshes = [];
+};
+spine.SkeletonJson.prototype = {
+	scale: 1,
+	readSkeletonData: function (root, name) {
+		var skeletonData = new spine.SkeletonData();
+		skeletonData.name = name;
+
+		// Skeleton.
+		var skeletonMap = root["skeleton"];
+		if (skeletonMap) {
+			skeletonData.hash = skeletonMap["hash"];
+			skeletonData.version = skeletonMap["spine"];
+			skeletonData.width = skeletonMap["width"] || 0;
+			skeletonData.height = skeletonMap["height"] || 0;
+		}
+
+		// Bones.
+		var bones = root["bones"];
+		for (var i = 0, n = bones.length; i < n; i++) {
+			var boneMap = bones[i];
+			var parent = null;
+			if (boneMap["parent"]) {
+				parent = skeletonData.findBone(boneMap["parent"]);
+				if (!parent) throw "Parent bone not found: " + boneMap["parent"];
+			}
+			var boneData = new spine.BoneData(boneMap["name"], parent);
+			boneData.length = (boneMap["length"] || 0) * this.scale;
+			boneData.x = (boneMap["x"] || 0) * this.scale;
+			boneData.y = (boneMap["y"] || 0) * this.scale;
+			boneData.rotation = (boneMap["rotation"] || 0);
+			boneData.scaleX = boneMap.hasOwnProperty("scaleX") ? boneMap["scaleX"] : 1;
+			boneData.scaleY = boneMap.hasOwnProperty("scaleY") ? boneMap["scaleY"] : 1;
+			boneData.inheritScale = boneMap.hasOwnProperty("inheritScale") ? boneMap["inheritScale"] : true;
+			boneData.inheritRotation = boneMap.hasOwnProperty("inheritRotation") ? boneMap["inheritRotation"] : true;
+			skeletonData.bones[i] = boneData;
+		}
+
+		// IK constraints.
+		var ik = root["ik"];
+		if (ik) {
+			for (var i = 0, n = ik.length; i < n; i++) {
+				var ikMap = ik[i];
+				var ikConstraintData = new spine.IkConstraintData(ikMap["name"]);
+
+				var bones = ikMap["bones"];
+				for (var ii = 0, nn = bones.length; ii < nn; ii++) {
+					var bone = skeletonData.findBone(bones[ii]);
+					if (!bone) throw "IK bone not found: " + bones[ii];
+					ikConstraintData.bones[ii] = bone;
+				}
+
+				ikConstraintData.target = skeletonData.findBone(ikMap["target"]);
+				if (!ikConstraintData.target) throw "Target bone not found: " + ikMap["target"];
+
+				ikConstraintData.bendDirection = (!ikMap.hasOwnProperty("bendPositive") || ikMap["bendPositive"]) ? 1 : -1;
+				ikConstraintData.mix = ikMap.hasOwnProperty("mix") ? ikMap["mix"] : 1;
+
+				skeletonData.ikConstraints[i] = ikConstraintData;
+			}
+		}
+
+		// Transform constraints.
+		var transform = root["transform"];
+		if (transform) {
+			for (var i = 0, n = transform.length; i < n; i++) {
+				var transformMap = transform[i];
+				var transformConstraintData = new spine.TransformConstraintData(transformMap["name"]);
+
+				transformConstraintData.bone = skeletonData.findBone(transformMap["bone"]);
+				if (!transformConstraintData.bone) throw "Bone not found: " + transformMap["bone"];
+
+				transformConstraintData.target = skeletonData.findBone(transformMap["target"]);
+				if (!transformConstraintData.target) throw "Target bone not found: " + transformMap["target"];
+
+				transformConstraintData.mix = transformMap.hasOwnProperty("translateMix") ? ikMap["translateMix"] : 1;
+				transformConstraintData.x = (transformMap["x"] || 0) * this.scale;
+				transformConstraintData.y = (transformMap["y"] || 0) * this.scale;
+
+				skeletonData.transformConstraints[i] = transformConstraintData;
+			}
+		}
+
+		// Slots.
+		var slots = root["slots"];
+		for (var i = 0, n = slots.length; i < n; i++) {
+			var slotMap = slots[i];
+			var boneData = skeletonData.findBone(slotMap["bone"]);
+			if (!boneData) throw "Slot bone not found: " + slotMap["bone"];
+			var slotData = new spine.SlotData(slotMap["name"], boneData);
+
+			var color = slotMap["color"];
+			if (color) {
+				slotData.r = this.toColor(color, 0);
+				slotData.g = this.toColor(color, 1);
+				slotData.b = this.toColor(color, 2);
+				slotData.a = this.toColor(color, 3);
+			}
+
+			slotData.attachmentName = slotMap["attachment"];
+			slotData.blendMode = spine.BlendMode[slotMap["blend"] || "normal"];
+
+			skeletonData.slots[i] = slotData;
+		}
+
+		// Skins.
+		var skins = root["skins"];
+		for (var skinName in skins) {
+			if (!skins.hasOwnProperty(skinName)) continue;
+			var skinMap = skins[skinName];
+			var skin = new spine.Skin(skinName);
+			for (var slotName in skinMap) {
+				if (!skinMap.hasOwnProperty(slotName)) continue;
+				var slotIndex = skeletonData.findSlotIndex(slotName);
+				var slotEntry = skinMap[slotName];
+				for (var attachmentName in slotEntry) {
+					if (!slotEntry.hasOwnProperty(attachmentName)) continue;
+					var attachment = this.readAttachment(skin, slotIndex, attachmentName, slotEntry[attachmentName]);
+					if (attachment) skin.addAttachment(slotIndex, attachmentName, attachment);
+				}
+			}
+			skeletonData.skins[skeletonData.skins.length] = skin;
+			if (skin.name == "default") skeletonData.defaultSkin = skin;
+		}
+
+		// Linked meshes.
+		for (var i = 0, n = this.linkedMeshes.length; i < n; i++) {
+			var linkedMesh = this.linkedMeshes[i];
+			var skin = !linkedMesh.skin ? skeletonData.defaultSkin : skeletonData.findSkin(linkedMesh.skin);
+			if (!skin) throw "Skin not found: " + linkedMesh.skin;
+			var parent = skin.getAttachment(linkedMesh.slotIndex, linkedMesh.parent);
+			if (!parent) throw "Parent mesh not found: " + linkedMesh.parent;
+			linkedMesh.mesh.setParentMesh(parent);
+			linkedMesh.mesh.updateUVs();
+		}
+		this.linkedMeshes.length = 0;
+
+		// Events.
+		var events = root["events"];
+		for (var eventName in events) {
+			if (!events.hasOwnProperty(eventName)) continue;
+			var eventMap = events[eventName];
+			var eventData = new spine.EventData(eventName);
+			eventData.intValue = eventMap["int"] || 0;
+			eventData.floatValue = eventMap["float"] || 0;
+			eventData.stringValue = eventMap["string"] || null;
+			skeletonData.events[skeletonData.events.length] = eventData;
+		}
+
+		// Animations.
+		var animations = root["animations"];
+		for (var animationName in animations) {
+			if (!animations.hasOwnProperty(animationName)) continue;
+			this.readAnimation(animationName, animations[animationName], skeletonData);
+		}
+
+		return skeletonData;
+	},
+	readAttachment: function (skin, slotIndex, name, map) {
+		name = map["name"] || name;
+
+		var type = map["type"] || "region";
+		if (type == "skinnedmesh") type = "weightedmesh";
+		type = spine.AttachmentType[type];
+		var path = map["path"] || name;
+
+		var scale = this.scale;
+		switch (type) {
+			case spine.AttachmentType.region:
+				var region = this.attachmentLoader.newRegionAttachment(skin, name, path);
+				if (!region) return null;
+				region.path = path;
+				region.x = (map["x"] || 0) * scale;
+				region.y = (map["y"] || 0) * scale;
+				region.scaleX = map.hasOwnProperty("scaleX") ? map["scaleX"] : 1;
+				region.scaleY = map.hasOwnProperty("scaleY") ? map["scaleY"] : 1;
+				region.rotation = map["rotation"] || 0;
+				region.width = (map["width"] || 0) * scale;
+				region.height = (map["height"] || 0) * scale;
+
+				var color = map["color"];
+				if (color) {
+					region.r = this.toColor(color, 0);
+					region.g = this.toColor(color, 1);
+					region.b = this.toColor(color, 2);
+					region.a = this.toColor(color, 3);
+				}
+
+				region.updateOffset();
+				return region;
+			case spine.AttachmentType.mesh:
+			case spine.AttachmentType.linkedmesh:
+				var mesh = this.attachmentLoader.newMeshAttachment(skin, name, path);
+				if (!mesh) return null;
+				mesh.path = path;
+
+				color = map["color"];
+				if (color) {
+					mesh.r = this.toColor(color, 0);
+					mesh.g = this.toColor(color, 1);
+					mesh.b = this.toColor(color, 2);
+					mesh.a = this.toColor(color, 3);
+				}
+
+				mesh.width = (map["width"] || 0) * scale;
+				mesh.height = (map["height"] || 0) * scale;
+
+				if (!map["parent"]) {
+					mesh.vertices = this.getFloatArray(map, "vertices", scale);
+					mesh.triangles = this.getUint32Array(map, "triangles");
+					mesh.regionUVs = this.getFloatArray(map, "uvs", 1);
+					mesh.updateUVs();
+
+					mesh.hullLength = (map["hull"] || 0) * 2;
+					if (map["edges"]) mesh.edges = this.getUint16Array(map, "edges");
+				} else {
+					mesh.inheritFFD = map.hasOwnProperty("ffd") ? map["ffd"] : true;
+					this.linkedMeshes[this.linkedMeshes.length] = {mesh: mesh, skin: map["skin"], slotIndex: slotIndex, parent: map["parent"]};
+				}
+				return mesh;
+			case spine.AttachmentType.weightedmesh:
+			case spine.AttachmentType.weightedlinkedmesh:
+				var mesh = this.attachmentLoader.newWeightedMeshAttachment(skin, name, path);
+				if (!mesh) return null;
+				mesh.path = path;
+
+				color = map["color"];
+				if (color) {
+					mesh.r = this.toColor(color, 0);
+					mesh.g = this.toColor(color, 1);
+					mesh.b = this.toColor(color, 2);
+					mesh.a = this.toColor(color, 3);
+				}
+
+				mesh.width = (map["width"] || 0) * scale;
+				mesh.height = (map["height"] || 0) * scale;
+
+				if (!map["parent"]) {
+					var uvs = this.getFloatArray(map, "uvs", 1);
+					var vertices = this.getFloatArray(map, "vertices", 1);
+					var weights = new spine.Float32Array(uvs.length * 3 * 3);
+					var bones = new spine.Uint32Array(uvs.length * 3);
+					for (var i = 0, b = 0, w = 0, n = vertices.length; i < n; ) {
+						var boneCount = vertices[i++] | 0;
+						bones[b++] = boneCount;
+						for (var nn = i + boneCount * 4; i < nn; ) {
+							bones[b++] = vertices[i];
+							weights[w++] = vertices[i + 1] * scale;
+							weights[w++] = vertices[i + 2] * scale;
+							weights[w++] = vertices[i + 3];
+							i += 4;
+						}
+					}
+					mesh.bones = bones;
+					mesh.weights = weights;
+					mesh.triangles = this.getUint32Array(map, "triangles");
+					mesh.regionUVs = uvs;
+					mesh.updateUVs();
+
+					mesh.hullLength = (map["hull"] || 0) * 2;
+					if (map["edges"]) mesh.edges = this.getUint16Array(map, "edges");
+				} else {
+					mesh.inheritFFD = map.hasOwnProperty("ffd") ? map["ffd"] : true;
+					this.linkedMeshes[this.linkedMeshes.length] = {mesh: mesh, skin: map["skin"], slotIndex: slotIndex, parent: map["parent"]};
+				}
+				return mesh;
+			case spine.AttachmentType.boundingbox:
+				var attachment = this.attachmentLoader.newBoundingBoxAttachment(skin, name);
+				var vertices = map["vertices"];
+				for (var i = 0, n = vertices.length; i < n; i++)
+					attachment.vertices[i] = vertices[i] * scale;
+				return attachment;
+		}
+		throw "Unknown attachment type: " + type;
+	},
+	readAnimation: function (name, map, skeletonData) {
+		var timelines = [];
+		var duration = 0;
+
+		var slots = map["slots"];
+		for (var slotName in slots) {
+			if (!slots.hasOwnProperty(slotName)) continue;
+			var slotMap = slots[slotName];
+			var slotIndex = skeletonData.findSlotIndex(slotName);
+
+			for (var timelineName in slotMap) {
+				if (!slotMap.hasOwnProperty(timelineName)) continue;
+				var values = slotMap[timelineName];
+				if (timelineName == "color") {
+					var timeline = new spine.ColorTimeline(values.length);
+					timeline.slotIndex = slotIndex;
+
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						var color = valueMap["color"];
+						var r = this.toColor(color, 0);
+						var g = this.toColor(color, 1);
+						var b = this.toColor(color, 2);
+						var a = this.toColor(color, 3);
+						timeline.setFrame(frameIndex, valueMap["time"], r, g, b, a);
+						this.readCurve(timeline, frameIndex, valueMap);
+						frameIndex++;
+					}
+					timelines[timelines.length] = timeline;
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 5 - 5]);
+
+				} else if (timelineName == "attachment") {
+					var timeline = new spine.AttachmentTimeline(values.length);
+					timeline.slotIndex = slotIndex;
+
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						timeline.setFrame(frameIndex++, valueMap["time"], valueMap["name"]);
+					}
+					timelines[timelines.length] = timeline;
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
+
+				} else
+					throw "Invalid timeline type for a slot: " + timelineName + " (" + slotName + ")";
+			}
+		}
+
+		var bones = map["bones"];
+		for (var boneName in bones) {
+			if (!bones.hasOwnProperty(boneName)) continue;
+			var boneIndex = skeletonData.findBoneIndex(boneName);
+			if (boneIndex == -1) throw "Bone not found: " + boneName;
+			var boneMap = bones[boneName];
+
+			for (var timelineName in boneMap) {
+				if (!boneMap.hasOwnProperty(timelineName)) continue;
+				var values = boneMap[timelineName];
+				if (timelineName == "rotate") {
+					var timeline = new spine.RotateTimeline(values.length);
+					timeline.boneIndex = boneIndex;
+
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						timeline.setFrame(frameIndex, valueMap["time"], valueMap["angle"]);
+						this.readCurve(timeline, frameIndex, valueMap);
+						frameIndex++;
+					}
+					timelines[timelines.length] = timeline;
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 2 - 2]);
+
+				} else if (timelineName == "translate" || timelineName == "scale") {
+					var timeline;
+					var timelineScale = 1;
+					if (timelineName == "scale")
+						timeline = new spine.ScaleTimeline(values.length);
+					else {
+						timeline = new spine.TranslateTimeline(values.length);
+						timelineScale = this.scale;
+					}
+					timeline.boneIndex = boneIndex;
+
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						var x = (valueMap["x"] || 0) * timelineScale;
+						var y = (valueMap["y"] || 0) * timelineScale;
+						timeline.setFrame(frameIndex, valueMap["time"], x, y);
+						this.readCurve(timeline, frameIndex, valueMap);
+						frameIndex++;
+					}
+					timelines[timelines.length] = timeline;
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 3 - 3]);
+
+				} else
+					throw "Invalid timeline type for a bone: " + timelineName + " (" + boneName + ")";
+			}
+		}
+
+		var ikMap = map["ik"];
+		for (var ikConstraintName in ikMap) {
+			if (!ikMap.hasOwnProperty(ikConstraintName)) continue;
+			var ikConstraint = skeletonData.findIkConstraint(ikConstraintName);
+			var values = ikMap[ikConstraintName];
+			var timeline = new spine.IkConstraintTimeline(values.length);
+			timeline.ikConstraintIndex = skeletonData.ikConstraints.indexOf(ikConstraint);
+			var frameIndex = 0;
+			for (var i = 0, n = values.length; i < n; i++) {
+				var valueMap = values[i];
+				var mix = valueMap.hasOwnProperty("mix") ? valueMap["mix"] : 1;
+				var bendDirection = (!valueMap.hasOwnProperty("bendPositive") || valueMap["bendPositive"]) ? 1 : -1;
+				timeline.setFrame(frameIndex, valueMap["time"], mix, bendDirection);
+				this.readCurve(timeline, frameIndex, valueMap);
+				frameIndex++;
+			}
+			timelines[timelines.length] = timeline;
+			duration = Math.max(duration, timeline.frames[timeline.getFrameCount() * 3 - 3]);
+		}
+
+		var ffd = map["ffd"];
+		for (var skinName in ffd) {
+			var skin = skeletonData.findSkin(skinName);
+			var slotMap = ffd[skinName];
+			for (slotName in slotMap) {
+				var slotIndex = skeletonData.findSlotIndex(slotName);
+				var meshMap = slotMap[slotName];
+				for (var meshName in meshMap) {
+					var values = meshMap[meshName];
+					var timeline = new spine.FfdTimeline(values.length);
+					var attachment = skin.getAttachment(slotIndex, meshName);
+					if (!attachment) throw "FFD attachment not found: " + meshName;
+					timeline.slotIndex = slotIndex;
+					timeline.attachment = attachment;
+
+					var isMesh = attachment.type == spine.AttachmentType.mesh;
+					var vertexCount;
+					if (isMesh)
+						vertexCount = attachment.vertices.length;
+					else
+						vertexCount = attachment.weights.length / 3 * 2;
+
+					var frameIndex = 0;
+					for (var i = 0, n = values.length; i < n; i++) {
+						var valueMap = values[i];
+						var vertices;
+						if (!valueMap["vertices"]) {
+							if (isMesh)
+								vertices = attachment.vertices;
+							else {
+								vertices = new spine.Float32Array(vertexCount);
+								vertices.length = vertexCount;
+							}
+						} else {
+							var verticesValue = valueMap["vertices"];
+							var vertices = new spine.Float32Array(vertexCount);
+							vertices.length = vertexCount;
+							var start = valueMap["offset"] || 0;
+							var nn = verticesValue.length;
+							if (this.scale == 1) {
+								for (var ii = 0; ii < nn; ii++)
+									vertices[ii + start] = verticesValue[ii];
+							} else {
+								for (var ii = 0; ii < nn; ii++)
+									vertices[ii + start] = verticesValue[ii] * this.scale;
+							}
+							if (isMesh) {
+								var meshVertices = attachment.vertices;
+								for (var ii = 0, nn = vertices.length; ii < nn; ii++)
+									vertices[ii] += meshVertices[ii];
+							}
+						}
+
+						timeline.setFrame(frameIndex, valueMap["time"], vertices);
+						this.readCurve(timeline, frameIndex, valueMap);
+						frameIndex++;
+					}
+					timelines[timelines.length] = timeline;
+					duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
+				}
+			}
+		}
+
+		var drawOrderValues = map["drawOrder"];
+		if (!drawOrderValues) drawOrderValues = map["draworder"];
+		if (drawOrderValues) {
+			var timeline = new spine.DrawOrderTimeline(drawOrderValues.length);
+			var slotCount = skeletonData.slots.length;
+			var frameIndex = 0;
+			for (var i = 0, n = drawOrderValues.length; i < n; i++) {
+				var drawOrderMap = drawOrderValues[i];
+				var drawOrder = null;
+				if (drawOrderMap["offsets"]) {
+					drawOrder = new spine.Uint32Array(slotCount);
+					drawOrder.length = slotCount;
+					for (var ii = slotCount - 1; ii >= 0; ii--)
+						drawOrder[ii] = 4294967295;
+					var offsets = drawOrderMap["offsets"];
+					var unchanged = new spine.Uint32Array(slotCount - offsets.length);
+					unchanged.length = slotCount - offsets.length;
+					var originalIndex = 0, unchangedIndex = 0;
+					for (var ii = 0, nn = offsets.length; ii < nn; ii++) {
+						var offsetMap = offsets[ii];
+						var slotIndex = skeletonData.findSlotIndex(offsetMap["slot"]);
+						if (slotIndex == -1) throw "Slot not found: " + offsetMap["slot"];
+						// Collect unchanged items.
+						while (originalIndex != slotIndex)
+							unchanged[unchangedIndex++] = originalIndex++;
+						// Set changed items.
+						drawOrder[originalIndex + offsetMap["offset"]] = originalIndex++;
+					}
+					// Collect remaining unchanged items.
+					while (originalIndex < slotCount)
+						unchanged[unchangedIndex++] = originalIndex++;
+					// Fill in unchanged items.
+					for (var ii = slotCount - 1; ii >= 0; ii--)
+						if (drawOrder[ii] == 4294967295) drawOrder[ii] = unchanged[--unchangedIndex];
+				}
+				timeline.setFrame(frameIndex++, drawOrderMap["time"], drawOrder);
+			}
+			timelines[timelines.length] = timeline;
+			duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
+		}
+
+		var events = map["events"];
+		if (events) {
+			var timeline = new spine.EventTimeline(events.length);
+			var frameIndex = 0;
+			for (var i = 0, n = events.length; i < n; i++) {
+				var eventMap = events[i];
+				var eventData = skeletonData.findEvent(eventMap["name"]);
+				if (!eventData) throw "Event not found: " + eventMap["name"];
+				var event = new spine.Event(eventMap["time"], eventData);
+				event.intValue = eventMap.hasOwnProperty("int") ? eventMap["int"] : eventData.intValue;
+				event.floatValue = eventMap.hasOwnProperty("float") ? eventMap["float"] : eventData.floatValue;
+				event.stringValue = eventMap.hasOwnProperty("string") ? eventMap["string"] : eventData.stringValue;
+				timeline.setFrame(frameIndex++, event);
+			}
+			timelines[timelines.length] = timeline;
+			duration = Math.max(duration, timeline.frames[timeline.getFrameCount() - 1]);
+		}
+
+		skeletonData.animations[skeletonData.animations.length] = new spine.Animation(name, timelines, duration);
+	},
+	readCurve: function (timeline, frameIndex, valueMap) {
+		var curve = valueMap["curve"];
+		if (!curve)
+			timeline.curves.setLinear(frameIndex);
+		else if (curve == "stepped")
+			timeline.curves.setStepped(frameIndex);
+		else if (curve instanceof Array)
+			timeline.curves.setCurve(frameIndex, curve[0], curve[1], curve[2], curve[3]);
+	},
+	toColor: function (hexString, colorIndex) {
+		if (hexString.length != 8) throw "Color hexidecimal length must be 8, recieved: " + hexString;
+		return parseInt(hexString.substring(colorIndex * 2, (colorIndex * 2) + 2), 16) / 255;
+	},
+	getFloatArray: function (map, name, scale) {
+		var list = map[name];
+		var values = new spine.Float32Array(list.length);
+		var i = 0, n = list.length;
+		if (scale == 1) {
+			for (; i < n; i++)
+				values[i] = list[i];
+		} else {
+			for (; i < n; i++)
+				values[i] = list[i] * scale;
+		}
+		return values;
+	},
+	getUint32Array: function (map, name) {
+		var list = map[name];
+		var values = new spine.Uint32Array(list.length);
+		for (var i = 0, n = list.length; i < n; i++)
+			values[i] = list[i] | 0;
+		return values;
+	},
+	getUint16Array: function (map, name) {
+		var list = map[name];
+		var values = new spine.Uint16Array(list.length);
+		for (var i = 0, n = list.length; i < n; i++)
+			values[i] = list[i] | 0;
+		return values;
+	}
+};
+
+spine.Atlas = function (atlasText, textureLoader) {
+	this.textureLoader = textureLoader;
+	this.pages = [];
+	this.regions = [];
+
+	var reader = new spine.AtlasReader(atlasText);
+	var tuple = [];
+	tuple.length = 4;
+	var page = null;
+	while (true) {
+		var line = reader.readLine();
+		if (line === null) break;
+		line = reader.trim(line);
+		if (!line.length)
+			page = null;
+		else if (!page) {
+			page = new spine.AtlasPage();
+			page.name = line;
+
+			if (reader.readTuple(tuple) == 2) { // size is only optional for an atlas packed with an old TexturePacker.
+				page.width = parseInt(tuple[0]);
+				page.height = parseInt(tuple[1]);
+				reader.readTuple(tuple);
+			}
+			page.format = spine.Atlas.Format[tuple[0]];
+
+			reader.readTuple(tuple);
+			page.minFilter = spine.Atlas.TextureFilter[tuple[0]];
+			page.magFilter = spine.Atlas.TextureFilter[tuple[1]];
+
+			var direction = reader.readValue();
+			page.uWrap = spine.Atlas.TextureWrap.clampToEdge;
+			page.vWrap = spine.Atlas.TextureWrap.clampToEdge;
+			if (direction == "x")
+				page.uWrap = spine.Atlas.TextureWrap.repeat;
+			else if (direction == "y")
+				page.vWrap = spine.Atlas.TextureWrap.repeat;
+			else if (direction == "xy")
+				page.uWrap = page.vWrap = spine.Atlas.TextureWrap.repeat;
+
+			textureLoader.load(page, line, this);
+
+			this.pages[this.pages.length] = page;
+
+		} else {
+			var region = new spine.AtlasRegion();
+			region.name = line;
+			region.page = page;
+
+			region.rotate = reader.readValue() == "true";
+
+			reader.readTuple(tuple);
+			var x = parseInt(tuple[0]);
+			var y = parseInt(tuple[1]);
+
+			reader.readTuple(tuple);
+			var width = parseInt(tuple[0]);
+			var height = parseInt(tuple[1]);
+
+			region.u = x / page.width;
+			region.v = y / page.height;
+			if (region.rotate) {
+				region.u2 = (x + height) / page.width;
+				region.v2 = (y + width) / page.height;
+			} else {
+				region.u2 = (x + width) / page.width;
+				region.v2 = (y + height) / page.height;
+			}
+			region.x = x;
+			region.y = y;
+			region.width = Math.abs(width);
+			region.height = Math.abs(height);
+
+			if (reader.readTuple(tuple) == 4) { // split is optional
+				region.splits = [parseInt(tuple[0]), parseInt(tuple[1]), parseInt(tuple[2]), parseInt(tuple[3])];
+
+				if (reader.readTuple(tuple) == 4) { // pad is optional, but only present with splits
+					region.pads = [parseInt(tuple[0]), parseInt(tuple[1]), parseInt(tuple[2]), parseInt(tuple[3])];
+
+					reader.readTuple(tuple);
+				}
+			}
+
+			region.originalWidth = parseInt(tuple[0]);
+			region.originalHeight = parseInt(tuple[1]);
+
+			reader.readTuple(tuple);
+			region.offsetX = parseInt(tuple[0]);
+			region.offsetY = parseInt(tuple[1]);
+
+			region.index = parseInt(reader.readValue());
+
+			this.regions[this.regions.length] = region;
+		}
+	}
+};
+spine.Atlas.prototype = {
+	findRegion: function (name) {
+		var regions = this.regions;
+		for (var i = 0, n = regions.length; i < n; i++)
+			if (regions[i].name == name) return regions[i];
+		return null;
+	},
+	dispose: function () {
+		var pages = this.pages;
+		for (var i = 0, n = pages.length; i < n; i++)
+			this.textureLoader.unload(pages[i].rendererObject);
+	},
+	updateUVs: function (page) {
+		var regions = this.regions;
+		for (var i = 0, n = regions.length; i < n; i++) {
+			var region = regions[i];
+			if (region.page != page) continue;
+			region.u = region.x / page.width;
+			region.v = region.y / page.height;
+			if (region.rotate) {
+				region.u2 = (region.x + region.height) / page.width;
+				region.v2 = (region.y + region.width) / page.height;
+			} else {
+				region.u2 = (region.x + region.width) / page.width;
+				region.v2 = (region.y + region.height) / page.height;
+			}
+		}
+	}
+};
+
+spine.Atlas.Format = {
+	alpha: 0,
+	intensity: 1,
+	luminanceAlpha: 2,
+	rgb565: 3,
+	rgba4444: 4,
+	rgb888: 5,
+	rgba8888: 6
+};
+
+spine.Atlas.TextureFilter = {
+	nearest: 0,
+	linear: 1,
+	mipMap: 2,
+	mipMapNearestNearest: 3,
+	mipMapLinearNearest: 4,
+	mipMapNearestLinear: 5,
+	mipMapLinearLinear: 6
+};
+
+spine.Atlas.TextureWrap = {
+	mirroredRepeat: 0,
+	clampToEdge: 1,
+	repeat: 2
+};
+
+spine.AtlasPage = function () {};
+spine.AtlasPage.prototype = {
+	name: null,
+	format: null,
+	minFilter: null,
+	magFilter: null,
+	uWrap: null,
+	vWrap: null,
+	rendererObject: null,
+	width: 0,
+	height: 0
+};
+
+spine.AtlasRegion = function () {};
+spine.AtlasRegion.prototype = {
+	page: null,
+	name: null,
+	x: 0, y: 0,
+	width: 0, height: 0,
+	u: 0, v: 0, u2: 0, v2: 0,
+	offsetX: 0, offsetY: 0,
+	originalWidth: 0, originalHeight: 0,
+	index: 0,
+	rotate: false,
+	splits: null,
+	pads: null
+};
+
+spine.AtlasReader = function (text) {
+	this.lines = text.split(/\r\n|\r|\n/);
+};
+spine.AtlasReader.prototype = {
+	index: 0,
+	trim: function (value) {
+		return value.replace(/^\s+|\s+$/g, "");
+	},
+	readLine: function () {
+		if (this.index >= this.lines.length) return null;
+		return this.lines[this.index++];
+	},
+	readValue: function () {
+		var line = this.readLine();
+		var colon = line.indexOf(":");
+		if (colon == -1) throw "Invalid line: " + line;
+		return this.trim(line.substring(colon + 1));
+	},
+	/** Returns the number of tuple values read (1, 2 or 4). */
+	readTuple: function (tuple) {
+		var line = this.readLine();
+		var colon = line.indexOf(":");
+		if (colon == -1) throw "Invalid line: " + line;
+		var i = 0, lastMatch = colon + 1;
+		for (; i < 3; i++) {
+			var comma = line.indexOf(",", lastMatch);
+			if (comma == -1) break;
+			tuple[i] = this.trim(line.substr(lastMatch, comma - lastMatch));
+			lastMatch = comma + 1;
+		}
+		tuple[i] = this.trim(line.substring(lastMatch));
+		return i + 1;
+	}
+};
+
+spine.AtlasAttachmentLoader = function (atlas) {
+	this.atlas = atlas;
+};
+spine.AtlasAttachmentLoader.prototype = {
+	newRegionAttachment: function (skin, name, path) {
+		var region = this.atlas.findRegion(path);
+		if (!region) throw "Region not found in atlas: " + path + " (region attachment: " + name + ")";
+		var attachment = new spine.RegionAttachment(name);
+		attachment.rendererObject = region;
+		attachment.setUVs(region.u, region.v, region.u2, region.v2, region.rotate);
+		attachment.regionOffsetX = region.offsetX;
+		attachment.regionOffsetY = region.offsetY;
+		attachment.regionWidth = region.width;
+		attachment.regionHeight = region.height;
+		attachment.regionOriginalWidth = region.originalWidth;
+		attachment.regionOriginalHeight = region.originalHeight;
+		return attachment;
+	},
+	newMeshAttachment: function (skin, name, path) {
+		var region = this.atlas.findRegion(path);
+		if (!region) throw "Region not found in atlas: " + path + " (mesh attachment: " + name + ")";
+		var attachment = new spine.MeshAttachment(name);
+		attachment.rendererObject = region;
+		attachment.regionU = region.u;
+		attachment.regionV = region.v;
+		attachment.regionU2 = region.u2;
+		attachment.regionV2 = region.v2;
+		attachment.regionRotate = region.rotate;
+		attachment.regionOffsetX = region.offsetX;
+		attachment.regionOffsetY = region.offsetY;
+		attachment.regionWidth = region.width;
+		attachment.regionHeight = region.height;
+		attachment.regionOriginalWidth = region.originalWidth;
+		attachment.regionOriginalHeight = region.originalHeight;
+		return attachment;
+	},
+	newWeightedMeshAttachment: function (skin, name, path) {
+		var region = this.atlas.findRegion(path);
+		if (!region) throw "Region not found in atlas: " + path + " (weighted mesh attachment: " + name + ")";
+		var attachment = new spine.WeightedMeshAttachment(name);
+		attachment.rendererObject = region;
+		attachment.regionU = region.u;
+		attachment.regionV = region.v;
+		attachment.regionU2 = region.u2;
+		attachment.regionV2 = region.v2;
+		attachment.regionRotate = region.rotate;
+		attachment.regionOffsetX = region.offsetX;
+		attachment.regionOffsetY = region.offsetY;
+		attachment.regionWidth = region.width;
+		attachment.regionHeight = region.height;
+		attachment.regionOriginalWidth = region.originalWidth;
+		attachment.regionOriginalHeight = region.originalHeight;
+		return attachment;
+	},
+	newBoundingBoxAttachment: function (skin, name) {
+		return new spine.BoundingBoxAttachment(name);
+	}
+};
+
+spine.SkeletonBounds = function () {
+	this.polygonPool = [];
+	this.polygons = [];
+	this.boundingBoxes = [];
+};
+spine.SkeletonBounds.prototype = {
+	minX: 0, minY: 0, maxX: 0, maxY: 0,
+	update: function (skeleton, updateAabb) {
+		var slots = skeleton.slots;
+		var slotCount = slots.length;
+		var x = skeleton.x, y = skeleton.y;
+		var boundingBoxes = this.boundingBoxes;
+		var polygonPool = this.polygonPool;
+		var polygons = this.polygons;
+
+		boundingBoxes.length = 0;
+		for (var i = 0, n = polygons.length; i < n; i++)
+			polygonPool[polygonPool.length] = polygons[i];
+		polygons.length = 0;
+
+		for (var i = 0; i < slotCount; i++) {
+			var slot = slots[i];
+			var boundingBox = slot.attachment;
+			if (boundingBox.type != spine.AttachmentType.boundingbox) continue;
+			boundingBoxes[boundingBoxes.length] = boundingBox;
+
+			var poolCount = polygonPool.length, polygon;
+			if (poolCount > 0) {
+				polygon = polygonPool[poolCount - 1];
+				polygonPool.splice(poolCount - 1, 1);
+			} else
+				polygon = new spine.Float32Array();
+			polygons[polygons.length] = polygon;
+
+			polygon.length = boundingBox.vertices.length;
+			boundingBox.computeWorldVertices(x, y, slot.bone, polygon);
+		}
+
+		if (updateAabb) this.aabbCompute();
+	},
+	aabbCompute: function () {
+		var polygons = this.polygons;
+		var minX = Number.MAX_VALUE, minY = Number.MAX_VALUE, maxX = -Number.MAX_VALUE, maxY = -Number.MAX_VALUE;
+		for (var i = 0, n = polygons.length; i < n; i++) {
+			var vertices = polygons[i];
+			for (var ii = 0, nn = vertices.length; ii < nn; ii += 2) {
+				var x = vertices[ii];
+				var y = vertices[ii + 1];
+				minX = Math.min(minX, x);
+				minY = Math.min(minY, y);
+				maxX = Math.max(maxX, x);
+				maxY = Math.max(maxY, y);
+			}
+		}
+		this.minX = minX;
+		this.minY = minY;
+		this.maxX = maxX;
+		this.maxY = maxY;
+	},
+	/** Returns true if the axis aligned bounding box contains the point. */
+	aabbContainsPoint: function (x, y) {
+		return x >= this.minX && x <= this.maxX && y >= this.minY && y <= this.maxY;
+	},
+	/** Returns true if the axis aligned bounding box intersects the line segment. */
+	aabbIntersectsSegment: function (x1, y1, x2, y2) {
+		var minX = this.minX, minY = this.minY, maxX = this.maxX, maxY = this.maxY;
+		if ((x1 <= minX && x2 <= minX) || (y1 <= minY && y2 <= minY) || (x1 >= maxX && x2 >= maxX) || (y1 >= maxY && y2 >= maxY))
+			return false;
+		var m = (y2 - y1) / (x2 - x1);
+		var y = m * (minX - x1) + y1;
+		if (y > minY && y < maxY) return true;
+		y = m * (maxX - x1) + y1;
+		if (y > minY && y < maxY) return true;
+		var x = (minY - y1) / m + x1;
+		if (x > minX && x < maxX) return true;
+		x = (maxY - y1) / m + x1;
+		if (x > minX && x < maxX) return true;
+		return false;
+	},
+	/** Returns true if the axis aligned bounding box intersects the axis aligned bounding box of the specified bounds. */
+	aabbIntersectsSkeleton: function (bounds) {
+		return this.minX < bounds.maxX && this.maxX > bounds.minX && this.minY < bounds.maxY && this.maxY > bounds.minY;
+	},
+	/** Returns the first bounding box attachment that contains the point, or null. When doing many checks, it is usually more
+	 * efficient to only call this method if {@link #aabbContainsPoint(float, float)} returns true. */
+	containsPoint: function (x, y) {
+		var polygons = this.polygons;
+		for (var i = 0, n = polygons.length; i < n; i++)
+			if (this.polygonContainsPoint(polygons[i], x, y)) return this.boundingBoxes[i];
+		return null;
+	},
+	/** Returns the first bounding box attachment that contains the line segment, or null. When doing many checks, it is usually
+	 * more efficient to only call this method if {@link #aabbIntersectsSegment(float, float, float, float)} returns true. */
+	intersectsSegment: function (x1, y1, x2, y2) {
+		var polygons = this.polygons;
+		for (var i = 0, n = polygons.length; i < n; i++)
+			if (polygons[i].intersectsSegment(x1, y1, x2, y2)) return this.boundingBoxes[i];
+		return null;
+	},
+	/** Returns true if the polygon contains the point. */
+	polygonContainsPoint: function (polygon, x, y) {
+		var nn = polygon.length;
+		var prevIndex = nn - 2;
+		var inside = false;
+		for (var ii = 0; ii < nn; ii += 2) {
+			var vertexY = polygon[ii + 1];
+			var prevY = polygon[prevIndex + 1];
+			if ((vertexY < y && prevY >= y) || (prevY < y && vertexY >= y)) {
+				var vertexX = polygon[ii];
+				if (vertexX + (y - vertexY) / (prevY - vertexY) * (polygon[prevIndex] - vertexX) < x) inside = !inside;
+			}
+			prevIndex = ii;
+		}
+		return inside;
+	},
+	/** Returns true if the polygon contains the line segment. */
+	polygonIntersectsSegment: function (polygon, x1, y1, x2, y2) {
+		var nn = polygon.length;
+		var width12 = x1 - x2, height12 = y1 - y2;
+		var det1 = x1 * y2 - y1 * x2;
+		var x3 = polygon[nn - 2], y3 = polygon[nn - 1];
+		for (var ii = 0; ii < nn; ii += 2) {
+			var x4 = polygon[ii], y4 = polygon[ii + 1];
+			var det2 = x3 * y4 - y3 * x4;
+			var width34 = x3 - x4, height34 = y3 - y4;
+			var det3 = width12 * height34 - height12 * width34;
+			var x = (det1 * width34 - width12 * det2) / det3;
+			if (((x >= x3 && x <= x4) || (x >= x4 && x <= x3)) && ((x >= x1 && x <= x2) || (x >= x2 && x <= x1))) {
+				var y = (det1 * height34 - height12 * det2) / det3;
+				if (((y >= y3 && y <= y4) || (y >= y4 && y <= y3)) && ((y >= y1 && y <= y2) || (y >= y2 && y <= y1))) return true;
+			}
+			x3 = x4;
+			y3 = y4;
+		}
+		return false;
+	},
+	getPolygon: function (attachment) {
+		var index = this.boundingBoxes.indexOf(attachment);
+		return index == -1 ? null : this.polygons[index];
+	},
+	getWidth: function () {
+		return this.maxX - this.minX;
+	},
+	getHeight: function () {
+		return this.maxY - this.minY;
+	}
+};
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Fabrique;
+(function (Fabrique) {
+    var Plugins;
+    (function (Plugins) {
+        var Spine = (function (_super) {
+            __extends(Spine, _super);
+            function Spine(game, parent) {
+                _super.call(this, game, parent);
+                this.addSpineCache();
+                this.addSpineFactory();
+                this.addSpineLoader();
+            }
+            Spine.prototype.addSpineLoader = function () {
+                Phaser.Loader.prototype.spine = function (key, url, scalingVariants) {
+                    var _this = this;
+                    var atlasKey = key + "Atlas";
+                    var cacheData = {
+                        atlas: atlasKey,
+                        basePath: (url.substring(0, url.lastIndexOf('/')) === '') ? '.' : url.substring(0, url.lastIndexOf('/')),
+                        variants: undefined
+                    };
+                    if (undefined === scalingVariants) {
+                        scalingVariants = [''];
+                    }
+                    else {
+                        cacheData.variants = scalingVariants;
+                    }
+                    scalingVariants.forEach(function (variant) {
+                        //Check if an atlas file was loaded
+                        _this.onFileComplete.add(function (progress, cacheKey) {
+                            if (cacheKey === atlasKey) {
+                                var atlas = new spine.Atlas(_this.game.cache.getText(cacheKey), {
+                                    load: function (page, file, atlas) {
+                                        // console.log(page, file, atlas);
+                                        _this.image(file, cacheData.basePath + '/' + file.substr(0, file.lastIndexOf('.')) + variant + '.png');
+                                    }
+                                });
+                            }
+                        });
+                        //Load the atlas file
+                        _this.text(atlasKey, url.substr(0, url.lastIndexOf('.')) + variant + '.atlas');
+                    });
+                    this.json(key, url);
+                    this.game.cache.addSpine(key, cacheData);
+                };
+            };
+            /**
+             * Extends the GameObjectFactory prototype with the support of adding spine. this allows us to add spine methods to the game just like any other object:
+             * game.add.spine();
+             */
+            Spine.prototype.addSpineFactory = function () {
+                Phaser.GameObjectFactory.prototype.spine = function (x, y, key, scalingVariant, group) {
+                    if (group === undefined) {
+                        group = this.world;
+                    }
+                    var spineObject = new Fabrique.Spine(this.game, key, scalingVariant);
+                    spineObject.setToSetupPose();
+                    spineObject.position.x = x;
+                    spineObject.position.y = y;
+                    return group.add(spineObject);
+                };
+            };
+            /**
+             * Extends the Phaser.Cache prototype with spine properties
+             */
+            Spine.prototype.addSpineCache = function () {
+                //Create the cache space
+                Phaser.Cache.prototype.spine = {};
+                //Method for adding a spine dict to the cache space
+                Phaser.Cache.prototype.addSpine = function (key, data) {
+                    this.spine[key] = data;
+                };
+                //Method for fetching a spine dict from the cache space
+                Phaser.Cache.prototype.getSpine = function (key) {
+                    if (!this.spine.hasOwnProperty(key)) {
+                        console.warn('Phaser.Cache.getSpine: Key "' + key + '" not found in Cache.');
+                    }
+                    return this.spine[key];
+                };
+            };
+            Spine.RESOLUTION_REGEXP = /@(.+)x/;
+            return Spine;
+        })(Phaser.Plugin);
+        Plugins.Spine = Spine;
+    })(Plugins = Fabrique.Plugins || (Fabrique.Plugins = {}));
+})(Fabrique || (Fabrique = {}));
+PIXI.Strip.prototype.postUpdate = function () { };
+spine.Bone.yDown = true;
+var Fabrique;
+(function (Fabrique) {
+    var Spine = (function (_super) {
+        __extends(Spine, _super);
+        /**
+         * @class Spine
+         * @extends Phaser.Group
+         * @constructor
+         * @param game {Phaser.Game} the game reference to add this object
+         * @param key {String} the key to find the assets for this object
+         */
+        function Spine(game, key, scalingVariant) {
+            _super.call(this, game);
+            this.imageScale = 1;
+            var data = this.game.cache.getSpine(key);
+            if (undefined !== scalingVariant && data.variants.indexOf(scalingVariant) !== -1) {
+                this.imageScale = this.getScaleFromVariant(scalingVariant);
+            }
+            else if (data.variants && data.variants.length >= 1) {
+                this.imageScale = this.getScaleFromVariant(data.variants[0]);
+            }
+            var textureLoader = new Fabrique.SpineTextureLoader(game);
+            // create a spine atlas using the loaded text and a spine texture loader instance //
+            var spineAtlas = new spine.Atlas(game.cache.getText(data.atlas), textureLoader);
+            // now we use an atlas attachment loader //
+            var attachmentLoader = new spine.AtlasAttachmentLoader(spineAtlas);
+            // spine animation
+            var spineJsonParser = new spine.SkeletonJson(attachmentLoader);
+            //get the Skeleton Data
+            this.skeletonData = spineJsonParser.readSkeletonData(game.cache.getJSON(key));
+            if (!this.skeletonData) {
+                throw new Error('Spine data must be preloaded using Loader.spine');
+            }
+            this.skeleton = new spine.Skeleton(this.skeletonData);
+            this.skeleton.updateWorldTransform();
+            this.stateData = new spine.AnimationStateData(this.skeletonData);
+            this.state = new spine.AnimationState(this.stateData);
+            this.slotContainers = [];
+            for (var i = 0, n = this.skeleton.slots.length; i < n; i++) {
+                var slot = this.skeleton.slots[i];
+                var attachment = slot.attachment;
+                var slotContainer = new Phaser.Group(game);
+                this.slotContainers.push(slotContainer);
+                this.add(slotContainer);
+                if (attachment instanceof spine.RegionAttachment) {
+                    var spriteName = attachment.rendererObject.name;
+                    var sprite = this.createSprite(slot, attachment);
+                    slot.currentSprite = sprite;
+                    slot.currentSpriteName = spriteName;
+                    slotContainer.add(sprite);
+                }
+                else if (attachment instanceof spine.WeightedMeshAttachment) {
+                    var mesh = this.createMesh(slot, attachment);
+                    slot.currentMesh = mesh;
+                    slot.currentMeshName = attachment.name;
+                    slotContainer.add(mesh);
+                }
+                else {
+                    continue;
+                }
+            }
+            this.autoUpdate = true;
+        }
+        Object.defineProperty(Spine.prototype, "autoUpdate", {
+            get: function () {
+                return (this.updateTransform === Fabrique.Spine.prototype.autoUpdateTransform);
+            },
+            set: function (value) {
+                this.updateTransform = value ? Fabrique.Spine.prototype.autoUpdateTransform : PIXI.DisplayObjectContainer.prototype.updateTransform;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        ;
+        Spine.prototype.getScaleFromVariant = function (variant) {
+            var scale = Fabrique.Plugins.Spine.RESOLUTION_REGEXP.exec(variant);
+            if (scale) {
+                return parseFloat(scale[1]);
+            }
+            return 1;
+        };
+        /**
+         * Update the spine skeleton and its animations by delta time (dt)
+         *
+         * @method update
+         * @param dt {Number} Delta time. Time by which the animation should be updated
+         */
+        Spine.prototype.update = function (dt) {
+            if (dt === undefined) {
+                return;
+            }
+            this.state.update(dt);
+            this.state.apply(this.skeleton);
+            this.skeleton.updateWorldTransform();
+            var drawOrder = this.skeleton.drawOrder;
+            var slots = this.skeleton.slots;
+            for (var i = 0, n = drawOrder.length; i < n; i++) {
+                if (drawOrder[i].currentSprite !== undefined) {
+                    this.children[i] = drawOrder[i].currentSprite.parent;
+                }
+            }
+            for (var i = 0, n = slots.length; i < n; i++) {
+                var slot = slots[i];
+                var attachment = slot.attachment;
+                var slotContainer = this.slotContainers[i];
+                if (!attachment) {
+                    slotContainer.visible = false;
+                    continue;
+                }
+                var type = attachment.type;
+                if (type === spine.AttachmentType.region) {
+                    if (attachment.rendererObject) {
+                        if (!slot.currentSpriteName || slot.currentSpriteName !== attachment.name) {
+                            var spriteName = attachment.rendererObject.name;
+                            if (slot.currentSprite !== undefined) {
+                                slot.currentSprite.visible = false;
+                            }
+                            slot.sprites = slot.sprites || {};
+                            if (slot.sprites[spriteName] !== undefined) {
+                                slot.sprites[spriteName].visible = true;
+                            }
+                            else {
+                                var sprite = this.createSprite(slot, attachment);
+                                slotContainer.add(sprite);
+                            }
+                            slot.currentSprite = slot.sprites[spriteName];
+                            slot.currentSpriteName = spriteName;
+                        }
+                    }
+                    var bone = slot.bone;
+                    //Update positions
+                    slotContainer.position.x = attachment.x * bone.a + attachment.y * bone.b + bone.worldX;
+                    slotContainer.position.y = attachment.x * bone.c + attachment.y * bone.d + bone.worldY;
+                    //Update scaling
+                    slotContainer.scale.x = bone.getWorldScaleX();
+                    slotContainer.scale.y = bone.getWorldScaleY();
+                    //Update rotation
+                    slotContainer.rotation = (bone.getWorldRotationX() - attachment.rotation) * Math.PI / 180;
+                    if (bone.getWorldScaleY() < 0 || bone.getWorldScaleX() < 0) {
+                        slotContainer.scale.y = -slotContainer.scale.y;
+                        slotContainer.scale.x = -slotContainer.scale.x;
+                        slotContainer.rotation = -slotContainer.rotation;
+                    }
+                    slot.currentSprite.blendMode = slot.blendMode;
+                    slot.currentSprite.tint = PIXI.rgb2hex([slot.r, slot.g, slot.b]);
+                }
+                else if (type === spine.AttachmentType.weightedmesh || type === spine.AttachmentType.weightedlinkedmesh) {
+                    if (!slot.currentMeshName || slot.currentMeshName !== attachment.name) {
+                        var meshName = attachment.name;
+                        if (slot.currentMesh !== undefined) {
+                            slot.currentMesh.visible = false;
+                        }
+                        slot.meshes = slot.meshes || {};
+                        if (slot.meshes[meshName] !== undefined) {
+                            slot.meshes[meshName].visible = true;
+                        }
+                        else {
+                            var mesh = this.createMesh(slot, attachment);
+                            slotContainer.add(mesh);
+                        }
+                        slot.currentMesh = slot.meshes[meshName];
+                        slot.currentMeshName = meshName;
+                    }
+                    attachment.computeWorldVertices(slot.bone.skeleton.x, slot.bone.skeleton.y, slot, slot.currentMesh.vertices);
+                }
+                else {
+                    slotContainer.visible = false;
+                    continue;
+                }
+                slotContainer.visible = true;
+                slotContainer.alpha = slot.a;
+            }
+        };
+        /**
+         * Children should always be destroyed
+         *
+         * @param destroyChildren
+         * @param soft
+         */
+        Spine.prototype.destroy = function (destroyChildren, soft) {
+            _super.prototype.destroy.call(this, true, soft);
+        };
+        /**
+         * When autoupdate is set to yes this function is used as pixi's updateTransform function
+         *
+         * @method autoUpdateTransform
+         * @private
+         */
+        Spine.prototype.autoUpdateTransform = function () {
+            this.lastTime = this.lastTime || Date.now();
+            var timeDelta = (Date.now() - this.lastTime) * 0.001;
+            this.lastTime = Date.now();
+            this.update(timeDelta);
+            PIXI.DisplayObjectContainer.prototype.updateTransform.call(this);
+        };
+        ;
+        /**
+         * Create a new sprite to be used with spine.RegionAttachment
+         *
+         * @method createSprite
+         * @param slot {spine.Slot} The slot to which the attachment is parented
+         * @param attachment {spine.RegionAttachment} The attachment that the sprite will represent
+         * @private
+         */
+        Spine.prototype.createSprite = function (slot, attachment) {
+            var descriptor = attachment.rendererObject;
+            var baseTexture = descriptor.page.rendererObject;
+            var spriteRect = new PIXI.Rectangle(descriptor.x, descriptor.y, descriptor.rotate ? descriptor.height : descriptor.width, descriptor.rotate ? descriptor.width : descriptor.height);
+            var spriteTexture = new PIXI.Texture(baseTexture, spriteRect);
+            var sprite = new Phaser.Sprite(this.game, 0, 0, spriteTexture);
+            var baseRotation = descriptor.rotate ? Math.PI * 0.5 : 0.0;
+            sprite.scale.x = descriptor.width / descriptor.originalWidth * attachment.scaleX / this.imageScale;
+            sprite.scale.y = descriptor.height / descriptor.originalHeight * attachment.scaleY / this.imageScale;
+            sprite.rotation = baseRotation;
+            ;
+            sprite.anchor.x = (0.5 * descriptor.originalWidth - descriptor.offsetX) / descriptor.width;
+            sprite.anchor.y = 1.0 - ((0.5 * descriptor.originalHeight - descriptor.offsetY) / descriptor.height);
+            sprite.alpha = attachment.a;
+            if (descriptor.rotate) {
+                var x1 = sprite.scale.x;
+                sprite.scale.x = sprite.scale.y;
+                sprite.scale.y = x1;
+            }
+            slot.sprites = slot.sprites || {};
+            slot.sprites[descriptor.name] = sprite;
+            return sprite;
+        };
+        ;
+        Spine.prototype.createMesh = function (slot, attachment) {
+            var descriptor = attachment.rendererObject;
+            var baseTexture = descriptor.page.rendererObject;
+            var texture = new PIXI.Texture(baseTexture);
+            var strip = new PIXI.Strip(texture);
+            strip.drawMode = 1;
+            strip.canvasPadding = 1.5;
+            strip.vertices = new spine.Float32Array(attachment.uvs.length);
+            strip.uvs = attachment.uvs;
+            strip.indices = attachment.triangles;
+            strip.alpha = attachment.a;
+            slot.meshes = slot.meshes || {};
+            slot.meshes[attachment.name] = strip;
+            return strip;
+        };
+        ;
+        /**
+         * [setMixByName wrap to stateData.setMixByName]
+         * @param {String} fromName [source animation name]
+         * @param {String} toName   [target animation name]
+         * @param {Float} duration [Duration in the transition of the animations]
+         */
+        Spine.prototype.setMixByName = function (fromName, toName, duration) {
+            this.stateData.setMixByName(fromName, toName, duration);
+        };
+        ;
+        /**
+         * exposing the state's setAnimation
+         * We override the original runtime's error because warnings dont stop the VM
+         *
+         * @param {number}  trackIndex
+         * @param {string}  animationName
+         * @param {boolean} loop
+         * @param {number}  delay
+         * @returns {any}
+         */
+        Spine.prototype.setAnimationByName = function (trackIndex, animationName, loop) {
+            if (loop === void 0) { loop = false; }
+            var animation = this.state.data.skeletonData.findAnimation(animationName);
+            if (!animation) {
+                console.warn("Animation not found: " + animationName);
+                return null;
+            }
+            return this.state.setAnimation(trackIndex, animation, loop);
+        };
+        ;
+        /**
+         * exposing the state's addAnimation
+         * We override the original runtime's error because warnings dont stop the VM
+         *
+         * @param {number}  trackIndex
+         * @param {string}  animationName
+         * @param {boolean} loop
+         * @param {number}  delay
+         * @returns {any}
+         */
+        Spine.prototype.addAnimationByName = function (trackIndex, animationName, loop, delay) {
+            if (loop === void 0) { loop = false; }
+            if (delay === void 0) { delay = 0; }
+            var animation = this.state.data.skeletonData.findAnimation(animationName);
+            if (!animation) {
+                console.warn("Animation not found: " + animationName);
+                return null;
+            }
+            return this.state.addAnimation(trackIndex, animation, loop, delay);
+        };
+        ;
+        /**
+         * Exposing the skeleton's method to change the skin by skinName
+         * We override the original runtime's error because warnings dont stop the VM
+         *
+         * @param {string}  skinName  The name of the skin we'd like to set
+         */
+        Spine.prototype.setSkinByName = function (skinName) {
+            var skin = this.skeleton.data.findSkin(skinName);
+            if (!skin) {
+                console.warn("Skin not found: " + skinName);
+                return;
+            }
+            this.skeleton.setSkin(skin);
+        };
+        /**
+         * Exposing the skeleton's method to change the skin
+         *
+         * @param skin
+         */
+        Spine.prototype.setSkin = function (skin) {
+            this.skeleton.setSkin(skin);
+        };
+        /**
+         * Set to initial setup pose
+         */
+        Spine.prototype.setToSetupPose = function () {
+            this.skeleton.setToSetupPose();
+        };
+        /**
+         * You can combine skins here by supplying a name for the new skin, and then a nummer of existing skins names that needed to be combined in the new skin
+         * If the skins that will be combined contain any double attachment, only the first attachment will be added to the newskin.
+         * any subsequent attachment that is double will not be added!
+         *
+         * @param newSkinName
+         * @param skinNames
+         */
+        Spine.prototype.createCombinedSkin = function (newSkinName) {
+            var skinNames = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                skinNames[_i - 1] = arguments[_i];
+            }
+            if (skinNames.length === 0) {
+                console.warn('Unable to combine skins when no skins are passed...');
+                return;
+            }
+            var newSkin = new spine.Skin(newSkinName);
+            for (var i = 0; i < skinNames.length; i++) {
+                var skinName = skinNames[i];
+                var skin = this.skeleton.data.findSkin(skinName);
+                if (!skin) {
+                    console.warn("Skin not found: " + skinName);
+                    return;
+                }
+                for (var key in skin.attachments) {
+                    var slotKeyPair = key.split(':');
+                    var slotIndex = slotKeyPair[0];
+                    var attachmentName = slotKeyPair[1];
+                    var attachment = skin.attachments[key];
+                    if (undefined === slotIndex || undefined === attachmentName) {
+                        console.warn('something went wrong with reading the attachments index and/or name');
+                        return;
+                    }
+                    if (newSkin.getAttachment(slotIndex, attachmentName) !== undefined) {
+                        console.warn('Found double attachment for: ' + skinName + '. Skipping');
+                        continue;
+                    }
+                    newSkin.addAttachment(slotIndex, attachmentName, attachment);
+                }
+            }
+            this.skeleton.data.skins.push(newSkin);
+            return newSkin;
+        };
+        return Spine;
+    })(Phaser.Group);
+    Fabrique.Spine = Spine;
+})(Fabrique || (Fabrique = {}));
+var Fabrique;
+(function (Fabrique) {
+    /**
+     * Supporting class to load images from spine atlases as per spine spec.
+     *
+     * @class SpineTextureLoader
+     * @uses EventTarget
+     * @constructor
+     * @param basePath {String} Tha base path where to look for the images to be loaded
+     * @param crossorigin {Boolean} Whether requests should be treated as crossorigin
+     */
+    var SpineTextureLoader = (function () {
+        function SpineTextureLoader(game) {
+            /**
+             * Starts loading a base texture as per spine specification
+             *
+             * @method load
+             * @param page {spine.AtlasPage} Atlas page to which texture belongs
+             * @param file {String} The file to load, this is just the file path relative to the base path configured in the constructor
+             */
+            this.load = function (page, file, atlas) {
+                var image = this.game.make.image(0, 0, file);
+                page.rendererObject = image.texture.baseTexture;
+            };
+            /**
+             * Unloads a previously loaded texture as per spine specification
+             *
+             * @method unload
+             * @param texture {BaseTexture} Texture object to destroy
+             */
+            this.unload = function (texture) {
+                texture.destroy();
+            };
+            this.game = game;
+        }
+        return SpineTextureLoader;
+    })();
+    Fabrique.SpineTextureLoader = SpineTextureLoader;
+})(Fabrique || (Fabrique = {}));
+//# sourceMappingURL=phaser-spine.js.map
