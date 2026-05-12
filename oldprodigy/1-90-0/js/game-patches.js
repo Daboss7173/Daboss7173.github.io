@@ -405,6 +405,20 @@ class ModObj {
 			};
 			this.downloadForCharacter(JSON.stringify(character), this.game.prodigy.player.appearance.data.name + '.json', 'text/plain');
 		},
+		Prodigy.Container.ItemContainer.prototype.update = function() {
+			if (Prodigy.Control.Element.prototype.update.call(this), !Util.isNullOrUndefined(this.followContainer)) {
+				if (Util.isNullOrUndefined(this.followContainer.player) || (this.followContainer.player = null), !Util.isNullOrUndefined(this.followContainer.findComponent) && Util.isNullOrUndefined(this.renderComponent)) {
+					var e = this.followContainer.findComponent(Prodigy.Framework.Behaviour.Follow);
+					Util.isNullOrUndefined(e) || this.followContainer.removeComponent(e), Util.isNullOrUndefined(this.followContainer.findComponent(Prodigy.Framework.Core.Renderer)) || (this.renderComponent = this.followContainer.findComponent(Prodigy.Framework.Core.Renderer))
+				}
+				if (Util.isNullOrUndefined(this.itemContainerWalking) && (this.itemContainerWalking = !0), Util.isNullOrUndefined(this.itemContainerAnimDuration) || this.itemContainerAnimDuration <= 0) {
+					this.itemContainerAnimDuration = 0;
+					var t = !1;
+					this.itemContainerWalking ? Util.isNullOrUndefined(this.followContainer._tweens) || Util.isNullOrUndefined(this.followContainer._standTween) ? Util.isNullOrUndefined(this.renderComponent) || (this.renderComponent.playAnimation("idle", !0), t = !0) : (this.followContainer.stand(), t = !0) : Util.isNullOrUndefined(this.followContainer._tweens) || Util.isNullOrUndefined(this.followContainer._standTween) ? Util.isNullOrUndefined(this.renderComponent) || (this.renderComponent.playAnimation("walk", !0), t = !0) : (this.followContainer.walk(), t = !0), t && (this.itemContainerAnimDuration = 1e3 + 3e3 * Math.random(), this.itemContainerWalking = !this.itemContainerWalking)
+				}
+				Util.isNullOrUndefined(this.followTimer) && (this.followTimer = new Phaser.Time(this.game)), this.itemContainerAnimDuration -= this.followTimer.physicsElapsedMS
+			}
+		},
 		Prodigy.Menu.Card.prototype.toHouse = function() {
 			this.game.prodigy.world.teleport("house")
 		},
